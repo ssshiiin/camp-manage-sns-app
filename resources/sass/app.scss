@@ -1,8 +1,26 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
-
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+body {
+    margin: 0;
+    
+        
+    #app {
+        display: flex;
+        flex-direction: column; 
+        min-height: 100vh;
+        
+        header {
+            height: 150px;
+        }
+        
+        .middle {
+            display: flex;
+            flex: 1;
+            
+            nav {
+                width: 250px;
+            }
+            main {
+                flex: 1;
+            }
+        }
+    }
+}
