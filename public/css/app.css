@@ -9,7 +9,16 @@ body #app {
 }
 
 body #app header {
-  height: 150px;
+  display: flex;
+  height: 100px;
+}
+
+body #app header .logo {
+  width: 250px;
+}
+
+body #app header .title {
+  flex: 1;
 }
 
 body #app .middle {
@@ -19,6 +28,23 @@ body #app .middle {
 
 body #app .middle nav {
   width: 250px;
+}
+
+body #app .middle nav .nav {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body #app .middle nav .nav a {
+  text-decoration: none;
+}
+
+body #app .middle nav .nav a li {
+  text-align: center;
+  margin: 20px 0px;
+  list-style: none;
+  font-size: 1.6em;
 }
 
 body #app .middle main {
