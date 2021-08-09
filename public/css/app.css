@@ -14,7 +14,7 @@ body #app header {
 }
 
 body #app header .logo {
-  width: 250px;
+  width: 300px;
 }
 
 body #app header .title {
@@ -27,7 +27,7 @@ body #app .middle {
 }
 
 body #app .middle nav {
-  width: 250px;
+  width: 300px;
 }
 
 body #app .middle nav .nav {
@@ -38,13 +38,16 @@ body #app .middle nav .nav {
 
 body #app .middle nav .nav a {
   text-decoration: none;
+  display: flex;
+  margin: 20px;
 }
 
 body #app .middle nav .nav a li {
   text-align: center;
-  margin: 20px 0px;
   list-style: none;
-  font-size: 1.6em;
+  font-size: 20px;
+  font-family: inherit;
+  padding: 0px 20px;
 }
 
 body #app .middle main {
