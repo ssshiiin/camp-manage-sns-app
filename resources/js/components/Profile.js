@@ -1,8 +1,25 @@
 import React from 'react';
+import { Link, Switch, Route } from 'react-router-dom';
+
+import ProfilePost from './ProfilePost';
+import ProfileGear from './ProfileGear';
 
 function Profile(){
     return (
-        <h1>プロフィール</h1>    
+        <div>
+            <div className="profile-index">
+                <div className="profile-image"></div>
+                <div className="profile-content"></div>
+            </div>
+            <ul className="profile-nav">
+                <Link to="/takumi"><li>投稿</li></Link>
+                <Link to="/takumi/gear"><li>ギア</li></Link>
+            </ul>
+            <Switch>
+                <Route path="/takumi" exact component={ProfilePost} />
+                <Route path="/takumi/gear" component={ProfileGear} />
+            </Switch>
+        </div>
     )
 }
 

@@ -1,3 +1,6 @@
+$border: rgb(230, 230, 230);
+
+
 body {
     margin: 0;
     
@@ -9,12 +12,14 @@ body {
         
         header {
             display: flex;
-            height: 100px;
+            height: 80px;
             .logo {
-                width: 300px;
+                width: 258px;
+                border-right: 1px solid $border;
             }
             .title {
                 flex: 1;
+                border-bottom: 1px solid $border;
             }
         }
         
@@ -23,7 +28,9 @@ body {
             flex: 1;
             
             nav {
-                width: 300px;
+                width: 258px;
+                border-right: 1px solid $border;
+                
                 .nav {
                     min-height: 100%;
                     margin: 0;
@@ -31,13 +38,18 @@ body {
                     a {
                         text-decoration: none;
                         display: flex;
-                        margin: 20px;
+                        margin: 20px 0px;
+                        
+                        img {
+                            padding: 0px 20px;
+                        }
                         
                         li {
                             text-align: center;
                             list-style: none;
-                            font-size: 20px;
-                            font-family: inherit;
+                            font-size: 1.5em;
+                            font-family: 'Nunito', sans-serif;
+                            font-weight: bold;
                             padding: 0px 20px;
                         }
                     }
@@ -46,6 +58,45 @@ body {
             
             main {
                 flex: 1;
+                
+                
+                .profile-index {
+                    height:200px;
+                    display: flex;
+                    border-bottom: 1px solid $border;
+                    
+                    .profile-image {
+                        height: 160px;
+                        width: 160px;
+                        margin: 20px;
+                        background-image: url(/images/prof.jpg);
+                        background-size: cover;
+                        background-position: center;
+                        border-radius: 100%;
+                    }
+                    .profile-content {
+                        height: 200px;
+                        flex: 1;
+                    }
+                }
+                
+                
+                .profile-nav {
+                    margin: 0;
+                    padding: 0;
+                    height: 36px;
+                    display: flex;
+                    justify-content: center;
+                    a {
+                        text-decoration: none;
+                        li {
+                            margin: 0px 50px;
+                            font-size: 1.5em;
+                            list-style: none;
+                        }
+                    }
+                }
+                
             }
         }
     }

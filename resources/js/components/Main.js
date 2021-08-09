@@ -10,7 +10,7 @@ function Main(){
         <main>
             <Switch>
                 <Route path="/home" exact component={Home} />
-                <Route path="/takumi" exact component={Profile} />
+                <Route path="/takumi" component={Profile} />
             </Switch>
         </main>
     )
