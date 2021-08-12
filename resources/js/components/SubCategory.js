@@ -2,7 +2,7 @@ import React from 'react'
 
 function SubCategory(){
     return (
-        <div className="subcategory">
+        <div className="sub-category">
             サブカテゴリ
         </div>    
     )

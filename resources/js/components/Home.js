@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import SubCategory from './SubCategory';
+import PostHeader from './PostHeader';
+import PostImage from './PostImage';
+import PostContent from './PostContent';
 
 function Home(){
     
@@ -25,7 +27,6 @@ function Home(){
      
         
     return (
-        <div className="home-all">
             <div className="timeline">
                 <InfiniteScroll
                 loadMore={getPosts}
@@ -34,40 +35,14 @@ function Home(){
                     <ul>
                         {posts.map((post) => 
                             <li key={post.id}>
-                                <div className="timeline-header">
-                                    <ul>
-                                        <li>
-                                            <div className="timeline-header-userImage"></div>
-                                        </li>
-                                        <li className="timeline-header-index">
-                                            <ul>
-                                                <li className="timeline-header-index-title">Place : </li>
-                                                <li className="timeline-header-index-content">{post.place}</li>
-                                            </ul>
-                                            <ul>
-                                                <li className="timeline-header-index-title">Day : </li>
-                                                <li className="timeline-header-index-content">{post.day}</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="timeline-img" style={{backgroundImage: `url(${post.image_path})`}}></div>
-                                <div className="timeline-content">
-                                    {post.content}
-                                    <ul>
-                                        {post.tags.map((tag) => 
-                                            <li key={tag.id}>#{tag.tag}</li>
-                                        )}
-                                    </ul>
-                                </div>
+                                <PostHeader place={post.place} day={post.day} />
+                                <PostImage img_path={post.image_path} />
+                                <PostContent content={post.content} tags={post.tags} />
                             </li>
                         )}
                     </ul>
                 </InfiniteScroll>
             </div>
-            <SubCategory />
-        </div>
-        
     );
 }
 
