@@ -9,7 +9,7 @@ function Main(){
     return (
         <main>
             <Switch>
-                <Route path="/home" exact component={Home} />
+                <Route path="/" exact component={Home} />
                 <Route path="/takumi" component={Profile} />
             </Switch>
         </main>

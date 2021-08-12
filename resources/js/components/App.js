@@ -20,6 +20,6 @@ function App(){
 
 
 
-if(document.getElementById('app')){
-    ReactDOM.render(<App />, document.getElementById('app'));
+if(document.getElementById('camp-app')){
+    ReactDOM.render(<App />, document.getElementById('camp-app'));
 }
