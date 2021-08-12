@@ -37,7 +37,7 @@ body #camp-app .middle nav {
   position: fixed;
 }
 body #camp-app .middle nav .nav {
-  min-height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
 }
@@ -62,6 +62,7 @@ body #camp-app .middle main {
   flex: 1;
   background-color: white;
   padding-left: 258px;
+  min-height: 100vh;
 }
 body #camp-app .middle main .profile-index {
   height: 200px;
