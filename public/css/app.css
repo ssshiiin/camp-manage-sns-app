@@ -1,54 +1,44 @@
 body {
   margin: 0;
 }
-
 body #app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
-
 body #app header {
   display: flex;
   height: 80px;
 }
-
 body #app header .logo {
   width: 258px;
   border-right: 1px solid #e6e6e6;
 }
-
 body #app header .title {
   flex: 1;
   border-bottom: 1px solid #e6e6e6;
 }
-
 body #app .middle {
   display: flex;
   flex: 1;
 }
-
 body #app .middle nav {
   width: 258px;
   border-right: 1px solid #e6e6e6;
 }
-
 body #app .middle nav .nav {
   min-height: 100%;
   margin: 0;
   padding: 0;
 }
-
 body #app .middle nav .nav a {
   text-decoration: none;
   display: flex;
   margin: 20px 0px;
 }
-
 body #app .middle nav .nav a img {
   padding: 0px 20px;
 }
-
 body #app .middle nav .nav a li {
   text-align: center;
   list-style: none;
@@ -57,17 +47,14 @@ body #app .middle nav .nav a li {
   font-weight: bold;
   padding: 0px 20px;
 }
-
 body #app .middle main {
   flex: 1;
 }
-
 body #app .middle main .profile-index {
   height: 200px;
   display: flex;
   border-bottom: 1px solid #e6e6e6;
 }
-
 body #app .middle main .profile-index .profile-image {
   height: 160px;
   width: 160px;
@@ -77,12 +64,10 @@ body #app .middle main .profile-index .profile-image {
   background-position: center;
   border-radius: 100%;
 }
-
 body #app .middle main .profile-index .profile-content {
   height: 200px;
   flex: 1;
 }
-
 body #app .middle main .profile-nav {
   margin: 0;
   padding: 0;
@@ -90,14 +75,11 @@ body #app .middle main .profile-nav {
   display: flex;
   justify-content: center;
 }
-
 body #app .middle main .profile-nav a {
   text-decoration: none;
 }
-
 body #app .middle main .profile-nav a li {
   margin: 0px 50px;
   font-size: 1.5em;
   list-style: none;
 }
-
