@@ -9,8 +9,8 @@ function Main(){
     return (
         <main>
             <Switch>
-                <Route path="/home" exact component={Home} />
-                <Route path="/takumi" component={Profile} />
+                <Route path="/" exact component={Home} />
+                <Route path="/:id" component={Profile} />
             </Switch>
         </main>
     )

@@ -1,45 +1,56 @@
-body {
+* {
+  padding: 0;
   margin: 0;
+  font-size: 1em;
 }
-body #app {
+
+body #camp-app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
-body #app header {
+body #camp-app header {
   display: flex;
   height: 80px;
 }
-body #app header .logo {
+body #camp-app header .logo {
+  height: 80px;
+  position: fixed;
   width: 258px;
-  border-right: 1px solid #e6e6e6;
+  border-right: 1px solid gainsboro;
+  background-color: #f7f7f7;
 }
-body #app header .title {
+body #camp-app header .title {
+  padding-left: 258px;
   flex: 1;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid gainsboro;
+  background-color: #fafafa;
 }
-body #app .middle {
+body #camp-app .middle {
   display: flex;
   flex: 1;
 }
-body #app .middle nav {
+body #camp-app .middle nav {
   width: 258px;
-  border-right: 1px solid #e6e6e6;
+  border-right: 1px solid gainsboro;
+  background-color: #f7f7f7;
+  position: fixed;
 }
-body #app .middle nav .nav {
-  min-height: 100%;
+body #camp-app .middle nav .nav {
+  min-height: 100vh;
   margin: 0;
   padding: 0;
 }
-body #app .middle nav .nav a {
+body #camp-app .middle nav .nav a {
   text-decoration: none;
   display: flex;
   margin: 20px 0px;
+  border-bottom: 1px solid gainsboro;
 }
-body #app .middle nav .nav a img {
+body #camp-app .middle nav .nav a img {
   padding: 0px 20px;
 }
-body #app .middle nav .nav a li {
+body #camp-app .middle nav .nav a li {
   text-align: center;
   list-style: none;
   font-size: 1.5em;
@@ -47,15 +58,18 @@ body #app .middle nav .nav a li {
   font-weight: bold;
   padding: 0px 20px;
 }
-body #app .middle main {
+body #camp-app .middle main {
   flex: 1;
+  background-color: white;
+  padding-left: 258px;
+  min-height: 100vh;
 }
-body #app .middle main .profile-index {
+body #camp-app .middle main .profile-index {
   height: 200px;
   display: flex;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid gainsboro;
 }
-body #app .middle main .profile-index .profile-image {
+body #camp-app .middle main .profile-index .profile-image {
   height: 160px;
   width: 160px;
   margin: 20px;
@@ -64,22 +78,85 @@ body #app .middle main .profile-index .profile-image {
   background-position: center;
   border-radius: 100%;
 }
-body #app .middle main .profile-index .profile-content {
+body #camp-app .middle main .profile-index .profile-content {
   height: 200px;
   flex: 1;
 }
-body #app .middle main .profile-nav {
+body #camp-app .middle main .profile-nav {
   margin: 0;
   padding: 0;
   height: 36px;
   display: flex;
   justify-content: center;
 }
-body #app .middle main .profile-nav a {
+body #camp-app .middle main .profile-nav a {
   text-decoration: none;
 }
-body #app .middle main .profile-nav a li {
+body #camp-app .middle main .profile-nav a li {
   margin: 0px 50px;
   font-size: 1.5em;
   list-style: none;
+}
+body #camp-app .middle main .home-all {
+  display: flex;
+}
+body #camp-app .middle main .home-all .timeline {
+  flex: 1;
+}
+body #camp-app .middle main .home-all .timeline ul li {
+  list-style: none;
+}
+body #camp-app .middle main .home-all .timeline ul li .timeline-header {
+  height: 80px;
+  border-bottom: 1px solid gainsboro;
+}
+body #camp-app .middle main .home-all .timeline ul li .timeline-header ul {
+  display: flex;
+}
+body #camp-app .middle main .home-all .timeline ul li .timeline-header ul li .timeline-header-userImage {
+  border: 1px solid gainsboro;
+  height: 60px;
+  width: 60px;
+  margin: 10px;
+  background-image: url(/images/prof.jpg);
+  background-size: cover;
+  background-position: center;
+  border-radius: 100%;
+}
+body #camp-app .middle main .home-all .timeline ul li .timeline-header ul .timeline-header-index {
+  flex: 1;
+}
+body #camp-app .middle main .home-all .timeline ul li .timeline-header ul .timeline-header-index ul {
+  height: 40px;
+  display: flex;
+}
+body #camp-app .middle main .home-all .timeline ul li .timeline-header ul .timeline-header-index ul .timeline-header-index-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+body #camp-app .middle main .home-all .timeline ul li .timeline-header ul .timeline-header-index ul .timeline-header-index-content {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body #camp-app .middle main .home-all .timeline ul li .timeline-img {
+  height: 500px;
+  background-image: url(/images/prof.jpg);
+  background-size: cover;
+  background-position: center;
+}
+body #camp-app .middle main .home-all .timeline ul li .timeline-content {
+  height: 150px;
+  border-top: 1px solid gainsboro;
+  border-bottom: 1px solid gainsboro;
+}
+body #camp-app .middle main .home-all .timeline ul li .timeline-content ul {
+  display: flex;
+}
+body #camp-app .middle main .home-all .subcategory {
+  width: 300px;
+  border-left: 1px solid gainsboro;
 }

@@ -16,8 +16,8 @@ function Profile(){
                 <Link to="/takumi/gear"><li>ギア</li></Link>
             </ul>
             <Switch>
-                <Route path="/takumi" exact component={ProfilePost} />
-                <Route path="/takumi/gear" component={ProfileGear} />
+                <Route path="/:id" exact component={ProfilePost} />
+                <Route path="/:id/gear" component={ProfileGear} />
             </Switch>
         </div>
     )

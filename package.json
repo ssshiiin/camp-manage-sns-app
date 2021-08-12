@@ -11,17 +11,22 @@
     },
     "devDependencies": {
         "@babel/preset-react": "^7.0.0",
-        "axios": "^0.19",
+        "axios": "^0.21.1",
         "bootstrap": "^4.0.0",
         "cross-env": "^7.0",
         "jquery": "^3.2",
-        "laravel-mix": "^5.0.1",
+        "laravel-mix": "^6.0.27",
         "lodash": "^4.17.19",
         "popper.js": "^1.12",
+        "postcss": "^8.3.6",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0"
+    },
+    "dependencies": {
+        "react-infinite-scroller": "^1.2.4",
+        "react-router-dom": "^5.2.0"
     }
 }
