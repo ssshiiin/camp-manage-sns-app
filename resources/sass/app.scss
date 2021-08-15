@@ -11,88 +11,222 @@ $main-color: rgb(255, 255, 255);
 
 ul {
     list-style: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
 }
-
+li {
+    list-style: none;
+}
 
 body {
     #camp-app {
-        display: flex;
-        flex-direction: column; 
         min-height: 100vh;
         width: 100%;
         
-        header {
-            display: flex;
-            height: 80px;
+        // header {
+        //     display: flex;
+        //     height: 80px;
+        //     width: 100%;
+        //     position: fixed;
+        //     background-color: white;
+        //     .title {
+        //         height: 80px;
+        //         width: 100%;
+        //         margin-left: 258px;
+        //         flex: 1;
+        //         border-bottom: 1px solid $border-color;
+        //     }
+        // }
+        nav {
+            width: 258px;
+            min-height: 100vh;
+            border-right: 1px solid $border-color;
             position: fixed;
-            z-index: 10;
-            width: 100%;
+            
             .logo {
                 height: 80px;
-                width: 258px;
-                border-right: 1px solid $border-color;
-                background-color: $side-color;
             }
-            .title {
-                flex: 1;
-                border-bottom: 1px solid $border-color;
-                background-color: $header-color;
-            }
-        }
-        
-        .middle {
-            display: flex;
-            flex: 1;
-            width: 100%;
-            
-            nav {
-                width: 258px;
-                border-right: 1px solid $border-color;
-                background-color: $side-color;
-                padding-top: 80px;
-                position: fixed;
-                z-index: 9;
-                
-                .nav {
-                    min-height: 100vh;
-                    margin: 0;
-                    padding: 0;
-                    a {
-                        text-decoration: none;
-                        display: flex;
-                        margin: 20px 0px;
-                        border-bottom: 1px solid $border-color;
-                        
-                        img {
-                            padding: 0px 20px;
-                        }
-                        
-                        li {
-                            text-align: center;
-                            list-style: none;
-                            font-size: 1.5em;
-                            font-family: 'Nunito', sans-serif;
-                            font-weight: bold;
-                            padding: 0px 20px;
-                        }
+            .nav {
+                min-height: 100vh;
+                margin: 0;
+                padding: 0;
+                a {
+                    text-decoration: none;
+                    display: flex;
+                    margin: 20px 0px;
+                    border-bottom: 1px solid $border-color;
+                    
+                    img {
+                        padding: 0px 20px;
+                    }
+                    
+                    li {
+                        text-align: center;
+                        list-style: none;
+                        font-size: 1.5em;
+                        font-family: 'Nunito', sans-serif;
+                        font-weight: bold;
+                        padding: 0px 20px;
                     }
                 }
             }
+        }
+        
+        main {
+            display: flex;
+            min-height: 100vh;
+            width: calc(100%-258px);
+            padding-left: 258px;
             
-            main {
+            .main-category {
                 flex: 1;
-                background-color: $main-color;
-                padding-left: 258px;
-                padding-top: 80px;
-                width: 100%;
-                min-height: 100vh;
-                display: flex;
-                .main-category {
-                    flex: 1;
-                    width: 100%;
-                    .profile {
+                width: calc(100%-258px);
+                
+                .profile-main-post-index {
+                        ul {
+                            li{
+                            list-style: none;
+                            .post-header {
+                                height: 80px;
+                                border-bottom: 1px solid $border-color;
+                                ul {
+                                    display: flex;
+                                    li {
+                                        .post-header-userImage{
+                                            border: 1px solid $border-color;
+                                            height: 60px;
+                                            width: 60px;
+                                            margin: 10px;
+                                            background-image: url(/images/prof.jpg);
+                                            background-size: cover;
+                                            background-position: center;
+                                            border-radius: 100%;
+                                        }
+                                    }
+                                    .post-header-index {
+                                        flex: 1;
+                                        ul{
+                                            height: 40px;
+                                            display: flex;
+                                            .post-header-index-title {
+                                                flex: 1;
+                                                display: flex;
+                                            	align-items: center;
+                                            	justify-content: flex-end;
+                                            }
+                                            .post-header-index-content {
+                                                width: 200px;
+                                                display: flex;
+                                            	align-items: center;
+                                            	justify-content: center;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .post-img {
+                                height: 500px;
+                                background-image: url(/images/prof.jpg);
+                                background-size: cover;
+                                background-position: center;
+                            }
+                            .post-content {
+                                height: 150px;
+                                border: {
+                                    top: 1px solid $border-color;
+                                    bottom: 1px solid $border-color;
+                                };
+                                ul {
+                                    display: flex;
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            
+                .home{
+                    header {
+                        position: fixed;
                         width: 100%;
-                        .profile-index {
+                        height: 80px;
+                    }
+                    .home-main{
+                        padding-top: 80px;
+                        .home-main-timeline {
+                            .home-main-timeline-list {
+                                .post-header {
+                                    height: 80px;
+                                    border: 1px solid $border-color;
+                                    ul {
+                                        display: flex;
+                                        li {
+                                            .post-header-userImage{
+                                                border: 1px solid $border-color;
+                                                height: 60px;
+                                                width: 60px;
+                                                margin: 10px;
+                                                background-image: url(/images/prof.jpg);
+                                                background-size: cover;
+                                                background-position: center;
+                                                border-radius: 100%;
+                                            }
+                                        }
+                                        .post-header-index {
+                                            flex: 1;
+                                            ul{
+                                                height: 40px;
+                                                display: flex;
+                                                .post-header-index-title {
+                                                    flex: 1;
+                                                    display: flex;
+                                                	align-items: center;
+                                                	justify-content: flex-end;
+                                                }
+                                                .post-header-index-content {
+                                                    width: 200px;
+                                                    display: flex;
+                                                	align-items: center;
+                                                	justify-content: center;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                .post-img {
+                                    box-shadow: 0 0 5px rgb(150, 150, 150) inset;
+                                    height: 500px;
+                                    background-image: url(/images/prof.jpg);
+                                    background-size: cover;
+                                    background-position: center;
+                                }
+                                .post-content {
+                                    height: 150px;
+                                    border: 1px solid $border-color;
+                                    ul {
+                                        display: flex;
+                                    }
+                                }
+                        }
+                        }
+                        
+                    }        
+                }
+            
+                .profile {
+                    width: 100%;
+                    header {
+                        position: fixed;
+                        height: 80px;
+                        width: 100%;
+                    }
+                    .profile-main {
+                        width: 100%;
+                        padding-top: 80px;
+                        
+                        .profile-introduce {
+                            width: 100%;
                             height:200px;
                             display: flex;
                             border-bottom: 1px solid $border-color;
@@ -108,11 +242,11 @@ body {
                             }
                             .profile-content {
                                 height: 200px;
-                                flex: 1;
                             }
-                        }
+                    }
                         
                         .profile-nav {
+                            width: 100%;
                             margin: 0;
                             padding: 0;
                             height: 36px;
@@ -126,7 +260,7 @@ body {
                                     list-style: none;
                                 }
                             }
-                        }
+                    }
                         
                         .profile-main-posts {
                             display: flex;
@@ -153,6 +287,7 @@ body {
                         
                         .profile-main-gear {
                             width: 100%;
+                            max-width: 881px;
                             .profile-main-gear-nav {
                                 border-top: 1px solid $border-color;
                                 position: relative;
@@ -218,9 +353,9 @@ body {
                                         font-size: 1em;
                                     }
                                 }
-                            }
+                        }
                             
-                            .profile-main-gear-category {
+                        .profile-main-gear-category {
                                 width: 100%;
                                 .profile-main-gear-category-timeline {
                                     width: 100%;
@@ -291,139 +426,27 @@ body {
                                         }
                                     }
                                 }
-                            }
-                        }
-                        
-                        .profile-main-post-index {
-                            ul {
-                                li{
-                                list-style: none;
-                                .post-header {
-                                    height: 80px;
-                                    border-bottom: 1px solid $border-color;
-                                    ul {
-                                        display: flex;
-                                        li {
-                                            .post-header-userImage{
-                                                border: 1px solid $border-color;
-                                                height: 60px;
-                                                width: 60px;
-                                                margin: 10px;
-                                                background-image: url(/images/prof.jpg);
-                                                background-size: cover;
-                                                background-position: center;
-                                                border-radius: 100%;
-                                            }
-                                        }
-                                        .post-header-index {
-                                            flex: 1;
-                                            ul{
-                                                height: 40px;
-                                                display: flex;
-                                                .post-header-index-title {
-                                                    flex: 1;
-                                                    display: flex;
-                                                	align-items: center;
-                                                	justify-content: flex-end;
-                                                }
-                                                .post-header-index-content {
-                                                    width: 200px;
-                                                    display: flex;
-                                                	align-items: center;
-                                                	justify-content: center;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                .post-img {
-                                    height: 500px;
-                                    background-image: url(/images/prof.jpg);
-                                    background-size: cover;
-                                    background-position: center;
-                                }
-                                .post-content {
-                                    height: 150px;
-                                    border: {
-                                        top: 1px solid $border-color;
-                                        bottom: 1px solid $border-color;
-                                    };
-                                    ul {
-                                        display: flex;
-                                    }
-                                }
-                            }
-                        }
-                        
-                    }
-                
-                    .timeline{
-                        ul {
-                            li{
-                                list-style: none;
-                                .post-header {
-                                    height: 80px;
-                                    border-bottom: 1px solid $border-color;
-                                    ul {
-                                        display: flex;
-                                        li {
-                                            .post-header-userImage{
-                                                border: 1px solid $border-color;
-                                                height: 60px;
-                                                width: 60px;
-                                                margin: 10px;
-                                                background-image: url(/images/prof.jpg);
-                                                background-size: cover;
-                                                background-position: center;
-                                                border-radius: 100%;
-                                            }
-                                        }
-                                        .post-header-index {
-                                            flex: 1;
-                                            ul{
-                                                height: 40px;
-                                                display: flex;
-                                                .post-header-index-title {
-                                                    flex: 1;
-                                                    display: flex;
-                                                	align-items: center;
-                                                	justify-content: flex-end;
-                                                }
-                                                .post-header-index-content {
-                                                    width: 200px;
-                                                    display: flex;
-                                                	align-items: center;
-                                                	justify-content: center;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                .post-img {
-                                    height: 500px;
-                                    background-image: url(/images/prof.jpg);
-                                    background-size: cover;
-                                    background-position: center;
-                                }
-                                .post-content {
-                                    height: 150px;
-                                    border: {
-                                        top: 1px solid $border-color;
-                                        bottom: 1px solid $border-color;
-                                    };
-                                    ul {
-                                        display: flex;
-                                    }
-                                }
-                            }
                         }
                     }
                 }
                 
-                .sub-category{
-                    width: 300px;
-                    border-left: 1px solid $border-color;
+                .gear {
+                    width: 100%;
+                    header {
+                        position: fixed;
+                        width: 100%;
+                        height: 80px;
+                    }
+                    .gear-main {
+                        width: 100%;
+                        padding-top: 80px;
+                    }
                 }
+            } 
+            .sub-category{
+                width: 258px;
+                padding-top: 80px;
+                border-left: 1px solid $border-color;
             }
         }
     }

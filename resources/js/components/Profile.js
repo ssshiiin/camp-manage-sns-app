@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 
+import Header from './Header';
 import ProfileUser from './ProfileUser';
 import ProfilePost from './ProfilePost';
 import ProfileGear from './ProfileGear';
@@ -10,6 +11,8 @@ import ProfileGearIndex from './ProfileGearIndex';
 function Profile(props){
     return (
         <div className="profile">
+            <Header />
+            <div className="profile-main">
             <ProfileUser />
             <ul className="profile-nav">
                 <Link to={`/${props.match.params.id}`}><li>投稿</li></Link>
@@ -21,6 +24,7 @@ function Profile(props){
                 <Route path="/:id/:post_id" exact component={ProfilePostIndex} />
                 <Route path="/:id/gear/:gear_id" component={ProfileGearIndex} />
             </Switch>
+            </div>
         </div>
     )
 }

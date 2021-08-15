@@ -5,6 +5,7 @@ import Pagination from 'react-js-pagination';
 
 import GearNav from './GearNav';
 import GearTimeLine from './GearTimeLine';
+import ScrollableTabsButtonAuto from './ScrollableTabsButtonAuto';
 
 function ProfileGear(props){
     const [eventList, setEventList] = useState([]);

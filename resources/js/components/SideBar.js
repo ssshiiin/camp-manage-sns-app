@@ -17,6 +17,9 @@ function SideBar(){
     
     return (
         <nav>
+            <div className="logo">
+                logo
+            </div>
             <ul className="nav">
                 <Link to="/"><img src={'/images/ホームアイコン.jpeg'} width="36px" height="36px" /><li>Home</li></Link>
                 <Link to={`/${user.id}/schedule`}><img src={'/images/schedule.jpeg'} width="36px" height="36px" /><li>Schedule</li></Link>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroller';
 
+import Header from './Header';
 import PostHeader from './PostHeader';
 import PostImage from './PostImage';
 import PostContent from './PostContent';
@@ -27,14 +28,16 @@ function Home(){
      
         
     return (
-            <div className="timeline">
+            <div className="home">
+                <Header />
                 <InfiniteScroll
+                className="home-main"
                 loadMore={getPosts}
                 hasMore={hasMore}
                 loader={loader}>
-                    <ul>
+                    <ul className="home-main-timeline">
                         {posts.map((post) => 
-                            <li key={post.id}>
+                            <li className="home-main-timeline-list" key={post.id}>
                                 <PostHeader place={post.place} day={post.day} />
                                 <PostImage img_path={post.image_path} />
                                 <PostContent content={post.content} tags={post.tags} />
