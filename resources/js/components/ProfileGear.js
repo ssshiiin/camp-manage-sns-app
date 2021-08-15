@@ -17,7 +17,6 @@ function ProfileGear(props){
     }, [])
     
     const getCategory = async (page) => {
-        console.log(props)
         const response = await axios.get(`/api/categories/${props.match.params.id}?page=${page}`);
         
         setEventList(response.data.data);

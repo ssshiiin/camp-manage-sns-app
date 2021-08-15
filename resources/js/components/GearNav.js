@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import Pagination from 'react-js-pagination';
 
+import SimpleMenu from './SimpleMenu';
+
 function GearNav(props){
     return (
         <div className="profile-main-gear-nav">
@@ -9,16 +11,7 @@ function GearNav(props){
                 <li className="categories"></li>
                 {props.eventList.map((category) => 
                     <li className="categories" key={category.category}>
-                        {category.category}
-                        <ul className="categories-submenu">
-                            {category.gears.map((gear)=>
-                                <Link to={`/${gear.user_id}/gear/${gear.id}`} key={gear.id}>
-                                    <li key={gear.id}>
-                                        {gear.gear_name}
-                                    </li>
-                                </Link>
-                            )}
-                        </ul>
+                        <SimpleMenu category={category.category} gearsList={category.gears} />
                     </li>    
                 )}  
                 <li className="categories"></li>
