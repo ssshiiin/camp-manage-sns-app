@@ -4,9 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\Http\Resources\GearProfileResource;
-use App\Http\Resources\GearProfileCollection;
-class GearCategoryResource extends JsonResource
+class GearPaginateResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +14,9 @@ class GearCategoryResource extends JsonResource
      */
     public function toArray($request)
     {
+        $category = $request->query->get("category");
         return [
-            'category' => $this->category, 
-            'gears' => GearProfileResource::collection($this->whereUser_idAndWhereCategory($this->user_id, $this->category)),
+            "gears" =>GearProfileResource::collection($this->whereUser_idAndWhereCategoryPaginate($this->user_id, $category)),
         ];
     }
 }

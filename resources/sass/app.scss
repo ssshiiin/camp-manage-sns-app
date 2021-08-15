@@ -9,12 +9,17 @@ $main-color: rgb(255, 255, 255);
   font-size: 1em;
 }
 
+ul {
+    list-style: none;
+}
+
 
 body {
     #camp-app {
         display: flex;
         flex-direction: column; 
         min-height: 100vh;
+        width: 100%;
         
         header {
             display: flex;
@@ -84,8 +89,9 @@ body {
                 display: flex;
                 .main-category {
                     flex: 1;
-                
+                    width: 100%;
                     .profile {
+                        width: 100%;
                         .profile-index {
                             height:200px;
                             display: flex;
@@ -125,9 +131,8 @@ body {
                         .profile-main-posts {
                             display: flex;
                             flex-wrap: wrap;
-                            justify-content: space-between;
                             .profile-main-posts-image {
-                                width: 33%;
+                                width: 33.1%;
                                 padding-top: 33%;
                                 background-image: url(/images/prof.jpg);
                                 background-size: cover;
@@ -142,6 +147,149 @@ body {
                                     width: 100%;
                                     text-align: center;
                                     font-size: 1.4em;
+                                }
+                            }
+                        }
+                        
+                        .profile-main-gear {
+                            width: 100%;
+                            .profile-main-gear-nav {
+                                border-top: 1px solid $border-color;
+                                position: relative;
+                                ul {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    .categories {
+                                        display: block;
+                                        height: 36px;
+                                        line-height: 36px;
+                                        text-align: center;
+                                        min-width: 30px;
+                                        font-size: 1em;
+                                        &:hover {
+                                            border-bottom: 1px solid $border-color;
+                                        }
+                                        &:hover > .categories-submenu{
+                                            height: auto;
+                                            overflow: visible;
+                                        }
+                                        .categories-submenu {
+                                            background-color: white;
+                                            display: flex;
+                                            flex-direction: column;
+                                            height: 0;
+                                            overflow: hidden;
+                                        }
+                                        .categories-submenu:hover {
+                                            height: 100%;
+                                            overflow: visible;
+                                        }
+                                    }
+                                }
+                            }
+                                
+                                .pagination {
+                                    height: 0;
+                                    overflow: hidden;
+                                    .paginate-prev{
+                                        height: auto;
+                                        overflow: visible;
+                                        position: absolute;
+                                        top: 0px;
+                                        left: 0px;
+                                        display: block;
+                                        height: 36px;
+                                        line-height: 36px;
+                                        text-align: center;
+                                        min-width: 30px;
+                                        font-size: 1em;
+                                    }
+                                    .paginate-next{
+                                        height: auto;
+                                        overflow: visible;
+                                        position: absolute;
+                                        top: 0px;
+                                        right: 0px;
+                                        display: block;
+                                        height: 36px;
+                                        line-height: 36px;
+                                        text-align: center;
+                                        min-width: 30px;
+                                        font-size: 1em;
+                                    }
+                                }
+                            }
+                            
+                            .profile-main-gear-category {
+                                width: 100%;
+                                .profile-main-gear-category-timeline {
+                                    width: 100%;
+                                    position: relative;
+                                    .profile-main-gear-category-timeline-header {
+                                        height: 36px;
+                                        border-top: 1px solid $border-color;
+                                        border-bottom: 1px solid $border-color;
+                                    }
+                                    
+                                    .profile-main-gear-category-timeline-gear-timeline {
+                                        width: 100%;
+                                        display: flex;
+                                        position: relative;
+                                        a {
+                                            width: 20%;
+                                            .profile-main-gear-category-timeline-gear-timeline-index {
+                                            .profile-main-gear-category-timeline-gear-timeline-index-image {
+                                                width: 100%;
+                                                padding-top: 100%;
+                                                background-image: url(/images/prof.jpg);
+                                                background-size: cover;
+                                                background-position: center;
+                                                border: 1px solid $border-color;
+                                            }
+                                        }
+                                        }
+                                        .profile-main-gear-category-timeline-gear-timeline-paginate-prev {
+                                            width: 7%;
+                                            margin-right: 3%; 
+                                        }
+                                        .profile-main-gear-category-timeline-gear-timeline-paginate-next {
+                                            position: absolute;
+                                            right: 0px;
+                                            width: 7%;
+                                            height: 100%;
+                                            margin-left: 3%; 
+                                        }
+                                    }
+                                    
+                                    .pagination {
+                                        width: 7%;
+                                        height: 0;
+                                        overflow: hidden;
+                                        .paginate-prev{
+                                            overflow: visible;
+                                            position: absolute;
+                                            top: 50%;
+                                            left: 0px;
+                                            display: block;
+                                            height: 36px;
+                                            line-height: 36px;
+                                            text-align: center;
+                                            min-width: 30px;
+                                            font-size: 1em;
+                                        }
+                                        .paginate-next{
+                                            overflow: visible;
+                                            position: absolute;
+                                            top: 50%;
+                                            right: 0px;
+                                            display: block;
+                                            height: 36px;
+                                            line-height: 36px;
+                                            text-align: center;
+                                            min-width: 30px;
+                                            font-size: 1em;
+                                        }
+                                    }
                                 }
                             }
                         }

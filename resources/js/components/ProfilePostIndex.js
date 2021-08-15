@@ -13,6 +13,7 @@ function ProfilePostIndex(props){
     }, [])
     
     const getPost = async () => {
+        console.log(props)
         const response = await axios.get(`/api/posts/${props.match.params.id}/${props.match.params.post_id}`);
         setPosts(response.data.data);
         console.log(response.data.data);

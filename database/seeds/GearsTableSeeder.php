@@ -11,6 +11,6 @@ class GearsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Gear::class, 200)->create();
+        factory(App\Gear::class, 400)->create();
     }
 }

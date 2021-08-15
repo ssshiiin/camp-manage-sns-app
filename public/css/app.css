@@ -4,10 +4,15 @@
   font-size: 1em;
 }
 
+ul {
+  list-style: none;
+}
+
 body #camp-app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
 }
 body #camp-app header {
   display: flex;
@@ -73,6 +78,10 @@ body #camp-app .middle main {
 }
 body #camp-app .middle main .main-category {
   flex: 1;
+  width: 100%;
+}
+body #camp-app .middle main .main-category .profile {
+  width: 100%;
 }
 body #camp-app .middle main .main-category .profile .profile-index {
   height: 200px;
@@ -110,10 +119,9 @@ body #camp-app .middle main .main-category .profile .profile-nav a li {
 body #camp-app .middle main .main-category .profile .profile-main-posts {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 body #camp-app .middle main .main-category .profile .profile-main-posts .profile-main-posts-image {
-  width: 33%;
+  width: 33.1%;
   padding-top: 33%;
   background-image: url(/images/prof.jpg);
   background-size: cover;
@@ -129,6 +137,141 @@ body #camp-app .middle main .main-category .profile .profile-main-posts .profile
   width: 100%;
   text-align: center;
   font-size: 1.4em;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear {
+  width: 100%;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-nav {
+  border-top: 1px solid gainsboro;
+  position: relative;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-nav ul {
+  display: flex;
+  justify-content: space-between;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-nav ul .categories {
+  display: block;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  min-width: 30px;
+  font-size: 1em;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-nav ul .categories:hover {
+  border-bottom: 1px solid gainsboro;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-nav ul .categories:hover > .categories-submenu {
+  height: auto;
+  overflow: visible;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-nav ul .categories .categories-submenu {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 0;
+  overflow: hidden;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-nav ul .categories .categories-submenu:hover {
+  height: auto;
+  overflow: visible;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-nav .pagination {
+  height: 0;
+  overflow: hidden;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-nav .pagination .paginate-prev {
+  height: auto;
+  overflow: visible;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: block;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  min-width: 30px;
+  font-size: 1em;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-nav .pagination .paginate-next {
+  height: auto;
+  overflow: visible;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: block;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  min-width: 30px;
+  font-size: 1em;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-category {
+  width: 100%;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-category .profile-main-gear-category-timeline {
+  width: 100%;
+  position: relative;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-header {
+  height: 36px;
+  border-top: 1px solid gainsboro;
+  border-bottom: 1px solid gainsboro;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-gear-timeline {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-gear-timeline a {
+  width: 20%;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-gear-timeline a .profile-main-gear-category-timeline-gear-timeline-index .profile-main-gear-category-timeline-gear-timeline-index-image {
+  width: 100%;
+  padding-top: 100%;
+  background-image: url(/images/prof.jpg);
+  background-size: cover;
+  background-position: center;
+  border: 1px solid gainsboro;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-gear-timeline .profile-main-gear-category-timeline-gear-timeline-paginate-prev {
+  width: 7%;
+  margin-right: 3%;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-gear-timeline .profile-main-gear-category-timeline-gear-timeline-paginate-next {
+  position: absolute;
+  right: 0px;
+  width: 7%;
+  height: 100%;
+  margin-left: 3%;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-category .profile-main-gear-category-timeline .pagination {
+  width: 7%;
+  height: 0;
+  overflow: hidden;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-category .profile-main-gear-category-timeline .pagination .paginate-prev {
+  overflow: visible;
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  display: block;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  min-width: 30px;
+  font-size: 1em;
+}
+body #camp-app .middle main .main-category .profile .profile-main-gear .profile-main-gear-category .profile-main-gear-category-timeline .pagination .paginate-next {
+  overflow: visible;
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  display: block;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  min-width: 30px;
+  font-size: 1em;
 }
 body #camp-app .middle main .main-category .profile .profile-main-post-index ul li {
   list-style: none;
