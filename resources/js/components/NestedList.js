@@ -26,31 +26,40 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NestedList(props) {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const [check, setCheck] = React.useState(0);
-    
-    const handleClick = () => {
-    setOpen(!open);
-    };
-    
-    return (
-        <List
-          component="nav"
-          aria-labelledby="nested-list-subheader"
-          subheader={
-            <ListSubheader component="div" id="gearList">
-              <p className="count">{props.count.countTrue} / {props.count.countAll}</p>
-            </ListSubheader>
-          }
-          className={classes.root}
-          style={{position: "static"}}
-          style={{width: "910px"}}
-        >
-            {props.categories.map((category)=>
-                <NestedListIndex category={category} key={category.category} getCount={props.getCount} getGear={props.getGear} postIs_check={props.postIs_check} count={props.count} />
+  console.log(props)
+  
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const [check, setCheck] = React.useState(0);
+  
+  const handleClick = () => {
+  setOpen(!open);
+  };
 
-            )}
-        </List>
-    );
+  return (
+    <List
+      component="nav"
+      aria-labelledby="nested-list-subheader"
+      subheader={
+        <ListSubheader component="div" id="gearList">
+          <p className="count">{props.count.countTrue} / {props.count.countAll}</p>
+        </ListSubheader>
+      }
+      className={classes.root}
+      style={{position: "static"}}
+      style={{width: "910px"}}
+    >
+    {props.categories.map((category)=>
+      <NestedListIndex 
+        category={category} 
+        key={category.category} 
+        getCount={props.getCount} 
+        getGear={props.getGear} 
+        postIs_check={props.postIs_check} 
+        deleteBringGear={props.deleteBringGear} 
+        count={props.count} 
+      />
+    )}
+  </List>
+  );
 }

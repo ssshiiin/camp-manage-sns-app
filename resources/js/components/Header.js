@@ -5,7 +5,6 @@ import GearAddHeader from './GearAddHeader';
 import GearBringHeader from './GearBringHeader';
 
 function Header(props){
-    console.log(props)
     return (
         <header>
             <Switch>

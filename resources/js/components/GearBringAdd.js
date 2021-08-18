@@ -5,7 +5,6 @@ import Header from './Header';
 import NestedList from './NestedList';
  
 function GearBringAdd(props){
-    console.log(props)
     const [categories, setCategories] = useState([]);
     const [count, setCount] = useState(0);
     

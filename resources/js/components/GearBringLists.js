@@ -32,9 +32,10 @@ function GearBringLists(props){
         getCount();
     } 
     
-    const deleteBringGear = async() => {
-        const response = await axios.get(`/api/create/bring_gears/${props.match.params.id}`);
+    const deleteBringGear = async(id) => {
+        const response = await axios.get(`/api/delete/bring_gears/${id}`);
         setCategories(response.data.data);
+        console.log(response)
         getCount();
     } 
     
@@ -42,7 +43,14 @@ function GearBringLists(props){
         <div className="gear">
             <Header user_id={props.match.params.id}/>
             <div className="gear-main">
-                <NestedList categories={categories} getCount={getCount} getGear={getGear} postIs_check={postIs_check} count={count}/>
+                <NestedList 
+                categories={categories} 
+                getCount={getCount} 
+                getGear={getGear} 
+                postIs_check={postIs_check} 
+                deleteBringGear={deleteBringGear} 
+                count={count}
+                />
             </div>
         </div>
     )

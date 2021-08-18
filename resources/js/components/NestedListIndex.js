@@ -53,7 +53,7 @@ export default function NestedListIndex(props) {
                         </ListItemIcon>
                         <ListItemText primary={gear.gear_name} />
                         <Checkboxes id={gear.id} is_check={gear.is_check} getCount={props.getCount} postIs_check={props.postIs_check} getGear={props.getGear} />
-                        <DeleteForeverIcon />
+                        <DeleteForeverIcon onClick={() => props.deleteBringGear(gear.id)} />
                     </ListItem>
                 )}
             </List>

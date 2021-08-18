@@ -15930,8 +15930,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function GearBringAdd(props) {
-  console.log(props);
-
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       categories = _useState2[0],
@@ -16100,7 +16098,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function GearBringHeader(props) {
-  console.log(props);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("header", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "title",
@@ -16261,21 +16258,22 @@ function GearBringLists(props) {
   }();
 
   var deleteBringGear = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(id) {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/create/bring_gears/".concat(props.match.params.id));
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/delete/bring_gears/".concat(id));
 
             case 2:
               response = _context4.sent;
               setCategories(response.data.data);
+              console.log(response);
               getCount();
 
-            case 5:
+            case 6:
             case "end":
               return _context4.stop();
           }
@@ -16283,7 +16281,7 @@ function GearBringLists(props) {
       }, _callee4);
     }));
 
-    return function deleteBringGear() {
+    return function deleteBringGear(_x3) {
       return _ref4.apply(this, arguments);
     };
   }();
@@ -16299,6 +16297,7 @@ function GearBringLists(props) {
         getCount: getCount,
         getGear: getGear,
         postIs_check: postIs_check,
+        deleteBringGear: deleteBringGear,
         count: count
       })
     })]
@@ -16693,7 +16692,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Header(props) {
-  console.log(props);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("header", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Switch, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
@@ -16993,6 +16991,7 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__.default
 function NestedList(props) {
   var _jsx2;
 
+  console.log(props);
   var classes = useStyles();
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
@@ -17032,6 +17031,7 @@ function NestedList(props) {
       getCount: props.getCount,
       getGear: props.getGear,
       postIs_check: props.postIs_check,
+      deleteBringGear: props.deleteBringGear,
       count: props.count
     }, category.category);
   })), _jsx2));
@@ -17148,7 +17148,11 @@ function NestedListIndex(props) {
               getCount: props.getCount,
               postIs_check: props.postIs_check,
               getGear: props.getGear
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_13__.default, {})]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_13__.default, {
+              onClick: function onClick() {
+                return props.deleteBringGear(gear.id);
+              }
+            })]
           }, gear.gear_id);
         })
       })
