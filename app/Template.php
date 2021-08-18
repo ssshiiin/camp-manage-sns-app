@@ -12,4 +12,8 @@ class Template extends Model
     protected $fillable = [
             'user_id', 'gear_id', 'index'  
         ];
+        
+    public function gear(){
+        return $this->belongsTo("App\Gear");
+    }
 }

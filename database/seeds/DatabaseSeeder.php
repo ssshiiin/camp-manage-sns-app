@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TagsTableSeeder::class);
         $this->call(GearsTableSeeder::class);
         $this->call(Save_gearsTableSeeder::class);
-        $this->call(TemplatesTableSeeder::class);
         $this->call(SchedulesTableSeeder::class);
     }
 }

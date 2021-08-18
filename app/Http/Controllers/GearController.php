@@ -30,7 +30,10 @@ class GearController extends Controller
         return $gear;
     }
     
-    public function getAddGear(User $user, Gear $gear, Bring_gear $bring_gear){
+    public function getAddGear(User $user){
+        $gear = new Gear;
+        $bring_gear = new Bring_gear;
+        
         $user_id = $user->id;
     
         $target = $gear->with("bring_gear")->get()->where("user_id", $user_id)->whereNull("bring_gear.gear_id");
@@ -56,10 +59,6 @@ class GearController extends Controller
         $gear->is_check = $request->is_check;
         $gear->update();
         
-        $target = $gear->with("bring_gear")->get()->where("user_id", $user_id)->whereNull("bring_gear.gear_id");
-        
-        $categories = $target->groupBy("category")->values();
-        
-        return Bring_gearsCategoriesResource::collection($categories);
+        return app()->make('App\Http\Controllers\GearController')->getAddGear(User::find($user_id));
     }
 }

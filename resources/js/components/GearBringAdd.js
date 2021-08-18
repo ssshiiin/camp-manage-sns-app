@@ -33,7 +33,7 @@ function GearBringAdd(props){
     } 
     
     const createAddBringGear = async() => {
-        const response = await axios.get(`/api/create/bring_gears/${props.match.params.id}`);
+        const response = await axios.post(`/api/create/bring_gears/${props.match.params.id}`);
         setCategories(response.data.data);
         getCount();
     } 

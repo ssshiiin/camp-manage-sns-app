@@ -6,6 +6,8 @@ function GearBringHeader(props){
         <header>
             <div className="title">ふもとっぱらキャンプ場の持ち物リスト
                 <Link to={`/${props.user_id}/bring_lists/add`}>add</Link>
+                <button type="button" onClick={props.createTemplates}>テンプレートを作成する</button>
+                <button type="button" onClick={props.useTemplates}>テンプレートを使う</button>
             </div>
         </header>
     )

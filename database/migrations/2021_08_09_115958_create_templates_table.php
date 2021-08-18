@@ -19,7 +19,8 @@ class CreateTemplatesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->bigInteger('gear_id')->unsigned();
             $table->foreign('gear_id')->references('id')->on('gears');
-            $table->integer('index');
+            $table->string('template_name');
+            $table->boolean('is_check');
             $table->timestamps();
         });
     }

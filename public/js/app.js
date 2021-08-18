@@ -16037,7 +16037,7 @@ function GearBringAdd(props) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/create/bring_gears/".concat(props.match.params.id));
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/create/bring_gears/".concat(props.match.params.id));
 
             case 2:
               response = _context4.sent;
@@ -16104,6 +16104,14 @@ function GearBringHeader(props) {
       children: ["\u3075\u3082\u3068\u3063\u3071\u3089\u30AD\u30E3\u30F3\u30D7\u5834\u306E\u6301\u3061\u7269\u30EA\u30B9\u30C8", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/".concat(props.user_id, "/bring_lists/add"),
         children: "add"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+        type: "button",
+        onClick: props.createTemplates,
+        children: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3092\u4F5C\u6210\u3059\u308B"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+        type: "button",
+        onClick: props.useTemplates,
+        children: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3092\u4F7F\u3046"
       })]
     })
   });
@@ -16270,10 +16278,9 @@ function GearBringLists(props) {
             case 2:
               response = _context4.sent;
               setCategories(response.data.data);
-              console.log(response);
               getCount();
 
-            case 6:
+            case 5:
             case "end":
               return _context4.stop();
           }
@@ -16286,10 +16293,65 @@ function GearBringLists(props) {
     };
   }();
 
+  var createTemplates = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/create/templates/".concat(props.match.params.id), [categories, "テンプレート"]);
+
+            case 2:
+              response = _context5.sent;
+
+            case 3:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function createTemplates() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  var useTemplates = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/templates/".concat(props.match.params.id), ["テンプレート"]);
+
+            case 2:
+              response = _context6.sent;
+              console.log(response.data.data);
+
+            case 4:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+
+    return function useTemplates() {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "gear",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_3__.default, {
-      user_id: props.match.params.id
+      user_id: props.match.params.id,
+      createTemplates: createTemplates,
+      useTemplates: useTemplates
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "gear-main",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_NestedList__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -16699,7 +16761,9 @@ function Header(props) {
         exact: true,
         render: function render() {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_GearBringHeader__WEBPACK_IMPORTED_MODULE_2__.default, {
-            user_id: props.user_id
+            user_id: props.user_id,
+            createTemplates: props.createTemplates,
+            useTemplates: props.useTemplates
           });
         }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {

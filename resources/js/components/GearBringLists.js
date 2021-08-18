@@ -35,13 +35,26 @@ function GearBringLists(props){
     const deleteBringGear = async(id) => {
         const response = await axios.get(`/api/delete/bring_gears/${id}`);
         setCategories(response.data.data);
-        console.log(response)
         getCount();
-    } 
+    }
+    
+    const createTemplates = async() => {
+        const response = await axios.post(`/api/create/templates/${props.match.params.id}`
+        , [categories, "テンプレート"]);
+    }
+    
+    const useTemplates = async() => {
+        const response = await axios.post(`/api/templates/${props.match.params.id}`
+        , ["テンプレート"]);
+        console.log(response.data.data)
+    }
     
     return (
         <div className="gear">
-            <Header user_id={props.match.params.id}/>
+            <Header 
+            user_id={props.match.params.id} 
+            createTemplates={createTemplates}
+            useTemplates={useTemplates}/>
             <div className="gear-main">
                 <NestedList 
                 categories={categories} 
