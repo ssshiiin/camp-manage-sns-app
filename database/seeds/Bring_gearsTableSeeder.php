@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class Save_gearsTableSeeder extends Seeder
+class Bring_gearsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class Save_gearsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Save_gear::class, 50)->create();
+        factory(App\Bring_gear::class, 1)->create();
     }
 }

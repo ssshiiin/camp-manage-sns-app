@@ -1,10 +1,12 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { Route, Switch} from 'react-router-dom';
 
 import Profile from './Profile';
 import Home from './Home';
 import SubCategory from './SubCategory';
-import GearLists from './GearLists';
+import GearBringLists from './GearBringLists';
+import GearSaveLists from './GearSaveLists';
+import GearBringAdd from './GearBringAdd';
 
 
 function Main(){
@@ -13,7 +15,9 @@ function Main(){
             <div className="main-category">
             <Switch>
                 <Route path="/" exact component={Home} />
-                <Route path="/:id/lists" exact component={GearLists} />
+                <Route path="/:id/save_lists" exact component={GearSaveLists} />
+                <Route path="/:id/bring_lists" exact component={GearBringLists} />
+                <Route path="/:id/bring_lists/add" exact component={GearBringAdd} />
                 <Route path="/:id" component={Profile} />
             </Switch>
             </div>

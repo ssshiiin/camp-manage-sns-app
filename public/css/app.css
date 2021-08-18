@@ -22,30 +22,29 @@ body #camp-app {
   min-height: 100vh;
   width: 100%;
 }
-body #camp-app nav {
+body #camp-app .side-bar {
   width: 258px;
   min-height: 100vh;
-  border-right: 1px solid gainsboro;
   position: fixed;
 }
-body #camp-app nav .logo {
+body #camp-app .side-bar .logo {
   height: 80px;
 }
-body #camp-app nav .nav {
+body #camp-app .side-bar .side-nav {
   min-height: 100vh;
   margin: 0;
   padding: 0;
 }
-body #camp-app nav .nav a {
+body #camp-app .side-bar .side-nav a {
   text-decoration: none;
   display: flex;
   margin: 20px 0px;
   border-bottom: 1px solid gainsboro;
 }
-body #camp-app nav .nav a img {
+body #camp-app .side-bar .side-nav a img {
   padding: 0px 20px;
 }
-body #camp-app nav .nav a li {
+body #camp-app .side-bar .side-nav a li {
   text-align: center;
   list-style: none;
   font-size: 1.5em;
@@ -56,12 +55,13 @@ body #camp-app nav .nav a li {
 body #camp-app main {
   display: flex;
   min-height: 100vh;
-  width: calc(100%-258px);
+  width: calc(100% - 258px);
   padding-left: 258px;
 }
 body #camp-app main .main-category {
   flex: 1;
-  width: calc(100%-258px);
+  width: calc(100% - 258px);
+  border-left: 1px solid gainsboro;
 }
 body #camp-app main .main-category .profile-main-post-index ul li {
   list-style: none;
@@ -382,9 +382,19 @@ body #camp-app main .main-category .gear {
   width: 100%;
 }
 body #camp-app main .main-category .gear header {
+  display: flex;
   position: fixed;
   width: 100%;
   height: 80px;
+  background-color: white;
+  z-index: 10;
+  border-bottom: 1px solid gainsboro;
+}
+body #camp-app main .main-category .gear header .title {
+  margin-left: 20px;
+  height: 100%;
+  font-size: 1.5em;
+  line-height: 80px;
 }
 body #camp-app main .main-category .gear .gear-main {
   width: 100%;

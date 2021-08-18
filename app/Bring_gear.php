@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Save_gear extends Model
+class Bring_gear extends Model
 {
-    protected $table = 'save_gears';
-    
+    protected $table = "bring_gears";
     
     protected $fillable = [
         'user_id', 'gear_id', 'is_check'

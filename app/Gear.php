@@ -24,4 +24,12 @@ class Gear extends Model
     public function whereUser_idAndWhereCategoryPaginate($user_id, $category, $limit = 4){
         return $this->where("user_id", $user_id)->where("category", $category)->paginate($limit);
     }
+    
+    public function save_gear(){
+        return $this->hasOne('App\Save_gear', 'gear_id');
+    }
+    
+    public function bring_gear(){
+        return $this->hasOne('App\Bring_gear', 'gear_id');
+    }
 }
