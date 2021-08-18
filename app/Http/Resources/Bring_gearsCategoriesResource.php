@@ -19,7 +19,7 @@ class Bring_gearsCategoriesResource extends JsonResource
         return [
             "category"=>$this->first()->category,
             "gearList"=>Bring_gearsResource::collection($this->all()),
-            "countTrue"=>$this->where("bring_gear.is_check", true)->count(),
+            "countTrue"=>$this->where("is_check", true)->count(),
             "countAll"=>$this->count(),
         ];
     }

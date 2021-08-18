@@ -5,10 +5,9 @@ function GearBringHeader(props){
     console.log(props)
     return (
         <header>
-            <div className="title">ふもとっぱらキャンプ場の持ち物リスト</div>
-            <Link to={`/${props.user_id}/bring_lists/add`}>
-            add
-            </Link>
+            <div className="title">ふもとっぱらキャンプ場の持ち物リスト
+                <Link to={`/${props.user_id}/bring_lists/add`}>add</Link>
+            </div>
         </header>
     )
 }

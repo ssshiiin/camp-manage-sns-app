@@ -12,6 +12,7 @@ import SendIcon from "@material-ui/icons/Send";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 import Checkboxes from './Checkboxes';
 
@@ -52,6 +53,7 @@ export default function NestedListIndex(props) {
                         </ListItemIcon>
                         <ListItemText primary={gear.gear_name} />
                         <Checkboxes id={gear.id} is_check={gear.is_check} getCount={props.getCount} postIs_check={props.postIs_check} getGear={props.getGear} />
+                        <DeleteForeverIcon />
                     </ListItem>
                 )}
             </List>

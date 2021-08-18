@@ -33,7 +33,7 @@ function GearBringAdd(props){
         getCount();
     } 
     
-    const postAddBringGear = async() => {
+    const createAddBringGear = async() => {
         const response = await axios.get(`/api/create/bring_gears/${props.match.params.id}`);
         setCategories(response.data.data);
         getCount();
@@ -43,7 +43,7 @@ function GearBringAdd(props){
         <div className="gear">
             <Header 
             user_id={props.match.params.id}
-            postAddBringGear={postAddBringGear} 
+            postAddBringGear={createAddBringGear} 
             />
             <div className="gear-main">
                 <NestedList 

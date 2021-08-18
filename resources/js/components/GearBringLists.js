@@ -32,6 +32,11 @@ function GearBringLists(props){
         getCount();
     } 
     
+    const deleteBringGear = async() => {
+        const response = await axios.get(`/api/create/bring_gears/${props.match.params.id}`);
+        setCategories(response.data.data);
+        getCount();
+    } 
     
     return (
         <div className="gear">
