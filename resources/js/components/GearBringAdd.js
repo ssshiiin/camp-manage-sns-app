@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import GearHeader from './GearHeader';
+import Header from './Header';
 import NestedList from './NestedList';
  
 function GearBringAdd(props){
+    console.log(props)
     const [categories, setCategories] = useState([]);
     const [count, setCount] = useState(0);
     
@@ -34,14 +35,13 @@ function GearBringAdd(props){
     
     const postAddBringGear = async() => {
         const response = await axios.get(`/api/create/bring_gears/${props.match.params.id}`);
-        console.log(response)
         setCategories(response.data.data);
         getCount();
     } 
     
     return (
         <div className="gear">
-            <GearHeader 
+            <Header 
             user_id={props.match.params.id}
             postAddBringGear={postAddBringGear} 
             />

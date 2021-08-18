@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import GearHeader from './GearHeader';
+import Header from './Header';
 import NestedList from './NestedList';
  
 function GearBringLists(props){
@@ -28,7 +28,6 @@ function GearBringLists(props){
         {
             is_check: is_check
         });
-        console.log(response.data.data)
         setCategories(response.data.data);
         getCount();
     } 
@@ -36,7 +35,7 @@ function GearBringLists(props){
     
     return (
         <div className="gear">
-            <GearHeader user_id={props.match.params.id}/>
+            <Header user_id={props.match.params.id}/>
             <div className="gear-main">
                 <NestedList categories={categories} getCount={getCount} getGear={getGear} postIs_check={postIs_check} count={count}/>
             </div>
