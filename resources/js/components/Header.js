@@ -10,7 +10,12 @@ function Header(props){
             <Switch>
                 <Route path="/:id/bring_lists" exact 
                 render={() => <GearBringHeader
-                    user_id={props.user_id} createTemplates={props.createTemplates} useTemplates={props.useTemplates}/>
+                    user_id={props.user_id} 
+                    createTemplates={props.createTemplates} 
+                    useTemplates={props.useTemplates}
+                    getTemplates={props.getTemplates}
+                    templates={props.templates}
+                    />
                 } />  
                 <Route path="/:id/bring_lists/add" exact 
                 render={() => <GearAddHeader 

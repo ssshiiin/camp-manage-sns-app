@@ -23,9 +23,8 @@ class TemplateController extends Controller
             foreach($category["gearList"] as $gear){
                 $input[] = [
                     "user_id" => $user_id,
-                    "gear_id" => $gear["gear_id"],
+                    "bring_gear_id" => $gear["id"],
                     "template_name" => $template_name,
-                    'is_check' => 0,
                     'created_at' => now(), 
                     'updated_at' => now(),
                 ];
@@ -37,11 +36,34 @@ class TemplateController extends Controller
     
     public function useTemplate(Request $request, User $user){
         $template = new Template;
+        $bring_gear = new Bring_gear;
+        
         $user_id = $user->id;
         $template_name = $request->input(0);
+        dump($template_name);
         
-        $categories = $template->with("gear")->get()->where("user_id", $user_id)->where("template_name", $template_name)->groupBy("gear.category")->values();
+        dd($bring_gear->gear());
+        
+        dump($bring_gear->with("template")->get()->where("template.template_name", $template_name));
+        dd($bring_gear->with("gear")->get()->where("gear.user_id", 10));
+        
+        dump($bring_gear->with(["template" => function ($query){
+            $query->where("template_name", $template_name);
+        }])->get());
+        
+        
+        $categories = dd($bring_gear->with("gear")->with("template")->get()->where("user_id", $user_id)->groupBy("gear.category")->values());
+        // ->where("template.template_name", $template_name)->groupBy("gear.category")->values();
         
         return Save_gearsCategoryResource::collection($categories);
+    }
+    
+    public function getTemplates(User $user){
+        $template = new Template;
+        
+        $user_id = $user->id;
+        $templates = $template->where("user_id", $user_id)->groupBy("template_name")->get("template_name");
+        
+        return response()->json($templates);
     }
 }

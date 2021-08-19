@@ -15,4 +15,8 @@ class Bring_gear extends Model
     public function gear(){
         return $this->belongsTo('App\Gear');
     }
+    
+    public function template(){
+        return $this->hasMany('App\Template', 'bring_gear_id');
+    }
 }

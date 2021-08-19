@@ -15,12 +15,11 @@ class CreateTemplatesTable extends Migration
     {
         Schema::create('templates', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('template_name');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->bigInteger('gear_id')->unsigned();
-            $table->foreign('gear_id')->references('id')->on('gears');
-            $table->string('template_name');
-            $table->boolean('is_check');
+            $table->bigInteger('bring_gear_id')->unsigned();
+            $table->foreign('bring_gear_id')->references('id')->on('bring_gears');
             $table->timestamps();
         });
     }

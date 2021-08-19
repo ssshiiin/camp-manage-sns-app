@@ -32,8 +32,4 @@ class Gear extends Model
     public function bring_gear(){
         return $this->hasOne('App\Bring_gear', 'gear_id');
     }
-    
-    public function templates(){
-        return $this->hasOne('App\Template', 'gear_id');
-    }
 }

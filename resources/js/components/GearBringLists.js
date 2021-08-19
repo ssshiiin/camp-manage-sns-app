@@ -7,10 +7,12 @@ import NestedList from './NestedList';
 function GearBringLists(props){
     const [categories, setCategories] = useState([]);
     const [count, setCount] = useState(0);
+    const [templates, setTemplates] = useState([]);
     
     useEffect(() => {
         getGear();
         getCount();
+        getTemplates();
     }, [])
     
     const getGear = async () => {
@@ -44,9 +46,18 @@ function GearBringLists(props){
     }
     
     const useTemplates = async() => {
-        const response = await axios.post(`/api/templates/${props.match.params.id}`
+        const response = await axios.post(`/api/templates/use/${props.match.params.id}`
         , ["テンプレート"]);
-        console.log(response.data.data)
+        console.log(response.data.data);
+        setCategories(response.data.data);
+        getCount();
+        
+    }
+    
+    const getTemplates = async() => {
+        const response = await axios.get(`/api/templates/${props.match.params.id}`);
+        
+        setTemplates(response.data);
     }
     
     return (
@@ -54,7 +65,10 @@ function GearBringLists(props){
             <Header 
             user_id={props.match.params.id} 
             createTemplates={createTemplates}
-            useTemplates={useTemplates}/>
+            useTemplates={useTemplates}
+            getTemplates={getTemplates}
+            templates={templates}
+            />
             <div className="gear-main">
                 <NestedList 
                 categories={categories} 

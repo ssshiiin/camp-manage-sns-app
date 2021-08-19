@@ -395,6 +395,7 @@ body #camp-app main .main-category .gear header .title {
   height: 100%;
   font-size: 1.5em;
   line-height: 80px;
+  display: flex;
 }
 body #camp-app main .main-category .gear .gear-main {
   width: 100%;

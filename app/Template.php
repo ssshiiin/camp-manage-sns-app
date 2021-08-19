@@ -10,10 +10,10 @@ class Template extends Model
     
     
     protected $fillable = [
-            'user_id', 'gear_id', 'index'  
+            'user_id', 'bring_gear_id', 'template_name'  
         ];
         
-    public function gear(){
-        return $this->belongsTo("App\Gear");
+    public function bring_gear(){
+        return $this->belongsTo("App\Bring_gear");
     }
 }

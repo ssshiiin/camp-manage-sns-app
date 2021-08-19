@@ -16090,28 +16090,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _SimpleListMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SimpleListMenu */ "./resources/js/components/SimpleListMenu.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
 
 
 function GearBringHeader(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("header", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("header", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "title",
-      children: ["\u3075\u3082\u3068\u3063\u3071\u3089\u30AD\u30E3\u30F3\u30D7\u5834\u306E\u6301\u3061\u7269\u30EA\u30B9\u30C8", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      children: ["\u3075\u3082\u3068\u3063\u3071\u3089\u30AD\u30E3\u30F3\u30D7\u5834\u306E\u6301\u3061\u7269\u30EA\u30B9\u30C8", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/".concat(props.user_id, "/bring_lists/add"),
         children: "add"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
         type: "button",
         onClick: props.createTemplates,
         children: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3092\u4F5C\u6210\u3059\u308B"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-        type: "button",
-        onClick: props.useTemplates,
-        children: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3092\u4F7F\u3046"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SimpleListMenu__WEBPACK_IMPORTED_MODULE_1__.default, {
+        getTemplates: props.getTemplates,
+        useTemplates: props.useTemplates,
+        templates: props.templates
       })]
     })
   });
@@ -16176,9 +16178,15 @@ function GearBringLists(props) {
       count = _useState4[0],
       setCount = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      templates = _useState6[0],
+      setTemplates = _useState6[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getGear();
     getCount();
+    getTemplates();
   }, []);
 
   var getGear = /*#__PURE__*/function () {
@@ -16327,13 +16335,15 @@ function GearBringLists(props) {
           switch (_context6.prev = _context6.next) {
             case 0:
               _context6.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/templates/".concat(props.match.params.id), ["テンプレート"]);
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/templates/use/".concat(props.match.params.id), ["テンプレート"]);
 
             case 2:
               response = _context6.sent;
               console.log(response.data.data);
+              setCategories(response.data.data);
+              getCount();
 
-            case 4:
+            case 6:
             case "end":
               return _context6.stop();
           }
@@ -16346,12 +16356,41 @@ function GearBringLists(props) {
     };
   }();
 
+  var getTemplates = /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              _context7.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/templates/".concat(props.match.params.id));
+
+            case 2:
+              response = _context7.sent;
+              setTemplates(response.data);
+
+            case 4:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }));
+
+    return function getTemplates() {
+      return _ref7.apply(this, arguments);
+    };
+  }();
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "gear",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_3__.default, {
       user_id: props.match.params.id,
       createTemplates: createTemplates,
-      useTemplates: useTemplates
+      useTemplates: useTemplates,
+      getTemplates: getTemplates,
+      templates: templates
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "gear-main",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_NestedList__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -16763,7 +16802,9 @@ function Header(props) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_GearBringHeader__WEBPACK_IMPORTED_MODULE_2__.default, {
             user_id: props.user_id,
             createTemplates: props.createTemplates,
-            useTemplates: props.useTemplates
+            useTemplates: props.useTemplates,
+            getTemplates: props.getTemplates,
+            templates: props.templates
           });
         }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
@@ -17055,7 +17096,6 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__.default
 function NestedList(props) {
   var _jsx2;
 
-  console.log(props);
   var classes = useStyles();
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
@@ -18205,6 +18245,122 @@ function SideBar() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SideBar);
+
+/***/ }),
+
+/***/ "./resources/js/components/SimpleListMenu.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/SimpleListMenu.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SimpleListMenu)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
+/* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/List */ "./node_modules/@material-ui/core/esm/List/List.js");
+/* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/ListItem */ "./node_modules/@material-ui/core/esm/ListItem/ListItem.js");
+/* harmony import */ var _material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/ListItemText */ "./node_modules/@material-ui/core/esm/ListItemText/ListItemText.js");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "./node_modules/@material-ui/core/esm/MenuItem/MenuItem.js");
+/* harmony import */ var _material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Menu */ "./node_modules/@material-ui/core/esm/Menu/Menu.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__.default)(function (theme) {
+  return {
+    root: {
+      backgroundColor: theme.palette.background.paper
+    }
+  };
+});
+function SimpleListMenu(props) {
+  var options = ["none"];
+  props.templates.forEach(function (template) {
+    return options.push(template.template_name);
+  });
+  var classes = useStyles();
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(null),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      anchorEl = _React$useState2[0],
+      setAnchorEl = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0__.useState(0),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      selectedIndex = _React$useState4[0],
+      setSelectedIndex = _React$useState4[1];
+
+  var handleClickListItem = function handleClickListItem(event) {
+    setAnchorEl(event.currentTarget);
+  };
+
+  var handleMenuItemClick = function handleMenuItemClick(event, index) {
+    setSelectedIndex(index);
+    setAnchorEl(null);
+    console.log("test");
+    props.useTemplates();
+  };
+
+  var handleClose = function handleClose() {
+    setAnchorEl(null);
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: classes.root,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_3__.default, {
+      component: "nav",
+      "aria-label": "Device settings",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_4__.default, {
+        "aria-haspopup": "true",
+        button: true,
+        "aria-controls": "lock-menu",
+        "aria-label": "when device is locked",
+        onClick: handleClickListItem,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_5__.default, {
+          primary: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3092\u4F7F\u3046",
+          secondary: options[selectedIndex]
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_6__.default, {
+      id: "lock-menu",
+      anchorEl: anchorEl,
+      keepMounted: true,
+      open: Boolean(anchorEl),
+      onClose: handleClose,
+      children: options.map(function (option, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_7__.default, {
+          selected: index === selectedIndex,
+          onClick: function onClick(event) {
+            return handleMenuItemClick(event, index);
+          },
+          children: option
+        }, option);
+      })
+    })]
+  });
+}
 
 /***/ }),
 

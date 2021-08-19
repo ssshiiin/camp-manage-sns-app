@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NestedList(props) {
-  console.log(props)
   
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
