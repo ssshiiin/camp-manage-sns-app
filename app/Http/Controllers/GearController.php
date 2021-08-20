@@ -61,4 +61,11 @@ class GearController extends Controller
         
         return app()->make('App\Http\Controllers\GearController')->getAddGear(User::find($user_id));
     }
+    
+    public function getCountGear(User $user){
+        $user_id = $user->id;
+        
+        $count = Gear::where("user_id", $user_id)->count();
+        return $count;
+    }
 }

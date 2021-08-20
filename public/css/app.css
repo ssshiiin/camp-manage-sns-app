@@ -244,6 +244,7 @@ body #camp-app main .main-category .profile .profile-main .profile-introduce .pr
   border-radius: 100%;
 }
 body #camp-app main .main-category .profile .profile-main .profile-introduce .profile-content {
+  flex: 1;
   height: 200px;
 }
 body #camp-app main .main-category .profile .profile-main .profile-nav {

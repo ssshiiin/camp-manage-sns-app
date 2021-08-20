@@ -42,6 +42,10 @@ Route::group( ['middleware' => 'api'], function(){
     Route::get('/count/true/bring/{user}', 'Bring_gearController@getCountTrue');
     Route::get('/count/true/{user}', 'Save_gearsController@getCountTrue');
     
+    Route::get('/count/post/{user}', 'PostController@getCountPost');
+    Route::get('/count/gear/{user}', 'GearController@getCountGear');
+    
+    Route::get('/profile/{user}', 'ProfileController@getProfile');
     Route::get('/templates/{user}', 'TemplateController@getTemplates');
     Route::get('/save_gears/{user}', 'Save_gearsController@getUserSave_gears');
     Route::get('/bring_gears/{user}', 'Bring_gearController@getUserBring_gears');

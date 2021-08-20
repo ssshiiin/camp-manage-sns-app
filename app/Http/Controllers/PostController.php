@@ -32,4 +32,11 @@ class PostController extends Controller
         
         return PostProfileIndexResource::collection($post->whereUser_idAndPost_id($user_id, $post_id));
     }
+    
+    public function getCountPost(User $user){
+        $user_id = $user->id;
+        
+        $count = Post::where("user_id", $user_id)->count();
+        return $count;
+    }
 }
