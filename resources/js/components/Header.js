@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import GearAddHeader from './GearAddHeader';
 import GearBringHeader from './GearBringHeader';
+import ProfilePostHeader from './ProfilePostHeader';
 
 function Header(props){
     return (
@@ -23,6 +24,9 @@ function Header(props){
                 render={() => <GearAddHeader 
                     user_id={props.user_id}
                     postAddBringGear={props.postAddBringGear} />
+                } />
+                <Route path="/:id" exact 
+                render={() => <ProfilePostHeader />
                 } />
             </Switch>
         </header>

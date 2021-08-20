@@ -1,8 +1,8 @@
 import React from 'react';
 
 import TocIcon from '@material-ui/icons/Toc';
+import GearBringNav from './GearBringNav';
 
-import GearBringNav from './GearBringNav'
 
 function GearBringHeader(props){
     return (

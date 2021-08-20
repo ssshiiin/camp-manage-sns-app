@@ -15,8 +15,8 @@ function Profile(props){
             <div className="profile-main">
             <ProfileUser />
             <ul className="profile-nav">
-                <Link to={`/${props.match.params.id}`}><li>投稿</li></Link>
-                <Link to={`/${props.match.params.id}/gear`}><li>ギア</li></Link>
+                <Link to={`/${props.match.params.id}`}><li>Achivement</li></Link>
+                <Link to={`/${props.match.params.id}/gear`}><li>Gear Lists</li></Link>
             </ul>
             <Switch>
                 <Route path="/:id" exact component={ProfilePost} />
