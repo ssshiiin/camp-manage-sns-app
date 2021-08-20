@@ -11,10 +11,12 @@ function Header(props){
                 <Route path="/:id/bring_lists" exact 
                 render={() => <GearBringHeader
                     user_id={props.user_id} 
+                    allDeleteBringGear={props.allDeleteBringGear}
                     createTemplates={props.createTemplates} 
                     useTemplates={props.useTemplates}
                     getTemplates={props.getTemplates}
                     templates={props.templates}
+                    deleteTemplate={props.deleteTemplate}
                     />
                 } />  
                 <Route path="/:id/bring_lists/add" exact 

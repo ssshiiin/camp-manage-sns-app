@@ -1,17 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import SimpleListMenu from './SimpleListMenu'
+
+import TocIcon from '@material-ui/icons/Toc';
+
+import GearBringNav from './GearBringNav'
 
 function GearBringHeader(props){
     return (
-        <header>
+        <React.Fragment>
             <div className="title">
-                ふもとっぱらキャンプ場の持ち物リスト
-                <Link to={`/${props.user_id}/bring_lists/add`}>add</Link>
-                <button type="button" onClick={props.createTemplates}>テンプレートを作成する</button>
-                <SimpleListMenu getTemplates={props.getTemplates} useTemplates={props.useTemplates} templates={props.templates}/>
+                持ち物リスト
+                <GearBringNav 
+                    user_id={props.user_id} 
+                    templates={props.templates}
+                    createTemplates={props.createTemplates}
+                    useTemplates={props.useTemplates} 
+                    allDeleteBringGear={props.allDeleteBringGear}
+                    deleteTemplate={props.deleteTemplate}
+                />
             </div>
-        </header>
+        </React.Fragment>
     )
 }
 

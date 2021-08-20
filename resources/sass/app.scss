@@ -15,9 +15,31 @@ ul {
     margin-block-end: 0;
     padding-inline-start: 0;
 }
+
 li {
     list-style: none;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+    &:link {
+        color: black;
+    }
+    &:visited {
+        color: black;
+    }
+    &:hover {
+        color: black;
+    }
+    &:active {
+        color: black;
+    }
+}
+
+
+
+
 
 body {
     #camp-app {
@@ -266,6 +288,7 @@ body {
                             display: flex;
                             flex-wrap: wrap;
                             .profile-main-posts-image {
+                                box-shadow: 0 0 1px rgb(150, 150, 150) inset;
                                 width: 33.1%;
                                 padding-top: 33%;
                                 background-image: url(/images/prof.jpg);
@@ -281,6 +304,12 @@ body {
                                     width: 100%;
                                     text-align: center;
                                     font-size: 1.4em;
+                                    height: 0;
+                                    overflow: hidden;
+                                }
+                                .p-center:hover {
+                                    height: 100%;
+                                    overflow: hidden;
                                 }
                             }
                         }
@@ -323,36 +352,36 @@ body {
                                 }
                             }
                                 
-                                .pagination {
-                                    height: 0;
-                                    overflow: hidden;
-                                    .paginate-prev{
-                                        height: auto;
-                                        overflow: visible;
-                                        position: absolute;
-                                        top: 0px;
-                                        left: 0px;
-                                        display: block;
-                                        height: 36px;
-                                        line-height: 36px;
-                                        text-align: center;
-                                        min-width: 30px;
-                                        font-size: 1em;
-                                    }
-                                    .paginate-next{
-                                        height: auto;
-                                        overflow: visible;
-                                        position: absolute;
-                                        top: 0px;
-                                        right: 0px;
-                                        display: block;
-                                        height: 36px;
-                                        line-height: 36px;
-                                        text-align: center;
-                                        min-width: 30px;
-                                        font-size: 1em;
-                                    }
+                            .pagination {
+                                height: 0;
+                                overflow: hidden;
+                                .paginate-prev{
+                                    height: auto;
+                                    overflow: visible;
+                                    position: absolute;
+                                    top: 0px;
+                                    left: 0px;
+                                    display: block;
+                                    height: 36px;
+                                    line-height: 36px;
+                                    text-align: center;
+                                    min-width: 30px;
+                                    font-size: 1em;
                                 }
+                                .paginate-next{
+                                    height: auto;
+                                    overflow: visible;
+                                    position: absolute;
+                                    top: 0px;
+                                    right: 0px;
+                                    display: block;
+                                    height: 36px;
+                                    line-height: 36px;
+                                    text-align: center;
+                                    min-width: 30px;
+                                    font-size: 1em;
+                                }
+                            }
                         }
                             
                         .profile-main-gear-category {
@@ -373,15 +402,16 @@ body {
                                         a {
                                             width: 20%;
                                             .profile-main-gear-category-timeline-gear-timeline-index {
-                                            .profile-main-gear-category-timeline-gear-timeline-index-image {
-                                                width: 100%;
-                                                padding-top: 100%;
-                                                background-image: url(/images/prof.jpg);
-                                                background-size: cover;
-                                                background-position: center;
-                                                border: 1px solid $border-color;
+                                                .profile-main-gear-category-timeline-gear-timeline-index-image {
+                                                    bow-shadow: 0 0 1px rgb(150, 150, 150) inset;
+                                                    width: 100%;
+                                                    padding-top: 100%;
+                                                    background-image: url(/images/prof.jpg);
+                                                    background-size: cover;
+                                                    background-position: center;
+                                                    border: 1px solid $border-color;
+                                                }
                                             }
-                                        }
                                         }
                                         .profile-main-gear-category-timeline-gear-timeline-paginate-prev {
                                             width: 7%;
@@ -441,11 +471,17 @@ body {
                         z-index: 10;
                         border-bottom: 1px solid $border-color;
                         .title {
-                            margin-left: 20px;
+                            padding-left: 20px;
                             height: 100%;
-                            font-size: 1.5em;
+                            width: calc(100% - 258px);
+                            font-size: 1em;
                             line-height: 80px;
-                            display: flex;
+                            position: relative;
+                            .GearBringNav {
+                                position: absolute;
+                                top: 0px;
+                                right: 320px;
+                            }
                         }
                     }
                     .gear-main {

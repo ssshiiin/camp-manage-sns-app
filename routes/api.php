@@ -29,9 +29,11 @@ Route::group( ['middleware' => 'api'], function(){
     
     Route::post('/create/templates/{user}', 'TemplateController@createTemplate');
     Route::post('/templates/use/{user}', 'TemplateController@useTemplate');
+    Route::post('/templates/delete/{user}', 'TemplateController@deleteTemplate');
     
     Route::post('/create/bring_gears/{user}', 'Bring_gearController@createBring_gear');
-    Route::get('/delete/bring_gears/{bring_gear}', 'Bring_gearController@deleteBring_gear');
+    Route::post('/delete/bring_gears/{bring_gear}', 'Bring_gearController@deleteBring_gear');
+    Route::post('/all/delete/bring_gears/{user}', 'Bring_gearController@allDeleteBring_gear');
     Route::post('/update/gears/{gear}', 'GearController@postUserGearsIs_check');
     Route::post('/update/bring_gears/{bring_gear}', 'Bring_gearController@postUserBring_gearsIs_check');
     Route::post('/update/save_gears/{save_gear}', 'Save_gearsController@postUserSave_gearsIs_check');

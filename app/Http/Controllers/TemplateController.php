@@ -31,29 +31,32 @@ class TemplateController extends Controller
             }
         }
         $template->insert($input);
-        return 0;
+        return [];
     }
     
     public function useTemplate(Request $request, User $user){
-        $template = new Template;
-        $bring_gear = new Bring_gear;
-        
         $user_id = $user->id;
         $template_name = $request->input(0);
-        dump($template_name);
         
-        dd($bring_gear->gear());
+        Bring_gear::where("user_id", $user_id)->each(function($i){
+            $i->delete();
+        });
         
-        dump($bring_gear->with("template")->get()->where("template.template_name", $template_name));
-        dd($bring_gear->with("gear")->get()->where("gear.user_id", 10));
+        $bring_gear = Bring_gear::withTrashed()->whereNotNull("id")->with(["template" => function ($query) use($template_name){
+            $query->where('templates.template_name', $template_name);
+        }])->with("gear")->where("user_id", $user_id)->get();
+
+        $collection = collect([]);
+
+        $bring_gear->each(function ($i)use($collection, $bring_gear){
+            if($bring_gear->find($i)->template->isNotEmpty()){
+                $collection->push($bring_gear->find($i));  
+                $bring_gear->find($i)->restore();
+            }
+        });
         
-        dump($bring_gear->with(["template" => function ($query){
-            $query->where("template_name", $template_name);
-        }])->get());
         
-        
-        $categories = dd($bring_gear->with("gear")->with("template")->get()->where("user_id", $user_id)->groupBy("gear.category")->values());
-        // ->where("template.template_name", $template_name)->groupBy("gear.category")->values();
+        $categories = $collection->where("user_id", $user_id)->groupBy("gear.category")->values();
         
         return Save_gearsCategoryResource::collection($categories);
     }
@@ -65,5 +68,18 @@ class TemplateController extends Controller
         $templates = $template->where("user_id", $user_id)->groupBy("template_name")->get("template_name");
         
         return response()->json($templates);
+    }
+    
+    public function deleteTemplate(Request $request, User $user){
+        $user_id = $user->id;
+        $template_name = $request->input(0);
+        
+        $templates = Template::where("user_id", $user_id)->where("template_name", $template_name)->get();
+        
+        $templates->each(function($i){
+            $i->forceDelete();
+        });
+        
+        return [];
     }
 }

@@ -11,7 +11,7 @@ function GearBringLists(props){
     
     useEffect(() => {
         getGear();
-        getCount();
+        getCountBring();
         getTemplates();
     }, [])
     
@@ -20,7 +20,7 @@ function GearBringLists(props){
         setCategories(response.data.data);
     }
     
-    const getCount = async () => {
+    const getCountBring = async () => {
         const response = await axios.get(`/api/count/true/bring/${props.match.params.id}`);
         setCount(response.data)
     }
@@ -31,48 +31,65 @@ function GearBringLists(props){
             is_check: is_check
         });
         setCategories(response.data.data);
-        getCount();
+        getCountBring();
     } 
     
     const deleteBringGear = async(id) => {
-        const response = await axios.get(`/api/delete/bring_gears/${id}`);
+        const response = await axios.post(`/api/delete/bring_gears/${id}`);
         setCategories(response.data.data);
-        getCount();
+        getCountBring();
     }
     
-    const createTemplates = async() => {
+    const allDeleteBringGear = async() => {
+        const response = await axios.post(`/api/all/delete/bring_gears/${props.match.params.id}`);
+        setCategories(response.data.data);
+        getCountBring();
+    }
+    
+    const createTemplates = async(template_name) => {
         const response = await axios.post(`/api/create/templates/${props.match.params.id}`
-        , [categories, "テンプレート"]);
+        , [categories, template_name]);
+        getTemplates();
     }
     
-    const useTemplates = async() => {
+    const useTemplates = async(useTemplate_name) => {
         const response = await axios.post(`/api/templates/use/${props.match.params.id}`
-        , ["テンプレート"]);
-        console.log(response.data.data);
+        , [useTemplate_name]);
         setCategories(response.data.data);
-        getCount();
+        getTemplates();
+    }
+    
+    const deleteTemplate = async(deleteTemplate_name) => {
+        const response = await axios.post(`/api/templates/delete/${props.match.params.id}`
+        , [deleteTemplate_name]);
         
+        getTemplates();
+        getGear();
+        getCountBring();
     }
     
     const getTemplates = async() => {
         const response = await axios.get(`/api/templates/${props.match.params.id}`);
         
         setTemplates(response.data);
+        getCountBring();
     }
     
     return (
         <div className="gear">
             <Header 
             user_id={props.match.params.id} 
+            allDeleteBringGear={allDeleteBringGear}
             createTemplates={createTemplates}
             useTemplates={useTemplates}
             getTemplates={getTemplates}
+            deleteTemplate={deleteTemplate}
             templates={templates}
             />
             <div className="gear-main">
                 <NestedList 
                 categories={categories} 
-                getCount={getCount} 
+                getCount={getCountBring} 
                 getGear={getGear} 
                 postIs_check={postIs_check} 
                 deleteBringGear={deleteBringGear} 

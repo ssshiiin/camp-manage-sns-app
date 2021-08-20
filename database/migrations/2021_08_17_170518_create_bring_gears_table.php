@@ -21,6 +21,7 @@ class CreateBringGearsTable extends Migration
             $table->foreign('gear_id')->references('id')->on('gears');
             $table->boolean('is_check');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -18,6 +18,23 @@ li {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+a:link {
+  color: black;
+}
+a:visited {
+  color: black;
+}
+a:hover {
+  color: black;
+}
+a:active {
+  color: black;
+}
+
 body #camp-app {
   min-height: 100vh;
   width: 100%;
@@ -225,6 +242,7 @@ body #camp-app main .main-category .profile .profile-main .profile-main-posts {
   flex-wrap: wrap;
 }
 body #camp-app main .main-category .profile .profile-main .profile-main-posts .profile-main-posts-image {
+  box-shadow: 0 0 1px #969696 inset;
   width: 33.1%;
   padding-top: 33%;
   background-image: url(/images/prof.jpg);
@@ -241,6 +259,12 @@ body #camp-app main .main-category .profile .profile-main .profile-main-posts .p
   width: 100%;
   text-align: center;
   font-size: 1.4em;
+  height: 0;
+  overflow: hidden;
+}
+body #camp-app main .main-category .profile .profile-main .profile-main-posts .profile-main-posts-image .p-center:hover {
+  height: 100%;
+  overflow: hidden;
 }
 body #camp-app main .main-category .profile .profile-main .profile-main-gear {
   width: 100%;
@@ -331,6 +355,7 @@ body #camp-app main .main-category .profile .profile-main .profile-main-gear-cat
   width: 20%;
 }
 body #camp-app main .main-category .profile .profile-main .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-gear-timeline a .profile-main-gear-category-timeline-gear-timeline-index .profile-main-gear-category-timeline-gear-timeline-index-image {
+  bow-shadow: 0 0 1px #969696 inset;
   width: 100%;
   padding-top: 100%;
   background-image: url(/images/prof.jpg);
@@ -391,11 +416,17 @@ body #camp-app main .main-category .gear header {
   border-bottom: 1px solid gainsboro;
 }
 body #camp-app main .main-category .gear header .title {
-  margin-left: 20px;
+  padding-left: 20px;
   height: 100%;
-  font-size: 1.5em;
+  width: calc(100% - 258px);
+  font-size: 1em;
   line-height: 80px;
-  display: flex;
+  position: relative;
+}
+body #camp-app main .main-category .gear header .title .GearBringNav {
+  position: absolute;
+  top: 0px;
+  right: 320px;
 }
 body #camp-app main .main-category .gear .gear-main {
   width: 100%;

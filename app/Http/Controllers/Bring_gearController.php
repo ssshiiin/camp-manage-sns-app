@@ -64,9 +64,21 @@ class Bring_gearController extends Controller
         return Bring_gearsCategoriesResource::collection($categories);
     }
     
-    public function deleteBring_gear(User $user, Gear $gear, Bring_gear $bring_gear){
-        $user_id = $bring_gear->user_id;
+    public function deleteBring_gear(Bring_gear $bring_gear){
         $bring_gear->delete();
+        $user_id = $bring_gear->user_id;
+        
+        $categories = $bring_gear->with("gear")->get()->where("user_id", $user_id)->groupBy("gear.category")->values();
+        
+        return Save_gearsCategoryResource::collection($categories);
+    }
+    
+    public function allDeleteBring_gear(User $user){
+        $user_id = $user->id;
+        $bring_gear = new Bring_gear;
+        $bring_gear->where("user_id", $user_id)->each(function($i){
+            $i->delete();
+        });
         
         $categories = $bring_gear->with("gear")->get()->where("user_id", $user_id)->groupBy("gear.category")->values();
         

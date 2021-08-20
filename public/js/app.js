@@ -11161,6 +11161,36 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/icons/MoreHoriz.js":
+/*!******************************************************!*\
+  !*** ./node_modules/@material-ui/icons/MoreHoriz.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+}), 'MoreHoriz');
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/icons/MoveToInbox.js":
 /*!********************************************************!*\
   !*** ./node_modules/@material-ui/icons/MoveToInbox.js ***!
@@ -16090,8 +16120,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _SimpleListMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SimpleListMenu */ "./resources/js/components/SimpleListMenu.js");
+/* harmony import */ var _GearBringNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GearBringNav */ "./resources/js/components/GearBringNav.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -16100,20 +16129,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function GearBringHeader(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("header", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "title",
-      children: ["\u3075\u3082\u3068\u3063\u3071\u3089\u30AD\u30E3\u30F3\u30D7\u5834\u306E\u6301\u3061\u7269\u30EA\u30B9\u30C8", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        to: "/".concat(props.user_id, "/bring_lists/add"),
-        children: "add"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-        type: "button",
-        onClick: props.createTemplates,
-        children: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3092\u4F5C\u6210\u3059\u308B"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SimpleListMenu__WEBPACK_IMPORTED_MODULE_1__.default, {
-        getTemplates: props.getTemplates,
+      children: ["\u6301\u3061\u7269\u30EA\u30B9\u30C8", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_GearBringNav__WEBPACK_IMPORTED_MODULE_1__.default, {
+        user_id: props.user_id,
+        templates: props.templates,
+        createTemplates: props.createTemplates,
         useTemplates: props.useTemplates,
-        templates: props.templates
+        allDeleteBringGear: props.allDeleteBringGear,
+        deleteTemplate: props.deleteTemplate
       })]
     })
   });
@@ -16185,7 +16210,7 @@ function GearBringLists(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getGear();
-    getCount();
+    getCountBring();
     getTemplates();
   }, []);
 
@@ -16216,7 +16241,7 @@ function GearBringLists(props) {
     };
   }();
 
-  var getCount = /*#__PURE__*/function () {
+  var getCountBring = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -16238,7 +16263,7 @@ function GearBringLists(props) {
       }, _callee2);
     }));
 
-    return function getCount() {
+    return function getCountBring() {
       return _ref2.apply(this, arguments);
     };
   }();
@@ -16258,7 +16283,7 @@ function GearBringLists(props) {
             case 2:
               response = _context3.sent;
               setCategories(response.data.data);
-              getCount();
+              getCountBring();
 
             case 5:
             case "end":
@@ -16281,12 +16306,12 @@ function GearBringLists(props) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/delete/bring_gears/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/delete/bring_gears/".concat(id));
 
             case 2:
               response = _context4.sent;
               setCategories(response.data.data);
-              getCount();
+              getCountBring();
 
             case 5:
             case "end":
@@ -16301,7 +16326,7 @@ function GearBringLists(props) {
     };
   }();
 
-  var createTemplates = /*#__PURE__*/function () {
+  var allDeleteBringGear = /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
@@ -16309,12 +16334,14 @@ function GearBringLists(props) {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/create/templates/".concat(props.match.params.id), [categories, "テンプレート"]);
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/all/delete/bring_gears/".concat(props.match.params.id));
 
             case 2:
               response = _context5.sent;
+              setCategories(response.data.data);
+              getCountBring();
 
-            case 3:
+            case 5:
             case "end":
               return _context5.stop();
           }
@@ -16322,28 +16349,26 @@ function GearBringLists(props) {
       }, _callee5);
     }));
 
-    return function createTemplates() {
+    return function allDeleteBringGear() {
       return _ref5.apply(this, arguments);
     };
   }();
 
-  var useTemplates = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+  var createTemplates = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(template_name) {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
               _context6.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/templates/use/".concat(props.match.params.id), ["テンプレート"]);
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/create/templates/".concat(props.match.params.id), [categories, template_name]);
 
             case 2:
               response = _context6.sent;
-              console.log(response.data.data);
-              setCategories(response.data.data);
-              getCount();
+              getTemplates();
 
-            case 6:
+            case 4:
             case "end":
               return _context6.stop();
           }
@@ -16351,26 +16376,27 @@ function GearBringLists(props) {
       }, _callee6);
     }));
 
-    return function useTemplates() {
+    return function createTemplates(_x4) {
       return _ref6.apply(this, arguments);
     };
   }();
 
-  var getTemplates = /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+  var useTemplates = /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(useTemplate_name) {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
               _context7.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/templates/".concat(props.match.params.id));
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/templates/use/".concat(props.match.params.id), [useTemplate_name]);
 
             case 2:
               response = _context7.sent;
-              setTemplates(response.data);
+              setCategories(response.data.data);
+              getTemplates();
 
-            case 4:
+            case 5:
             case "end":
               return _context7.stop();
           }
@@ -16378,8 +16404,65 @@ function GearBringLists(props) {
       }, _callee7);
     }));
 
-    return function getTemplates() {
+    return function useTemplates(_x5) {
       return _ref7.apply(this, arguments);
+    };
+  }();
+
+  var deleteTemplate = /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(deleteTemplate_name) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              _context8.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/templates/delete/".concat(props.match.params.id), [deleteTemplate_name]);
+
+            case 2:
+              response = _context8.sent;
+              getTemplates();
+              getGear();
+              getCountBring();
+
+            case 6:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8);
+    }));
+
+    return function deleteTemplate(_x6) {
+      return _ref8.apply(this, arguments);
+    };
+  }();
+
+  var getTemplates = /*#__PURE__*/function () {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+              _context9.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/templates/".concat(props.match.params.id));
+
+            case 2:
+              response = _context9.sent;
+              setTemplates(response.data);
+              getCountBring();
+
+            case 5:
+            case "end":
+              return _context9.stop();
+          }
+        }
+      }, _callee9);
+    }));
+
+    return function getTemplates() {
+      return _ref9.apply(this, arguments);
     };
   }();
 
@@ -16387,15 +16470,17 @@ function GearBringLists(props) {
     className: "gear",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_3__.default, {
       user_id: props.match.params.id,
+      allDeleteBringGear: allDeleteBringGear,
       createTemplates: createTemplates,
       useTemplates: useTemplates,
       getTemplates: getTemplates,
+      deleteTemplate: deleteTemplate,
       templates: templates
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "gear-main",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_NestedList__WEBPACK_IMPORTED_MODULE_4__.default, {
         categories: categories,
-        getCount: getCount,
+        getCount: getCountBring,
         getGear: getGear,
         postIs_check: postIs_check,
         deleteBringGear: deleteBringGear,
@@ -16406,6 +16491,213 @@ function GearBringLists(props) {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GearBringLists);
+
+/***/ }),
+
+/***/ "./resources/js/components/GearBringNav.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/GearBringNav.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ GearBringNav)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/Button.js");
+/* harmony import */ var _material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Menu */ "./node_modules/@material-ui/core/esm/Menu/Menu.js");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "./node_modules/@material-ui/core/esm/MenuItem/MenuItem.js");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/Paper.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
+/* harmony import */ var _material_ui_core_MenuList__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/MenuList */ "./node_modules/@material-ui/core/esm/MenuList/MenuList.js");
+/* harmony import */ var _material_ui_icons_MoreHoriz__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/MoreHoriz */ "./node_modules/@material-ui/icons/MoreHoriz.js");
+/* harmony import */ var _SimpleModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SimpleModal */ "./resources/js/components/SimpleModal.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var StyledMenu = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__.default)({
+  paper: {
+    border: '1px solid #d3d4d5'
+  }
+})(function (props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_4__.default, _objectSpread({
+    elevation: 0,
+    getContentAnchorEl: null,
+    anchorOrigin: {
+      vertical: 'bottom',
+      horizontal: 'center'
+    },
+    transformOrigin: {
+      vertical: 'top',
+      horizontal: 'center'
+    }
+  }, props));
+});
+var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__.default)(function (theme) {
+  return {
+    root: {
+      display: 'flex'
+    },
+    paper: {
+      marginRight: theme.spacing(2)
+    }
+  };
+});
+function GearBringNav(props) {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(null),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      anchorEl = _React$useState2[0],
+      setAnchorEl = _React$useState2[1];
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      template_name = _useState2[0],
+      setTemplate_name = _useState2[1];
+
+  var handleClick = function handleClick(event) {
+    setAnchorEl(event.currentTarget);
+  };
+
+  var handleClose = function handleClose() {
+    setAnchorEl(null);
+  };
+
+  var handleChange = function handleChange(event) {
+    setTemplate_name(event.target.value);
+  };
+
+  var handleSubmit = function handleSubmit(event) {
+    alert('Create Template: ' + template_name);
+    props.createTemplates(template_name);
+    event.preventDefault();
+  };
+
+  var classes = useStyles();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "GearBringNav",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__.default, {
+      className: "BringNavButton",
+      "aria-controls": "customized-menu",
+      "aria-haspopup": "true",
+      variant: "contained",
+      onClick: handleClick,
+      style: {
+        border: 'none',
+        backgroundColor: 'white'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_MoreHoriz__WEBPACK_IMPORTED_MODULE_7__.default, {
+        fontSize: "large"
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(StyledMenu, {
+      id: "customized-menu",
+      anchorEl: anchorEl,
+      keepMounted: true,
+      open: Boolean(anchorEl),
+      onClose: handleClose,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_8__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
+          to: "/".concat(props.user_id, "/bring_lists/add"),
+          children: "\u30AE\u30A2\u3092\u8FFD\u52A0\u3059\u308B"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_8__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          onClick: props.allDeleteBringGear,
+          style: {
+            border: 'none',
+            backgroundColor: 'white'
+          },
+          children: "\u6301\u3061\u7269\u30EA\u30B9\u30C8\u3092\u30EA\u30BB\u30C3\u30C8\u3059\u308B"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_8__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SimpleModal__WEBPACK_IMPORTED_MODULE_1__.default, {
+          nav: "テンプレートを作る",
+          body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+            onSubmit: handleSubmit,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {
+              children: ["\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3068\u3057\u3066\u4FDD\u5B58\u3059\u308B:", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "text",
+                value: template_name,
+                onChange: handleChange
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "submit",
+              value: "\u4FDD\u5B58"
+            })]
+          }),
+          createTemplates: props.createTemplates
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_8__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SimpleModal__WEBPACK_IMPORTED_MODULE_1__.default, {
+          nav: "テンプレートを使う",
+          body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10__.default, {
+            className: classes.paper,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_MenuList__WEBPACK_IMPORTED_MODULE_11__.default, {
+              children: props.templates.map(function (template) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_8__.default, {
+                  onClick: function onClick() {
+                    return props.useTemplates(template.template_name);
+                  },
+                  children: template.template_name
+                }, template.template_name);
+              })
+            })
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_8__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_SimpleModal__WEBPACK_IMPORTED_MODULE_1__.default, {
+          nav: "テンプレートの削除",
+          body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10__.default, {
+            className: classes.paper,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_MenuList__WEBPACK_IMPORTED_MODULE_11__.default, {
+              children: props.templates.map(function (template) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_8__.default, {
+                  onClick: function onClick() {
+                    return props.deleteTemplate(template.template_name);
+                  },
+                  children: template.template_name
+                }, template.template_name);
+              })
+            })
+          })
+        })
+      })]
+    })]
+  });
+}
 
 /***/ }),
 
@@ -16801,10 +17093,12 @@ function Header(props) {
         render: function render() {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_GearBringHeader__WEBPACK_IMPORTED_MODULE_2__.default, {
             user_id: props.user_id,
+            allDeleteBringGear: props.allDeleteBringGear,
             createTemplates: props.createTemplates,
             useTemplates: props.useTemplates,
             getTemplates: props.getTemplates,
-            templates: props.templates
+            templates: props.templates,
+            deleteTemplate: props.deleteTemplate
           });
         }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
@@ -18248,122 +18542,6 @@ function SideBar() {
 
 /***/ }),
 
-/***/ "./resources/js/components/SimpleListMenu.js":
-/*!***************************************************!*\
-  !*** ./resources/js/components/SimpleListMenu.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ SimpleListMenu)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
-/* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/List */ "./node_modules/@material-ui/core/esm/List/List.js");
-/* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/ListItem */ "./node_modules/@material-ui/core/esm/ListItem/ListItem.js");
-/* harmony import */ var _material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/ListItemText */ "./node_modules/@material-ui/core/esm/ListItemText/ListItemText.js");
-/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "./node_modules/@material-ui/core/esm/MenuItem/MenuItem.js");
-/* harmony import */ var _material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Menu */ "./node_modules/@material-ui/core/esm/Menu/Menu.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
-
-
-
-var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__.default)(function (theme) {
-  return {
-    root: {
-      backgroundColor: theme.palette.background.paper
-    }
-  };
-});
-function SimpleListMenu(props) {
-  var options = ["none"];
-  props.templates.forEach(function (template) {
-    return options.push(template.template_name);
-  });
-  var classes = useStyles();
-
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(null),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      anchorEl = _React$useState2[0],
-      setAnchorEl = _React$useState2[1];
-
-  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0__.useState(0),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      selectedIndex = _React$useState4[0],
-      setSelectedIndex = _React$useState4[1];
-
-  var handleClickListItem = function handleClickListItem(event) {
-    setAnchorEl(event.currentTarget);
-  };
-
-  var handleMenuItemClick = function handleMenuItemClick(event, index) {
-    setSelectedIndex(index);
-    setAnchorEl(null);
-    console.log("test");
-    props.useTemplates();
-  };
-
-  var handleClose = function handleClose() {
-    setAnchorEl(null);
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: classes.root,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_3__.default, {
-      component: "nav",
-      "aria-label": "Device settings",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_4__.default, {
-        "aria-haspopup": "true",
-        button: true,
-        "aria-controls": "lock-menu",
-        "aria-label": "when device is locked",
-        onClick: handleClickListItem,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_5__.default, {
-          primary: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3092\u4F7F\u3046",
-          secondary: options[selectedIndex]
-        })
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_6__.default, {
-      id: "lock-menu",
-      anchorEl: anchorEl,
-      keepMounted: true,
-      open: Boolean(anchorEl),
-      onClose: handleClose,
-      children: options.map(function (option, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_7__.default, {
-          selected: index === selectedIndex,
-          onClick: function onClick(event) {
-            return handleMenuItemClick(event, index);
-          },
-          children: option
-        }, option);
-      })
-    })]
-  });
-}
-
-/***/ }),
-
 /***/ "./resources/js/components/SimpleMenu.js":
 /*!***********************************************!*\
   !*** ./resources/js/components/SimpleMenu.js ***!
@@ -18437,6 +18615,111 @@ function SimpleMenu(props) {
           })
         }, gear.id);
       })
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/SimpleModal.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/SimpleModal.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SimpleModal)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
+/* harmony import */ var _material_ui_core_Modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Modal */ "./node_modules/@material-ui/core/esm/Modal/Modal.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+function getModalStyle() {
+  var top = 50;
+  var left = 50;
+  return {
+    top: "".concat(top, "%"),
+    left: "".concat(left, "%"),
+    transform: "translate(-".concat(top, "%, -").concat(left, "%)")
+  };
+}
+
+var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__.default)(function (theme) {
+  return {
+    paper: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3)
+    }
+  };
+});
+function SimpleModal(props) {
+  var classes = useStyles(); // getModalStyle is not a pure function, we roll the style only on the first render
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(getModalStyle),
+      _React$useState2 = _slicedToArray(_React$useState, 1),
+      modalStyle = _React$useState2[0];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      open = _React$useState4[0],
+      setOpen = _React$useState4[1];
+
+  var handleOpen = function handleOpen() {
+    setOpen(true);
+  };
+
+  var handleClose = function handleClose() {
+    setOpen(false);
+  };
+
+  var body = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    style: modalStyle,
+    className: classes.paper,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      id: "simple-modal-description",
+      children: props.body
+    })
+  });
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      type: "button",
+      onClick: handleOpen,
+      style: {
+        border: 'none',
+        backgroundColor: 'white'
+      },
+      children: props.nav
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_Modal__WEBPACK_IMPORTED_MODULE_3__.default, {
+      open: open,
+      onClose: handleClose,
+      "aria-labelledby": "simple-modal-title",
+      "aria-describedby": "simple-modal-description",
+      children: body
     })]
   });
 }
