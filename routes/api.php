@@ -38,7 +38,7 @@ Route::group( ['middleware' => 'api'], function(){
     Route::post('/update/bring_gears/{bring_gear}', 'Bring_gearController@postUserBring_gearsIs_check');
     Route::post('/update/save_gears/{save_gear}', 'Save_gearsController@postUserSave_gearsIs_check');
     
-    Route::post('/edit/profile/{profile}', 'ProfileController@editProfile');
+    Route::post('/edit/profile/{user}', 'ProfileController@createOrEditProfile');
     
     Route::get('/count/true/add/{user}', 'GearController@getCountTrue');
     Route::get('/count/true/bring/{user}', 'Bring_gearController@getCountTrue');

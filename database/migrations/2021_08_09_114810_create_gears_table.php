@@ -22,7 +22,6 @@ class CreateGearsTable extends Migration
             $table->string('brand');
             $table->bigInteger('price');
             $table->integer('amount');
-            $table->string('image_path');
             $table->date('purchased_day');
             $table->boolean('is_check');
             $table->timestamps();

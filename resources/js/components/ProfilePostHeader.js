@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Button from '@material-ui/core/Button';
@@ -9,6 +8,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import SimpleModal from './SimpleModal';
+import EditProfile from './EditProfile';
+import PostCreate from './PostCreate';
 
 
 const StyledMenu = withStyles({
@@ -42,38 +43,14 @@ const useStyles = makeStyles((theme) => ({
 
 function ProfilePostHeader(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [app_name, setApp_name] = useState(props.profile.app_name);
-    const [profile, setProfile] = useState(props.profile.profile);
     
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
-        setApp_name(props.profile.app_name)
-        setProfile(props.profile.profile)
     };
     
     const handleClose = () => {
         setAnchorEl(null);
     };
-    
-    const handleApp_nameChange = (event) => {
-        setApp_name(event.target.value);
-    };
-    
-    const handleProfileChange = (event) => {
-        setProfile(event.target.value);
-    };
-    
-    const handleSubmit = (event) => {
-        alert('保存しました');
-        editProfile();
-        event.preventDefault();
-    }
-    
-    const editProfile = async () => {
-        const response = axios.post(`api/edit/profile/${props.profile.id}`, 
-        [app_name, profile]);
-        props.getProfile();
-    }
     
     const classes = useStyles();
     
@@ -97,27 +74,17 @@ function ProfilePostHeader(props) {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >
-                    <MenuItem>
-                        投稿する
-                    </MenuItem>
+                    <PostCreate 
+                        user_id={props.user_id} 
+                    />
                     <MenuItem>
                         ギアを登録する
                     </MenuItem>
-                    <MenuItem>
-                        <SimpleModal 
-                        nav={"プロフィールを編集する"} 
-                        body=
-                            {
-                            <form onSubmit={handleSubmit}>
-                                <label>
-                                    <input type="text" value={app_name} onChange={handleApp_nameChange} /><br />
-                                    <textarea  value={profile} onChange={handleProfileChange} />
-                                </label>
-                                <input type="submit" value="保存" />
-                            </form>
-                            }
-                        />
-                    </MenuItem>
+                    <EditProfile 
+                        user_id={props.user_id} 
+                        profile={props.profile}
+                        getProfile={props.getProfile}
+                    />
                     <MenuItem>
                         設定
                     </MenuItem>

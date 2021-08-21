@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class CreateGearImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('gear_images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->text('content');
-            $table->string('place');
-            $table->date('day');
+            $table->bigInteger('gear_id')->unsigned();
+            $table->foreign('gear_id')->references('id')->on('gears');
+            $table->string('image_path');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('gear_images');
     }
 }

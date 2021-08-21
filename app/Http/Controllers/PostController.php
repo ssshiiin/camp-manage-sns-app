@@ -39,4 +39,13 @@ class PostController extends Controller
         $count = Post::where("user_id", $user_id)->count();
         return $count;
     }
+    
+    public function createPost(Request $request, User $user){
+        $user_id = $user->id;
+        
+        Post::insert([
+            
+            ]);
+        
+    }
 }

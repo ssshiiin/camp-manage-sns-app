@@ -38,7 +38,7 @@ function Profile(props){
     
     return (
         <div className="profile">
-            <Header profile={profile} getProfile={getProfile}/>
+            <Header user_id={props.match.params.id} profile={profile} getProfile={getProfile}/>
             <div className="profile-main">
             <ProfileUser profile={profile} countPost={countPost} countGear={countGear}/>
             <ul className="profile-nav">

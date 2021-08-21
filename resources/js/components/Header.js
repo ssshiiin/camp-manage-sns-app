@@ -27,6 +27,7 @@ function Header(props){
                 } />
                 <Route path="/:id" exact 
                 render={() => <ProfilePostHeader 
+                    user_id={props.user_id} 
                     profile={props.profile}
                     getProfile={props.getProfile} />
                 } />
