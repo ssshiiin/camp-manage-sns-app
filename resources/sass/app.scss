@@ -275,7 +275,20 @@ body {
                             .profile-content {
                                 flex: 1;
                                 height: 200px;
-                                
+                                padding: 40px;
+                                .profileColumn {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    .profileCount {
+                                        display: flex;
+                                        p {
+                                            margin-right: 20px;
+                                        }
+                                    }
+                                }
+                                .profileContent {
+                                    margin-top: 40px;
+                                }
                             }
                         }
                         

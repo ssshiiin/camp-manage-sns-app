@@ -246,6 +246,20 @@ body #camp-app main .main-category .profile .profile-main .profile-introduce .pr
 body #camp-app main .main-category .profile .profile-main .profile-introduce .profile-content {
   flex: 1;
   height: 200px;
+  padding: 40px;
+}
+body #camp-app main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn {
+  display: flex;
+  justify-content: space-between;
+}
+body #camp-app main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn .profileCount {
+  display: flex;
+}
+body #camp-app main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn .profileCount p {
+  margin-right: 20px;
+}
+body #camp-app main .main-category .profile .profile-main .profile-introduce .profile-content .profileContent {
+  margin-top: 40px;
 }
 body #camp-app main .main-category .profile .profile-main .profile-nav {
   width: 100%;

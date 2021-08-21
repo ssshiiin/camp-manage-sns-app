@@ -35,9 +35,10 @@ function Profile(props){
         setCountGear(response.data);
     }
     
+    
     return (
         <div className="profile">
-            <Header />
+            <Header profile={profile} getProfile={getProfile}/>
             <div className="profile-main">
             <ProfileUser profile={profile} countPost={countPost} countGear={countGear}/>
             <ul className="profile-nav">

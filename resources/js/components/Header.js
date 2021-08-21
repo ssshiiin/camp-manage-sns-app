@@ -26,7 +26,9 @@ function Header(props){
                     postAddBringGear={props.postAddBringGear} />
                 } />
                 <Route path="/:id" exact 
-                render={() => <ProfilePostHeader />
+                render={() => <ProfilePostHeader 
+                    profile={props.profile}
+                    getProfile={props.getProfile} />
                 } />
             </Switch>
         </header>
