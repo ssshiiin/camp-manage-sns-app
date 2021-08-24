@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import PostHeader from './PostHeader';
-import PostImage from './PostImage';
-import PostContent from './PostContent';
-
-function ProfileGearIndex(props){
-    console.log(props)
+function ShowGear(props){
     const [gear, setGear] = useState([]);
     
     useEffect(() => {
@@ -33,4 +28,4 @@ function ProfileGearIndex(props){
     )
 }
 
-export default ProfileGearIndex;
+export default ShowGear;

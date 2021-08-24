@@ -3,11 +3,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 
-import GearNav from './GearNav';
-import GearTimeLine from './GearTimeLine';
-import ScrollableTabsButtonAuto from './ScrollableTabsButtonAuto';
+import NavGear from './NavGear';
+import IndexGear from './IndexGear';
 
-function ProfileGear(props){
+function UserGears(props){
     const [eventList, setEventList] = useState([]);
     const [activePage, setActivePage] = useState(1);
     const [itemsCountPerPage, setItemsCountPerPage] = useState(0);
@@ -28,7 +27,7 @@ function ProfileGear(props){
     
     return (
         <div className="profile-main-gear">
-            <GearNav 
+            <NavGear
             getCategory={getCategory} 
             eventList={eventList} 
             activePage={activePage} 
@@ -36,11 +35,11 @@ function ProfileGear(props){
             />
             <div className="profile-main-gear-category">
                 {eventList.map((category) =>
-                <GearTimeLine id={props.match.params.id} category={category.category} key={category.category}/>
+                <IndexGear id={props.match.params.id} category={category.category} key={category.category}/>
                 )}
             </div>
         </div>
     )
 }
 
-export default ProfileGear;
+export default UserGears;

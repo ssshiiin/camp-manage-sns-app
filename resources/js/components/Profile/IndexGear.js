@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
 
-function GearTimeLine(props){
+function IndexGear(props){
     const [gearList, setGearList] = useState([]);
     const [activeGearPage, setActiveGearPage] = useState(1);
     const [gearsCountPerPage, setGearsCountPerPage] = useState(0);
@@ -14,7 +14,6 @@ function GearTimeLine(props){
     }, [])
     
     const getGear = async (page) => {
-        console.log(props)
         const response = await axios.get(`/api/gears/${props.id}?page=${page}&category=${props.category}`);
         
         setGearList(response.data.data)
@@ -54,4 +53,4 @@ function GearTimeLine(props){
     )
 }
 
-export default GearTimeLine;
+export default IndexGear;

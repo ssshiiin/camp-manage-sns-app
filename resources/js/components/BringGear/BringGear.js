@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import Header from './Header';
-import NestedList from './NestedList';
+import Header from '../Header/Header';
+import IndexNestedList from '../ReactUI/IndexNestedList';
  
-function GearBringLists(props){
+function BringGear(props){
     const [categories, setCategories] = useState([]);
     const [count, setCount] = useState(0);
     const [templates, setTemplates] = useState([]);
@@ -87,7 +87,7 @@ function GearBringLists(props){
             templates={templates}
             />
             <div className="gear-main">
-                <NestedList 
+                <IndexNestedList 
                 categories={categories} 
                 getCount={getCountBring} 
                 getGear={getGear} 
@@ -100,4 +100,4 @@ function GearBringLists(props){
     )
 }
 
-export default GearBringLists;
+export default BringGear;

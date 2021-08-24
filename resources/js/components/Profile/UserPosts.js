@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-function ProfilePost(props){
+function UserPosts(props){
     const [posts, setPosts] = useState([]);
     
     useEffect(() => {
@@ -25,4 +25,4 @@ function ProfilePost(props){
     )
 }
 
-export default ProfilePost;
+export default UserPosts;

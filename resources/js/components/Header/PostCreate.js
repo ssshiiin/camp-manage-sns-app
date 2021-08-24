@@ -4,18 +4,27 @@ import axios from 'axios';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import SimpleModal from './SimpleModal';
+import SimpleModal from '../ReactUI/SimpleModal';
 
 const PostCreate = React.forwardRef((props, ref) => {
-    const [fileUrl, setFileUrl] = useState(null);
+    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+    const [bolbs, setBolbs] = useState([]);
     const [content, setContent] = useState("");
     const [place, setPlace] = useState("");
     const [day, setDay] = useState("");
+    const [params, setParams] = useState(new FormData());
     
     const handleImageChange = (event) => {
-        const image = event.target.files[0];
-        const imageUrl = URL.createObjectURL(image);
-        setFileUrl(imageUrl);
+        let bolbUrls = Array();
+        let imageUrls = Array();
+        const len = event.target.files["length"];
+        for (let i=0; i<len; i++){
+            console.log(i);
+            const image = event.target.files[i];
+            bolbUrls.push(URL.createObjectURL(image));
+            params.append(`${i}`, image);
+        }
+        setBolbs(bolbUrls);
     };
     
     const handleContentChange = (event) => {
@@ -32,7 +41,25 @@ const PostCreate = React.forwardRef((props, ref) => {
     
     const handleSubmit = (event) => {
         alert('保存しました');
+        createPost();
         event.preventDefault();
+    }
+    
+    const createPost = async () => {
+        params.append("content", content)
+        params.append("place", place)
+        params.append("day", day)
+        params.append("_token", csrf_token);
+        
+        const response = axios.post(`api/posts/create/${props.user_id}`, 
+        params,
+        {
+          headers: {
+            'content-type': 'multipart/form-data',
+            }
+        }
+        );
+        console.log(response.data);
     }
     
     return (
@@ -42,14 +69,17 @@ const PostCreate = React.forwardRef((props, ref) => {
             body=
                 {
                 <form onSubmit={handleSubmit}>
+                    <input type="hidden" name="_token" value={csrf_token} />
                     <label>
-                        image : <input type="file" onChange={handleImageChange} /><br />
+                        image : <input type="file" onChange={handleImageChange} multiple /><br />
                         place : <input type="text" value={place} onChange={handlePlaceChange} /><br />
                         day : <input type="date" value={day} onChange={handleDayChange} /><br />
                         content : <textarea value={content} onChange={handleContentChange} />
                     </label>
                     <input type="submit" value="保存" />
-                    <img src={fileUrl} style={{width: "320px"}} />
+                    {bolbs.map((file) => (
+                       <img src={file} style={{width: "320px"}} key={file}/> 
+                    ))}
                 </form>
                 }
             />

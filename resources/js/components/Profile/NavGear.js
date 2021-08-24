@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import Pagination from 'react-js-pagination';
 
-import SimpleMenu from './SimpleMenu';
+import SimpleMenu from '../ReactUI/SimpleMenu';
 
-function GearNav(props){
+function NavGear(props){
     return (
         <div className="profile-main-gear-nav">
             <ul>
@@ -30,4 +30,4 @@ function GearNav(props){
     )
 }
 
-export default GearNav;
+export default NavGear;

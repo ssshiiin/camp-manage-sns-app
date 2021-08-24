@@ -13,7 +13,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
 
-import NestedListIndex from './NestedListIndex'
+import ShowNestedList from './ShowNestedList'
  
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function NestedList(props) {
+export default function IndexNestedList(props) {
   
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -49,7 +49,7 @@ export default function NestedList(props) {
       style={{width: "910px"}}
     >
     {props.categories.map((category)=>
-      <NestedListIndex 
+      <ShowNestedList
         category={category} 
         key={category.category} 
         getCount={props.getCount} 

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import PostHeader from './PostHeader';
-import PostImage from './PostImage';
-import PostContent from './PostContent';
+import PostHeader from '../Home/PostHeader';
+import PostImage from '../Home/PostImage';
+import PostContent from '../Home/PostContent';
 
-function ProfilePostIndex(props){
+function ShowPost(props){
     const [posts, setPosts] = useState([]);
     
     useEffect(() => {
@@ -13,10 +13,8 @@ function ProfilePostIndex(props){
     }, [])
     
     const getPost = async () => {
-        console.log(props)
         const response = await axios.get(`/api/posts/${props.match.params.id}/${props.match.params.post_id}`);
         setPosts(response.data.data);
-        console.log(response.data.data);
     }
     
     return (
@@ -34,4 +32,4 @@ function ProfilePostIndex(props){
     )
 }
 
-export default ProfilePostIndex;
+export default ShowPost;

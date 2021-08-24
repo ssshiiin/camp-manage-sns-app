@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 
-import Header from './Header';
-import ProfileUser from './ProfileUser';
-import ProfilePost from './ProfilePost';
-import ProfileGear from './ProfileGear';
-import ProfilePostIndex from './ProfilePostIndex';
-import ProfileGearIndex from './ProfileGearIndex';
+import Header from '../Header/Header';
+import UserProfile from './UserProfile';
+import UserPosts from './UserPosts';
+import UserGears from './UserGears';
+import ShowPost from './ShowPost';
+import ShowGear from './ShowGear';
 
 function Profile(props){
     const [profile, setProfile] = useState([]);
@@ -21,7 +21,7 @@ function Profile(props){
     },[]);
     
     const getProfile = async () => {
-        const response = await axios.get(`/api/profile/${props.match.params.id}`);
+        const response = await axios.get(`/api/profiles/${props.match.params.id}`);
         setProfile(response.data);
     }
     
@@ -40,16 +40,16 @@ function Profile(props){
         <div className="profile">
             <Header user_id={props.match.params.id} profile={profile} getProfile={getProfile}/>
             <div className="profile-main">
-            <ProfileUser profile={profile} countPost={countPost} countGear={countGear}/>
+            <UserProfile profile={profile} countPost={countPost} countGear={countGear}/>
             <ul className="profile-nav">
                 <Link to={`/${props.match.params.id}`}><li>Achivement</li></Link>
                 <Link to={`/${props.match.params.id}/gear`}><li>Gear Lists</li></Link>
             </ul>
             <Switch>
-                <Route path="/:id" exact component={ProfilePost} />
-                <Route path="/:id/gear" exact component={ProfileGear} />
-                <Route path="/:id/:post_id" exact component={ProfilePostIndex} />
-                <Route path="/:id/gear/:gear_id" component={ProfileGearIndex} />
+                <Route path="/:id" exact component={UserPosts} />
+                <Route path="/:id/gear" exact component={UserGears} />
+                <Route path="/:id/:post_id" exact component={ShowPost} />
+                <Route path="/:id/gear/:gear_id" component={ShowGear} />
             </Switch>
             </div>
         </div>

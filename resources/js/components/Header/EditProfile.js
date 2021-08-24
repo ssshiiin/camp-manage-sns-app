@@ -3,13 +3,14 @@ import axios from 'axios';
 
 import MenuItem from '@material-ui/core/MenuItem';
 
-import SimpleModal from './SimpleModal';
+import SimpleModal from '../ReactUI/SimpleModal';
 
 function EditProfile(props){
     const [app_name, setApp_name] = useState("");
     const [profile, setProfile] = useState("");
+    console.log(app_name)
     
-    const handleClick = () => {
+    const handleLoad = () => {
         setApp_name(props.profile.app_name);
         setProfile(props.profile.profile);
     };
@@ -29,14 +30,15 @@ function EditProfile(props){
     }
     
     const editProfile = async () => {
-        const response = axios.post(`api/edit/profile/${props.user_id}`, 
+        const response = axios.post(`api/profiles/edit/${props.user_id}`, 
         [app_name, profile]);
         props.getProfile();
     }
     
     return (
-        <MenuItem onClick={handleClick}>
+        <MenuItem>
             <SimpleModal 
+            onClick={handleLoad}
             nav={"プロフィールを編集する"} 
             body=
                 {

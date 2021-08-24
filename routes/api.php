@@ -19,12 +19,21 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 
 
 Route::group( ['middleware' => 'api'], function(){
+    Route::get('/posts', 'PostController@getPosts');
+    Route::post('/posts/create/{user}', 'PostController@createPost');
+    
+    Route::get('/profiles/{user}', 'ProfileController@getProfile');
+    Route::post('/profiles/edit/{user}', 'ProfileController@createOrEditProfile');
+    
+    
+    
+    
     Route::get('/posts/{user}/{post}', 'PostController@getPostIndex');
     Route::get('/posts/{user}', 'PostController@getPostsProfile');
-    Route::get('/posts', 'PostController@getPosts');
     Route::get('/categories/{user}', 'GearController@getCategoryProfile');
     Route::get('/gears/{user}', 'GearController@getGearProfile');
     Route::get('/gear/{gear}', 'GearController@getGearIndex');
+    
     
     
     Route::post('/create/templates/{user}', 'TemplateController@createTemplate');
@@ -38,7 +47,6 @@ Route::group( ['middleware' => 'api'], function(){
     Route::post('/update/bring_gears/{bring_gear}', 'Bring_gearController@postUserBring_gearsIs_check');
     Route::post('/update/save_gears/{save_gear}', 'Save_gearsController@postUserSave_gearsIs_check');
     
-    Route::post('/edit/profile/{user}', 'ProfileController@createOrEditProfile');
     
     Route::get('/count/true/add/{user}', 'GearController@getCountTrue');
     Route::get('/count/true/bring/{user}', 'Bring_gearController@getCountTrue');
@@ -47,7 +55,6 @@ Route::group( ['middleware' => 'api'], function(){
     Route::get('/count/post/{user}', 'PostController@getCountPost');
     Route::get('/count/gear/{user}', 'GearController@getCountGear');
     
-    Route::get('/profile/{user}', 'ProfileController@getProfile');
     Route::get('/templates/{user}', 'TemplateController@getTemplates');
     Route::get('/save_gears/{user}', 'Save_gearsController@getUserSave_gears');
     Route::get('/bring_gears/{user}', 'Bring_gearController@getUserBring_gears');

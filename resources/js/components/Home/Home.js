@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import Header from './Header';
+import Header from '../Header/Header';
 import PostHeader from './PostHeader';
 import PostImage from './PostImage';
 import PostContent from './PostContent';

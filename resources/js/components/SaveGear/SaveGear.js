@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import Header from './Header';
-import NestedList from './NestedList';
+import Header from '../Header/Header';
+import IndexNestedList from '../ReactUI/IndexNestedList';
  
-function GearSaveLists(props){
+function SaveGear(props){
     const [categories, setCategories] = useState([]);
     const [count, setCount] = useState(0);
     
@@ -36,10 +36,10 @@ function GearSaveLists(props){
         <div className="gear">
             <Header user_id={props.match.params.id}/>
             <div className="gear-main">
-                <NestedList categories={categories} getCount={getCount} getGear={getGear} postIs_check={postIs_check} count={count}/>
+                <IndexNestedList categories={categories} getCount={getCount} getGear={getGear} postIs_check={postIs_check} count={count}/>
             </div>
         </div>
     )
 }
 
-export default GearSaveLists;
+export default SaveGear;

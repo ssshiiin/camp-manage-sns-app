@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ProfileUser(props){
+function UserProfile(props){
     return (
         <div className="profile-introduce">
             <div className="profile-image"></div>
@@ -18,4 +18,4 @@ function ProfileUser(props){
     )
 }
 
-export default ProfileUser;
+export default UserProfile;

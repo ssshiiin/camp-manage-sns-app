@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
-import SimpleModal from './SimpleModal';
+import SimpleModal from '../ReactUI/SimpleModal';
 
 const StyledMenu = withStyles({
   paper: {
