@@ -48,7 +48,7 @@ export default function SimpleModal(props) {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen} style={{border: 'none', backgroundColor: 'white'}}>
+      <button type="button" onClick={handleOpen} style={{border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left"}}>
         {props.nav}
       </button>
       <Modal

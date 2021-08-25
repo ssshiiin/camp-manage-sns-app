@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import MoreHorizOutlined from '@material-ui/icons/MoreHorizOutlined';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,7 +9,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import SimpleModal from '../ReactUI/SimpleModal';
 import EditProfile from './EditProfile';
-import PostCreate from './PostCreate';
+import CreatePost from './CreatePost';
+import CreateGear from './CreateGear';
 
 
 const StyledMenu = withStyles({
@@ -65,7 +66,7 @@ function ProfilePostHeader(props) {
                     onClick={handleClick}
                     style={{border: 'none', backgroundColor: 'white'}}
                 >
-                    <MoreHorizIcon fontSize="large" />
+                    <MoreHorizOutlined fontSize="large" />
                 </Button>
                 <StyledMenu
                     id="customized-menu"
@@ -74,8 +75,9 @@ function ProfilePostHeader(props) {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >
-                    <PostCreate 
+                    <CreatePost 
                         user_id={props.user_id} 
+                        getUserPosts={props.getUserPosts}
                     />
                     <MenuItem>
                         ギアを登録する

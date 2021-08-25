@@ -5,7 +5,7 @@ function PostHeader(props){
         <div className="post-header">
             <ul>
                 <li>
-                    <div className="post-header-userImage"></div>
+                    <div className="post-header-userImage" style={{backgroundImage: `url(${props.profile_image})`}}></div>
                 </li>
                 <li className="post-header-index">
                     <ul>

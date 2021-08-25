@@ -3,7 +3,7 @@ import React from 'react';
 function UserProfile(props){
     return (
         <div className="profile-introduce">
-            <div className="profile-image"></div>
+            <div className="profile-image" style={{backgroundImage: `url(${props.profile.image_path})`}}></div>
             <div className="profile-content">
                 <div className="profileColumn">
                     <p className="profileName">{props.profile.app_name}</p>

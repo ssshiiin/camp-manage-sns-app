@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import SimpleModal from '../ReactUI/SimpleModal';
 
-const PostCreate = React.forwardRef((props, ref) => {
+const CreatePost = React.forwardRef((props, ref) => {
     const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     const [bolbs, setBolbs] = useState([]);
     const [content, setContent] = useState("");
@@ -16,10 +16,8 @@ const PostCreate = React.forwardRef((props, ref) => {
     
     const handleImageChange = (event) => {
         let bolbUrls = Array();
-        let imageUrls = Array();
         const len = event.target.files["length"];
         for (let i=0; i<len; i++){
-            console.log(i);
             const image = event.target.files[i];
             bolbUrls.push(URL.createObjectURL(image));
             params.append(`${i}`, image);
@@ -51,7 +49,7 @@ const PostCreate = React.forwardRef((props, ref) => {
         params.append("day", day)
         params.append("_token", csrf_token);
         
-        const response = axios.post(`api/posts/create/${props.user_id}`, 
+        const response = await axios.post(`api/posts/create/${props.user_id}`, 
         params,
         {
           headers: {
@@ -59,7 +57,7 @@ const PostCreate = React.forwardRef((props, ref) => {
             }
         }
         );
-        console.log(response.data);
+        props.getUserPosts();
     }
     
     return (
@@ -87,4 +85,4 @@ const PostCreate = React.forwardRef((props, ref) => {
     )
 })
 
-export default PostCreate;
+export default CreatePost;

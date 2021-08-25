@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\PostResource;
+use App\Http\Resources\GetPostsResource;
 use App\Http\Resources\PostProfileResource;
 use App\Http\Resources\PostProfileIndexResource;
 use Storage;
@@ -11,24 +11,29 @@ use App\File;
 use App\Post;
 use App\User;
 use App\Post_image;
+use App\Profile;
 
 
 class PostController extends Controller
 {
     //全ユーザーのpostsを取得
-    public function getPosts(Request $request, Post $post)
+    public function getPosts(Request $request)
     {
-        $limit_count = $request->query->get("limit");
+        $posts = Post::orderBy("created_at", "DESC")->simplePaginate(5);
         
-        return PostResource::collection($post->simplePaginate($limit_count));
+        //GetPostsResourceの中でprofilesのimage_pathを追加する
+        return GetPostsResource::collection($posts);
     }
     
     //ユーザーのpostsを取得
-    public function getPostsProfile(User $user, Post $post)
+    //post_imagesをリレーションする
+    public function getUserPosts(User $user)
     {
         $user_id = $user->id;
         
-        return PostProfileResource::collection($post->whereUser_idOrderByCreated_at($user_id));
+        return Post::with("Post_images")->where('user_id', $user_id)->orderBy('created_at', 'DESC')->get();
+        
+        // return PostProfileResource::collection($post->whereUser_idOrderByCreated_at($user_id));
     }
     
     public function getPostIndex(User $user, Post $post)
@@ -80,5 +85,8 @@ class PostController extends Controller
                 "image_path" => Storage::disk('s3')->url($path),
             ]);
         }
+        
+        //getUserPostsを返り値として返す
+        return app()->make('App\Http\Controllers\PostController')->getUserPosts(User::find($user_id));
     }
 }

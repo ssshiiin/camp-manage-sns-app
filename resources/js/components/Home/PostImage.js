@@ -2,7 +2,7 @@ import React from 'react';
 
 function PostImage(props){
     return (
-        <div className="post-img"></div>    
+        <img src={props.post_images[0].image_path} className="post-img" />    
     )
 }
 

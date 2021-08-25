@@ -20,18 +20,19 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 
 Route::group( ['middleware' => 'api'], function(){
     Route::get('/posts', 'PostController@getPosts');
+    Route::get('/posts/{user}', 'PostController@getUserPosts');
     Route::post('/posts/create/{user}', 'PostController@createPost');
     
     Route::get('/profiles/{user}', 'ProfileController@getProfile');
     Route::post('/profiles/edit/{user}', 'ProfileController@createOrEditProfile');
     
+    Route::get('/gears/{user}', 'GearController@getGearProfile');
+    Route::post('/gears/create/{user}', 'GearController@createGear');
     
     
     
     Route::get('/posts/{user}/{post}', 'PostController@getPostIndex');
-    Route::get('/posts/{user}', 'PostController@getPostsProfile');
     Route::get('/categories/{user}', 'GearController@getCategoryProfile');
-    Route::get('/gears/{user}', 'GearController@getGearProfile');
     Route::get('/gear/{gear}', 'GearController@getGearIndex');
     
     

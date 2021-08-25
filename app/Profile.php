@@ -9,6 +9,6 @@ class Profile extends Model
     protected $table = "profiles";
     
     protected $fillable = [
-        "user_id", "app_name", "profile"
+        "user_id", "image_path", "app_name", "profile"
     ];
 }

@@ -17,16 +17,22 @@ class Post extends Model
            return $this->orderBy('created_at', 'DESC')->simplePaginate($limit);
     }
     
-    public function whereUser_idOrderByCreated_at($user_id){
-        return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->get();
-    }
-    
     public function whereUser_idAndPost_id($user_id, $post_id){
         return $this->where('user_id', $user_id)->where('id', $post_id)->get();
     }
     
     
+    
+    //リレーション
     public function tags(){
-        return $this-> hasMany('App\Tag');
+        return $this->hasMany('App\Tag');
+    }
+    
+    public function post_images(){
+        return $this->hasMany('App\Post_image');
+    }
+    
+    public function user(){
+        return $this->belongsTo('App\User', "user_id");
     }
 }

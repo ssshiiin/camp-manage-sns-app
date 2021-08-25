@@ -86,10 +86,10 @@ export default function GearBringNav(props) {
                 onClose={handleClose}
             >
                 <MenuItem>
-                    <Link to={`/${props.user_id}/bring_lists/add`}>ギアを追加する</Link>
+                    <Link to={`/${props.user_id}/bring_lists/add`}　style={{ minWidth: "180px", textAlign: "left"}} >ギアを追加する</Link>
                 </MenuItem>
                 <MenuItem>
-                    <button onClick={props.allDeleteBringGear} style={{border: 'none', backgroundColor: 'white'}}>持ち物リストをリセットする</button>
+                    <button onClick={props.allDeleteBringGear} style={{border: 'none', backgroundColor: 'white', minWidth: "170px", textAlign: "left"}}>持ち物をリセットする</button>
                 </MenuItem>
                 <MenuItem>
                     <SimpleModal 

@@ -8,8 +8,7 @@ import PostImage from './PostImage';
 import PostContent from './PostContent';
 
 function Home(){
-    
-    const [posts, setPosts] = useState([]);
+    const [Allposts, setAllPosts] = useState([]);
     const [hasMore, setHasMore] = useState(true); 
     
     
@@ -20,8 +19,8 @@ function Home(){
             setHasMore(false);
             return;
         }
-        
-        setPosts([...posts, ...response.data.data]);
+        console.log(response.data.data)
+        setAllPosts([...Allposts, ...response.data.data]);
     }
     
     const loader =<div className="loader" key={0}>Loading ...</div>;
@@ -33,13 +32,16 @@ function Home(){
                 <InfiniteScroll
                 className="home-main"
                 loadMore={getPosts}
-                hasMore={hasMore}
+                hasMore={hasMore} 
                 loader={loader}>
                     <ul className="home-main-timeline">
-                        {posts.map((post) => 
+                        {Allposts.map((post) => 
                             <li className="home-main-timeline-list" key={post.id}>
-                                <PostHeader place={post.place} day={post.day} />
-                                <PostImage img_path={post.image_path} />
+                                <PostHeader 
+                                    place={post.place} 
+                                    day={post.day} 
+                                    profile_image={post.profile_image} />
+                                <PostImage post_images={post.image_path} />
                                 <PostContent content={post.content} tags={post.tags} />
                             </li>
                         )}

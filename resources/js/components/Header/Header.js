@@ -29,7 +29,8 @@ function Header(props){
                 render={() => <ProfilePostHeader 
                     user_id={props.user_id} 
                     profile={props.profile}
-                    getProfile={props.getProfile} />
+                    getProfile={props.getProfile}
+                    getUserPosts={props.getUserPosts} />
                 } />
             </Switch>
         </header>
