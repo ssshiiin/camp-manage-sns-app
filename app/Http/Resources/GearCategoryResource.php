@@ -4,8 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\Http\Resources\GearProfileResource;
-use App\Http\Resources\GearProfileCollection;
+use App\Http\Resources\GetUserGearsResource;
+
 class GearCategoryResource extends JsonResource
 {
     /**
@@ -18,7 +18,7 @@ class GearCategoryResource extends JsonResource
     {
         return [
             'category' => $this->category, 
-            'gears' => GearProfileResource::collection($this->whereUser_idAndWhereCategory($this->user_id, $this->category)),
+            'gears' => GetUserGearsResource::collection($this->whereUser_idAndWhereCategory($this->user_id, $this->category)),
         ];
     }
 }

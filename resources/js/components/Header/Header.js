@@ -25,12 +25,13 @@ function Header(props){
                     user_id={props.user_id}
                     postAddBringGear={props.postAddBringGear} />
                 } />
-                <Route path="/:id" exact 
+                <Route path="/:id" 
                 render={() => <ProfilePostHeader 
                     user_id={props.user_id} 
                     profile={props.profile}
                     getProfile={props.getProfile}
-                    getUserPosts={props.getUserPosts} />
+                    getUserPosts={props.getUserPosts} 
+                    getCategory={props.getCategory}/>
                 } />
             </Switch>
         </header>

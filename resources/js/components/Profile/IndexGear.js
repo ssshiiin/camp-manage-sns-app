@@ -10,10 +10,10 @@ function IndexGear(props){
     const [totalGearsCount, setTotalGearsCount] = useState(0);
     
     useEffect(() => {
-        getGear();
+        getUserGears();
     }, [])
     
-    const getGear = async (page) => {
+    const getUserGears = async (page) => {
         const response = await axios.get(`/api/gears/${props.id}?page=${page}&category=${props.category}`);
         
         setGearList(response.data.data)
@@ -33,7 +33,7 @@ function IndexGear(props){
                 <Link to={`/${props.id}/gear/${gear.id}`} key={gear.id}>
                     <li className="profile-main-gear-category-timeline-gear-timeline-index"> 
                         {gear.gear_name}
-                        <div className="profile-main-gear-category-timeline-gear-timeline-index-image"></div>
+                        <div style={{backgroundImage: `url(${gear.image_path[0].image_path})`}} className="profile-main-gear-category-timeline-gear-timeline-index-image"></div>
                     </li>
                 </Link>
                 )}
@@ -43,7 +43,7 @@ function IndexGear(props){
               activePage={activeGearPage}
               itemsCountPerPage={4}
               totalItemsCount={totalGearsCount}
-              onChange={getGear}
+              onChange={getUserGears}
               linkClass='paginate-number'
               linkClassPrev='paginate-prev'
               linkClassNext='paginate-next'

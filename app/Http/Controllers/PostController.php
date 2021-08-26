@@ -21,7 +21,7 @@ class PostController extends Controller
     {
         $posts = Post::orderBy("created_at", "DESC")->simplePaginate(5);
         
-        //GetPostsResourceの中でprofilesのimage_pathを追加する
+        //profilesのimage_pathを追加する
         return GetPostsResource::collection($posts);
     }
     
@@ -36,12 +36,11 @@ class PostController extends Controller
         // return PostProfileResource::collection($post->whereUser_idOrderByCreated_at($user_id));
     }
     
-    public function getPostIndex(User $user, Post $post)
+    //postsの詳細を取得する
+    public function getShowPost(Post $post)
     {
-        $user_id = $user->id;
         $post_id = $post->id;
-        
-        return PostProfileIndexResource::collection($post->whereUser_idAndPost_id($user_id, $post_id));
+        return Post::with("post_images", "tags")->where("id", $post_id)->get();
     }
     
     public function getCountPost(User $user){

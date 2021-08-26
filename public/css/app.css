@@ -132,7 +132,7 @@ body #camp-app main .main-category .profile-main-post-index ul li .post-header u
   justify-content: center;
 }
 body #camp-app main .main-category .profile-main-post-index ul li .post-img {
-  height: 500px;
+  width: 100%;
   background-image: url(/images/prof.jpg);
   background-size: cover;
   background-position: center;
@@ -399,7 +399,6 @@ body #camp-app main .main-category .profile .profile-main .profile-main-gear-cat
   bow-shadow: 0 0 1px #969696 inset;
   width: 100%;
   padding-top: 100%;
-  background-image: url(/images/prof.jpg);
   background-size: cover;
   background-position: center;
   border: 1px solid #dbdbdb;

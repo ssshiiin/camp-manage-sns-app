@@ -15,12 +15,16 @@ function Profile(props){
     const [countGear, setCountGear] = useState(0);
     const [posts, setPosts] = useState([]);
     
+    const [categories, setCategories] = useState([]);
+    const [activePage, setActivePage] = useState(1);
+    const [itemsCountPerPage, setItemsCountPerPage] = useState(0);
+    const [totalItemsCount, setTotalItemsCount] = useState(0);
+    
     
     useEffect(() => {
         getProfile();
         getUserPosts();
-        getCountPost();
-        getCountGear();
+        getCategory();
     },[]);
     
     const getProfile = async () => {
@@ -40,13 +44,28 @@ function Profile(props){
     
     const getUserPosts = async () => {
         const response = await axios.get(`/api/posts/${props.match.params.id}`);
-        console.log("start");
         setPosts(response.data);
+        getCountPost();
+        getCountGear();
+    }
+    
+    const getCategory = async (page) => {
+        const response = await axios.get(`/api/gears/category/${props.match.params.id}?page=${page}`);
+        console.log(response.data.data)
+        setCategories(response.data.data);
+        setActivePage(response.data.meta.current_page);
+        setItemsCountPerPage(response.data.meta.per_page);
+        setTotalItemsCount(response.data.meta.total);
     }
     
     return (
         <div className="profile">
-            <Header user_id={props.match.params.id} profile={profile} getProfile={getProfile} getUserPosts={getUserPosts} />
+            <Header 
+                user_id={props.match.params.id} 
+                profile={profile} 
+                getProfile={getProfile} 
+                getUserPosts={getUserPosts}
+                getCategory={getCategory}/>
             <div className="profile-main">
             <UserProfile profile={profile} countPost={countPost} countGear={countGear}/>
             <ul className="profile-nav">
@@ -58,8 +77,16 @@ function Profile(props){
                     user_id={props.match.params.id}
                     posts={posts} />
                 }/>
-                <Route path="/:id/gear" exact component={UserGears} />
-                <Route path="/:id/:post_id" exact component={ShowPost} />
+                <Route path="/:id/gear" exact render = {() => <UserGears
+                    user_id={props.match.params.id}
+                    categories={categories}
+                    activePage={activePage}
+                    itemsCountPerPage={itemsCountPerPage}
+                    totalItemsCount={totalItemsCount}
+                    getCategory={getCategory}
+                    />
+                }/>
+                <Route path="/:id/post/:post_id" exact component={ShowPost} />
                 <Route path="/:id/gear/:gear_id" component={ShowGear} />
             </Switch>
             </div>

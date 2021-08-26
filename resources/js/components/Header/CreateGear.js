@@ -68,7 +68,7 @@ const CreateGear = React.forwardRef((props, ref) => {
         params.append("amount", amount)
         params.append("_token", csrf_token);
         
-        const response = await axios.post(`api/gears/create/${props.user_id}`, 
+        const response = await axios.post(`/api/gears/create/${props.user_id}`, 
         params,
         {
           headers: {
@@ -76,26 +76,28 @@ const CreateGear = React.forwardRef((props, ref) => {
             }
         }
         );
-        props.getUserPosts();
+        props.getCategory();
     }
     
     return (
         <MenuItem>
             <SimpleModal 
-            nav={"投稿する"} 
+            nav={"ギアを登録する"} 
             body=
                 {
                 <form onSubmit={handleSubmit}>
-                    <input type="hidden" name="_token" value={csrf_token} />
                     <label>
                         image : <input type="file" onChange={handleImageChange} multiple /><br />
-                        place : <input type="text" value={place} onChange={handlePlaceChange} /><br />
-                        day : <input type="date" value={day} onChange={handleDayChange} /><br />
-                        content : <textarea value={content} onChange={handleContentChange} />
+                        gearName : <input type="text" value={gearName} onChange={handleGearNameChange} /><br />
+                        category : <input type="text" value={category} onChange={handleCategoryChange} /><br />
+                        brand : <input type="text" value={brand} onChange={handleBrandChange} /><br />
+                        purchasedDay : <input type="date" value={purchasedDay} onChange={handlePurchasedDayChange} /><br />
+                        price : <input type="number" value={price} onChange={handlePriceChange} /><br />
+                        amount : <input type="number" value={amount} onChange={handleAmountChange} /><br />
                     </label>
                     <input type="submit" value="保存" />
                     {bolbs.map((file) => (
-                       <img src={file} style={{width: "320px"}} key={file}/> 
+                       <img src={file} style={{width: "200px", height: '200px', objectFit: 'contain', border: "1px solid black"}} key={file}/> 
                     ))}
                 </form>
                 }

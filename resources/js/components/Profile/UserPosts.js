@@ -6,7 +6,7 @@ function UserPosts(props){
     return (
         <div className="profile-main-posts">
             {props.posts.map((post) =>
-                <Link to={`/${props.user_id}/${post.id}`} style={{backgroundImage: `url(${post.post_images[0].image_path})`}} className="profile-main-posts-image" key={post.id}>
+                <Link to={`/${props.user_id}/post/${post.id}`} style={{backgroundImage: `url(${post.post_images[0].image_path})`}} className="profile-main-posts-image" key={post.id}>
                     <p className="p-center">{post.place}<br />{post.day}</p>
                 </Link>
             )}

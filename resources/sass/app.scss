@@ -150,7 +150,7 @@ body {
                                 }
                             }
                             .post-img {
-                                height: 500px;
+                                width: 100%;
                                 background-image: url(/images/prof.jpg);
                                 background-size: cover;
                                 background-position: center;
@@ -435,7 +435,6 @@ body {
                                                 bow-shadow: 0 0 1px rgb(150, 150, 150) inset;
                                                 width: 100%;
                                                 padding-top: 100%;
-                                                background-image: url(/images/prof.jpg);
                                                 background-size: cover;
                                                 background-position: center;
                                                 border: 1px solid $border-color;

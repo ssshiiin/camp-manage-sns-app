@@ -13990,7 +13990,7 @@ var CreateGear = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
               params.append("amount", amount);
               params.append("_token", csrf_token);
               _context.next = 9;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("api/gears/create/".concat(props.user_id), params, {
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/gears/create/".concat(props.user_id), params, {
                 headers: {
                   'content-type': 'multipart/form-data'
                 }
@@ -13998,7 +13998,7 @@ var CreateGear = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
 
             case 9:
               response = _context.sent;
-              props.getUserPosts();
+              props.getCategory();
 
             case 11:
             case "end":
@@ -14015,30 +14015,39 @@ var CreateGear = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_5__.default, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ReactUI_SimpleModal__WEBPACK_IMPORTED_MODULE_3__.default, {
-      nav: "投稿する",
+      nav: "ギアを登録する",
       body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
         onSubmit: handleSubmit,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-          type: "hidden",
-          name: "_token",
-          value: csrf_token
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
           children: ["image : ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "file",
             onChange: handleImageChange,
             multiple: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), "place : ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), "gearName : ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "text",
-            value: place,
-            onChange: handlePlaceChange
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), "day : ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            value: gearName,
+            onChange: handleGearNameChange
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), "category : ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            type: "text",
+            value: category,
+            onChange: handleCategoryChange
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), "brand : ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            type: "text",
+            value: brand,
+            onChange: handleBrandChange
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), "purchasedDay : ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "date",
-            value: day,
-            onChange: handleDayChange
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), "content : ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("textarea", {
-            value: content,
-            onChange: handleContentChange
-          })]
+            value: purchasedDay,
+            onChange: handlePurchasedDayChange
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), "price : ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            type: "number",
+            value: price,
+            onChange: handlePriceChange
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), "amount : ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            type: "number",
+            value: amount,
+            onChange: handleAmountChange
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {})]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
           type: "submit",
           value: "\u4FDD\u5B58"
@@ -14046,7 +14055,10 @@ var CreateGear = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
             src: file,
             style: {
-              width: "320px"
+              width: "200px",
+              height: '200px',
+              objectFit: 'contain',
+              border: "1px solid black"
             }
           }, file);
         })]
@@ -14173,7 +14185,7 @@ var CreatePost = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
               params.append("day", day);
               params.append("_token", csrf_token);
               _context.next = 6;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("api/posts/create/".concat(props.user_id), params, {
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/posts/create/".concat(props.user_id), params, {
                 headers: {
                   'content-type': 'multipart/form-data'
                 }
@@ -14201,11 +14213,7 @@ var CreatePost = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
       nav: "投稿する",
       body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
         onSubmit: handleSubmit,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-          type: "hidden",
-          name: "_token",
-          value: csrf_token
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
           children: ["image : ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "file",
             onChange: handleImageChange,
@@ -14226,12 +14234,16 @@ var CreatePost = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
           type: "submit",
           value: "\u4FDD\u5B58"
         }), bolbs.map(function (file) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-            src: file,
-            style: {
-              width: "320px"
-            }
-          }, file);
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+              src: file,
+              style: {
+                width: "200px",
+                height: '200px',
+                objectFit: 'contain'
+              }
+            }, file)
+          });
         })]
       })
     })
@@ -14315,7 +14327,7 @@ function EditProfile(props) {
     setBolb(bolbUrl);
   };
 
-  var handleLoad = function handleLoad() {
+  var handleClick = function handleClick() {
     setApp_name(props.profile.app_name);
     setProfile(props.profile.profile);
   };
@@ -14345,7 +14357,7 @@ function EditProfile(props) {
               params.append("profile", profile);
               params.append("_token", csrf_token);
               _context.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("api/profiles/edit/".concat(props.user_id), params, {
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/profiles/edit/".concat(props.user_id), params, {
                 headers: {
                   'content-type': 'multipart/form-data'
                 }
@@ -14370,7 +14382,7 @@ function EditProfile(props) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_5__.default, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ReactUI_SimpleModal__WEBPACK_IMPORTED_MODULE_3__.default, {
-      onClick: handleLoad,
+      onClick: handleClick,
       nav: "プロフィールを編集する",
       body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
         onSubmit: handleSubmit,
@@ -14744,13 +14756,13 @@ function Header(props) {
         }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
         path: "/:id",
-        exact: true,
         render: function render() {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ProfilePostHeader__WEBPACK_IMPORTED_MODULE_3__.default, {
             user_id: props.user_id,
             profile: props.profile,
             getProfile: props.getProfile,
-            getUserPosts: props.getUserPosts
+            getUserPosts: props.getUserPosts,
+            getCategory: props.getCategory
           });
         }
       })]
@@ -14886,8 +14898,9 @@ function ProfilePostHeader(props) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_CreatePost__WEBPACK_IMPORTED_MODULE_3__.default, {
           user_id: props.user_id,
           getUserPosts: props.getUserPosts
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_11__.default, {
-          children: "\u30AE\u30A2\u3092\u767B\u9332\u3059\u308B"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_CreateGear__WEBPACK_IMPORTED_MODULE_4__.default, {
+          user_id: props.user_id,
+          getCategory: props.getCategory
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_EditProfile__WEBPACK_IMPORTED_MODULE_2__.default, {
           user_id: props.user_id,
           profile: props.profile,
@@ -15298,10 +15311,10 @@ function IndexGear(props) {
       setTotalGearsCount = _useState8[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    getGear();
+    getUserGears();
   }, []);
 
-  var getGear = /*#__PURE__*/function () {
+  var getUserGears = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(page) {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -15326,7 +15339,7 @@ function IndexGear(props) {
       }, _callee);
     }));
 
-    return function getGear(_x) {
+    return function getUserGears(_x) {
       return _ref.apply(this, arguments);
     };
   }();
@@ -15346,6 +15359,9 @@ function IndexGear(props) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
             className: "profile-main-gear-category-timeline-gear-timeline-index",
             children: [gear.gear_name, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              style: {
+                backgroundImage: "url(".concat(gear.image_path[0].image_path, ")")
+              },
               className: "profile-main-gear-category-timeline-gear-timeline-index-image"
             })]
           })
@@ -15357,7 +15373,7 @@ function IndexGear(props) {
       activePage: activeGearPage,
       itemsCountPerPage: 4,
       totalItemsCount: totalGearsCount,
-      onChange: getGear,
+      onChange: getUserGears,
       linkClass: "paginate-number",
       linkClassPrev: "paginate-prev",
       linkClassNext: "paginate-next",
@@ -15393,12 +15409,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function NavGear(props) {
+  console.log(props);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "profile-main-gear-nav",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
         className: "categories"
-      }), props.eventList.map(function (category) {
+      }), props.categories.map(function (category) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
           className: "categories",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ReactUI_SimpleMenu__WEBPACK_IMPORTED_MODULE_2__.default, {
@@ -15502,11 +15519,30 @@ function Profile(props) {
       posts = _useState8[0],
       setPosts = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      categories = _useState10[0],
+      setCategories = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+      _useState12 = _slicedToArray(_useState11, 2),
+      activePage = _useState12[0],
+      setActivePage = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState14 = _slicedToArray(_useState13, 2),
+      itemsCountPerPage = _useState14[0],
+      setItemsCountPerPage = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState16 = _slicedToArray(_useState15, 2),
+      totalItemsCount = _useState16[0],
+      setTotalItemsCount = _useState16[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getProfile();
     getUserPosts();
-    getCountPost();
-    getCountGear();
+    getCategory();
   }, []);
 
   var getProfile = /*#__PURE__*/function () {
@@ -15602,10 +15638,11 @@ function Profile(props) {
 
             case 2:
               response = _context4.sent;
-              console.log("start");
               setPosts(response.data);
+              getCountPost();
+              getCountGear();
 
-            case 5:
+            case 6:
             case "end":
               return _context4.stop();
           }
@@ -15618,13 +15655,45 @@ function Profile(props) {
     };
   }();
 
+  var getCategory = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(page) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/gears/category/".concat(props.match.params.id, "?page=").concat(page));
+
+            case 2:
+              response = _context5.sent;
+              console.log(response.data.data);
+              setCategories(response.data.data);
+              setActivePage(response.data.meta.current_page);
+              setItemsCountPerPage(response.data.meta.per_page);
+              setTotalItemsCount(response.data.meta.total);
+
+            case 8:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function getCategory(_x) {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
     className: "profile",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Header_Header__WEBPACK_IMPORTED_MODULE_3__.default, {
       user_id: props.match.params.id,
       profile: profile,
       getProfile: getProfile,
-      getUserPosts: getUserPosts
+      getUserPosts: getUserPosts,
+      getCategory: getCategory
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
       className: "profile-main",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UserProfile__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -15657,9 +15726,18 @@ function Profile(props) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
           path: "/:id/gear",
           exact: true,
-          component: _UserGears__WEBPACK_IMPORTED_MODULE_6__.default
+          render: function render() {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UserGears__WEBPACK_IMPORTED_MODULE_6__.default, {
+              user_id: props.match.params.id,
+              categories: categories,
+              activePage: activePage,
+              itemsCountPerPage: itemsCountPerPage,
+              totalItemsCount: totalItemsCount,
+              getCategory: getCategory
+            });
+          }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-          path: "/:id/:post_id",
+          path: "/:id/post/:post_id",
           exact: true,
           component: _ShowPost__WEBPACK_IMPORTED_MODULE_7__.default
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
@@ -15841,11 +15919,11 @@ function ShowPost(props) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/posts/".concat(props.match.params.id, "/").concat(props.match.params.post_id));
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/posts/show/".concat(props.match.params.post_id));
 
             case 2:
               response = _context.sent;
-              setPosts(response.data.data);
+              setPosts(response.data);
 
             case 4:
             case "end":
@@ -15860,6 +15938,7 @@ function ShowPost(props) {
     };
   }();
 
+  console.log(posts);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
     className: "profile-main-post-index",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("ul", {
@@ -15869,7 +15948,7 @@ function ShowPost(props) {
             place: post.place,
             day: post.day
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Home_PostImage__WEBPACK_IMPORTED_MODULE_4__.default, {
-            image_path: post.image_path
+            post_images: post.post_images
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Home_PostContent__WEBPACK_IMPORTED_MODULE_5__.default, {
             content: post.content,
             tags: post.tags
@@ -15895,33 +15974,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_js_pagination__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-js-pagination */ "./node_modules/react-js-pagination/dist/Pagination.js");
-/* harmony import */ var _NavGear__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NavGear */ "./resources/js/components/Profile/NavGear.js");
-/* harmony import */ var _IndexGear__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./IndexGear */ "./resources/js/components/Profile/IndexGear.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_js_pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-js-pagination */ "./node_modules/react-js-pagination/dist/Pagination.js");
+/* harmony import */ var _NavGear__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NavGear */ "./resources/js/components/Profile/NavGear.js");
+/* harmony import */ var _IndexGear__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./IndexGear */ "./resources/js/components/Profile/IndexGear.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -15932,73 +15991,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function UserGears(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      eventList = _useState2[0],
-      setEventList = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
-      _useState4 = _slicedToArray(_useState3, 2),
-      activePage = _useState4[0],
-      setActivePage = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
-      _useState6 = _slicedToArray(_useState5, 2),
-      itemsCountPerPage = _useState6[0],
-      setItemsCountPerPage = _useState6[1];
-
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
-      _useState8 = _slicedToArray(_useState7, 2),
-      totalItemsCount = _useState8[0],
-      setTotalItemsCount = _useState8[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    getCategory();
-  }, []);
-
-  var getCategory = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(page) {
-      var response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/categories/".concat(props.match.params.id, "?page=").concat(page));
-
-            case 2:
-              response = _context.sent;
-              setEventList(response.data.data);
-              setActivePage(response.data.meta.current_page);
-              setItemsCountPerPage(response.data.meta.per_page);
-              setTotalItemsCount(response.data.meta.total);
-
-            case 7:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function getCategory(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "profile-main-gear",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_NavGear__WEBPACK_IMPORTED_MODULE_4__.default, {
-      getCategory: getCategory,
-      eventList: eventList,
-      activePage: activePage,
-      totalItemsCount: totalItemsCount
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_NavGear__WEBPACK_IMPORTED_MODULE_3__.default, {
+      getCategory: props.getCategory,
+      categories: props.categories,
+      activePage: props.activePage,
+      totalItemsCount: props.totalItemsCount
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "profile-main-gear-category",
-      children: eventList.map(function (category) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_IndexGear__WEBPACK_IMPORTED_MODULE_5__.default, {
-          id: props.match.params.id,
-          category: category.category
+      children: props.categories.map(function (category) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_IndexGear__WEBPACK_IMPORTED_MODULE_4__.default, {
+          id: props.user_id,
+          category: category.category,
+          getCategory: props.getCategory
         }, category.category);
       })
     })]
@@ -16036,7 +16042,7 @@ function UserPosts(props) {
     className: "profile-main-posts",
     children: props.posts.map(function (post) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        to: "/".concat(props.user_id, "/").concat(post.id),
+        to: "/".concat(props.user_id, "/post/").concat(post.id),
         style: {
           backgroundImage: "url(".concat(post.post_images[0].image_path, ")")
         },

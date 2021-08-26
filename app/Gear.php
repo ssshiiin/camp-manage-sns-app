@@ -10,7 +10,7 @@ class Gear extends Model
     
     
     protected $fillable = [
-        'user_id', 'category', 'name', 'brand', 'purchased_day', 'price', 'amount', 'image_path'
+        'user_id', 'category', 'gear_name', 'brand', 'purchased_day', 'price', 'amount', 'image_path'
     ];
     
     public function whereUser_idAndWhereCategory($user_id, $category){
@@ -31,5 +31,9 @@ class Gear extends Model
     
     public function bring_gear(){
         return $this->hasOne('App\Bring_gear', 'gear_id');
+    }
+    
+    public function gear_images(){
+        return $this->hasMany('App\Gear_image');
     }
 }

@@ -79,9 +79,10 @@ function ProfilePostHeader(props) {
                         user_id={props.user_id} 
                         getUserPosts={props.getUserPosts}
                     />
-                    <MenuItem>
-                        ギアを登録する
-                    </MenuItem>
+                    <CreateGear 
+                        user_id={props.user_id} 
+                        getCategory={props.getCategory}
+                    />
                     <EditProfile 
                         user_id={props.user_id} 
                         profile={props.profile}

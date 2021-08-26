@@ -19,7 +19,7 @@ function EditProfile(props){
         setBolb(bolbUrl);
     };
     
-    const handleLoad = () => {
+    const handleClick = () => {
         setApp_name(props.profile.app_name);
         setProfile(props.profile.profile);
     };
@@ -43,7 +43,7 @@ function EditProfile(props){
         params.append("profile", profile);
         params.append("_token", csrf_token);
         
-        const response = await axios.post(`api/profiles/edit/${props.user_id}`, 
+        const response = await axios.post(`/api/profiles/edit/${props.user_id}`, 
         params, 
         {
           headers: {
@@ -57,7 +57,7 @@ function EditProfile(props){
     return (
         <MenuItem>
             <SimpleModal 
-            onClick={handleLoad}
+            onClick={handleClick}
             nav={"プロフィールを編集する"} 
             body=
                 {

@@ -49,7 +49,7 @@ const CreatePost = React.forwardRef((props, ref) => {
         params.append("day", day)
         params.append("_token", csrf_token);
         
-        const response = await axios.post(`api/posts/create/${props.user_id}`, 
+        const response = await axios.post(`/api/posts/create/${props.user_id}`, 
         params,
         {
           headers: {
@@ -67,7 +67,6 @@ const CreatePost = React.forwardRef((props, ref) => {
             body=
                 {
                 <form onSubmit={handleSubmit}>
-                    <input type="hidden" name="_token" value={csrf_token} />
                     <label>
                         image : <input type="file" onChange={handleImageChange} multiple /><br />
                         place : <input type="text" value={place} onChange={handlePlaceChange} /><br />
@@ -76,7 +75,9 @@ const CreatePost = React.forwardRef((props, ref) => {
                     </label>
                     <input type="submit" value="保存" />
                     {bolbs.map((file) => (
-                       <img src={file} style={{width: "320px"}} key={file}/> 
+                    <div>
+                       <img src={file} style={{width: "200px", height: '200px', objectFit: 'contain'}} key={file}/> 
+                    </div> 
                     ))}
                 </form>
                 }

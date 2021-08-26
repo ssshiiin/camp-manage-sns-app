@@ -5,25 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\GearCategoryResource;
 use App\Http\Resources\GearPaginateResource;
-use App\Http\Resources\GearProfileResource;
+use App\Http\Resources\GetUserGearsResource;
 use App\Http\Resources\Save_gearsCategoryResource;
 use App\Http\Resources\Bring_gearsCategoriesResource;
-use App\Gear;
 use App\User;
+use App\Gear;
+use App\Gear_image;
 use App\Bring_gear;
+use Storage;
 
 class GearController extends Controller
 {
-    public function getCategoryProfile(User $user, Gear $gear){
+    public function getUserCategory(User $user, Gear $gear){
         $user_id = $user->id;
         return GearCategoryResource::collection($gear->whereUser_idGroupByCategoryPaginate($user_id));
     }
     
-    public function getGearProfile(Request $request, User $user, Gear $gear){
+    //プロフィールに表示するユーザーのギア
+    public function getUserGears(Request $request, User $user, Gear $gear){
         $user_id = $user->id;
         $category = $request->query->get("category");
         
-        return GearProfileResource::collection($gear->whereUser_idAndWhereCategoryPaginate($user_id, $category));
+        return GetUserGearsResource::collection($gear->whereUser_idAndWhereCategoryPaginate($user_id, $category));
     }
     
     public function getGearIndex(Gear $gear){
@@ -67,5 +70,47 @@ class GearController extends Controller
         
         $count = Gear::where("user_id", $user_id)->count();
         return $count;
+    }
+    
+    //geatsとgear_imagesを作成して、s3に保存する
+    public function createGear(Request $request, User $user){
+        $user_id = $user->id;
+        $fileImage = $request->files;
+        $gear_name = $request->input("gearName");
+        $category = $request->input("category");
+        $brand = $request->input("brand");
+        $purchased_day = $request->input("purchasedDay");
+        $price = $request->input("price");
+        $amount = $request->input("amount");
+        
+        
+        //gearsを作成し、作成したidをgear_idとして取得する
+        $gear = new Gear;
+        
+        $input = [
+            "user_id" => $user_id,
+            "gear_name" => $gear_name,
+            "category" => $category,
+            "brand" => $brand,
+            "purchasedDay" => $purchased_day,
+            "price" => $price,
+            "amount" => $amount,
+        ];
+        
+        $gear->fill($input)->save();
+        $gear_id = $gear->id;
+        
+        
+        //s3に画像を保存して、urlをgear_imagesに保存する
+        foreach ($fileImage as $key => $value){
+            $path = Storage::disk('s3')->putFile('/Gear_images', $request->file($key), 'public');
+            Gear_image::create([
+                "gear_id" => $gear_id,
+                "image_path" => Storage::disk('s3')->url($path),
+            ]);
+        }
+        
+        //getUserPostsを返り値として返す
+        // return app()->make('App\Http\Controllers\PostController')->getUserPosts(User::find($user_id));
     }
 }

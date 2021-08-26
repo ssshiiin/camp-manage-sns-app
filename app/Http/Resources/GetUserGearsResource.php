@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GearProfileResource extends JsonResource
+class GetUserGearsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -24,7 +24,7 @@ class GearProfileResource extends JsonResource
             'purchased_day' => $this->purchased_day, 
             'price' => $this->price, 
             'amount' => $this->amount, 
-            'image_path' => $this->image_path, 
+            'image_path' => $this->gear_images, 
         ];
     }
 }
