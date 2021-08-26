@@ -15170,6 +15170,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function PostImage(props) {
+  console.log(props);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
     src: props.post_images[0].image_path,
     className: "post-img"
@@ -15923,9 +15924,10 @@ function ShowPost(props) {
 
             case 2:
               response = _context.sent;
-              setPosts(response.data);
+              console.log(response);
+              setPosts(response.data.data);
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -15938,17 +15940,17 @@ function ShowPost(props) {
     };
   }();
 
-  console.log(posts);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
     className: "profile-main-post-index",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("ul", {
       children: posts.map(function (post) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("li", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Home_PostHeader__WEBPACK_IMPORTED_MODULE_3__.default, {
+            profile_image: post.profile_image,
             place: post.place,
             day: post.day
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Home_PostImage__WEBPACK_IMPORTED_MODULE_4__.default, {
-            post_images: post.post_images
+            post_images: post.image_path
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Home_PostContent__WEBPACK_IMPORTED_MODULE_5__.default, {
             content: post.content,
             tags: post.tags

@@ -40,7 +40,9 @@ class PostController extends Controller
     public function getShowPost(Post $post)
     {
         $post_id = $post->id;
-        return Post::with("post_images", "tags")->where("id", $post_id)->get();
+        $post = Post::where("id", $post_id)->get();
+        //profilesのimage_pathを追加する
+        return GetPostsResource::collection($post);
     }
     
     public function getCountPost(User $user){

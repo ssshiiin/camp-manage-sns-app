@@ -14,17 +14,17 @@ function ShowPost(props){
     
     const getPost = async () => {
         const response = await axios.get(`/api/posts/show/${props.match.params.post_id}`);
-        setPosts(response.data);
+        console.log(response)
+        setPosts(response.data.data);
     }
     
-    console.log(posts)
     return (
         <div className="profile-main-post-index">
             <ul>
             {posts.map((post) => 
                 <li key={post.id}>
-                    <PostHeader place={post.place} day={post.day} />
-                    <PostImage post_images={post.post_images} /> 
+                    <PostHeader profile_image={post.profile_image} place={post.place} day={post.day} />
+                    <PostImage post_images={post.image_path} /> 
                     <PostContent content={post.content} tags={post.tags} />
                 </li>
             )}
