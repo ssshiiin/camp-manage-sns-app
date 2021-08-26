@@ -14,7 +14,6 @@ function ShowPost(props){
     
     const getPost = async () => {
         const response = await axios.get(`/api/posts/show/${props.match.params.post_id}`);
-        console.log(response)
         setPosts(response.data.data);
     }
     

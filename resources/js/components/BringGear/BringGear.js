@@ -16,12 +16,12 @@ function BringGear(props){
     }, [])
     
     const getGear = async () => {
-        const response = await axios.get(`/api/bring_gears/${props.match.params.id}`);
+        const response = await axios.get(`/api/bring_gears/${props.user_id}`);
         setCategories(response.data.data);
     }
     
     const getCountBring = async () => {
-        const response = await axios.get(`/api/count/true/bring/${props.match.params.id}`);
+        const response = await axios.get(`/api/count/true/bring/${props.user_id}`);
         setCount(response.data)
     }
     
@@ -41,26 +41,26 @@ function BringGear(props){
     }
     
     const allDeleteBringGear = async() => {
-        const response = await axios.post(`/api/all/delete/bring_gears/${props.match.params.id}`);
+        const response = await axios.post(`/api/all/delete/bring_gears/${props.user_id}`);
         setCategories(response.data.data);
         getCountBring();
     }
     
     const createTemplates = async(template_name) => {
-        const response = await axios.post(`/api/create/templates/${props.match.params.id}`
+        const response = await axios.post(`/api/create/templates/${props.user_id}`
         , [categories, template_name]);
         getTemplates();
     }
     
     const useTemplates = async(useTemplate_name) => {
-        const response = await axios.post(`/api/templates/use/${props.match.params.id}`
+        const response = await axios.post(`/api/templates/use/${props.user_id}`
         , [useTemplate_name]);
         setCategories(response.data.data);
         getTemplates();
     }
     
     const deleteTemplate = async(deleteTemplate_name) => {
-        const response = await axios.post(`/api/templates/delete/${props.match.params.id}`
+        const response = await axios.post(`/api/templates/delete/${props.user_id}`
         , [deleteTemplate_name]);
         
         getTemplates();
@@ -69,7 +69,7 @@ function BringGear(props){
     }
     
     const getTemplates = async() => {
-        const response = await axios.get(`/api/templates/${props.match.params.id}`);
+        const response = await axios.get(`/api/templates/${props.user_id}`);
         
         setTemplates(response.data);
         getCountBring();
@@ -78,7 +78,7 @@ function BringGear(props){
     return (
         <div className="gear">
             <Header 
-            user_id={props.match.params.id} 
+            user_id={props.user_id} 
             allDeleteBringGear={allDeleteBringGear}
             createTemplates={createTemplates}
             useTemplates={useTemplates}

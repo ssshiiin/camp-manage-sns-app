@@ -14,12 +14,12 @@ function AddBringGear(props){
     }, [])
     
     const getAddGear = async () => {
-        const response = await axios.get(`/api/add/gears/${props.match.params.id}`);
+        const response = await axios.get(`/api/add/gears/${props.user_id}`);
         setCategories(response.data.data);
     }
     
     const getCount = async () => {
-        const response = await axios.get(`/api/count/true/add/${props.match.params.id}`);
+        const response = await axios.get(`/api/count/true/add/${props.user_id}`);
         setCount(response.data)
     }
     
@@ -33,7 +33,7 @@ function AddBringGear(props){
     } 
     
     const createAddBringGear = async() => {
-        const response = await axios.post(`/api/create/bring_gears/${props.match.params.id}`);
+        const response = await axios.post(`/api/create/bring_gears/${props.user_id}`);
         setCategories(response.data.data);
         getCount();
     } 
@@ -41,7 +41,7 @@ function AddBringGear(props){
     return (
         <div className="gear">
             <Header 
-            user_id={props.match.params.id}
+            user_id={props.user_id}
             postAddBringGear={createAddBringGear} 
             />
             <div className="gear-main">
