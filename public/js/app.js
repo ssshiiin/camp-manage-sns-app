@@ -13318,16 +13318,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function App() {
-  console.log("App");
-
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       user = _useState2[0],
       setUser = _useState2[1];
-
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      rerender = _React$useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getUsers();
@@ -13362,8 +13356,7 @@ function App() {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.BrowserRouter, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_SideBar__WEBPACK_IMPORTED_MODULE_4__.default, {
-      user_id: user.id,
-      rerender: rerender
+      user_id: user.id
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Main__WEBPACK_IMPORTED_MODULE_5__.default, {
       user_id: user.id
     })]
@@ -15657,8 +15650,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Profile(props) {
-  console.log("Profile");
-
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       idList = _useState2[0],
@@ -17022,7 +17013,6 @@ function SideBar(props) {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/".concat(props.user_id),
-        onClick: props.rerender,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
           src: '/images/履歴書アイコン6.jpeg',
           width: "36px",

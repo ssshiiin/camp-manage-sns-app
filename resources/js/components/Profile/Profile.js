@@ -9,67 +9,66 @@ import UserGears from './UserGears';
 import ShowPost from './ShowPost';
 import ShowGear from './ShowGear';
 
-function Profile(props){
-    console.log("Profile")
+function Profile(props) {
     const [idList, setIdList] = useState([]);
     const [profile, setProfile] = useState([]);
     const [countPost, setCountPost] = useState(0);
     const [countGear, setCountGear] = useState(0);
     const [posts, setPosts] = useState([]);
-    
+
     const [categories, setCategories] = useState([]);
     const [activePage, setActivePage] = useState(1);
     const [itemsCountPerPage, setItemsCountPerPage] = useState(0);
     const [totalItemsCount, setTotalItemsCount] = useState(0);
-    
-    
+
+
     useEffect(() => {
         getUserId();
         getProfile();
         getUserPosts();
         getCategory();
-    },[]);
-    
-    const getUserId = async () => {
+    }, []);
+
+    const getUserId = async() => {
         const response = await axios.get("/api/users");
         setIdList(response.data);
     }
-    
-    const getProfile = async () => {
+
+    const getProfile = async() => {
         const response = await axios.get(`/api/profiles/${props.match.params.id}`);
-        
+
         setProfile(response.data);
     }
-    
-    const getCountPost = async () => {
+
+    const getCountPost = async() => {
         const response = await axios.get(`/api/count/post/${props.match.params.id}`);
-        
+
         setCountPost(response.data);
     }
-    
-    const getCountGear = async () => {
+
+    const getCountGear = async() => {
         const response = await axios.get(`/api/count/gear/${props.match.params.id}`);
-        
+
         setCountGear(response.data);
     }
-    
-    const getUserPosts = async () => {
+
+    const getUserPosts = async() => {
         const response = await axios.get(`/api/posts/${props.match.params.id}`);
-        
+
         setPosts(response.data);
         getCountPost();
         getCountGear();
     }
-    
-    const getCategory = async (page) => {
+
+    const getCategory = async(page) => {
         const response = await axios.get(`/api/gears/category/${props.match.params.id}?page=${page}`);
-    
+
         setCategories(response.data.data);
         setActivePage(response.data.meta.current_page);
         setItemsCountPerPage(response.data.meta.per_page);
         setTotalItemsCount(response.data.meta.total);
     }
-    
+
     return (
         <React.Fragment>
         {
