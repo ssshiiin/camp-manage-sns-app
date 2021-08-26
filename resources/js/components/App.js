@@ -7,7 +7,9 @@ import SideBar from './SideBar';
 import Main from './Main';
 
 function App(){
+    console.log("App")
     const [user, setUser] = useState([]);
+    const [, rerender] = React.useState();
 
     useEffect(() => {
         getUsers()
@@ -19,8 +21,8 @@ function App(){
     }
     return (
         <Router>
-            <SideBar user={user} />
-            <Main user={user}/>
+            <SideBar user_id={user.id} rerender={rerender}/>
+            <Main user_id={user.id}/>
         </Router>
     )
 }

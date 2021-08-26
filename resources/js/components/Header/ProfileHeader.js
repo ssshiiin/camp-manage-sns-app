@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProfilePostHeader(props) {
+function ProfileHeader(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     
     const handleClick = (event) => {
@@ -97,4 +97,4 @@ function ProfilePostHeader(props) {
     )
 }
 
-export default ProfilePostHeader;
+export default ProfileHeader;

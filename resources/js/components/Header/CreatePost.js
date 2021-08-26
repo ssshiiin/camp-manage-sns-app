@@ -75,7 +75,7 @@ const CreatePost = React.forwardRef((props, ref) => {
                     </label>
                     <input type="submit" value="保存" />
                     {bolbs.map((file) => (
-                    <div>
+                    <div key={file}>
                        <img src={file} style={{width: "200px", height: '200px', objectFit: 'contain'}} key={file}/> 
                     </div> 
                     ))}

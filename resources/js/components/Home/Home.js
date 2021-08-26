@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -7,7 +8,7 @@ import PostHeader from './PostHeader';
 import PostImage from './PostImage';
 import PostContent from './PostContent';
 
-function Home(){
+function Home(props){
     const [Allposts, setAllPosts] = useState([]);
     const [hasMore, setHasMore] = useState(true); 
     
@@ -36,14 +37,16 @@ function Home(){
                 loader={loader}>
                     <ul className="home-main-timeline">
                         {Allposts.map((post) => 
-                            <li className="home-main-timeline-list" key={post.id}>
+                        <li className="home-main-timeline-list" key={post.id} >
+                            <Link to={`/${post.user_id}/post/${post.id}`}>
                                 <PostHeader 
                                     place={post.place} 
                                     day={post.day} 
                                     profile_image={post.profile_image} />
                                 <PostImage post_images={post.image_path} />
                                 <PostContent content={post.content} tags={post.tags} />
-                            </li>
+                            </Link>
+                        </li>
                         )}
                     </ul>
                 </InfiniteScroll>

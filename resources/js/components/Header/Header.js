@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 import GearAddHeader from './GearAddHeader';
 import GearBringHeader from './GearBringHeader';
-import ProfilePostHeader from './ProfilePostHeader';
+import ProfileHeader from './ProfileHeader';
 
 function Header(props){
+    const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        getUsers()
+    },[])
+
+    const getUsers = async () => {
+        const response = await axios.get('/api/user');
+        setUser(response.data);
+    }
     return (
         <header>
             <Switch>
@@ -25,14 +36,20 @@ function Header(props){
                     user_id={props.user_id}
                     postAddBringGear={props.postAddBringGear} />
                 } />
-                <Route path={`/${props.user_id}`} 
-                render={() => <ProfilePostHeader 
-                    user_id={props.user_id} 
-                    profile={props.profile}
-                    getProfile={props.getProfile}
-                    getUserPosts={props.getUserPosts} 
-                    getCategory={props.getCategory}/>
-                } />
+                {
+                    function(){
+                        if (props.user_id == user.id){
+                            return (
+                            <Route path={`/${props.user_id}`} render={() => <ProfileHeader 
+                                user_id={props.user_id} 
+                                profile={props.profile}
+                                getProfile={props.getProfile}
+                                getUserPosts={props.getUserPosts} 
+                                getCategory={props.getCategory}/>
+                            } />)
+                        }
+                    }()
+                }
             </Switch>
         </header>
     )

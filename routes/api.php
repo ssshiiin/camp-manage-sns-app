@@ -19,6 +19,8 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 
 
 Route::group( ['middleware' => 'api'], function(){
+    Route::get('/users', 'UserController@getUserId');
+    
     Route::get('/posts', 'PostController@getPosts');
     Route::get('/posts/{user}', 'PostController@getUserPosts');
     Route::get('/posts/show/{post}', 'PostController@getShowPost');

@@ -13318,10 +13318,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function App() {
+  console.log("App");
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       user = _useState2[0],
       setUser = _useState2[1];
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      rerender = _React$useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getUsers();
@@ -13356,9 +13362,10 @@ function App() {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.BrowserRouter, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_SideBar__WEBPACK_IMPORTED_MODULE_4__.default, {
-      user: user
+      user_id: user.id,
+      rerender: rerender
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Main__WEBPACK_IMPORTED_MODULE_5__.default, {
-      user: user
+      user_id: user.id
     })]
   });
 }
@@ -14306,7 +14313,7 @@ var CreatePost = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
                 objectFit: 'contain'
               }
             }, file)
-          });
+          }, file);
         })]
       })
     })
@@ -14777,12 +14784,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _GearAddHeader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GearAddHeader */ "./resources/js/components/Header/GearAddHeader.js");
-/* harmony import */ var _GearBringHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GearBringHeader */ "./resources/js/components/Header/GearBringHeader.js");
-/* harmony import */ var _ProfilePostHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProfilePostHeader */ "./resources/js/components/Header/ProfilePostHeader.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _GearAddHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./GearAddHeader */ "./resources/js/components/Header/GearAddHeader.js");
+/* harmony import */ var _GearBringHeader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GearBringHeader */ "./resources/js/components/Header/GearBringHeader.js");
+/* harmony import */ var _ProfileHeader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ProfileHeader */ "./resources/js/components/Header/ProfileHeader.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -14792,13 +14822,49 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Header(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("header", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Switch, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      user = _useState2[0],
+      setUser = _useState2[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    getUsers();
+  }, []);
+
+  var getUsers = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/user');
+
+            case 2:
+              response = _context.sent;
+              setUser(response.data);
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function getUsers() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("header", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/".concat(props.user_id, "/bring_lists"),
         exact: true,
         render: function render() {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_GearBringHeader__WEBPACK_IMPORTED_MODULE_2__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_GearBringHeader__WEBPACK_IMPORTED_MODULE_4__.default, {
             user_id: props.user_id,
             allDeleteBringGear: props.allDeleteBringGear,
             createTemplates: props.createTemplates,
@@ -14808,27 +14874,31 @@ function Header(props) {
             deleteTemplate: props.deleteTemplate
           });
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/".concat(props.user_id, "/bring_lists/add"),
         exact: true,
         render: function render() {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_GearAddHeader__WEBPACK_IMPORTED_MODULE_1__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_GearAddHeader__WEBPACK_IMPORTED_MODULE_3__.default, {
             user_id: props.user_id,
             postAddBringGear: props.postAddBringGear
           });
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
-        path: "/".concat(props.user_id),
-        render: function render() {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ProfilePostHeader__WEBPACK_IMPORTED_MODULE_3__.default, {
-            user_id: props.user_id,
-            profile: props.profile,
-            getProfile: props.getProfile,
-            getUserPosts: props.getUserPosts,
-            getCategory: props.getCategory
+      }), function () {
+        if (props.user_id == user.id) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+            path: "/".concat(props.user_id),
+            render: function render() {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ProfileHeader__WEBPACK_IMPORTED_MODULE_5__.default, {
+                user_id: props.user_id,
+                profile: props.profile,
+                getProfile: props.getProfile,
+                getUserPosts: props.getUserPosts,
+                getCategory: props.getCategory
+              });
+            }
           });
         }
-      })]
+      }()]
     })
   });
 }
@@ -14837,10 +14907,10 @@ function Header(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Header/ProfilePostHeader.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/Header/ProfilePostHeader.js ***!
-  \*************************************************************/
+/***/ "./resources/js/components/Header/ProfileHeader.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Header/ProfileHeader.js ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -14920,7 +14990,7 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__.default
   };
 });
 
-function ProfilePostHeader(props) {
+function ProfileHeader(props) {
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(null),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       anchorEl = _React$useState2[0],
@@ -14976,7 +15046,7 @@ function ProfilePostHeader(props) {
   });
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfilePostHeader);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfileHeader);
 
 /***/ }),
 
@@ -14994,6 +15064,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_infinite_scroller__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-infinite-scroller */ "./node_modules/react-infinite-scroller/index.js");
@@ -15039,7 +15110,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function Home() {
+
+function Home(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       Allposts = _useState2[0],
@@ -15103,18 +15175,21 @@ function Home() {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("ul", {
         className: "home-main-timeline",
         children: Allposts.map(function (post) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("li", {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("li", {
             className: "home-main-timeline-list",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_PostHeader__WEBPACK_IMPORTED_MODULE_5__.default, {
-              place: post.place,
-              day: post.day,
-              profile_image: post.profile_image
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_PostImage__WEBPACK_IMPORTED_MODULE_6__.default, {
-              post_images: post.image_path
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_PostContent__WEBPACK_IMPORTED_MODULE_7__.default, {
-              content: post.content,
-              tags: post.tags
-            })]
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
+              to: "/".concat(post.user_id, "/post/").concat(post.id),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_PostHeader__WEBPACK_IMPORTED_MODULE_5__.default, {
+                place: post.place,
+                day: post.day,
+                profile_image: post.profile_image
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_PostImage__WEBPACK_IMPORTED_MODULE_6__.default, {
+                post_images: post.image_path
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_PostContent__WEBPACK_IMPORTED_MODULE_7__.default, {
+                content: post.content,
+                tags: post.tags
+              })]
+            })
           }, post.id);
         })
       })
@@ -15255,15 +15330,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _Profile_Profile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Profile/Profile */ "./resources/js/components/Profile/Profile.js");
-/* harmony import */ var _Home_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home/Home */ "./resources/js/components/Home/Home.js");
-/* harmony import */ var _SubCategory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SubCategory */ "./resources/js/components/SubCategory.js");
-/* harmony import */ var _BringGear_BringGear__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./BringGear/BringGear */ "./resources/js/components/BringGear/BringGear.js");
-/* harmony import */ var _SaveGear_SaveGear__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SaveGear/SaveGear */ "./resources/js/components/SaveGear/SaveGear.js");
-/* harmony import */ var _BringGear_AddBringGear__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BringGear/AddBringGear */ "./resources/js/components/BringGear/AddBringGear.js");
-/* harmony import */ var _routes_LoginRoute__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../routes/LoginRoute */ "./resources/js/routes/LoginRoute.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Profile_Profile__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Profile/Profile */ "./resources/js/components/Profile/Profile.js");
+/* harmony import */ var _Home_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Home/Home */ "./resources/js/components/Home/Home.js");
+/* harmony import */ var _SubCategory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SubCategory */ "./resources/js/components/SubCategory.js");
+/* harmony import */ var _BringGear_BringGear__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./BringGear/BringGear */ "./resources/js/components/BringGear/BringGear.js");
+/* harmony import */ var _SaveGear_SaveGear__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SaveGear/SaveGear */ "./resources/js/components/SaveGear/SaveGear.js");
+/* harmony import */ var _BringGear_AddBringGear__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BringGear/AddBringGear */ "./resources/js/components/BringGear/AddBringGear.js");
+/* harmony import */ var _routes_LoginRoute__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../routes/LoginRoute */ "./resources/js/routes/LoginRoute.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -15277,50 +15355,47 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Main(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("main", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+  console.log("Main");
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("main", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
       className: "main-category",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Switch, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/",
           exact: true,
-          component: _Home_Home__WEBPACK_IMPORTED_MODULE_2__.default
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-          path: "/".concat(props.user.id, "/bring_lists"),
+          component: _Home_Home__WEBPACK_IMPORTED_MODULE_3__.default
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          path: "/".concat(props.user_id, "/bring_lists"),
           exact: true,
           render: function render() {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_BringGear_BringGear__WEBPACK_IMPORTED_MODULE_4__.default, {
-              user_id: props.user.id
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_BringGear_BringGear__WEBPACK_IMPORTED_MODULE_5__.default, {
+              user_id: props.user_id
             });
           }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-          path: "/".concat(props.user.id, "/bring_lists/add"),
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          path: "/".concat(props.user_id, "/bring_lists/add"),
           exact: true,
           render: function render() {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_BringGear_AddBringGear__WEBPACK_IMPORTED_MODULE_6__.default, {
-              user_id: props.user.id
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_BringGear_AddBringGear__WEBPACK_IMPORTED_MODULE_7__.default, {
+              user_id: props.user_id
             });
           }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-          path: "/".concat(props.user.id, "/save_lists"),
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          path: "/".concat(props.user_id, "/save_lists"),
           exact: true,
           render: function render() {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_SaveGear_SaveGear__WEBPACK_IMPORTED_MODULE_5__.default, {
-              user_id: props.user.id
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_SaveGear_SaveGear__WEBPACK_IMPORTED_MODULE_6__.default, {
+              user_id: props.user_id
             });
           }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-          path: "/".concat(props.user.id),
-          render: function render() {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Profile_Profile__WEBPACK_IMPORTED_MODULE_1__.default, {
-              user_id: props.user.id
-            });
-          }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Redirect, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          path: "/:id",
+          component: _Profile_Profile__WEBPACK_IMPORTED_MODULE_2__.default
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Redirect, {
           to: "/"
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_SubCategory__WEBPACK_IMPORTED_MODULE_3__.default, {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_SubCategory__WEBPACK_IMPORTED_MODULE_4__.default, {})]
   });
 }
 
@@ -15540,8 +15615,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Header_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Header/Header */ "./resources/js/components/Header/Header.js");
@@ -15582,53 +15657,61 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Profile(props) {
+  console.log("Profile");
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      profile = _useState2[0],
-      setProfile = _useState2[1];
+      idList = _useState2[0],
+      setIdList = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      countPost = _useState4[0],
-      setCountPost = _useState4[1];
+      profile = _useState4[0],
+      setProfile = _useState4[1];
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
-      countGear = _useState6[0],
-      setCountGear = _useState6[1];
+      countPost = _useState6[0],
+      setCountPost = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
       _useState8 = _slicedToArray(_useState7, 2),
-      posts = _useState8[0],
-      setPosts = _useState8[1];
+      countGear = _useState8[0],
+      setCountGear = _useState8[1];
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      categories = _useState10[0],
-      setCategories = _useState10[1];
+      posts = _useState10[0],
+      setPosts = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      activePage = _useState12[0],
-      setActivePage = _useState12[1];
+      categories = _useState12[0],
+      setCategories = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
       _useState14 = _slicedToArray(_useState13, 2),
-      itemsCountPerPage = _useState14[0],
-      setItemsCountPerPage = _useState14[1];
+      activePage = _useState14[0],
+      setActivePage = _useState14[1];
 
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
       _useState16 = _slicedToArray(_useState15, 2),
-      totalItemsCount = _useState16[0],
-      setTotalItemsCount = _useState16[1];
+      itemsCountPerPage = _useState16[0],
+      setItemsCountPerPage = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState18 = _slicedToArray(_useState17, 2),
+      totalItemsCount = _useState18[0],
+      setTotalItemsCount = _useState18[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    getUserId();
     getProfile();
     getUserPosts();
     getCategory();
   }, []);
 
-  var getProfile = /*#__PURE__*/function () {
+  var getUserId = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -15636,11 +15719,11 @@ function Profile(props) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/profiles/".concat(props.user_id));
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/users");
 
             case 2:
               response = _context.sent;
-              setProfile(response.data);
+              setIdList(response.data);
 
             case 4:
             case "end":
@@ -15650,12 +15733,12 @@ function Profile(props) {
       }, _callee);
     }));
 
-    return function getProfile() {
+    return function getUserId() {
       return _ref.apply(this, arguments);
     };
   }();
 
-  var getCountPost = /*#__PURE__*/function () {
+  var getProfile = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -15663,11 +15746,11 @@ function Profile(props) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/count/post/".concat(props.user_id));
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/profiles/".concat(props.match.params.id));
 
             case 2:
               response = _context2.sent;
-              setCountPost(response.data);
+              setProfile(response.data);
 
             case 4:
             case "end":
@@ -15677,12 +15760,12 @@ function Profile(props) {
       }, _callee2);
     }));
 
-    return function getCountPost() {
+    return function getProfile() {
       return _ref2.apply(this, arguments);
     };
   }();
 
-  var getCountGear = /*#__PURE__*/function () {
+  var getCountPost = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
@@ -15690,11 +15773,11 @@ function Profile(props) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/count/gear/".concat(props.user_id));
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/count/post/".concat(props.match.params.id));
 
             case 2:
               response = _context3.sent;
-              setCountGear(response.data);
+              setCountPost(response.data);
 
             case 4:
             case "end":
@@ -15704,12 +15787,12 @@ function Profile(props) {
       }, _callee3);
     }));
 
-    return function getCountGear() {
+    return function getCountPost() {
       return _ref3.apply(this, arguments);
     };
   }();
 
-  var getUserPosts = /*#__PURE__*/function () {
+  var getCountGear = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
@@ -15717,15 +15800,13 @@ function Profile(props) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/posts/".concat(props.user_id));
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/count/gear/".concat(props.match.params.id));
 
             case 2:
               response = _context4.sent;
-              setPosts(response.data);
-              getCountPost();
-              getCountGear();
+              setCountGear(response.data);
 
-            case 6:
+            case 4:
             case "end":
               return _context4.stop();
           }
@@ -15733,29 +15814,28 @@ function Profile(props) {
       }, _callee4);
     }));
 
-    return function getUserPosts() {
+    return function getCountGear() {
       return _ref4.apply(this, arguments);
     };
   }();
 
-  var getCategory = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(page) {
+  var getUserPosts = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/gears/category/".concat(props.user_id, "?page=").concat(page));
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/posts/".concat(props.match.params.id));
 
             case 2:
               response = _context5.sent;
-              setCategories(response.data.data);
-              setActivePage(response.data.meta.current_page);
-              setItemsCountPerPage(response.data.meta.per_page);
-              setTotalItemsCount(response.data.meta.total);
+              setPosts(response.data);
+              getCountPost();
+              getCountGear();
 
-            case 7:
+            case 6:
             case "end":
               return _context5.stop();
           }
@@ -15763,68 +15843,111 @@ function Profile(props) {
       }, _callee5);
     }));
 
-    return function getCategory(_x) {
+    return function getUserPosts() {
       return _ref5.apply(this, arguments);
     };
   }();
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
-    className: "profile",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Header_Header__WEBPACK_IMPORTED_MODULE_3__.default, {
-      user_id: props.user_id,
-      profile: profile,
-      getProfile: getProfile,
-      getUserPosts: getUserPosts,
-      getCategory: getCategory
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
-      className: "profile-main",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UserProfile__WEBPACK_IMPORTED_MODULE_4__.default, {
+  var getCategory = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(page) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/gears/category/".concat(props.match.params.id, "?page=").concat(page));
+
+            case 2:
+              response = _context6.sent;
+              setCategories(response.data.data);
+              setActivePage(response.data.meta.current_page);
+              setItemsCountPerPage(response.data.meta.per_page);
+              setTotalItemsCount(response.data.meta.total);
+
+            case 7:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+
+    return function getCategory(_x) {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [function () {
+      if (!(idList.length === 0)) {
+        if (!idList.includes(parseInt(props.match.params.id))) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Redirect, {
+            to: "/"
+          });
+        }
+      }
+    }(), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+      className: "profile",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Header_Header__WEBPACK_IMPORTED_MODULE_3__.default, {
+        user_id: props.match.params.id,
         profile: profile,
-        countPost: countPost,
-        countGear: countGear
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("ul", {
-        className: "profile-nav",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Link, {
-          to: "/".concat(props.user_id),
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("li", {
-            children: "Achivement"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Link, {
-          to: "/".concat(props.user_id, "/gear"),
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("li", {
-            children: "Gear Lists"
-          })
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-          path: "/:id",
-          exact: true,
-          render: function render() {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UserPosts__WEBPACK_IMPORTED_MODULE_5__.default, {
-              user_id: props.user_id,
-              posts: posts
-            });
-          }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-          path: "/:id/gear",
-          exact: true,
-          render: function render() {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UserGears__WEBPACK_IMPORTED_MODULE_6__.default, {
-              user_id: props.user_id,
-              categories: categories,
-              activePage: activePage,
-              itemsCountPerPage: itemsCountPerPage,
-              totalItemsCount: totalItemsCount,
-              getCategory: getCategory
-            });
-          }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-          path: "/:id/post/:post_id",
-          exact: true,
-          component: _ShowPost__WEBPACK_IMPORTED_MODULE_7__.default
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-          path: "/:id/gear/:gear_id",
-          component: _ShowGear__WEBPACK_IMPORTED_MODULE_8__.default
+        getProfile: getProfile,
+        getUserPosts: getUserPosts,
+        getCategory: getCategory
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+        className: "profile-main",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UserProfile__WEBPACK_IMPORTED_MODULE_4__.default, {
+          profile: profile,
+          countPost: countPost,
+          countGear: countGear
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("ul", {
+          className: "profile-nav",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Link, {
+            to: "/".concat(props.match.params.id),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("li", {
+              children: "Achivement"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Link, {
+            to: "/".concat(props.match.params.id, "/gear"),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("li", {
+              children: "Gear Lists"
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+            path: "/:id",
+            exact: true,
+            render: function render() {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UserPosts__WEBPACK_IMPORTED_MODULE_5__.default, {
+                user_id: props.match.params.id,
+                posts: posts
+              });
+            }
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+            path: "/:id/gear",
+            exact: true,
+            render: function render() {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UserGears__WEBPACK_IMPORTED_MODULE_6__.default, {
+                user_id: props.match.params.id,
+                categories: categories,
+                activePage: activePage,
+                itemsCountPerPage: itemsCountPerPage,
+                totalItemsCount: totalItemsCount,
+                getCategory: getCategory
+              });
+            }
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+            path: "/:id/post/:post_id",
+            exact: true,
+            component: _ShowPost__WEBPACK_IMPORTED_MODULE_7__.default
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+            path: "/:id/gear/:gear_id",
+            exact: true,
+            component: _ShowGear__WEBPACK_IMPORTED_MODULE_8__.default
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Redirect, {
+            to: "/"
+          })]
         })]
       })]
     })]
@@ -16871,7 +16994,7 @@ function SideBar(props) {
           children: "Home"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        to: "/".concat(props.user.id, "/schedule"),
+        to: "/".concat(props.user_id, "/schedule"),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
           src: '/images/schedule.jpeg',
           width: "36px",
@@ -16880,7 +17003,7 @@ function SideBar(props) {
           children: "Schedule"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        to: "/".concat(props.user.id, "/bring_lists"),
+        to: "/".concat(props.user_id, "/bring_lists"),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
           src: '/images/ランタンアイコン1.jpeg',
           width: "36px",
@@ -16889,7 +17012,7 @@ function SideBar(props) {
           children: "Gear"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        to: "/".concat(props.user.id, "/dm"),
+        to: "/".concat(props.user_id, "/dm"),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
           src: '/images/メールの無料アイコンその8.jpeg',
           width: "36px",
@@ -16898,7 +17021,8 @@ function SideBar(props) {
           children: "Messages"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        to: "/".concat(props.user.id),
+        to: "/".concat(props.user_id),
+        onClick: props.rerender,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
           src: '/images/履歴書アイコン6.jpeg',
           width: "36px",
