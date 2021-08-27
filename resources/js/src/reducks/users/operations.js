@@ -1,4 +1,4 @@
-import { getUserIdAction } from "./actions";
+import { signInAction } from "./actions";
 import { push } from "connected-react-router";
 
 export const getUserId = () => {

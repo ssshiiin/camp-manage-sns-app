@@ -12,7 +12,8 @@ export default function createStore(history) {
       users: UsersReducer,
     }),
     applyMiddleware(
-      routerMiddleware(history)
+      routerMiddleware(history),
+      thunk
     )
   )
 }

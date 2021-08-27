@@ -5,16 +5,16 @@ import * as History from "history";
 
 import createStore from "./reducks/store/store";
 import App from "./App";
-import { connectRouter } from "connected-react-router";
+import { ConnectedRouter } from "connected-react-router";
 
 const history = History.createBrowserHistory();
-export const store = createStore();
+export const store = createStore(history);
 
 ReactDOM.render(
   <Provider store={store}>
-    <connectRouter history={history}>
+    <ConnectedRouter history={history}>
       <App />
-    </connectRouter>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );
