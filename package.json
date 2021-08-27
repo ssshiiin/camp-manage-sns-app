@@ -28,8 +28,15 @@
     "dependencies": {
         "@material-ui/core": "^4.12.3",
         "@material-ui/icons": "^4.11.2",
+        "connected-react-router": "^6.9.1",
         "react-infinite-scroller": "^1.2.4",
         "react-js-pagination": "^3.0.3",
-        "react-router-dom": "^5.2.0"
+        "react-redux": "^7.2.4",
+        "react-router": "^5.2.0",
+        "react-router-dom": "^5.2.0",
+        "redux": "^4.1.1",
+        "redux-actions": "^2.6.5",
+        "redux-thunk": "^2.3.0",
+        "reselect": "^4.0.0"
     }
 }
