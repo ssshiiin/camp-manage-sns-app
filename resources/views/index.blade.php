@@ -20,6 +20,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="camp-app"></div>
+    <div id="root"></div>
 </body>
 </html>
