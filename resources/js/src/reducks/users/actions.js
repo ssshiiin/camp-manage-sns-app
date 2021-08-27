@@ -1,7 +1,7 @@
 export const SIGN_IN = "SIGN_IN";
 export const signInAction = (userState) => {
   return {
-    type: "GET_USER_ID",
+    type: "SIGN_IN",
     payload: {
       isSignIn: true,
       user_name: userState.user_name,
