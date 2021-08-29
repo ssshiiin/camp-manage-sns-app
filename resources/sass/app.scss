@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Sacramento'); //font-family: 'Sacramento', cursive;
-@import url('https://fonts.googleapis.com/css?family=Raleway:200,100,400');  //font-family: 'Raleway', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Raleway:200,100,400'); //font-family: 'Raleway', sans-serif;
 
-$border-color: rgb(219,219,219);
+$border-color: rgb(219, 219, 219);
 $side-color: rgb(100, 100, 100);
 $header-color: rgb(250, 250, 250);
 $back-color: rgb(250, 250, 250);
 $main-color: white;
 
 * {
-  padding: 0;
-  margin: 0;
-  font-size: 1em;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    padding: 0;
+    margin: 0;
+    font-size: 1em;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 ul {
@@ -28,96 +28,108 @@ li {
 a {
     text-decoration: none;
     color: black;
+
     &:link {
         color: black;
     }
+
     &:visited {
         color: black;
     }
+
     &:hover {
         color: black;
     }
+
     &:active {
         color: black;
     }
 }
 
-header {
-    background-color: $header-color;
-}
-
-
-
 body {
-
     background-color: $back-color;
-    #camp-app {
+    width: 100%;
+
+    #root {
         min-height: 100vh;
         width: 100%;
-        
 
+        header {
+            background-color: $header-color;
+        }
 
-        .side-bar {
-            background-color: $side-color;
-            width: 258px;
+        main {
+            width: 100%;
             min-height: 100vh;
-            position: fixed;
-            z-index: 20;
-            
-            .logo {
-                height: 80px;
-            }
-            .side-nav {
-                min-height: 100vh;
-                margin: 0;
-                padding: 0;
-                a {
-                    text-decoration: none;
-                    display: flex;
-                    margin: 20px 0px;
-                    border-bottom: 1px solid $border-color;
-                    
-                    img {
-                        padding: 0px 20px;
-                    }
-                    
+
+            .side-bar {
+                background-color: $side-color;
+                width: 258px;
+                height: 100vh;
+                position: fixed;
+                z-index: 20;
+                top: 0;
+                left: 0;
+
+                .logo {
+                    height: 80px;
+                }
+
+                .side-nav {
+                    min-height: 100vh;
+                    margin: 0;
+                    padding: 0;
+
                     li {
-                        color: white;
-                        text-align: center;
-                        font-size: 1.5em;
-                        font-family:'Raleway', 'ヒラギノ角ゴシック', sans-serif;
-                        font-weight: 500;
-                        padding: 0px 20px;
+                        text-decoration: none;
+                        display: flex;
+                        margin: 20px 0px;
+                        border-bottom: 1px solid $border-color;
+
+                        img {
+                            padding: 0px 20px;
+                        }
+
+                        p {
+                            color: white;
+                            text-align: center;
+                            font-size: 1.5em;
+                            font-family: 'Raleway', 'ヒラギノ角ゴシック', sans-serif;
+                            font-weight: 500;
+                            padding: 0px 20px;
+                        }
                     }
                 }
             }
-        }
-        
 
-
-        main {
-            display: flex;
-            min-height: 100vh;
-            width: calc(100% - 258px);
-            padding-left: 258px;
-            
-            .main-category {
-                flex: 1;
-                width: 100%;
-                min-height: 100vh;
-                border-left: 1px solid $border-color;
+            header {
+                position: fixed;
+                width: calc(100% - 516px);
+                height: 80px;
+                padding-left: 258px;
                 padding-right: 258px;
-                
+            }
+
+            .main-category {
+                padding-top: 80px;
+                width: calc(100% - 516px);
+                min-height: 100vh;
+                padding-left: 258px;
+                padding-right: 258px;
+                border-left: 1px solid $border-color;
+
                 .profile-main-post-index {
                     ul {
-                        li{
+                        li {
                             .post-header {
                                 height: 80px;
                                 border-bottom: 1px solid $border-color;
+
                                 ul {
                                     display: flex;
+
                                     li {
-                                        .post-header-userImage{
+                                        .post-header-userImage {
                                             border: 1px solid $border-color;
                                             height: 60px;
                                             width: 60px;
@@ -128,64 +140,68 @@ body {
                                             border-radius: 100%;
                                         }
                                     }
+
                                     .post-header-index {
                                         flex: 1;
-                                        ul{
+
+                                        ul {
                                             height: 40px;
                                             display: flex;
+
                                             .post-header-index-title {
                                                 flex: 1;
                                                 display: flex;
-                                            	align-items: center;
-                                            	justify-content: flex-end;
+                                                align-items: center;
+                                                justify-content: flex-end;
                                             }
+
                                             .post-header-index-content {
                                                 width: 200px;
                                                 display: flex;
-                                            	align-items: center;
-                                            	justify-content: center;
+                                                align-items: center;
+                                                justify-content: center;
                                             }
                                         }
                                     }
                                 }
                             }
+
                             .post-img {
                                 width: 100%;
                                 background-size: cover;
                                 background-position: center;
                             }
+
                             .post-content {
                                 height: 150px;
+
                                 border: {
                                     top: 1px solid $border-color;
                                     bottom: 1px solid $border-color;
                                 }
+
                                 ul {
                                     display: flex;
                                 }
                             }
                         }
                     }
-                    
+
                 }
-            
-                .home{
-                    header {
-                        position: fixed;
-                        width: 100%;
-                        height: 80px;
-                    }
-                    .home-main{
-                        padding-top: 80px;
+
+                .home {
+                    .home-main {
                         .home-main-timeline {
-                            .home-main-timeline-list {
+                            .Post-set {
                                 .post-header {
                                     height: 80px;
                                     border: 1px solid $border-color;
+
                                     ul {
                                         display: flex;
+
                                         li {
-                                            .post-header-userImage{
+                                            .post-header-userImage {
                                                 border: 1px solid $border-color;
                                                 height: 60px;
                                                 width: 60px;
@@ -195,46 +211,54 @@ body {
                                                 border-radius: 100%;
                                             }
                                         }
+
                                         .post-header-index {
                                             flex: 1;
-                                            ul{
+
+                                            ul {
                                                 height: 40px;
                                                 display: flex;
+
                                                 .post-header-index-title {
                                                     flex: 1;
                                                     display: flex;
-                                                	align-items: center;
-                                                	justify-content: flex-end;
+                                                    align-items: center;
+                                                    justify-content: flex-end;
                                                 }
+
                                                 .post-header-index-content {
                                                     width: 200px;
                                                     display: flex;
-                                                	align-items: center;
-                                                	justify-content: center;
+                                                    align-items: center;
+                                                    justify-content: center;
                                                 }
                                             }
                                         }
                                     }
                                 }
+
                                 .post-img {
                                     width: 100%;
                                     object-fit: contain;
                                 }
+
                                 .post-content {
                                     height: 150px;
                                     border: 1px solid $border-color;
+
                                     ul {
                                         display: flex;
                                     }
                                 }
                             }
                         }
-                        
-                    }        
+
+                    }
                 }
-            
+
                 .profile {
                     width: 100%;
+
                     header {
                         width: 100%;
                         display: flex;
@@ -242,6 +266,7 @@ body {
                         height: 80px;
                         z-index: 10;
                         border-bottom: 1px solid $border-color;
+
                         .title {
                             height: 80px;
                             width: 100%;
@@ -250,6 +275,7 @@ body {
                             line-height: 80px;
                             position: relative;
                             padding-inline-start: 20px;
+
                             .GearBringNav {
                                 position: absolute;
                                 top: 0;
@@ -257,16 +283,17 @@ body {
                             }
                         }
                     }
+
                     .profile-main {
                         width: 100%;
                         padding-top: 80px;
-                        
+
                         .profile-introduce {
                             width: 100%;
-                            height:200px;
+                            height: 200px;
                             display: flex;
                             border-bottom: 1px solid $border-color;
-                            
+
                             .profile-image {
                                 height: 160px;
                                 width: 160px;
@@ -276,26 +303,31 @@ body {
                                 border-radius: 100%;
                                 border: 1px solid $border-color;
                             }
+
                             .profile-content {
                                 flex: 1;
                                 height: 200px;
                                 padding: 40px;
+
                                 .profileColumn {
                                     display: flex;
                                     justify-content: space-between;
+
                                     .profileCount {
                                         display: flex;
+
                                         p {
                                             margin-right: 20px;
                                         }
                                     }
                                 }
+
                                 .profileContent {
                                     margin-top: 40px;
                                 }
                             }
                         }
-                        
+
                         .profile-nav {
                             width: 100%;
                             margin: 0;
@@ -303,8 +335,10 @@ body {
                             height: 36px;
                             display: flex;
                             justify-content: center;
+
                             a {
                                 text-decoration: none;
+
                                 li {
                                     margin: 0px 50px;
                                     font-size: 1.5em;
@@ -313,10 +347,11 @@ body {
                                 }
                             }
                         }
-                        
+
                         .profile-main-posts {
                             display: flex;
                             flex-wrap: wrap;
+
                             .profile-main-posts-image {
                                 box-shadow: 0 0 1px rgb(150, 150, 150) inset;
                                 width: 33.1%;
@@ -326,6 +361,7 @@ body {
                                 background-position: center;
                                 position: relative;
                                 border: 1px solid $border-color;
+
                                 .p-center {
                                     position: absolute;
                                     top: 50%;
@@ -337,20 +373,23 @@ body {
                                     font-weight: 100;
                                     opacity: 0.7;
                                     color: white;
-                                    font-family:'Raleway', 'ヒラギノ角ゴシック', sans-serif;
+                                    font-family: 'Raleway', 'ヒラギノ角ゴシック', sans-serif;
                                 }
                             }
                         }
-                        
+
                         .profile-main-gear {
                             width: 100%;
                             max-width: 881px;
+
                             .profile-main-gear-nav {
                                 border-top: 1px solid $border-color;
                                 position: relative;
+
                                 ul {
                                     display: flex;
                                     justify-content: space-between;
+
                                     .categories {
                                         display: block;
                                         height: 36px;
@@ -358,13 +397,16 @@ body {
                                         text-align: center;
                                         min-width: 30px;
                                         font-size: 1em;
+
                                         &:hover {
                                             border-bottom: 1px solid $border-color;
                                         }
-                                        &:hover > .categories-submenu{
+
+                                        &:hover>.categories-submenu {
                                             height: auto;
                                             overflow: visible;
                                         }
+
                                         .categories-submenu {
                                             background-color: white;
                                             display: flex;
@@ -372,6 +414,7 @@ body {
                                             height: 0;
                                             overflow: hidden;
                                         }
+
                                         .categories-submenu:hover {
                                             height: 100%;
                                             overflow: visible;
@@ -379,11 +422,12 @@ body {
                                     }
                                 }
                             }
-                                
+
                             .pagination {
                                 height: 0;
                                 overflow: hidden;
-                                .paginate-prev{
+
+                                .paginate-prev {
                                     height: auto;
                                     overflow: visible;
                                     position: absolute;
@@ -396,7 +440,8 @@ body {
                                     min-width: 30px;
                                     font-size: 1em;
                                 }
-                                .paginate-next{
+
+                                .paginate-next {
                                     height: auto;
                                     overflow: visible;
                                     position: absolute;
@@ -411,24 +456,28 @@ body {
                                 }
                             }
                         }
-                            
+
                         .profile-main-gear-category {
                             width: 100%;
+
                             .profile-main-gear-category-timeline {
                                 width: 100%;
                                 position: relative;
+
                                 .profile-main-gear-category-timeline-header {
                                     height: 36px;
                                     border-top: 1px solid $border-color;
                                     border-bottom: 1px solid $border-color;
                                 }
-                                
+
                                 .profile-main-gear-category-timeline-gear-timeline {
                                     width: 100%;
                                     display: flex;
                                     position: relative;
+
                                     a {
                                         width: 20%;
+
                                         .profile-main-gear-category-timeline-gear-timeline-index {
                                             .profile-main-gear-category-timeline-gear-timeline-index-image {
                                                 bow-shadow: 0 0 1px rgb(150, 150, 150) inset;
@@ -440,24 +489,27 @@ body {
                                             }
                                         }
                                     }
+
                                     .profile-main-gear-category-timeline-gear-timeline-paginate-prev {
                                         width: 7%;
-                                        margin-right: 3%; 
+                                        margin-right: 3%;
                                     }
+
                                     .profile-main-gear-category-timeline-gear-timeline-paginate-next {
                                         position: absolute;
                                         right: 0px;
                                         width: 7%;
                                         height: 100%;
-                                        margin-left: 3%; 
+                                        margin-left: 3%;
                                     }
                                 }
-                                
+
                                 .pagination {
                                     width: 7%;
                                     height: 0;
                                     overflow: hidden;
-                                    .paginate-prev{
+
+                                    .paginate-prev {
                                         overflow: visible;
                                         position: absolute;
                                         top: 50%;
@@ -469,7 +521,8 @@ body {
                                         min-width: 30px;
                                         font-size: 1em;
                                     }
-                                    .paginate-next{
+
+                                    .paginate-next {
                                         overflow: visible;
                                         position: absolute;
                                         top: 50%;
@@ -486,9 +539,10 @@ body {
                         }
                     }
                 }
-                
+
                 .gear {
                     width: calc(100% - 259px);
+
                     header {
                         width: calc(100% - 520px);
                         display: flex;
@@ -496,6 +550,7 @@ body {
                         height: 80px;
                         z-index: 10;
                         border-bottom: 1px solid $border-color;
+
                         .title {
                             height: 100%;
                             width: 100%;
@@ -504,6 +559,7 @@ body {
                             line-height: 80px;
                             position: relative;
                             padding-inline-start: 20px;
+
                             .GearBringNav {
                                 position: absolute;
                                 top: 0px;
@@ -511,13 +567,15 @@ body {
                             }
                         }
                     }
+
                     .gear-main {
                         width: 100%;
                         padding-top: 80px;
                     }
                 }
-            } 
-            .sub-category{
+            }
+
+            .sub-category {
                 background-color: $back-color;
                 position: fixed;
                 z-index: 20;

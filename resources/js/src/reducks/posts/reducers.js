@@ -1,17 +1,17 @@
 import * as Actions from "./actions"
 import initialState from "../store/initialState"
 
-export const UsersReducer = (state = initialState.users, action) => {
+export const PostsReducer = (state = initialState.posts, action) => {
   switch (action.type){
-    case Actions.SIGN_IN:
+    case Actions.POSTS:
       return {
         ...state,
         ...action.payload
       }
-    case Actions.PROFILE:
+    case Actions.COUNT_POSTS:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       }
     default: 
       return state
