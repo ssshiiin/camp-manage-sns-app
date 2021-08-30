@@ -7,7 +7,9 @@ const App = () => {
   return (
     <main>
       <SideBar />
-      <HeaderRouter />
+      <header>
+        <HeaderRouter />
+      </header>
       <div className="main-category">
         <Router />
       </div>

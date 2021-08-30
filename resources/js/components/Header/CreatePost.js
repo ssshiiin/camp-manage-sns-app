@@ -4,7 +4,7 @@ import axios from 'axios';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import SimpleModal from '../ReactUI/SimpleModal';
+import SimpleModal from '../../src/components/SimpleModal';
 
 const CreatePost = React.forwardRef((props, ref) => {
     const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;

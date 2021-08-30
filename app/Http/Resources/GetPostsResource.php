@@ -17,8 +17,10 @@ class GetPostsResource extends JsonResource
     {
         //プロフィールを設定していなかった場合はprofile_imageをnullとする
         try {
+            $app_name = Profile::where("user_id", $this->user_id)->first()->app_name;
             $profile_image = Profile::where("user_id", $this->user_id)->first()->image_path;
         } catch(\Exception $e){
+            $app_name = "";
             $profile_image = "";
         }
         return [
@@ -29,6 +31,8 @@ class GetPostsResource extends JsonResource
             'place' => $this->place, 
             'day' => $this->day, 
             'tags' => $this->tags,
+            'tags' => $this->tags,
+            'app_name' => $app_name,
             'profile_image' => $profile_image,
         ];
     }

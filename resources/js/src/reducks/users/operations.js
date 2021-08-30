@@ -1,5 +1,5 @@
-import { ProfileAction, signInAction } from "./actions";
-import { push } from "connected-react-router";
+import { ModalAction, ProfileAction, signInAction, MenuAction,
+  editAppNameAction, editProfBolbAction, editProfContentAction } from "./actions";
 import axios from 'axios';
 
 export const SignIn = () => {
@@ -25,22 +25,68 @@ export const SignIn = () => {
 
 export const getProfile = (user_id) => {
   return async (dispatch, getState) => {
-    const state = getState();
-    const profile_user_id = state.users.profile_user_id;
-  
+    console.log("getProfile");
+    const url = `/api/profiles/${user_id}`
+    
+    const response = await axios.get(url)
+      .catch((err) => {console.log("err:", err)});
+    
 
-    if (!(profile_user_id === user_id)){
-      console.log("getProfile");
-      const url = `/api/profiles/${user_id}`
-      
-      const response = await axios.get(url)
-        .catch((err) => {console.log("err:", err)});
-      
-  
-      dispatch(ProfileAction({
-        profile_user_id: user_id,
-        profile: response.data
-      }));
-    }
+    dispatch(ProfileAction({
+      profile: response.data
+    }));
+
+    dispatch(editAppNameAction({
+      app_name: response.data.app_name
+    }));
+
+    dispatch(editProfContentAction({
+      prof_content: response.data.profile
+    }));
+
+    dispatch(editProfBolbAction({
+      prof_bolb_url: response.data.image_path
+    }));
+    
+  }
+}
+
+export const updateProfile = (user_id) => {
+  return async (dispatch, getState) => {
+    console.log("updateProfile");
+    dispatch(ModalAction({
+      modal_open: false
+    }));
+
+    dispatch(MenuAction({
+      menu_open: null
+    }));
+    
+    const state = getState();
+    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+    const app_name = state.users.app_name;
+    const prof_content = state.users.prof_content;
+    const prof_image = state.users.prof_image;
+    const data = new FormData();
+    data.append("app_name", app_name);
+    data.append("profile", prof_content);
+    data.append("0", prof_image);
+    data.append("_token", csrf_token);
+    const url = `/api/profiles/edit/${user_id}`;
+    
+    const response = await axios.post(url, 
+      data, 
+      {
+        headers: {
+          'content-type': 'multipart/form-data',
+          }
+      })
+      .catch((err) => {console.log("err:", err)});
+    
+
+    dispatch(ProfileAction({
+      profile_user_id: user_id,
+      profile: response.data
+    }));
   }
 }

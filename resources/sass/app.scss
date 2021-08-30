@@ -46,6 +46,7 @@ a {
     }
 }
 
+
 body {
     background-color: $back-color;
     width: 100%;
@@ -54,13 +55,20 @@ body {
         min-height: 100vh;
         width: 100%;
 
-        header {
-            background-color: $header-color;
-        }
-
         main {
             width: 100%;
             min-height: 100vh;
+
+            header {
+                top: 0;
+                background-color: white;
+                position: fixed;
+                width: calc(100% - 516px);
+                height: 80px;
+                padding-left: 258px;
+                padding-right: 258px;
+                z-index: 10;
+            }
 
             .side-bar {
                 background-color: $side-color;
@@ -100,14 +108,6 @@ body {
                         }
                     }
                 }
-            }
-
-            header {
-                position: fixed;
-                width: calc(100% - 516px);
-                height: 80px;
-                padding-left: 258px;
-                padding-right: 258px;
             }
 
             .main-category {
@@ -259,34 +259,8 @@ body {
                 .profile {
                     width: 100%;
 
-                    header {
-                        width: 100%;
-                        display: flex;
-                        position: fixed;
-                        height: 80px;
-                        z-index: 10;
-                        border-bottom: 1px solid $border-color;
-
-                        .title {
-                            height: 80px;
-                            width: 100%;
-                            font-size: 1.2em;
-                            font-weight: 300;
-                            line-height: 80px;
-                            position: relative;
-                            padding-inline-start: 20px;
-
-                            .GearBringNav {
-                                position: absolute;
-                                top: 0;
-                                right: 38%;
-                            }
-                        }
-                    }
-
                     .profile-main {
                         width: 100%;
-                        padding-top: 80px;
 
                         .profile-introduce {
                             width: 100%;

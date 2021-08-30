@@ -13,6 +13,31 @@ export const UsersReducer = (state = initialState.users, action) => {
         ...state,
         ...action.payload,
       }
+    case Actions.EDIT_APPNAME:
+      return {
+        ...state,
+        ...action.payload,
+      }
+    case Actions.EDIT_PROFCONTENT:
+      return {
+        ...state,
+        ...action.payload,
+      }
+    case Actions.EDIT_PROFBOLB:
+      return {
+        ...state,
+        ...action.payload,
+      }  
+    case Actions.MODAL_OPEN:
+      return {
+        ...state,
+        ...action.payload
+      }
+    case Actions.MENU_OPEN:
+      return {
+        ...state,
+        ...action.payload
+      }  
     default: 
       return state
   }

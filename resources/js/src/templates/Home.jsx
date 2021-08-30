@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import InfiniteScroll from 'react-infinite-scroller';
 
-import { PostHeader, PostImage, PostContent } from "../components";
+import { PostHeader, PostImage, PostContent, PostsTimeLine } from "../components";
 
 
 
@@ -36,14 +36,7 @@ const Home = () => {
         loader={loader}>
         <div className="home-main-timeline">
           {Allposts.map((post) =>
-            <div className="Post-set" onClick={() => dispatch(push(`/${post.user_id}/post/${post.id}`))} key={post.id}>
-              <PostHeader
-                place={post.place}
-                day={post.day}
-                profile_image={post.profile_image} />
-              <PostImage post_images={post.image_path} />
-              <PostContent content={post.content} tags={post.tags} />
-            </div>
+            <PostsTimeLine post={post} key={post.id} />
           )}
         </div>
       </InfiniteScroll>

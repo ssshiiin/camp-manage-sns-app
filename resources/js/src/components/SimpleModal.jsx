@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { ModalAction } from '../reducks/users/actions';
 
 function getModalStyle() {
   const top = 50;
@@ -16,7 +18,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 400,
+    maxWidth: 800,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -25,30 +27,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SimpleModal(props) {
-    const classes = useStyles();
+  const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const open = selector.users.modal_open;
 
   const handleOpen = () => {
-    setOpen(true);
-  };
+    dispatch(ModalAction({
+      modal_open: true
+    }))
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    dispatch(ModalAction({
+      modal_open: false
+    }))
+  }
 
-    const body = (
-        <div style={modalStyle} className={classes.paper}>
-            <div id="simple-modal-description">
-                {props.body}
-            </div>
-        </div>
-    );
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <div id="simple-modal-description">
+        {props.body}
+      </div>
+    </div>
+  );
 
   return (
     <div>
-      <button type="button" onClick={handleOpen} style={{border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left"}}>
+      <button type="button" onClick={handleOpen} style={{ border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left" }}>
         {props.nav}
       </button>
       <Modal

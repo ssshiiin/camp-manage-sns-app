@@ -47,12 +47,19 @@ body #root {
   min-height: 100vh;
   width: 100%;
 }
-body #root header {
-  background-color: #fafafa;
-}
 body #root main {
   width: 100%;
   min-height: 100vh;
+}
+body #root main header {
+  top: 0;
+  background-color: white;
+  position: fixed;
+  width: calc(100% - 516px);
+  height: 80px;
+  padding-left: 258px;
+  padding-right: 258px;
+  z-index: 10;
 }
 body #root main .side-bar {
   background-color: #646464;
@@ -87,13 +94,6 @@ body #root main .side-bar .side-nav li p {
   font-family: "Raleway", "ヒラギノ角ゴシック", sans-serif;
   font-weight: 500;
   padding: 0px 20px;
-}
-body #root main header {
-  position: fixed;
-  width: calc(100% - 516px);
-  height: 80px;
-  padding-left: 258px;
-  padding-right: 258px;
 }
 body #root main .main-category {
   padding-top: 80px;
@@ -202,32 +202,8 @@ body #root main .main-category .home .home-main .home-main-timeline .Post-set .p
 body #root main .main-category .profile {
   width: 100%;
 }
-body #root main .main-category .profile header {
-  width: 100%;
-  display: flex;
-  position: fixed;
-  height: 80px;
-  z-index: 10;
-  border-bottom: 1px solid #dbdbdb;
-}
-body #root main .main-category .profile header .title {
-  height: 80px;
-  width: 100%;
-  font-size: 1.2em;
-  font-weight: 300;
-  line-height: 80px;
-  position: relative;
-  -webkit-padding-start: 20px;
-          padding-inline-start: 20px;
-}
-body #root main .main-category .profile header .title .GearBringNav {
-  position: absolute;
-  top: 0;
-  right: 38%;
-}
 body #root main .main-category .profile .profile-main {
   width: 100%;
-  padding-top: 80px;
 }
 body #root main .main-category .profile .profile-main .profile-introduce {
   width: 100%;

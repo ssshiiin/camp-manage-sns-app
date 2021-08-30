@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import SimpleModal from '../ReactUI/SimpleModal';
+
 import EditProfile from './EditProfile';
 import CreatePost from './CreatePost';
 import CreateGear from './CreateGear';

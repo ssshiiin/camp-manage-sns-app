@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import MenuItem from '@material-ui/core/MenuItem';
 
-import SimpleModal from '../ReactUI/SimpleModal';
+import SimpleModal from '../../src/components/SimpleModal';
 
 function EditProfile(props){
     const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;

@@ -2,11 +2,15 @@ const initialState = {
   users: {
     isSignedIn: false,
     user_name: "",
-    profile_user_id: null, 
     profile: {},
+    app_name: "",
+    prof_content: "",
+    prof_bolb_url: "",
+    prof_image: "",
+    modal_open: false,
+    menu_open: null
   },
   posts: {
-    posts_user_id: null,
     posts: [],
     count_posts: 0
   }

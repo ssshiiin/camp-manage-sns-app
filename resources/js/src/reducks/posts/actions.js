@@ -3,7 +3,6 @@ export const PostsAction = (postsState) => {
   return {
     type: "POSTS",
     payload: {
-      posts_user_id: postsState.posts_user_id,
       posts: postsState.posts,
     }
   }
