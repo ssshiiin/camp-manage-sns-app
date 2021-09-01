@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { ModalAction } from '../reducks/users/actions';
+import { ModalAction, StoreAction } from '../reducks/users/actions';;
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Alert from '@material-ui/lab/Alert';
 
 function getModalStyle() {
   const top = 50;
@@ -24,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
 }));
 
 export default function SimpleModal(props) {
@@ -33,6 +42,18 @@ export default function SimpleModal(props) {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const open = selector.users.modal_open;
+  const store = selector.users.store;
+  const [alertOpen, setAlertOpen] = React.useState(false);
+
+  const handleAlertOpen = () => {
+    setAlertOpen(true);
+  };
+  const handleAlertClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setAlertOpen(false);
+  };
 
   const handleOpen = () => {
     dispatch(ModalAction({
@@ -41,17 +62,33 @@ export default function SimpleModal(props) {
   }
 
   const handleClose = () => {
+    if (!store) {
+      handleAlertOpen();
+      return
+    }
+    else {
+      dispatch(StoreAction({
+        store: true
+      }))
+    }
     dispatch(ModalAction({
       modal_open: false
     }))
   }
 
   const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <div id="simple-modal-description">
-        {props.body}
+    <React.Fragment>
+      <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
+        <Alert onClose={handleAlertClose} severity="warning">
+          保存されていません
+        </Alert>
+      </Snackbar>
+      <div style={modalStyle} className={classes.paper}>
+        <div id="simple-modal-description">
+          {props.body}
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 
   return (

@@ -26,6 +26,7 @@ export const editAppNameAction = (userState) => {
     type: "EDIT_APPNAME",
     payload: {
       app_name: userState.app_name, 
+      store: userState.store
     }
   }
 }
@@ -36,6 +37,8 @@ export const editProfContentAction = (userState) => {
     type: "EDIT_PROFCONTENT",
     payload: {
       prof_content: userState.prof_content, 
+      store: userState.store,
+      store: userState.store
     }
   }
 }
@@ -46,7 +49,8 @@ export const editProfBolbAction = (userState) => {
     type: "EDIT_PROFBOLB",
     payload: {
       prof_bolb_url: userState.prof_bolb_url, 
-      prof_image: userState.prof_image
+      prof_image: userState.prof_image,
+      store: userState.store
     }
   }
 }
@@ -70,3 +74,13 @@ export const ModalAction = (userState) => {
     }
   }
 } 
+
+export const STORE = "STORE";
+export const StoreAction = (userState) => {
+  return {
+    type: "STORE",
+    payload: {
+      store: userState.store
+    }
+  }
+}

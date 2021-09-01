@@ -291,36 +291,16 @@ body {
 
                                     .profileCount {
                                         display: flex;
+                                        width: 300px;
 
                                         p {
-                                            margin-right: 20px;
+                                            margin-right: 10%;
                                         }
                                     }
                                 }
 
                                 .profileContent {
                                     margin-top: 40px;
-                                }
-                            }
-                        }
-
-                        .profile-nav {
-                            width: 100%;
-                            margin: 0;
-                            padding: 0;
-                            height: 36px;
-                            display: flex;
-                            justify-content: center;
-
-                            a {
-                                text-decoration: none;
-
-                                p {
-                                    line-height: 36px;
-                                    margin: 0px 50px;
-                                    font-size: 1.5em;
-                                    font-weight: 200;
-                                    list-style: none;
                                 }
                             }
                         }
@@ -351,166 +331,6 @@ body {
                                     opacity: 0.7;
                                     color: white;
                                     font-family: 'Raleway', 'ヒラギノ角ゴシック', sans-serif;
-                                }
-                            }
-                        }
-
-                        .profile-main-gear {
-                            width: 100%;
-                            max-width: 881px;
-
-                            .profile-main-gear-nav {
-                                border-top: 1px solid $border-color;
-                                position: relative;
-
-                                ul {
-                                    display: flex;
-                                    justify-content: space-between;
-
-                                    .categories {
-                                        display: block;
-                                        height: 36px;
-                                        line-height: 36px;
-                                        text-align: center;
-                                        min-width: 30px;
-                                        font-size: 1em;
-
-                                        &:hover {
-                                            border-bottom: 1px solid $border-color;
-                                        }
-
-                                        &:hover>.categories-submenu {
-                                            height: auto;
-                                            overflow: visible;
-                                        }
-
-                                        .categories-submenu {
-                                            background-color: white;
-                                            display: flex;
-                                            flex-direction: column;
-                                            height: 0;
-                                            overflow: hidden;
-                                        }
-
-                                        .categories-submenu:hover {
-                                            height: 100%;
-                                            overflow: visible;
-                                        }
-                                    }
-                                }
-                            }
-
-                            .pagination {
-                                height: 0;
-                                overflow: hidden;
-
-                                .paginate-prev {
-                                    height: auto;
-                                    overflow: visible;
-                                    position: absolute;
-                                    top: 0px;
-                                    left: 0px;
-                                    display: block;
-                                    height: 36px;
-                                    line-height: 36px;
-                                    text-align: center;
-                                    min-width: 30px;
-                                    font-size: 1em;
-                                }
-
-                                .paginate-next {
-                                    height: auto;
-                                    overflow: visible;
-                                    position: absolute;
-                                    top: 0px;
-                                    right: 0px;
-                                    display: block;
-                                    height: 36px;
-                                    line-height: 36px;
-                                    text-align: center;
-                                    min-width: 30px;
-                                    font-size: 1em;
-                                }
-                            }
-                        }
-
-                        .profile-main-gear-category {
-                            width: 100%;
-
-                            .profile-main-gear-category-timeline {
-                                width: 100%;
-                                position: relative;
-
-                                .profile-main-gear-category-timeline-header {
-                                    height: 36px;
-                                    border-top: 1px solid $border-color;
-                                    border-bottom: 1px solid $border-color;
-                                }
-
-                                .profile-main-gear-category-timeline-gear-timeline {
-                                    width: 100%;
-                                    display: flex;
-                                    position: relative;
-
-                                    a {
-                                        width: 20%;
-
-                                        .profile-main-gear-category-timeline-gear-timeline-index {
-                                            .profile-main-gear-category-timeline-gear-timeline-index-image {
-                                                bow-shadow: 0 0 1px rgb(150, 150, 150) inset;
-                                                width: 100%;
-                                                padding-top: 100%;
-                                                background-size: cover;
-                                                background-position: center;
-                                                border: 1px solid $border-color;
-                                            }
-                                        }
-                                    }
-
-                                    .profile-main-gear-category-timeline-gear-timeline-paginate-prev {
-                                        width: 7%;
-                                        margin-right: 3%;
-                                    }
-
-                                    .profile-main-gear-category-timeline-gear-timeline-paginate-next {
-                                        position: absolute;
-                                        right: 0px;
-                                        width: 7%;
-                                        height: 100%;
-                                        margin-left: 3%;
-                                    }
-                                }
-
-                                .pagination {
-                                    width: 7%;
-                                    height: 0;
-                                    overflow: hidden;
-
-                                    .paginate-prev {
-                                        overflow: visible;
-                                        position: absolute;
-                                        top: 50%;
-                                        left: 0px;
-                                        display: block;
-                                        height: 36px;
-                                        line-height: 36px;
-                                        text-align: center;
-                                        min-width: 30px;
-                                        font-size: 1em;
-                                    }
-
-                                    .paginate-next {
-                                        overflow: visible;
-                                        position: absolute;
-                                        top: 50%;
-                                        right: 0px;
-                                        display: block;
-                                        height: 36px;
-                                        line-height: 36px;
-                                        text-align: center;
-                                        min-width: 30px;
-                                        font-size: 1em;
-                                    }
                                 }
                             }
                         }

@@ -7,7 +7,9 @@ const UserProfile = (props) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const user_id = props.user_id;
-  const profile = selector.users.profile;
+  const app_name = selector.users.app_name;
+  const content = selector.users.prof_content;
+  const image = selector.users.prof_bolb_url;
   const count_posts = selector.posts.count_posts;
   const count_gears = 25;
 
@@ -18,16 +20,16 @@ const UserProfile = (props) => {
 
   return (
     <div className="profile-introduce">
-      <div className="profile-image" style={{ backgroundImage: `url(${profile.image_path})` }}></div>
+      <div className="profile-image" style={{ backgroundImage: `url(${image})` }}></div>
       <div className="profile-content">
         <div className="profileColumn">
-          <p className="profileName">{profile.app_name}</p>
+          <p className="profileName">{app_name}</p>
           <div className="profileCount">
             <p>実績 : {count_posts}</p>
             <p>所持ギア : {count_gears}</p>
           </div>
         </div>
-        <div className="profileContent">{profile.profile}</div>
+        <div className="profileContent">{content}</div>
       </div>
     </div>
   )

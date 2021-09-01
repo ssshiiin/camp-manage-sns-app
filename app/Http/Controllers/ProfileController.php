@@ -28,18 +28,30 @@ class ProfileController extends Controller
 
         $profile = Profile::where("user_id", $user_id)->get();
         
-        
-        
-        $path = Storage::disk('s3')->putFile('/Profile_images', $image_file, 'public');
-        $image_path = Storage::disk("s3")->url($path);
         // プロフィールが存在するかどうか
         if($profile->isNotEmpty()){
+            ///プロフィール画像の変更があったか
+            if (!$image_file){
+                $image_path = Profile::where("user_id", $user_id)->first()->image_path;
+            }
+            else {
+                $path = Storage::disk('s3')->putFile('/Profile_images', $image_file, 'public');
+                $image_path = Storage::disk("s3")->url($path);
+            }
             $profile->first()->image_path = $image_path;
             $profile->first()->app_name = $app_name;
             $profile->first()->profile = $content;   
             $profile->first()->update();
         }
         else {
+            ///プロフィール画像の変更があったか
+            if ($image_file){
+                $path = Storage::disk('s3')->putFile('/Profile_images', $image_file, 'public');
+                $image_path = Storage::disk("s3")->url($path);
+            }
+            else {
+                $image_path = "";
+            }
             Profile::create([
                 "user_id" => $user_id,
                 "image_path" => $image_path,

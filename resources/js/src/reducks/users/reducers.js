@@ -38,6 +38,11 @@ export const UsersReducer = (state = initialState.users, action) => {
         ...state,
         ...action.payload
       }  
+    case  Actions.STORE:
+      return {
+        ...state,
+        ...action.payload
+      }
     default: 
       return state
   }

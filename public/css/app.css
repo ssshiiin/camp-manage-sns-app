@@ -235,30 +235,13 @@ body #root main .main-category .profile .profile-main .profile-introduce .profil
 }
 body #root main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn .profileCount {
   display: flex;
+  width: 300px;
 }
 body #root main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn .profileCount p {
-  margin-right: 20px;
+  margin-right: 10%;
 }
 body #root main .main-category .profile .profile-main .profile-introduce .profile-content .profileContent {
   margin-top: 40px;
-}
-body #root main .main-category .profile .profile-main .profile-nav {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-}
-body #root main .main-category .profile .profile-main .profile-nav a {
-  text-decoration: none;
-}
-body #root main .main-category .profile .profile-main .profile-nav a p {
-  line-height: 36px;
-  margin: 0px 50px;
-  font-size: 1.5em;
-  font-weight: 200;
-  list-style: none;
 }
 body #root main .main-category .profile .profile-main .profile-main-posts {
   display: flex;
@@ -286,142 +269,6 @@ body #root main .main-category .profile .profile-main .profile-main-posts .profi
   opacity: 0.7;
   color: white;
   font-family: "Raleway", "ヒラギノ角ゴシック", sans-serif;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear {
-  width: 100%;
-  max-width: 881px;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear .profile-main-gear-nav {
-  border-top: 1px solid #dbdbdb;
-  position: relative;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear .profile-main-gear-nav ul {
-  display: flex;
-  justify-content: space-between;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear .profile-main-gear-nav ul .categories {
-  display: block;
-  height: 36px;
-  line-height: 36px;
-  text-align: center;
-  min-width: 30px;
-  font-size: 1em;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear .profile-main-gear-nav ul .categories:hover {
-  border-bottom: 1px solid #dbdbdb;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear .profile-main-gear-nav ul .categories:hover > .categories-submenu {
-  height: auto;
-  overflow: visible;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear .profile-main-gear-nav ul .categories .categories-submenu {
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  height: 0;
-  overflow: hidden;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear .profile-main-gear-nav ul .categories .categories-submenu:hover {
-  height: 100%;
-  overflow: visible;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear .pagination {
-  height: 0;
-  overflow: hidden;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear .pagination .paginate-prev {
-  height: auto;
-  overflow: visible;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  display: block;
-  height: 36px;
-  line-height: 36px;
-  text-align: center;
-  min-width: 30px;
-  font-size: 1em;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear .pagination .paginate-next {
-  height: auto;
-  overflow: visible;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  display: block;
-  height: 36px;
-  line-height: 36px;
-  text-align: center;
-  min-width: 30px;
-  font-size: 1em;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear-category {
-  width: 100%;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear-category .profile-main-gear-category-timeline {
-  width: 100%;
-  position: relative;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-header {
-  height: 36px;
-  border-top: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-gear-timeline {
-  width: 100%;
-  display: flex;
-  position: relative;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-gear-timeline a {
-  width: 20%;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-gear-timeline a .profile-main-gear-category-timeline-gear-timeline-index .profile-main-gear-category-timeline-gear-timeline-index-image {
-  bow-shadow: 0 0 1px #969696 inset;
-  width: 100%;
-  padding-top: 100%;
-  background-size: cover;
-  background-position: center;
-  border: 1px solid #dbdbdb;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-gear-timeline .profile-main-gear-category-timeline-gear-timeline-paginate-prev {
-  width: 7%;
-  margin-right: 3%;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear-category .profile-main-gear-category-timeline .profile-main-gear-category-timeline-gear-timeline .profile-main-gear-category-timeline-gear-timeline-paginate-next {
-  position: absolute;
-  right: 0px;
-  width: 7%;
-  height: 100%;
-  margin-left: 3%;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear-category .profile-main-gear-category-timeline .pagination {
-  width: 7%;
-  height: 0;
-  overflow: hidden;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear-category .profile-main-gear-category-timeline .pagination .paginate-prev {
-  overflow: visible;
-  position: absolute;
-  top: 50%;
-  left: 0px;
-  display: block;
-  height: 36px;
-  line-height: 36px;
-  text-align: center;
-  min-width: 30px;
-  font-size: 1em;
-}
-body #root main .main-category .profile .profile-main .profile-main-gear-category .profile-main-gear-category-timeline .pagination .paginate-next {
-  overflow: visible;
-  position: absolute;
-  top: 50%;
-  right: 0px;
-  display: block;
-  height: 36px;
-  line-height: 36px;
-  text-align: center;
-  min-width: 30px;
-  font-size: 1em;
 }
 body #root main .main-category .gear {
   width: calc(100% - 259px);

@@ -33,19 +33,22 @@ export const getProfile = (user_id) => {
     
 
     dispatch(ProfileAction({
-      profile: response.data
+      profile: response.data,
     }));
 
     dispatch(editAppNameAction({
-      app_name: response.data.app_name
+      app_name: response.data.app_name,
+      store: true
     }));
 
     dispatch(editProfContentAction({
-      prof_content: response.data.profile
+      prof_content: response.data.profile,
+      store: true
     }));
 
     dispatch(editProfBolbAction({
-      prof_bolb_url: response.data.image_path
+      prof_bolb_url: response.data.image_path,
+      store: true
     }));
     
   }
@@ -85,7 +88,6 @@ export const updateProfile = (user_id) => {
     
 
     dispatch(ProfileAction({
-      profile_user_id: user_id,
       profile: response.data
     }));
   }

@@ -8,7 +8,8 @@ const initialState = {
     prof_bolb_url: "",
     prof_image: "",
     modal_open: false,
-    menu_open: null
+    menu_open: null,
+    store: true
   },
   posts: {
     posts: [],

@@ -69,19 +69,22 @@ const EditProfile = React.forwardRef((props, ref) => {
     const bolbUrl = (URL.createObjectURL(image));
     dispatch(editProfBolbAction({
       prof_bolb_url: bolbUrl,
-      prof_image: image
+      prof_image: image,
+      store: false
     }));
   };
 
   const handleApp_nameChange = (event) => {
     dispatch(editAppNameAction({
-      app_name: event.target.value
+      app_name: event.target.value,
+      store: false
     }));
   };
 
   const handleProfileChange = (event) => {
     dispatch(editProfContentAction({
-      prof_content: event.target.value
+      prof_content: event.target.value,
+      store: false
     }));
   };
 
