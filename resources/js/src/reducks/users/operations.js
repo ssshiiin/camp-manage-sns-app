@@ -1,5 +1,6 @@
 import { ModalAction, ProfileAction, signInAction, MenuAction,
-  editAppNameAction, editProfBolbAction, editProfContentAction } from "./actions";
+  editAppNameAction, editProfBolbAction, editProfContentAction, 
+  SuccessAction } from "./actions";
 import axios from 'axios';
 
 export const SignIn = () => {
@@ -89,6 +90,9 @@ export const updateProfile = (user_id) => {
 
     dispatch(ProfileAction({
       profile: response.data
+    }));
+    dispatch(SuccessAction({
+      success: true
     }));
   }
 }

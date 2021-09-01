@@ -9,7 +9,8 @@ const initialState = {
     prof_image: "",
     modal_open: false,
     menu_open: null,
-    store: true
+    store: true,
+    success: false
   },
   posts: {
     posts: [],

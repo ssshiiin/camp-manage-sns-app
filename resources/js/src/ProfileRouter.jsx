@@ -4,11 +4,25 @@ import { push } from 'connected-react-router';
 import { useDispatch, useSelector } from "react-redux";
 import { UserProfile, IndexPosts, IndexGearsNav } from './templates';
 import { ProfileNav } from './components';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
+import { SuccessAction } from './reducks/users/actions';
 
 
 function ProfileRouter(props) {
   const user_id = props.match.params.id;
   const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const success = selector.users.success;
+
+  const handleSuccessClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    dispatch(SuccessAction({
+      success: false
+    }))
+  };
 
   return (
     <div className="profile">
@@ -20,6 +34,11 @@ function ProfileRouter(props) {
           <Route path="/:id/gear" exact component={IndexGearsNav} />
         </Switch>
       </div>
+      <Snackbar open={success} autoHideDuration={6000} onClose={handleSuccessClose}>
+        <Alert onClose={handleSuccessClose} severity="success">
+          保存しました
+        </Alert>
+      </Snackbar>
     </div >
   )
 }

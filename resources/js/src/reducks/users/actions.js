@@ -80,7 +80,17 @@ export const StoreAction = (userState) => {
   return {
     type: "STORE",
     payload: {
-      store: userState.store
+      store: userState.store,
+    }
+  }
+}
+
+export const SUCCESS = "SUCCESS";
+export const SuccessAction = (userState) => {
+  return {
+    type: "SUCCESS",
+    payload: {
+      success: userState.success
     }
   }
 }

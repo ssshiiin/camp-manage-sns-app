@@ -9,6 +9,7 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
+
 import SimpleModal from '../components/SimpleModal';
 import { editAppNameAction, editProfBolbAction, editProfContentAction } from '../reducks/users/actions';
 import { updateProfile } from '../reducks/users/operations';
@@ -63,6 +64,18 @@ const EditProfile = React.forwardRef((props, ref) => {
   const prof_content = selector.users.prof_content;
   const prof_bolb_url = selector.users.prof_bolb_url;
 
+  const [alertOpen, setAlertOpen] = React.useState(false);
+
+  const handleAlertOpen = () => {
+    setAlertOpen(true);
+  };
+  const handleAlertClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setAlertOpen(false);
+  };
+
 
   const handleImageChange = (event) => {
     const image = event.target.files[0];
@@ -89,7 +102,6 @@ const EditProfile = React.forwardRef((props, ref) => {
   };
 
   const handleSubmit = (event) => {
-    alert('保存しました');
     dispatch(updateProfile(user_id));
     event.preventDefault();
   }
@@ -97,6 +109,9 @@ const EditProfile = React.forwardRef((props, ref) => {
   return (
     <MenuItem>
       <SimpleModal
+        alertOpen={alertOpen}
+        handleAlertOpen={handleAlertOpen}
+        handleAlertClose={handleAlertClose}
         nav={"プロフィールを編集する"}
         body=
         {
