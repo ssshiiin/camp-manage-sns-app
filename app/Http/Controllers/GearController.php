@@ -16,13 +16,15 @@ use Storage;
 
 class GearController extends Controller
 {
-    public function getUserCategory(User $user, Gear $gear){
+    //Userの所有するcategory別にしたgears
+    public function getUserCategory(User $user){
         $user_id = $user->id;
-        return GearCategoryResource::collection($gear->whereUser_idGroupByCategoryPaginate($user_id));
+        //categoryとuser_idからgearsという配列にgearを入れる
+        return GearCategoryResource::collection(Gear::where("user_id", $user_id)->groupBy("category")->orderBy('category', 'desc')->get());
     }
     
-    //プロフィールに表示するユーザーのギア
-    public function getUserGears(Request $request, User $user, Gear $gear){
+
+    public function getUserCategories(User $user){
         $user_id = $user->id;
         $category = $request->query->get("category");
         

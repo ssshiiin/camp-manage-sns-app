@@ -6,6 +6,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Http\Resources\GetUserGearsResource;
 
+use App\Gear;
+
 class GearCategoryResource extends JsonResource
 {
     /**
@@ -18,7 +20,7 @@ class GearCategoryResource extends JsonResource
     {
         return [
             'category' => $this->category, 
-            'gears' => GetUserGearsResource::collection($this->whereUser_idAndWhereCategory($this->user_id, $this->category)),
+            'gears' => GetUserGearsResource::collection(Gear::where("user_id", $this->user_id)->where("category", $this->category)->get()),
         ];
     }
 }

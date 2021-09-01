@@ -44,8 +44,8 @@ const useStyles = makeStyles((theme) => ({
     top: "50%",
     right: "20px",
     transform: "translate(0, -50%)",
-    backgroundColor: "rgb(100, 100, 100)",
-    color: "white"
+    backgroundColor: "white",
+    color: "black"
   }
 
 }));

@@ -16,7 +16,6 @@ $factory->define(Post_image::class, function (Faker $faker) {
                 'https://camp-manage-sns-app.s3.ap-northeast-1.amazonaws.com/Post_images/BXkY7jWoyupc3ZBUDh8Dngc7a6qo3W1BSYzLEbHZ.jpg', 
                 'https://camp-manage-sns-app.s3.ap-northeast-1.amazonaws.com/Post_images/cyUgFaa30JLBQUOVYdIAz5GHzcySFFU6bvps3vRK.jpg', 
                 'https://camp-manage-sns-app.s3.ap-northeast-1.amazonaws.com/Post_images/FOfd5jZQ9WHdpgKVDLL79ZVQ02uAnP1nRO1KF7LW.jpg', 
-                'https://camp-manage-sns-app.s3.ap-northeast-1.amazonaws.com/Post_images/j37Q603nhIimTK5zcKEEiiov4rvXw8U7pc6AbwFC.jpg', 
                 'https://camp-manage-sns-app.s3.ap-northeast-1.amazonaws.com/Post_images/O6enD5isv34nWCfSilXZ7W6fypEZHKWKNMudzXuU.jpg',
                 'https://camp-manage-sns-app.s3.ap-northeast-1.amazonaws.com/Post_images/ojuRjGKMAIxJE4aK0JkypdZ5OLRn1nrD4rZldz4W.jpg',
                 ]),

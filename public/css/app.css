@@ -69,6 +69,7 @@ body #root main .side-bar {
   z-index: 20;
   top: 0;
   left: 0;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 body #root main .side-bar .logo {
   height: 80px;
@@ -222,8 +223,11 @@ body #root main .main-category .profile .profile-main .profile-introduce .profil
 }
 body #root main .main-category .profile .profile-main .profile-introduce .profile-content {
   flex: 1;
-  height: 200px;
-  padding: 40px;
+  max-height: 200px;
+  -webkit-padding-start: 40px;
+          padding-inline-start: 40px;
+  -webkit-padding-before: 40px;
+          padding-block-start: 40px;
 }
 body #root main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn {
   display: flex;
@@ -249,7 +253,8 @@ body #root main .main-category .profile .profile-main .profile-nav {
 body #root main .main-category .profile .profile-main .profile-nav a {
   text-decoration: none;
 }
-body #root main .main-category .profile .profile-main .profile-nav a li {
+body #root main .main-category .profile .profile-main .profile-nav a p {
+  line-height: 36px;
   margin: 0px 50px;
   font-size: 1.5em;
   font-weight: 200;

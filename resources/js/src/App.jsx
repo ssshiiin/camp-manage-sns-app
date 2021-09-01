@@ -13,6 +13,9 @@ const App = () => {
       <div className="main-category">
         <Router />
       </div>
+      <div className="sub-category">
+
+      </div>
     </main>
   )
 }

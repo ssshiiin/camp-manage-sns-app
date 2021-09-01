@@ -13,6 +13,10 @@ const initialState = {
   posts: {
     posts: [],
     count_posts: 0
+  },
+  gears: {
+    gears: [],
+    count_gears: 0
   }
 }
 

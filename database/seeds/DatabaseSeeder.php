@@ -14,9 +14,10 @@ class DatabaseSeeder extends Seeder
         //uniqueが原因でpost_imagesとprofilesは別で実行しないとエラーが出る
         // $this->call(UsersTableSeeder::class);
         // $this->call(PostsTableSeeder::class);
-        // $this->call(Post_imagesTableSeeder::class);
+        $this->call(Post_imagesTableSeeder::class);
         // $this->call(ProfilesTableSeeder::class);
         // $this->call(TagsTableSeeder::class);
-        $this->call(GearsTableSeeder::class);
+        // $this->call(GearsTableSeeder::class);
+        // $this->call(Gear_imagesTableSeeder::class);
     }
 }
