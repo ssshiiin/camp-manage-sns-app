@@ -7,6 +7,8 @@ import { ProfileNav } from './components';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import { SuccessAction } from './reducks/users/actions';
+import { ReactReduxContext } from 'react-redux';
+import ScrollToTopOnMount from './templates/ScrollToTopOnMount';
 
 
 function ProfileRouter(props) {
@@ -25,21 +27,24 @@ function ProfileRouter(props) {
   };
 
   return (
-    <div className="profile">
-      <div className="profile-main">
-        <UserProfile user_id={user_id} />
-        <ProfileNav user_id={user_id} />
-        <Switch>
-          <Route path="/:id" exact component={IndexPosts} />
-          <Route path="/:id/gear" exact component={IndexGearsNav} />
-        </Switch>
-      </div>
-      <Snackbar open={success} autoHideDuration={6000} onClose={handleSuccessClose}>
-        <Alert onClose={handleSuccessClose} severity="success">
-          保存しました
-        </Alert>
-      </Snackbar>
-    </div >
+    <React.Fragment>
+      <ScrollToTopOnMount />
+      <div className="profile">
+        <div className="profile-main">
+          <UserProfile user_id={user_id} />
+          <ProfileNav user_id={user_id} />
+          <Switch>
+            <Route path="/:id" exact component={IndexPosts} />
+            <Route path="/:id/gear" exact component={IndexGearsNav} />
+          </Switch>
+        </div>
+        <Snackbar open={success} autoHideDuration={6000} onClose={handleSuccessClose}>
+          <Alert onClose={handleSuccessClose} severity="success">
+            保存しました
+          </Alert>
+        </Snackbar>
+      </div >
+    </React.Fragment>
   )
 }
 

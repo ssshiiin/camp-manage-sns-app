@@ -17,8 +17,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
+import moment from "moment";
 
 import { TimeLineGearNested } from ".";
+import { useDispatch } from "react-redux";
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function postsTimeLine(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -82,7 +86,8 @@ export default function postsTimeLine(props) {
           </IconButton>
         }
         title={props.post.app_name}
-        subheader={`${props.post.day} - ${props.post.place}`}
+        subheader={`${moment(props.post.day).format("YYYY/MM/DD")} - ${props.post.place}`}
+        onClick={() => dispatch(push(`/${props.post.user_id}`))}
       />
       <CardMedia
         className={classes.media}

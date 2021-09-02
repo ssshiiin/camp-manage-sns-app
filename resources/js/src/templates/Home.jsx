@@ -4,6 +4,7 @@ import { push } from "connected-react-router";
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { PostHeader, PostImage, PostContent, PostsTimeLine } from "../components";
+import ScrollToTopOnMount from "./ScrollToTopOnMount";
 
 
 
@@ -28,19 +29,22 @@ const Home = () => {
   const loader = <div className="loader" key={0}>Loading ...</div>;
 
   return (
-    <div className="home">
-      <InfiniteScroll
-        className="home-main"
-        loadMore={getPosts}
-        hasMore={hasMore}
-        loader={loader}>
-        <div className="home-main-timeline">
-          {Allposts.map((post) =>
-            <PostsTimeLine post={post} key={post.id} />
-          )}
-        </div>
-      </InfiniteScroll>
-    </div>
+    <React.Fragment>
+      <ScrollToTopOnMount />
+      <div className="home">
+        <InfiniteScroll
+          className="home-main"
+          loadMore={getPosts}
+          hasMore={hasMore}
+          loader={loader}>
+          <div className="home-main-timeline">
+            {Allposts.map((post) =>
+              <PostsTimeLine post={post} key={post.id} />
+            )}
+          </div>
+        </InfiniteScroll>
+      </div>
+    </React.Fragment>
   )
 }
 
