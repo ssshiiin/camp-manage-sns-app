@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getCountGears } from "../reducks/gears/operations";
 import { getCountPosts } from "../reducks/posts/operations";
 import { getProfile } from "../reducks/users/operations";
 
@@ -11,11 +12,12 @@ const UserProfile = (props) => {
   const content = selector.users.prof_content;
   const image = selector.users.prof_bolb_url;
   const count_posts = selector.posts.count_posts;
-  const count_gears = 25;
+  const count_gears = selector.gears.count_gears;
 
   useEffect(() => {
     dispatch(getProfile(user_id));
     dispatch(getCountPosts(user_id));
+    dispatch(getCountGears(user_id));
   }, [])
 
   return (
