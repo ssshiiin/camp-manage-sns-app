@@ -11,11 +11,9 @@ import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 
 import { SimpleModal } from '../components';
-import { editAppNameAction, editProfBolbAction, editProfContentAction } from '../reducks/users/actions';
-import { updateProfile } from '../reducks/users/operations';
+import { handleApp_nameChange, handleImageChange, handleProfileChange, handleSubmit } from '../reducks/users/operations';
 import { handleProfEditModalOpen } from '../reducks/modals/operations';
 import { handleAlertClose, handleAlertOpen } from '../reducks/Alerts/operations';
-import { StoreAction } from '../reducks/Alerts/actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,49 +58,11 @@ const EditProfile = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
 
-  const user_id = props.user_id;
   const app_name = selector.users.app_name;
   const prof_content = selector.users.prof_content;
   const prof_bolb_url = selector.users.prof_bolb_url;
   const open = selector.modals.modal_prof_edit_open;
   const alertOpen = selector.alerts.open;
-
-  console.log(selector.alerts)
-
-  const handleImageChange = (event) => {
-    const image = event.target.files[0];
-    const bolbUrl = (URL.createObjectURL(image));
-    dispatch(editProfBolbAction({
-      prof_bolb_url: bolbUrl,
-      prof_image: image,
-    }));
-    dispatch(StoreAction({
-      store: false
-    }));
-  };
-
-  const handleApp_nameChange = (event) => {
-    dispatch(editAppNameAction({
-      app_name: event.target.value,
-    }));
-    dispatch(StoreAction({
-      store: false
-    }));
-  };
-
-  const handleProfileChange = (event) => {
-    dispatch(editProfContentAction({
-      prof_content: event.target.value,
-    }));
-    dispatch(StoreAction({
-      store: false
-    }));
-  };
-
-  const handleSubmit = (event) => {
-    dispatch(updateProfile(user_id));
-    event.preventDefault();
-  }
 
   return (
     <MenuItem>
@@ -125,7 +85,7 @@ const EditProfile = React.forwardRef((props, ref) => {
                 className={classes.input}
                 id="icon-button-file"
                 type="file"
-                onChange={handleImageChange}
+                onChange={(event) => dispatch(handleImageChange(event))}
               />
               <label htmlFor="icon-button-file">
                 <IconButton
@@ -144,7 +104,7 @@ const EditProfile = React.forwardRef((props, ref) => {
                 defaultValue={app_name}
                 placeholder="Placeholder"
                 variant="outlined"
-                onChange={handleApp_nameChange}
+                onChange={(event) => dispatch(handleApp_nameChange(event))}
               />
               <TextField
                 id="outlined-multiline-static"
@@ -153,7 +113,7 @@ const EditProfile = React.forwardRef((props, ref) => {
                 rows={6}
                 defaultValue={prof_content}
                 variant="outlined"
-                onChange={handleProfileChange}
+                onChange={(event) => dispatch(handleProfileChange(event))}
               />
             </div>
             <div>
@@ -161,7 +121,7 @@ const EditProfile = React.forwardRef((props, ref) => {
                 variant="contained"
                 className={classes.upImg}
                 startIcon={<CloudUploadIcon />}
-                onClick={handleSubmit}
+                onClick={() => dispatch(handleSubmit())}
               >
                 保存する
               </Button>

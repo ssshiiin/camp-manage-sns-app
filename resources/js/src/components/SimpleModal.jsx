@@ -48,8 +48,8 @@ const SimpleModal = React.forwardRef((props, ref) => {
 
   const body = (
     <React.Fragment>
-      <Snackbar open={props.alertOpen} autoHideDuration={6000} onClose={() => dispatch(props.handleClose())}>
-        <Alert onClose={() => dispatch(props.handleAlertClose())} severity="warning">
+      <Snackbar open={props.alertOpen} autoHideDuration={6000} onClose={(event, reason) => dispatch(props.handleClose(event, reason))}>
+        <Alert onClose={(event, reason) => dispatch(props.handleAlertClose(event, reason))} severity="warning">
           保存されていません
         </Alert>
       </Snackbar>

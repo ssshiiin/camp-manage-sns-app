@@ -1,8 +1,9 @@
 import { ProfileAction, signInAction, MenuAction,
   editAppNameAction, editProfBolbAction, editProfContentAction } from "./actions";
-import { AlertOpenAction, SuccessAction } from "../Alerts/actions";
+import { AlertOpenAction, StoreAction, SuccessAction } from "../Alerts/actions";
 import { ModalProfEditAction } from "../modals/actions";
 import axios from 'axios';
+
 
 export const SignIn = () => {
   return async (dispach, getState) => {
@@ -97,5 +98,50 @@ export const updateProfile = (user_id) => {
     dispatch(MenuAction({
       menu_open: null
     }));
+  }
+}
+
+
+export const handleApp_nameChange = (event) => {
+  return (dispatch, getState) => {
+    dispatch(editAppNameAction({
+      app_name: event.target.value,
+    }));
+    dispatch(StoreAction({
+      store: false
+    }));
+  }
+};
+
+export const handleImageChange = (event) => {
+  return (dispatch, getState) => {
+    const image = event.target.files[0];
+    const bolbUrl = (URL.createObjectURL(image));
+    dispatch(editProfBolbAction({
+      prof_bolb_url: bolbUrl,
+      prof_image: image,
+    }));
+    dispatch(StoreAction({
+      store: false
+    }));
+  }
+};
+
+export const handleProfileChange = (event) => {
+  return (dispatch, getState) => {
+    dispatch(editProfContentAction({
+      prof_content: event.target.value,
+    }));
+    dispatch(StoreAction({
+      store: false
+    }));
+  }
+};
+
+export const handleSubmit = () => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const user_id = state.users.user_id;
+    dispatch(updateProfile(user_id));
   }
 }
