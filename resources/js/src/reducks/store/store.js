@@ -6,6 +6,8 @@ import thunk from "redux-thunk";
 import { UsersReducer } from "../users/reducers";
 import { PostsReducer } from "../posts/reducers";
 import { GearsReducer } from "../gears/reducers";
+import { ModalsReducer } from "../modals/reducers";
+import { AlertsReducer } from "../Alerts/reducers";
 
 export default function createStore(history) {
   return reduxCreateStore(
@@ -13,7 +15,9 @@ export default function createStore(history) {
       router: connectRouter(history),
       users: UsersReducer,
       posts: PostsReducer,
-      gears: GearsReducer
+      gears: GearsReducer,
+      modals: ModalsReducer,
+      alerts: AlertsReducer,
     }),
     applyMiddleware(
       routerMiddleware(history),

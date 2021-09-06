@@ -26,7 +26,6 @@ export const editAppNameAction = (userState) => {
     type: "EDIT_APPNAME",
     payload: {
       app_name: userState.app_name, 
-      store: userState.store
     }
   }
 }
@@ -37,8 +36,6 @@ export const editProfContentAction = (userState) => {
     type: "EDIT_PROFCONTENT",
     payload: {
       prof_content: userState.prof_content, 
-      store: userState.store,
-      store: userState.store
     }
   }
 }
@@ -50,7 +47,6 @@ export const editProfBolbAction = (userState) => {
     payload: {
       prof_bolb_url: userState.prof_bolb_url, 
       prof_image: userState.prof_image,
-      store: userState.store
     }
   }
 }
@@ -64,33 +60,3 @@ export const MenuAction = (userState) => {
     }
   }
 } 
-
-export const MODAL_OPEN = "MODAL_OPEN";
-export const ModalAction = (userState) => {
-  return {
-    type: "MODAL_OPEN",
-    payload: {
-      modal_open: userState.modal_open
-    }
-  }
-} 
-
-export const STORE = "STORE";
-export const StoreAction = (userState) => {
-  return {
-    type: "STORE",
-    payload: {
-      store: userState.store,
-    }
-  }
-}
-
-export const SUCCESS = "SUCCESS";
-export const SuccessAction = (userState) => {
-  return {
-    type: "SUCCESS",
-    payload: {
-      success: userState.success
-    }
-  }
-}

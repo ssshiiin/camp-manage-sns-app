@@ -28,26 +28,11 @@ export const UsersReducer = (state = initialState.users, action) => {
         ...state,
         ...action.payload,
       }  
-    case Actions.MODAL_OPEN:
-      return {
-        ...state,
-        ...action.payload
-      }
     case Actions.MENU_OPEN:
       return {
         ...state,
         ...action.payload
       }  
-    case  Actions.STORE:
-      return {
-        ...state,
-        ...action.payload
-      }
-    case  Actions.SUCCESS:
-      return {
-        ...state,
-        ...action.payload
-      }
     default: 
       return state
   }

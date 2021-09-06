@@ -10,9 +10,12 @@ import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 
-import SimpleModal from '../components/SimpleModal';
+import { SimpleModal } from '../components';
 import { editAppNameAction, editProfBolbAction, editProfContentAction } from '../reducks/users/actions';
 import { updateProfile } from '../reducks/users/operations';
+import { handleProfEditModalOpen } from '../reducks/modals/operations';
+import { handleAlertClose, handleAlertOpen } from '../reducks/Alerts/operations';
+import { StoreAction } from '../reducks/Alerts/actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,26 +59,15 @@ const EditProfile = React.forwardRef((props, ref) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  console.log(selector)
-
 
   const user_id = props.user_id;
   const app_name = selector.users.app_name;
   const prof_content = selector.users.prof_content;
   const prof_bolb_url = selector.users.prof_bolb_url;
+  const open = selector.modals.modal_prof_edit_open;
+  const alertOpen = selector.alerts.open;
 
-  const [alertOpen, setAlertOpen] = React.useState(false);
-
-  const handleAlertOpen = () => {
-    setAlertOpen(true);
-  };
-  const handleAlertClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setAlertOpen(false);
-  };
-
+  console.log(selector.alerts)
 
   const handleImageChange = (event) => {
     const image = event.target.files[0];
@@ -83,6 +75,8 @@ const EditProfile = React.forwardRef((props, ref) => {
     dispatch(editProfBolbAction({
       prof_bolb_url: bolbUrl,
       prof_image: image,
+    }));
+    dispatch(StoreAction({
       store: false
     }));
   };
@@ -90,6 +84,8 @@ const EditProfile = React.forwardRef((props, ref) => {
   const handleApp_nameChange = (event) => {
     dispatch(editAppNameAction({
       app_name: event.target.value,
+    }));
+    dispatch(StoreAction({
       store: false
     }));
   };
@@ -97,6 +93,8 @@ const EditProfile = React.forwardRef((props, ref) => {
   const handleProfileChange = (event) => {
     dispatch(editProfContentAction({
       prof_content: event.target.value,
+    }));
+    dispatch(StoreAction({
       store: false
     }));
   };
@@ -112,6 +110,8 @@ const EditProfile = React.forwardRef((props, ref) => {
         alertOpen={alertOpen}
         handleAlertOpen={handleAlertOpen}
         handleAlertClose={handleAlertClose}
+        modalOpen={handleProfEditModalOpen}
+        open={open}
         nav={"プロフィールを編集する"}
         body=
         {

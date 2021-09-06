@@ -6,4 +6,6 @@ export {default as Home} from "./Home";
 export {default as UserProfile} from "./UserProfile";
 export {default as IndexPosts} from "./IndexPosts";
 export {default as IndexGearsNav} from "./IndexGearsNav";
+export {default as CreatePost} from "./CreatePost";
+export {default as EditProfile} from "./EditProfile";
 

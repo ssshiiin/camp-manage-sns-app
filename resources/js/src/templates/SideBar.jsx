@@ -11,7 +11,6 @@ const SideBar = () => {
   const selector = useSelector((state) => state);
   const dispatch = useDispatch();
   const user_id = getUserId(selector);
-  console.log(user_id)
 
   useEffect(() => {
     dispatch(SignIn())

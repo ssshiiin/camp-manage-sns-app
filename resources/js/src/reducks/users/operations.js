@@ -1,6 +1,7 @@
-import { ModalAction, ProfileAction, signInAction, MenuAction,
-  editAppNameAction, editProfBolbAction, editProfContentAction, 
-  SuccessAction } from "./actions";
+import { ProfileAction, signInAction, MenuAction,
+  editAppNameAction, editProfBolbAction, editProfContentAction } from "./actions";
+import { AlertOpenAction, SuccessAction } from "../Alerts/actions";
+import { ModalProfEditAction } from "../modals/actions";
 import axios from 'axios';
 
 export const SignIn = () => {
@@ -58,26 +59,19 @@ export const getProfile = (user_id) => {
 export const updateProfile = (user_id) => {
   return async (dispatch, getState) => {
     console.log("updateProfile");
-    dispatch(ModalAction({
-      modal_open: false
-    }));
-
-    dispatch(MenuAction({
-      menu_open: null
-    }));
-    
     const state = getState();
     const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     const app_name = state.users.app_name;
     const prof_content = state.users.prof_content;
     const prof_image = state.users.prof_image;
     const data = new FormData();
+
     data.append("app_name", app_name);
     data.append("profile", prof_content);
     data.append("0", prof_image);
     data.append("_token", csrf_token);
+
     const url = `/api/profiles/edit/${user_id}`;
-    
     const response = await axios.post(url, 
       data, 
       {
@@ -93,6 +87,15 @@ export const updateProfile = (user_id) => {
     }));
     dispatch(SuccessAction({
       success: true
+    }));
+    dispatch(AlertOpenAction({
+      open: false
+    }))
+    dispatch(ModalProfEditAction({
+      modal_prof_edit_open: false
+    }));
+    dispatch(MenuAction({
+      menu_open: null
     }));
   }
 }

@@ -1,13 +1,11 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { push } from 'connected-react-router';
 import { useDispatch, useSelector } from "react-redux";
 import { UserProfile, IndexPosts, IndexGearsNav } from './templates';
 import { ProfileNav } from './components';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
-import { SuccessAction } from './reducks/users/actions';
-import { ReactReduxContext } from 'react-redux';
+import { SuccessAction } from './reducks/Alerts/actions';
 import ScrollToTopOnMount from './templates/ScrollToTopOnMount';
 
 
@@ -15,7 +13,8 @@ function ProfileRouter(props) {
   const user_id = props.match.params.id;
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const success = selector.users.success;
+
+  const success = selector.modals.success;
 
   const handleSuccessClose = (event, reason) => {
     if (reason === 'clickaway') {

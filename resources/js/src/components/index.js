@@ -5,3 +5,4 @@ export {default as PostsTimeLine} from "./PostsTimeLine";
 export {default as TimeLineGearNested} from "./TimeLineGearNested";
 export {default as IndexGears} from "./IndexGears";
 export {default as ProfileNav} from "./ProfileNav";
+export {default as SimpleModal} from "./SimpleModal";

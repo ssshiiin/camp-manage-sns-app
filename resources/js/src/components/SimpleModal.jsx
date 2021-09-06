@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { ModalAction, StoreAction } from '../reducks/users/actions';;
+import { StoreAction } from '../reducks/Alerts/actions';
+import { ModalProfEditAction } from '../reducks/modals/actions';
+
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import { ModalClose } from '../reducks/modals/operations';
 
 function getModalStyle() {
   const top = 50;
@@ -34,41 +37,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal(props) {
+
+
+const SimpleModal = React.forwardRef((props, ref) => {
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
+
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const open = selector.users.modal_open;
-  const store = selector.users.store;
-
-
-  const handleOpen = () => {
-    dispatch(ModalAction({
-      modal_open: true
-    }))
-  }
-
-  const handleClose = () => {
-    if (!store) {
-      props.handleAlertOpen();
-      return
-    }
-    else {
-      dispatch(StoreAction({
-        store: true
-      }));
-    }
-    dispatch(ModalAction({
-      modal_open: false
-    }))
-  }
 
   const body = (
     <React.Fragment>
-      <Snackbar open={props.alertOpen} autoHideDuration={6000} onClose={props.handleAlertClose}>
-        <Alert onClose={props.handleAlertClose} severity="warning">
+      <Snackbar open={props.alertOpen} autoHideDuration={6000} onClose={() => dispatch(props.handleClose())}>
+        <Alert onClose={() => dispatch(props.handleAlertClose())} severity="warning">
           保存されていません
         </Alert>
       </Snackbar>
@@ -82,17 +63,19 @@ export default function SimpleModal(props) {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen} style={{ border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left" }}>
+      <button type="button" onClick={() => dispatch(props.modalOpen())} style={{ border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left" }}>
         {props.nav}
       </button>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={() => dispatch(ModalClose())}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
         {body}
       </Modal>
-    </div>
+    </div >
   );
-}
+})
+
+export default SimpleModal;

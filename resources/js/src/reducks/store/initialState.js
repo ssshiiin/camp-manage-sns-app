@@ -7,18 +7,28 @@ const initialState = {
     prof_content: "",
     prof_bolb_url: "",
     prof_image: "",
-    modal_open: false,
     menu_open: null,
-    store: true,
-    success: false
   },
   posts: {
     posts: [],
-    count_posts: 0
+    count_posts: 0,
+    post_place: "",
+    post_day: "",
+    post_content: "",
+    post_bolb_urls: [],
+    post_images: []
   },
   gears: {
     gears: [],
     count_gears: 0
+  }, 
+  modals: {
+    modal_prof_edit_open: false,
+  }, 
+  alerts: {
+    open: false,
+    store: true,
+    success: false
   }
 }
 

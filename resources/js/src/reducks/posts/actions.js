@@ -17,3 +17,53 @@ export const countPostsAction = (postsState) => {
     }
   }
 }
+
+export const CREATE_PLACE = "CREATE_PLACE"
+export const CreatePlaceAction =  (postsState) => {
+  return {
+    type: "CREATE_PLACE",
+    payload: {
+      post_place: postsState.post_place,
+    }
+  }
+}
+
+export const CREATE_DAY = "CREATE_DAY"
+export const CreateDayAction =  (postsState) => {
+  return {
+    type: "CREATE_DAY",
+    payload: {
+      post_day: postsState.post_day,
+    }
+  }
+}
+
+export const CREATE_CONTENT = "CREATE_CONTENT"
+export const CreateContentAction =  (postsState) => {
+  return {
+    type: "CREATE_CONTENT",
+    payload: {
+      post_content: postsState.post_content,
+    }
+  }
+}
+
+export const CREATE_BOLB_URLS = "CREATE_BOLB_URLS"
+export const CreateBolbAction =  (postsState) => {
+  return {
+    type: "CREATE_BOLB_URLS",
+    payload: {
+      post_bolb_urls: postsState.post_bolb_urls,
+    }
+  }
+}
+
+export const CREATE_IMAGES = "CREATE_IMAGES"
+export const CreateImagesAction =  (postsState) => {
+  return {
+    type: "CREATE_IMAGES",
+    payload: {
+      post_images: postsState.post_images,
+    }
+  }
+}
