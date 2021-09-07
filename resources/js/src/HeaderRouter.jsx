@@ -5,7 +5,7 @@ import { HomeHeader, ProfileHeader } from "./templates";
 const HeaderRouter = () => {
   return (
     <Switch>
-      <Route path="/:id" exact component={ProfileHeader} />
+      <Route path="/:id" component={ProfileHeader} />
       <Route path="(/)?" exact component={HomeHeader} />
     </Switch>
   )

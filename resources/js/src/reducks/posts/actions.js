@@ -8,6 +8,16 @@ export const PostsAction = (postsState) => {
   }
 }
 
+export const SHOW_POST = "SHOW_POST";
+export const ShowPostAction = (postsState) => {
+  return {
+    type: "SHOW_POST",
+    payload: {
+      post: postsState.post,
+    }
+  }
+}
+
 export const COUNT_POSTS = "COUNT_POSTS";
 export const countPostsAction = (postsState) => {
   return {
@@ -63,6 +73,7 @@ export const CreateImagesAction =  (postsState) => {
   return {
     type: "CREATE_IMAGES",
     payload: {
+      post_bolb_urls: postsState.post_bolb_urls,
       post_images: postsState.post_images,
     }
   }

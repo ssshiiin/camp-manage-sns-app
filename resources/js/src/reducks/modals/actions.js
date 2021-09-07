@@ -6,4 +6,24 @@ export const ModalProfEditAction = (modalState) => {
       modal_prof_edit_open: modalState.modal_prof_edit_open
     }
   }
+}
+
+export const MODAL_POST_CREATE_OPEN = "MODAL_POST_CREATE_OPEN";
+export const ModalPostCreateAction = (modalState) => {
+  return {
+    type: "MODAL_POST_CREATE_OPEN",
+    payload: {
+      modal_post_create_open: modalState.modal_post_create_open
+    }
+  }
+} 
+
+export const MODAL_GEAR_CREATE_OPEN = "MODAL_GEAR_CREATE_OPEN";
+export const ModalGearCreateAction = (modalState) => {
+  return {
+    type: "MODAL_GEAR_CREATE_OPEN",
+    payload: {
+      modal_gear_create_open: modalState.modal_gear_create_open
+    }
+  }
 } 

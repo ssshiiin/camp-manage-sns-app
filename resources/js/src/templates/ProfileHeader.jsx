@@ -8,7 +8,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
 
-import { CreatePost, EditProfile } from './index';
+import { CreatePost, EditProfile, CreateGear } from './index';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuAction } from '../reducks/users/actions';
 
@@ -88,10 +88,9 @@ function ProfileHeader(props) {
         open={Boolean(open)}
         onClose={handleClose}
       >
-        <EditProfile
-          user_id={user_id}
-        />
         <CreatePost />
+        <CreateGear />
+        <EditProfile />
         <MenuItem>
           設定
         </MenuItem>

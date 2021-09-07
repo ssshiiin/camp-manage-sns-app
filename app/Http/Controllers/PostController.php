@@ -87,7 +87,13 @@ class PostController extends Controller
             ]);
         }
         
-        //getUserPostsを返り値として返す
-        return app()->make('App\Http\Controllers\PostController')->getUserPosts(User::find($user_id));
+        return;
+    }
+
+    public function deletePost(Post $post){
+        Post_image::where("post_id", $post->id)->delete();
+        $post->delete();
+        return;
     }
 }
+

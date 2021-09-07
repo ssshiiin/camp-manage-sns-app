@@ -20,7 +20,7 @@ class GearCategoryResource extends JsonResource
     {
         return [
             'category' => $this->category, 
-            'gears' => GetUserGearsResource::collection(Gear::where("user_id", $this->user_id)->where("category", $this->category)->get()),
+            'gears' => GetUserGearsResource::collection(Gear::where("user_id", $this->user_id)->where("category", $this->category)->orderBy("created_at", "DESC")->get()),
         ];
     }
 }

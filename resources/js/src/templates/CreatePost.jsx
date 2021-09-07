@@ -1,85 +1,159 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { alpha } from '@material-ui/core/styles';
+import 'date-fns';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import IconButton from "@material-ui/core/IconButton";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 import { SimpleModal } from '../components';
+import { createPost, handleContentChange, handleDayChange, handleImageChange, handlePlaceChange } from '../reducks/posts/operations';
+import { handlePostCreateModalOpen } from '../reducks/modals/operations';
+import { handleAlertClose, handleAlertOpen } from '../reducks/Alerts/operations';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "25ch"
+    }
+  },
+  bolb: {
+    width: 400,
+    objectFit: "cover"
+  },
+  button: {
+    margin: theme.spacing(1),
+    backgroundColor: "#1876d1",
+    color: "white"
+  },
+  buttonRoot: {
+    "& > *": {
+      margin: theme.spacing(1)
+    }
+  },
+  input: {
+    display: "none"
+  },
+  upImg: {
+    margin: 7,
+    backgroundColor: "#1876d1",
+    color: "white"
+  },
+  textForm: {
+    display: "flex",
+    flexDirection: "column"
+  }
+}));
+
+
 
 const CreatePost = React.forwardRef((props, ref) => {
-  const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
-  const [bolbs, setBolbs] = useState([]);
-  const [content, setContent] = useState("");
-  const [place, setPlace] = useState("");
-  const [day, setDay] = useState("");
-  const [params, setParams] = useState(new FormData());
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
 
-  const handleImageChange = (event) => {
-    let bolbUrls = Array();
-    const len = event.target.files["length"];
-    for (let i = 0; i < len; i++) {
-      const image = event.target.files[i];
-      bolbUrls.push(URL.createObjectURL(image));
-      params.append(`${i}`, image);
-    }
-    setBolbs(bolbUrls);
-  };
+  const place = selector.posts.post_place;
+  const day = selector.posts.post_day;
+  const content = selector.posts.post_content;
+  const bolb_urls = selector.posts.post_bolb_urls;
+  const open = selector.modals.modal_post_create_open;
+  const alertOpen = selector.alerts.open;
 
-  const handleContentChange = (event) => {
-    setContent(event.target.value);
-  };
-
-  const handlePlaceChange = (event) => {
-    setPlace(event.target.value);
-  };
-
-  const handleDayChange = (event) => {
-    setDay(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    alert('保存しました');
-    createPost();
-    event.preventDefault();
-  }
-
-  const createPost = async () => {
-    params.append("content", content)
-    params.append("place", place)
-    params.append("day", day)
-    params.append("_token", csrf_token);
-
-    const response = await axios.post(`/api/posts/create/${props.user_id}`,
-      params,
-      {
-        headers: {
-          'content-type': 'multipart/form-data',
-        }
-      }
-    );
-    props.getUserPosts();
-  }
+  console.log(selector)
 
   return (
     <MenuItem>
-      {/* <SimpleModal
+      <SimpleModal
+        alertOpen={alertOpen}
+        handleAlertOpen={handleAlertOpen}
+        handleAlertClose={handleAlertClose}
+        modalOpen={handlePostCreateModalOpen}
+        open={open}
         nav={"投稿する"}
         body=
         {
-          <form onSubmit={handleSubmit}>
-            <label>
-              image : <input type="file" onChange={handleImageChange} multiple /><br />
-              place : <input type="text" value={place} onChange={handlePlaceChange} /><br />
-              day : <input type="date" value={day} onChange={handleDayChange} /><br />
-              content : <textarea value={content} onChange={handleContentChange} />
-            </label>
-            <input type="submit" value="保存" />
-            {bolbs.map((file) => (
-              <div key={file}>
-                <img src={file} style={{ width: "200px", height: '200px', objectFit: 'contain' }} key={file} />
-              </div>
-            ))}
+          <form className={classes.root} noValidate autoComplete="off">
+            <img src={bolb_urls[0]} className={classes.bolb} />
+            <div className={classes.buttonRoot}>
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="icon-button-file"
+                type="file"
+                onChange={(event) => dispatch(handleImageChange(event))}
+                multiple
+              />
+              <label htmlFor="icon-button-file">
+                <IconButton
+                  className={classes.button}
+                  aria-label="upload picture"
+                  component="span"
+                >
+                  <PhotoCamera />
+                </IconButton>
+              </label>
+            </div>
+            <div className={classes.textForm}>
+              <TextField
+                id="outlined-textarea"
+                label="キャンプ場"
+                defaultValue={place}
+                placeholder="Placeholder"
+                variant="outlined"
+                onChange={(event) => dispatch(handlePlaceChange(event))}
+              />
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <Grid container justifyContent="space-around">
+                  <KeyboardDatePicker
+                    margin="normal"
+                    id="date-picker-dialog"
+                    label="購入日"
+                    format="yyyy/MM/dd"
+                    value={day}
+                    variant="outlined"
+                    disableFuture="true"
+                    onChange={(date) => dispatch(handleDayChange(date))}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
+                  />
+                </Grid>
+              </MuiPickersUtilsProvider>
+              <TextField
+                id="outlined-multiline-static"
+                label="キャプション"
+                multiline
+                rows={6}
+                defaultValue={content}
+                variant="outlined"
+                onChange={(event) => dispatch(handleContentChange(event))}
+              />
+              <Button
+                variant="contained"
+                className={classes.upImg}
+                startIcon={<CloudUploadIcon />}
+                onClick={() => dispatch(createPost())}
+              >
+                保存する
+              </Button>
+            </div>
           </form>
         }
-      /> */}
+      />
     </MenuItem>
   )
 })

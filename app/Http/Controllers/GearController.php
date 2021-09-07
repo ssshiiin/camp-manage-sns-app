@@ -111,8 +111,5 @@ class GearController extends Controller
                 "image_path" => Storage::disk('s3')->url($path),
             ]);
         }
-        
-        //getUserPostsを返り値として返す
-        // return app()->make('App\Http\Controllers\PostController')->getUserPosts(User::find($user_id));
     }
-}
+}  

@@ -8,6 +8,16 @@ export const ModalsReducer = (state = initialState.modals, action) => {
         ...state,
         ...action.payload
       }
+    case Actions.MODAL_POST_CREATE_OPEN:
+      return {
+        ...state,
+        ...action.payload
+      }
+    case Actions.MODAL_GEAR_CREATE_OPEN:
+      return {
+        ...state,
+        ...action.payload
+      }
     default: 
       return state
   }

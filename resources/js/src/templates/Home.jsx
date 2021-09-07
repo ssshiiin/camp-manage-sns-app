@@ -14,8 +14,8 @@ const Home = () => {
   const [hasMore, setHasMore] = useState(true);
 
 
-  const getPosts = async (page) => {
-    console.log("getPosts");
+  const getAllPosts = async (page) => {
+    console.log("getAllPosts");
     const response = await axios.get(`/api/posts?page=${page}`)
       .catch(err => { console.log('err:', err); });
 
@@ -34,7 +34,7 @@ const Home = () => {
       <div className="home">
         <InfiniteScroll
           className="home-main"
-          loadMore={getPosts}
+          loadMore={getAllPosts}
           hasMore={hasMore}
           loader={loader}>
           <div className="home-main-timeline">

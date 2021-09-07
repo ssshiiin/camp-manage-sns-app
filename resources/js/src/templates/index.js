@@ -8,4 +8,6 @@ export {default as IndexPosts} from "./IndexPosts";
 export {default as IndexGearsNav} from "./IndexGearsNav";
 export {default as CreatePost} from "./CreatePost";
 export {default as EditProfile} from "./EditProfile";
+export {default as CreateGear} from "./CreateGear";
+export {default as PostNav} from "./PostNav";
 

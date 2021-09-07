@@ -11,13 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //uniqueが原因でpost_imagesとprofilesは別で実行しないとエラーが出る
-        // $this->call(UsersTableSeeder::class);
-        // $this->call(PostsTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(ProfilesTableSeeder::class);
+        $this->call(PostsTableSeeder::class);
+        $this->call(GearsTableSeeder::class);
         $this->call(Post_imagesTableSeeder::class);
-        // $this->call(ProfilesTableSeeder::class);
         // $this->call(TagsTableSeeder::class);
-        // $this->call(GearsTableSeeder::class);
-        // $this->call(Gear_imagesTableSeeder::class);
+        $this->call(Gear_imagesTableSeeder::class);
     }
 }

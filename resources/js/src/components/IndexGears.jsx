@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const IndexGears = (props) => {
+  console.log(props)
   const classes = useStyles();
   const theme = useTheme();
 
@@ -91,7 +92,7 @@ const IndexGears = (props) => {
           <Card className={classes.root} key={i}>
             <CardMedia
               className={classes.cover}
-              image={gear.image_path[0].image_path}
+              image={gear.image_path["0"].image_path}
               title="Gear image"
             />
             <div className={classes.details}>
