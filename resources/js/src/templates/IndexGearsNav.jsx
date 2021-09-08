@@ -75,7 +75,7 @@ export default function IndexGearsNav(props) {
           )}
         </Tabs>
         {categories.map((category, i) =>
-          <IndexGears category={category} index={i} value={value} key={i} />
+          <IndexGears user_id={user_id} category={category} index={i} value={value} key={i} />
         )}
       </AppBar>
     </div>

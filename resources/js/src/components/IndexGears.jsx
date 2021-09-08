@@ -78,10 +78,9 @@ const IndexGears = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const theme = useTheme();
+  const user_id = props.user_id
 
   const category = props.category;
-  console.log(selector)
   const index = props.index;
   const value = props.value;
 
@@ -110,7 +109,7 @@ const IndexGears = (props) => {
                 </Typography>
               </CardContent>
             </div>
-            <GearNav gear_id={gear.id} />
+            <GearNav user_id={user_id} gear_id={gear.id} />
           </Card>
         )}
       </TabPanel>

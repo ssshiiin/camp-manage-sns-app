@@ -63,6 +63,8 @@ const ShowPost = (props) => {
   const [expanded, setExpanded] = useState(false);
   const [categories, setCategories] = useState([]);
   const show_post = selector.posts.post;
+  const user_id = props.match.params.id;
+  const login_user = selector.users.user_id;
 
   useEffect(() => {
     getAddGear();
@@ -87,12 +89,14 @@ const ShowPost = (props) => {
                 onClick={() => dispatch(push(`/${post.user_id}`))} />
             }
             action={
-              <React.Fragment>
+              <>
                 <IconButton aria-label="settings" onClick={(event) => dispatch(handlePostNavClick(event))}>
                   <MoreVertIcon />
                 </IconButton>
-                <PostNav post_id={post.id} />
-              </React.Fragment>
+                {(user_id == login_user) &&
+                  <PostNav post_id={post.id} />
+                }
+              </>
             }
             title={post.app_name}
             subheader={`${moment(post.day).format("YYYY/MM/DD")} - ${post.place}`}

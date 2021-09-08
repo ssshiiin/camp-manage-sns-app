@@ -55,6 +55,7 @@ const GearNav = React.forwardRef((props, ref) => {
   console.log(props)
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
+  const login_user = selector.users.user_id;
   const [open, setOpen] = useState(null)
 
   const handleClick = (event) => {
@@ -73,21 +74,23 @@ const GearNav = React.forwardRef((props, ref) => {
       <IconButton className={classes.settingIcon} aria-label="settings" onClick={handleClick}>
         <MoreVertIcon />
       </IconButton>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={open}
-        keepMounted
-        open={Boolean(open)}
-        onClose={handleClose}
-      >
-        <EditGear gear_id={props.gear_id} />
-        <MenuItem onClick={() => dispatch(deleteGear(props.gear_id))}>
-          削除
-        </MenuItem>
-        <MenuItem>
-          設定
-        </MenuItem>
-      </StyledMenu>
+      {(props.user_id == login_user) &&
+        <StyledMenu
+          id="customized-menu"
+          anchorEl={open}
+          keepMounted
+          open={Boolean(open)}
+          onClose={handleClose}
+        >
+          <EditGear gear_id={props.gear_id} />
+          <MenuItem onClick={() => dispatch(deleteGear(props.gear_id))}>
+            削除
+          </MenuItem>
+          <MenuItem>
+            設定
+          </MenuItem>
+        </StyledMenu>
+      }
     </React.Fragment >
   )
 })

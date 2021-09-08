@@ -55,6 +55,7 @@ function ProfileHeader(props) {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const user_id = props.match.params.id;
+  const login_user = selector.users.user_id;
   const open = selector.users.menu_open;
 
   const handleClick = (event) => {
@@ -71,33 +72,40 @@ function ProfileHeader(props) {
 
   const classes = useStyles();
 
-  return (
-    <div className={classes.root}>
-      <Button
-        className={classes.NavButton}
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        onClick={handleClick}
-      >
-        <MoreHorizOutlined fontSize="large" />
-      </Button>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={open}
-        keepMounted
-        open={Boolean(open)}
-        onClose={handleClose}
-      >
-        <CreatePost />
-        <CreateGear />
-        <EditProfile />
-        <MenuItem>
-          設定
-        </MenuItem>
-      </StyledMenu>
-    </div >
-  )
+  if (user_id == login_user) {
+    return (
+      <div className={classes.root}>
+        <Button
+          className={classes.NavButton}
+          aria-controls="customized-menu"
+          aria-haspopup="true"
+          variant="contained"
+          onClick={handleClick}
+        >
+          <MoreHorizOutlined fontSize="large" />
+        </Button>
+        <StyledMenu
+          id="customized-menu"
+          anchorEl={open}
+          keepMounted
+          open={Boolean(open)}
+          onClose={handleClose}
+        >
+          <CreatePost />
+          <CreateGear />
+          <EditProfile />
+          <MenuItem>
+            設定
+          </MenuItem>
+        </StyledMenu>
+      </div >
+    )
+  }
+  else {
+    return (
+      <div>他人</div>
+    )
+  }
 }
 
 export default ProfileHeader;
