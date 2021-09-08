@@ -19,9 +19,9 @@ import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 import { SimpleModal } from '../components';
-import { createPost, handleContentChange, handleDayChange, handleImageChange, handlePlaceChange } from '../reducks/posts/operations';
-import { handlePostCreateModalOpen } from '../reducks/modals/operations';
-import { handleAlertClose, handleAlertOpen } from '../reducks/Alerts/operations';
+import { createPost, handleContentChange, handleDayChange, handleImageChange, handlePlaceChange, resetPost } from '../reducks/posts/operations';
+import { handlePostCreateModalOpen, ModalClose } from '../reducks/modals/operations';
+import { handleAlertClose, handleAlertOpen } from '../reducks/alerts/operations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,7 +73,7 @@ const CreatePost = React.forwardRef((props, ref) => {
   const open = selector.modals.modal_post_create_open;
   const alertOpen = selector.alerts.open;
 
-  console.log(selector)
+
 
   return (
     <MenuItem>

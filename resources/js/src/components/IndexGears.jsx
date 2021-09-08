@@ -8,11 +8,8 @@ import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
+import { GearNav } from "../templates";
 
 
 function TabPanel(props) {
@@ -58,9 +55,10 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flex: '1 0 auto',
+    padding: "16px 0px 16px 16px"
   },
   cover: {
-    width: 151,
+    width: 190,
   },
   controls: {
     display: 'flex',
@@ -71,17 +69,19 @@ const useStyles = makeStyles((theme) => ({
   playIcon: {
     height: 38,
     width: 38,
-  },
+  }
 }));
 
 
 
 const IndexGears = (props) => {
-  console.log(props)
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
   const theme = useTheme();
 
   const category = props.category;
+  console.log(selector)
   const index = props.index;
   const value = props.value;
 
@@ -92,24 +92,25 @@ const IndexGears = (props) => {
           <Card className={classes.root} key={i}>
             <CardMedia
               className={classes.cover}
-              image={gear.image_path["0"].image_path}
+              image={gear.image_path[0].image_path}
               title="Gear image"
             />
             <div className={classes.details}>
               <CardContent className={classes.content}>
-                <Typography component="h6" variant="h6">
+                <Typography variant="subtitle1" >
                   {gear.gear_name}
                 </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
+                <Typography variant="subtitle2" color="textSecondary">
                   {gear.brand}
                 </Typography>
-                <Typography variant="body1" color="textSecondary">
+                <Typography variant="body2" color="textSecondary">
                   価格 : {Number(gear.price).toLocaleString()} <br />
                   所持数 : {gear.amount} <br />
                   購入日 : {moment(gear.purchased_day).format("YYYY/MM/DD")} <br />
                 </Typography>
               </CardContent>
             </div>
+            <GearNav gear_id={gear.id} />
           </Card>
         )}
       </TabPanel>

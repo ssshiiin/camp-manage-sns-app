@@ -1,6 +1,6 @@
 import { ProfileAction, signInAction, MenuAction,
   editAppNameAction, editProfBolbAction, editProfContentAction } from "./actions";
-import { AlertOpenAction, StoreAction, SuccessAction } from "../Alerts/actions";
+import { AlertOpenAction, StoreAction, SuccessAction } from "../alerts/actions";
 import { ModalProfEditAction } from "../modals/actions";
 import axios from 'axios';
 

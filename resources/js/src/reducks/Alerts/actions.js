@@ -1,31 +1,29 @@
-import { type } from "jquery";
-
 export const STORE = "STORE";
-export const StoreAction = (alertState) => {
+export const StoreAction = (alertsState) => {
   return {
     type: "STORE",
     payload: {
-      store: alertState.store,
+      store: alertsState.store,
     }
   }
 }
 
 export const SUCCESS = "SUCCESS";
-export const SuccessAction = (alertState) => {
+export const SuccessAction = (alertsState) => {
   return {
     type: "SUCCESS",
     payload: {
-      success: alertState.success
+      success: alertsState.success
     }
   }
 }
 
 export const ALERT_OPEN = "ALERT_OPEN";
-export const AlertOpenAction = (alertState) => {
+export const AlertOpenAction = (alertsState) => {
   return {
     type: "ALERT_OPEN",
     payload: {
-      open: alertState.open
+      open: alertsState.open
     }
   }
 }

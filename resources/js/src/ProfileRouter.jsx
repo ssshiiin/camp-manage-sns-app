@@ -5,7 +5,7 @@ import { UserProfile, IndexPosts, IndexGearsNav } from './templates';
 import { ProfileNav, ShowPost } from './components';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
-import { SuccessAction } from './reducks/Alerts/actions';
+import { SuccessAction } from './reducks/alerts/actions';
 import ScrollToTopOnMount from './templates/ScrollToTopOnMount';
 
 

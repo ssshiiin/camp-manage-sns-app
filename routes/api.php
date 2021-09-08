@@ -26,13 +26,17 @@ Route::group( ['middleware' => 'api'], function(){
     Route::get('/posts/show/{post}', 'PostController@getShowPost');
     Route::post('/posts/create/{user}', 'PostController@createPost');
     Route::post('/posts/delete/{post}', 'PostController@deletePost');
+    Route::post('/posts/update/{post}', 'PostController@updatePost');
     
     Route::get('/profiles/{user}', 'ProfileController@getProfile');
     Route::post('/profiles/edit/{user}', 'ProfileController@createOrEditProfile');
     
     Route::get('/gears/{user}', 'GearController@getUserGears');
     Route::get('/gears/category/{user}', 'GearController@getUserCategory');
+    Route::get('/gears/show/{gear}', 'GearController@getShowGear');
     Route::post('/gears/create/{user}', 'GearController@createGear');
+    Route::post('/gears/delete/{gear}', 'GearController@deleteGear');
+    Route::post('/gears/update/{gear}', 'GearController@updateGear');
     
     Route::get('/count/posts/{user}', 'PostController@getCountPost');
     Route::get('/count/gears/{user}', 'GearController@getCountGear');

@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { CreatePost, EditProfile, CreateGear } from './index';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuAction } from '../reducks/users/actions';
+import { resetPost } from '../reducks/posts/operations';
 
 
 

@@ -7,10 +7,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePost } from '../reducks/posts/operations';
+import { handlePostNavClose } from '../reducks/menus/operations';
+import EditPost from './EditPost';
 
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
+    color: "black"
   },
 })((props) => (
   <Menu
@@ -47,28 +50,23 @@ const useStyles = makeStyles((theme) => ({
 const PostNav = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
+  const open = selector.menus.post_nav;
+
 
   const classes = useStyles();
-  console.log(props);
-
-  const handleClose = () => {
-    props.setOpen(null);
-  };
 
   return (
     <React.Fragment>
       <StyledMenu
         id="customized-menu"
-        anchorEl={props.open}
+        anchorEl={open}
         keepMounted
-        open={Boolean(props.open)}
-        onClose={handleClose}
+        open={Boolean(open)}
+        onClose={() => dispatch(handlePostNavClose())}
       >
+        <EditPost post_id={props.post_id} />
         <MenuItem onClick={() => dispatch(deletePost(props.post_id))}>
           削除
-        </MenuItem>
-        <MenuItem>
-          編集する
         </MenuItem>
         <MenuItem>
           設定

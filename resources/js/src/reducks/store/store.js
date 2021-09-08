@@ -7,7 +7,9 @@ import { UsersReducer } from "../users/reducers";
 import { PostsReducer } from "../posts/reducers";
 import { GearsReducer } from "../gears/reducers";
 import { ModalsReducer } from "../modals/reducers";
-import { AlertsReducer } from "../Alerts/reducers";
+import { AlertsReducer } from "../alerts/reducers";
+import { MenusReducers } from "../menus/reducers";
+
 
 export default function createStore(history) {
   return reduxCreateStore(
@@ -18,6 +20,7 @@ export default function createStore(history) {
       gears: GearsReducer,
       modals: ModalsReducer,
       alerts: AlertsReducer,
+      menus: MenusReducers,
     }),
     applyMiddleware(
       routerMiddleware(history),

@@ -17,8 +17,8 @@ import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 import SimpleModal from '../../src/components/SimpleModal';
-import { handleAlertClose, handleAlertOpen } from '../reducks/Alerts/operations';
-import { handleGearCreateModalOpen } from '../reducks/modals/operations';
+import { handleAlertClose, handleAlertOpen } from '../reducks/alerts/operations';
+import { handleGearCreateModalOpen, ModalClose } from '../reducks/modals/operations';
 import {
   createGear,
   handleAmountChange, handleBrandChange, handleCategoryChange, handleGearNameChange,

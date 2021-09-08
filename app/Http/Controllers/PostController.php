@@ -95,5 +95,34 @@ class PostController extends Controller
         $post->delete();
         return;
     }
+
+    public function updatePost(Request $request, Post $post){
+        $user_id = $post->user_id;
+        $post_id = $post->id;
+    
+        $fileImage = $request->files;
+        $content = $request->input("content");
+        $place = $request->input("place");
+        $day = $request->input("day");
+
+        ///プロフィール画像の変更があったか
+        if (empty($fileImage)){
+            Post_image::where("post_id", $post_id)->delete();
+            foreach ($fileImage as $key => $value){
+                $path = Storage::disk('s3')->putFile('/Post_images', $request->file($key), 'public');
+                Post_image::create([
+                    "post_id" => $post_id,
+                    "image_path" => Storage::disk('s3')->url($path),
+                ]);
+            }
+        }
+        
+        $post->content = $content;
+        $post->day = $day;
+        $post->place = $place;   
+        $post->update();
+
+        return;
+    }
 }
 

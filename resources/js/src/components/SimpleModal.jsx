@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { StoreAction } from '../reducks/Alerts/actions';
+import { StoreAction } from '../reducks/alerts/actions';
 import { ModalProfEditAction } from '../reducks/modals/actions';
 
 import Snackbar from '@material-ui/core/Snackbar';
@@ -62,7 +62,7 @@ const SimpleModal = React.forwardRef((props, ref) => {
 
   return (
     <div>
-      <button type="button" onClick={() => dispatch(props.modalOpen())} style={{ border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left" }}>
+      <button type="button" onClick={() => dispatch(props.modalOpen(props.gear_id))} style={{ border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left" }}>
         {props.nav}
       </button>
       <Modal

@@ -26,4 +26,24 @@ export const ModalGearCreateAction = (modalState) => {
       modal_gear_create_open: modalState.modal_gear_create_open
     }
   }
+}
+
+export const MODAL_POST_EDIT_OPEN = "MODAL_POST_EDIT_OPEN";
+export const ModalPostEditAction = (modalState) => {
+  return {
+    type: "MODAL_POST_EDIT_OPEN",
+    payload: {
+      modal_post_edit_open: modalState.modal_post_edit_open
+    }
+  }
+} 
+
+export const MODAL_GEAR_EDIT_OPEN = "MODAL_GEAR_EDIT_OPEN";
+export const ModalGearEditAction = (modalState) => {
+  return {
+    type: "MODAL_GEAR_EDIT_OPEN",
+    payload: {
+      modal_gear_edit_open: modalState.modal_gear_edit_open
+    }
+  }
 } 

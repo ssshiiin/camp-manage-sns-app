@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
-import { getPosts } from '../reducks/posts/operations';
+import { getPosts, getShowPost } from '../reducks/posts/operations';
 import moment from "moment";
 
 const IndexPosts = (props) => {
@@ -9,7 +9,7 @@ const IndexPosts = (props) => {
   const selector = useSelector((state) => state);
   const user_id = props.match.params.id;
   const posts = selector.posts.posts;
-
+  console.log(posts)
 
   useEffect(() => {
     dispatch(getPosts(user_id));
@@ -19,7 +19,7 @@ const IndexPosts = (props) => {
   return (
     <div className="profile-main-posts">
       {posts.map((post) =>
-        <div onClick={() => { dispatch(push(`/${user_id}/post/${post.id}`)) }} style={{ backgroundImage: `url(${post.post_images[0].image_path})` }} className="profile-main-posts-image" key={post.id}>
+        <div onClick={() => { dispatch(getShowPost(user_id, post.id)) }} style={{ backgroundImage: `url(${post.post_images[0].image_path})` }} className="profile-main-posts-image" key={post.id}>
           <p className="p-center">{post.place}<br />{moment(post.day).format("YYYY/MM/DD")}</p>
         </div>
       )}

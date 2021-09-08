@@ -1,11 +1,13 @@
-import { countPostsAction, CreateContentAction, CreateDayAction, CreateImagesAction, CreatePlaceAction, PostsAction, ShowPostAction } from './actions';
+import { countPostsAction, CreateContentAction, CreateDayAction, CreateImagesAction, CreatePlaceAction, CREATE_IMAGES, PostsAction, ShowPostAction } from './actions';
 import { push } from 'connected-react-router';
 import axios from 'axios';
 import { getProfile } from '../users/operations';
 import { getCountGears } from '../gears/operations';
-import { AlertOpenAction, StoreAction, SuccessAction } from '../Alerts/actions';
-import { ModalPostCreateAction } from '../modals/actions';
+import { AlertOpenAction, StoreAction, SuccessAction } from '../alerts/actions';
+import { ModalPostCreateAction, ModalPostEditAction } from '../modals/actions';
 import { MenuAction } from '../users/actions';
+import { CreatePurchasedDayAction } from '../gears/actions';
+import { PostNavAction } from '../menus/actions';
 
 
 export const getPosts = (user_id) => {
@@ -22,7 +24,7 @@ export const getPosts = (user_id) => {
   }
 }
 
-export const getShowPost = (post_id) => {
+export const getShowPost = (user_id, post_id) => {
   return async (dispatch, getState) => {
     console.log("getShowPost");
     const url = `/api/posts/show/${post_id}`;
@@ -32,6 +34,8 @@ export const getShowPost = (post_id) => {
     dispatch(ShowPostAction({
       post: response.data.data
     }));
+
+    dispatch(push(`/${user_id}/post/${post_id}`));
   }
 }
 
@@ -108,6 +112,56 @@ export const createPost = () => {
   }
 }
 
+export const updatePost = (post_id) => {
+  return async (dispatch, getState) => {
+    console.log("updatePost");
+    const state = getState();
+    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+    const place = state.posts.post_place;
+    const day = state.posts.post_day;
+    const content = state.posts.post_content;
+    const images = state.posts.post_images;
+    const user_id = state.users.user_id;
+    
+    const data = new FormData();
+
+    data.append("place", place);
+    data.append("day", day);
+    data.append("content", content);
+    if(typeof images !== 'undefined'){
+      images.map((image, i) => {
+        data.append(`${i}`, image);
+      });
+    }
+    data.append("_token", csrf_token);
+
+    const url = `/api/posts/update/${post_id}`;
+    const response = await axios.post(url, 
+      data, 
+      {
+        headers: {
+          'content-type': 'multipart/form-data',
+          }
+      })
+      .catch((err) => {console.log("err:", err)});
+    
+
+    dispatch(SuccessAction({
+      success: true
+    }));
+    dispatch(AlertOpenAction({
+      open: false
+    }))
+    dispatch(ModalPostEditAction({
+      modal_post_edit_open: false
+    }));
+    dispatch(PostNavAction({
+      post_nav: null
+    }));
+    dispatch(push(`/${user_id}`));
+  }
+}
+
 export const handleImageChange = (event) => {
   return (dispatch, getState) => {
     let images = Array();
@@ -164,15 +218,13 @@ export const handleContentChange = (event) => {
 };
 
 export const deletePost = (post_id) => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const state = getState();
     const user_id = state.users.user_id;
     const url = `/api/posts/delete/${post_id}`;
 
-    const response = axios.post(url)
+    const response = await axios.post(url)
       .catch((err) => {console.log(err);});
-    
-    console.log(response)
 
     dispatch(push(`/${user_id}`));
   }

@@ -24,11 +24,8 @@ class GearController extends Controller
     }
     
 
-    public function getUserCategories(User $user){
-        $user_id = $user->id;
-        $category = $request->query->get("category");
-        
-        return GetUserGearsResource::collection($gear->whereUser_idAndWhereCategoryPaginate($user_id, $category));
+    public function getShowGear(Gear $gear){
+        return new GetUserGearsResource($gear);
     }
     
     public function getGearIndex(Gear $gear){
@@ -111,5 +108,51 @@ class GearController extends Controller
                 "image_path" => Storage::disk('s3')->url($path),
             ]);
         }
+
+        return app()->make('App\Http\Controllers\GearController')->getUserCategory(User::find($user_id));
     }
+
+    public function deleteGear(Gear $gear){
+        $user_id = $gear->user_id;
+        Gear_image::where("gear_id", $gear->id)->delete();
+        $gear->delete();
+
+        return app()->make('App\Http\Controllers\GearController')->getUserCategory(User::find($user_id));
+    }
+
+    public function updateGear(Request $request, Gear $gear){
+        $user_id = $gear->user_id;
+        $gear_id = $gear->id;
+    
+        $fileImage = $request->files;
+        $gear_name = $request->input("gearName");
+        $category = $request->input("category");
+        $brand = $request->input("brand");
+        $purchased_day = $request->input("purchasedDay");
+        $price = $request->input("price");
+        $amount = $request->input("amount");
+
+        ///プロフィール画像の変更があったか
+        if (empty($fileImage)){
+            Gear_image::where("gear_id", $gear_id)->delete();
+            foreach ($fileImage as $key => $value){
+                $path = Storage::disk('s3')->putFile('/Gear_images', $request->file($key), 'public');
+                Gear_image::create([
+                    "gear_id" => $gear_id,
+                    "image_path" => Storage::disk('s3')->url($path),
+                ]);
+            }
+        }
+
+        $gear->gear_name = $gear_name;
+        $gear->category = $category;
+        $gear->brand = $brand;   
+        $gear->purchased_day = $purchased_day;   
+        $gear->price = $price;   
+        $gear->amount = $amount;   
+        $gear->update();
+
+        return app()->make('App\Http\Controllers\GearController')->getUserCategory(User::find($user_id));
+    }
+
 }  

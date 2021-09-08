@@ -35,11 +35,17 @@ const initialState = {
     modal_prof_edit_open: false,
     modal_post_create_open: false,
     modal_gear_create_open: false,
+    modal_post_edit_open: false,
+    modal_gear_edit_open: false,
   }, 
   alerts: {
     open: false,
     store: true,
     success: false
+  },
+  menus: {
+    post_nav: null,
+    gear_nav: null,
   }
 }
 

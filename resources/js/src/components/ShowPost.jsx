@@ -8,12 +8,11 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -24,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { getShowPost } from "../reducks/posts/operations";
 import { PostNav } from "../templates";
+import { handlePostNavClick } from "../reducks/menus/operations";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,18 +62,11 @@ const ShowPost = (props) => {
   const selector = useSelector((state) => state);
   const [expanded, setExpanded] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [open, setOpen] = useState(null);
   const show_post = selector.posts.post;
-  const post_id = props.match.params.post_id;
 
   useEffect(() => {
-    dispatch(getShowPost(post_id));
     getAddGear();
   }, []);
-
-  const handleClick = (event) => {
-    setOpen(event.currentTarget);
-  };
 
   const getAddGear = async () => {
     const response = await axios.get(`/api/add/gears/1`);
@@ -94,10 +87,12 @@ const ShowPost = (props) => {
                 onClick={() => dispatch(push(`/${post.user_id}`))} />
             }
             action={
-              <IconButton aria-label="settings" onClick={handleClick}>
-                <MoreVertIcon />
-                <PostNav open={open} setOpen={setOpen} post_id={post_id} />
-              </IconButton>
+              <React.Fragment>
+                <IconButton aria-label="settings" onClick={(event) => dispatch(handlePostNavClick(event))}>
+                  <MoreVertIcon />
+                </IconButton>
+                <PostNav post_id={post.id} />
+              </React.Fragment>
             }
             title={post.app_name}
             subheader={`${moment(post.day).format("YYYY/MM/DD")} - ${post.place}`}

@@ -12,8 +12,8 @@ import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 import { SimpleModal } from '../components';
 import { handleApp_nameChange, handleImageChange, handleProfileChange, handleSubmit } from '../reducks/users/operations';
-import { handleProfEditModalOpen } from '../reducks/modals/operations';
-import { handleAlertClose, handleAlertOpen } from '../reducks/Alerts/operations';
+import { handleProfEditModalOpen, ModalClose } from '../reducks/modals/operations';
+import { handleAlertClose, handleAlertOpen } from '../reducks/alerts/operations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
