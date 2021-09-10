@@ -37,10 +37,6 @@ const ShowAdd = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const mopen = selector.modals.modal_bring_edit_open;
-  const alertOpen = selector.alerts.open;
-  const bring_gears = selector.bring_gears.bring_gears;
-  const add_gears = selector.bring_gears.add_gears;
   const category = props.category;
 
   const [open, setOpen] = React.useState(false);

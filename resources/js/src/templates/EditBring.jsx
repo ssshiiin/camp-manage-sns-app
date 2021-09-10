@@ -20,7 +20,7 @@ import SimpleModal from '../../src/components/SimpleModal';
 import { handleAlertClose, handleAlertOpen } from "../reducks/alerts/operations";
 import { handleBringEditModalOpen } from "../reducks/modals/operations";
 import { ShowAdd } from "../components";
-import { createBringGear, deleteBringGear, getCountAllAdd } from "../reducks/bring_gears/operations";
+import { AddAllIs_check, BringAllIs_check, createBringGear, deleteBringGear, getCountAllAdd } from "../reducks/bring_gears/operations";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +65,7 @@ const EditBring = React.forwardRef((props, ref) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
+  const user_id = selector.users.user_id;
   const mopen = selector.modals.modal_bring_edit_open;
   const alertOpen = selector.alerts.open;
   const bring_gears = selector.bring_gears.bring_gears;
@@ -74,13 +75,23 @@ const EditBring = React.forwardRef((props, ref) => {
 
   const [open, setOpen] = React.useState(true);
 
+  const handleClick = (event, type) => {
+    console.log(event.target.checked)
+    if (type == "bring") {
+      dispatch(BringAllIs_check(user_id, event.target.checked));
+    }
+    else if (type == "add") {
+      dispatch(AddAllIs_check(user_id, event.target.checked));
+    }
+  }
+
   const customList = (title, categories, type, count) => (
     <Card>
       <CardHeader
         className={classes.cardHeader}
         avatar={
           <Checkbox
-            // onClick={handleToggleAll(categories)}
+            onClick={(event) => handleClick(event, type)}
             // checked={
             //   numberOfChecked(categories) === categories.length && categories.length !== 0
             // }
@@ -130,7 +141,7 @@ const EditBring = React.forwardRef((props, ref) => {
                   variant="outlined"
                   size="small"
                   className={classes.button}
-                  onClick={() => dispatch(deleteBringGear(props.user_id))}
+                  onClick={() => dispatch(deleteBringGear(user_id))}
                   // disabled={leftChecked.length === 0}
                   aria-label="move selected right"
                 >
@@ -140,7 +151,7 @@ const EditBring = React.forwardRef((props, ref) => {
                   variant="outlined"
                   size="small"
                   className={classes.button}
-                  onClick={() => dispatch(createBringGear(props.user_id))}
+                  onClick={() => dispatch(createBringGear(user_id))}
                   // disabled={rightChecked.length === 0}
                   aria-label="move selected left"
                 >

@@ -57,18 +57,6 @@ const Bring = (props) => {
     setOpen(!open);
   };
 
-  const allDeleteBringGear = async () => {
-    const response = await axios.post(`/api/all/delete/bring_gears/${user_id}`);
-    setCategories(response.data.data);
-    getCountBring();
-  }
-
-  const createTemplates = async (template_name) => {
-    const response = await axios.post(`/api/create/templates/${user_id}`
-      , [categories, template_name]);
-    getTemplates();
-  }
-
   const useTemplates = async (useTemplate_name) => {
     const response = await axios.post(`/api/templates/use/${user_id}`
       , [useTemplate_name]);
@@ -94,24 +82,22 @@ const Bring = (props) => {
 
   return (
     <div className="gear">
-      <div className="gear-main">
-        <List
-          component="nav"
-          aria-labelledby="nested-list-subheader"
-          subheader={
-            <>
-              <ListSubheader component="div" id="gearList">
-                {count_all.countTrue}/{count_all.countAll}  selected
-              </ListSubheader>
-            </>
-          }
-          className={classes.root}
-        >
-          {bring_gears.map((bring_gear, i) =>
-            <ShowBring bring_gear={bring_gear} key={i} />
-          )}
-        </List>
-      </div>
+      <List
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+        subheader={
+          <>
+            <ListSubheader component="div" id="gearList">
+              {count_all.countTrue}/{count_all.countAll}  selected
+            </ListSubheader>
+          </>
+        }
+        className={classes.root}
+      >
+        {bring_gears.map((bring_gear, i) =>
+          <ShowBring bring_gear={bring_gear} key={i} />
+        )}
+      </List>
     </div>
   )
 }

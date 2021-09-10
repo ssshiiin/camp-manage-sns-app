@@ -43,6 +43,15 @@ a:active {
   font-size: 0.8em;
 }
 
+.flex-1 {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.flex-cancel {
+  flex: auto;
+}
+
 body {
   background-color: #fafafa;
   width: 100%;
@@ -276,33 +285,6 @@ body #root main .main-category .profile .profile-main .profile-main-posts .profi
 }
 body #root main .main-category .gear {
   width: calc(100% - 259px);
-}
-body #root main .main-category .gear header {
-  width: calc(100% - 520px);
-  display: flex;
-  position: fixed;
-  height: 80px;
-  z-index: 10;
-  border-bottom: 1px solid #dbdbdb;
-}
-body #root main .main-category .gear header .title {
-  height: 100%;
-  width: 100%;
-  font-size: 1.2em;
-  font-weight: 300;
-  line-height: 80px;
-  position: relative;
-  -webkit-padding-start: 20px;
-          padding-inline-start: 20px;
-}
-body #root main .main-category .gear header .title .GearBringNav {
-  position: absolute;
-  top: 0px;
-  right: 20px;
-}
-body #root main .main-category .gear .gear-main {
-  width: 100%;
-  padding-top: 80px;
 }
 body #root main .sub-category {
   background-color: #fafafa;

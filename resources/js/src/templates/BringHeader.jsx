@@ -8,10 +8,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
 
-import { CreatePost, EditProfile, CreateGear } from './index';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuAction } from '../reducks/users/actions';
 import EditBring from './EditBring';
+import CreateTemplates from './CreateTemplates';
 
 
 
@@ -90,7 +90,8 @@ function BringHeader(props) {
           open={Boolean(open)}
           onClose={handleClose}
         >
-          <EditBring user_id={user_id} />
+          <CreateTemplates />
+          <EditBring />
           <MenuItem>
             設定
           </MenuItem>

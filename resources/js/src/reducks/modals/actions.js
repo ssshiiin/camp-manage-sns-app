@@ -46,4 +46,14 @@ export const ModalBringEditAction = (modalState) => {
       modal_bring_edit_open: modalState.modal_bring_edit_open
     }
   }
+}
+
+export const MODAL_TEMPLATES_CREATE_OPEN = "MODAL_TEMPLATES_CREATE_OPEN";
+export const ModalTemplatesCreateAction = (modalState) => {
+  return {
+    type: "MODAL_TEMPLATES_CREATE_OPEN",
+    payload: {
+      modal_templates_create_open: modalState.modal_templates_create_open
+    }
+  }
 } 

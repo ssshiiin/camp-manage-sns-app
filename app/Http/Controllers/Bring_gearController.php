@@ -59,11 +59,49 @@ class Bring_gearController extends Controller
         return app()->make('App\Http\Controllers\Bring_gearController')->getUserBring_gears(User::find($user_id));
     }
 
+    public function updateAllIs_check(Request $request, User $user){
+        $user_id = $user->id;
+        $is_check = $request->is_check;
+
+        if ($is_check){
+            $bring_gears = Bring_gear::where("user_id", $user_id)->where("is_check", false)->get();
+        }
+        else {
+            $bring_gears = Bring_gear::where("user_id", $user_id)->where("is_check", true)->get();
+        }
+
+        foreach($bring_gears as $bring_gear){
+            $bring_gear->is_check = $is_check;
+            $bring_gear->update();
+        }
+        
+        return app()->make('App\Http\Controllers\Bring_gearController')->getUserBring_gears(User::find($user_id));
+    }
+
     public function updateAddIs_check(Request $request, Gear $gear){
         $user_id = $gear->user_id;
     
         $gear->is_check = $request->is_check;
         $gear->update();
+        
+        return app()->make('App\Http\Controllers\Bring_gearController')->getAddGear(User::find($user_id));
+    }
+
+    public function updateAllAddIs_check(Request $request, User $user){
+        $user_id = $user->id;
+        $is_check = $request->is_check;
+
+        if ($is_check){
+            $gears = Gear::with("bring_gear")->get()->where("user_id", $user_id)->whereNull("bring_gear.gear_id")->where("is_check", false);
+        }
+        else {
+            $gears = Gear::with("bring_gear")->get()->where("user_id", $user_id)->whereNull("bring_gear.gear_id")->where("is_check", true);
+        }
+            
+        foreach($gears as $gear){
+            $gear->is_check = $is_check;
+            $gear->update();
+        }
         
         return app()->make('App\Http\Controllers\Bring_gearController')->getAddGear(User::find($user_id));
     }
@@ -94,17 +132,5 @@ class Bring_gearController extends Controller
         }
 
         return app()->make('App\Http\Controllers\Bring_gearController')->getUserBring_gears(User::find($user_id));
-    }
-    
-    public function allDeleteBring_gear(User $user){
-        $user_id = $user->id;
-        $bring_gear = new Bring_gear;
-        $bring_gear->where("user_id", $user_id)->each(function($i){
-            $i->delete();
-        });
-        
-        $categories = $bring_gear->with("gear")->get()->where("user_id", $user_id)->groupBy("gear.category")->values();
-        
-        return Save_gearsCategoryResource::collection($categories);
     }
 }

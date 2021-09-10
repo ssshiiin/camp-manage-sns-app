@@ -10,28 +10,29 @@ use App\Http\Resources\Save_gearsCategoryResource;
 
 class TemplateController extends Controller
 {
-    public function createTemplate(Request $request, User $user){
-        $bring_gear = new Bring_gear;
-        $template = new Template;
-        
+    public function getTemplates(User $user){
         $user_id = $user->id;
-        $categories = $request->input(0);
-        $template_name = $request->input(1);
+        $templates = Template::where("user_id", $user_id)->groupBy("template_name")->orderBy("created_at", "asc")->get("template_name");
+        
+        return response()->json($templates);
+    }
 
-        $input = array();
+    public function createTemplate(Request $request, User $user){    
+        $user_id = $user->id;
+        $categories = $request->bring_gears;
+        $template_name = $request->template_name;
+
         foreach($categories as $category){
             foreach($category["gearList"] as $gear){
-                $input[] = [
+                Template::create([
                     "user_id" => $user_id,
                     "bring_gear_id" => $gear["id"],
                     "template_name" => $template_name,
-                    'created_at' => now(), 
-                    'updated_at' => now(),
-                ];
+                ]);
             }
         }
-        $template->insert($input);
-        return [];
+
+        return app()->make('App\Http\Controllers\TemplateController')->getTemplates(User::find($user_id));
     }
     
     public function useTemplate(Request $request, User $user){
@@ -61,14 +62,6 @@ class TemplateController extends Controller
         return Save_gearsCategoryResource::collection($categories);
     }
     
-    public function getTemplates(User $user){
-        $template = new Template;
-        
-        $user_id = $user->id;
-        $templates = $template->where("user_id", $user_id)->groupBy("template_name")->get("template_name");
-        
-        return response()->json($templates);
-    }
     
     public function deleteTemplate(Request $request, User $user){
         $user_id = $user->id;

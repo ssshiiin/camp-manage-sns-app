@@ -10,6 +10,8 @@ import { ModalsReducer } from "../modals/reducers";
 import { AlertsReducer } from "../alerts/reducers";
 import { MenusReducers } from "../menus/reducers";
 import { BringGearsReducer } from "../bring_gears/reducers";
+import { TemplatesReducers } from "../templates/reducers";
+
 
 
 export default function createStore(history) {
@@ -23,6 +25,7 @@ export default function createStore(history) {
       alerts: AlertsReducer,
       menus: MenusReducers,
       bring_gears: BringGearsReducer,
+      templates: TemplatesReducers
     }),
     applyMiddleware(
       routerMiddleware(history),

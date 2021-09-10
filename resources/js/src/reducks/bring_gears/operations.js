@@ -81,6 +81,25 @@ export const BringIs_check = (is_check, id) => {
   }
 }
 
+export const BringAllIs_check = (user_id, is_check) => {
+  return async (dispatch, getState) => {
+    console.log("BringAllIs_check")
+    const state = getState();
+
+    const url = `/api/bring_gears/update/all/${user_id}`;
+    const response = await axios.post(url,
+      {
+        is_check: is_check
+      })
+      .catch((err) => console.log(err));
+
+    dispatch(BringGearsActions({
+      bring_gears: response.data.data
+    }));
+    dispatch(getCountAllBring(user_id));
+  }
+}
+
 export const AddIs_check = (is_check, id) => {
   return async (dispatch, getState) => {
     console.log("AddIs_check")
@@ -89,10 +108,29 @@ export const AddIs_check = (is_check, id) => {
 
     const url = `/api/bring_gears/update/add/${id}`;
     const response = await axios.post(url,
-    {
+      {
+          is_check: is_check
+      })
+      .catch((err) => console.log(err));
+
+    dispatch(AddGearsActions({
+      add_gears: response.data.data
+    }));
+    dispatch(getCountAllAdd(user_id));
+  }
+}
+
+export const AddAllIs_check = (user_id, is_check) => {
+  return async (dispatch, getState) => {
+    console.log("AddAllIs_check")
+    const state = getState();
+
+    const url = `/api/bring_gears/update/add/all/${user_id}`;
+    const response = await axios.post(url,
+      {
         is_check: is_check
-    })
-    .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
 
     dispatch(AddGearsActions({
       add_gears: response.data.data

@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ShowBring = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleNestClick = () => {
     setOpen(!open);
@@ -46,17 +46,10 @@ const ShowBring = (props) => {
         role="listitem"
         button
         onClick={handleNestClick}
+        className={classes.subHeader}
       >
-        <ListItemText primary={
-          <div className={classes.subHeader}>
-            <ListSubheader component="div" id="gearList">
-              {`${props.bring_gear.category}`}
-            </ListSubheader>
-            <ListSubheader component="div" id="gearList">
-              {props.bring_gear.countTrue}/{props.bring_gear.countAll}  selected
-            </ListSubheader>
-          </div>
-        } />
+        <ListItemText primary={`${props.bring_gear.category}`} style={{ flex: "initial" }} />
+        <ListItemText secondary={`${props.bring_gear.countTrue}/${props.bring_gear.countAll}  selected`} style={{ flex: "1", marginLeft: 20 }} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>

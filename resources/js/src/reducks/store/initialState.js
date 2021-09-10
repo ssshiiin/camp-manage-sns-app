@@ -37,6 +37,7 @@ const initialState = {
     modal_gear_create_open: false,
     modal_post_edit_open: false,
     modal_bring_edit_open: false,
+    modal_templates_create_open: false,
   }, 
   alerts: {
     open: false,
@@ -52,6 +53,10 @@ const initialState = {
     add_gears: [],
     count_all: {},
     count_add_all: {},
+  },
+  templates: {
+    templates: [],
+    template_name: ""
   }
 }
 
