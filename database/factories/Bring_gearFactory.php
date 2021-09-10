@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Bring_gear::class, function (Faker $faker) {
     return [
-        'user_id' => 5,  
-        'gear_id' => 4,  
-        'is_check' => 0,  
+        'user_id' => 6,  
+        'gear_id' => 41,  
+        'is_check' => 1,  
     ];
 });

@@ -41,9 +41,14 @@ Route::group( ['middleware' => 'api'], function(){
     Route::get('/count/posts/{user}', 'PostController@getCountPost');
     Route::get('/count/gears/{user}', 'GearController@getCountGear');
     
-
-    
-    Route::get('/gear/{gear}', 'GearController@getGearIndex');
+    Route::get('/bring_gears/{user}', 'Bring_gearController@getUserBring_gears');
+    Route::get('/bring_gears/add/{user}', 'Bring_gearController@getAddGear');
+    Route::get('/bring_gears/countAll/{user}', 'Bring_gearController@getCountAll');
+    Route::get('/bring_gears/countAll/add/{user}', 'Bring_gearController@getCountAllAdd');
+    Route::post('/bring_gears/update/add/{gear}', 'Bring_gearController@updateAddIs_check');
+    Route::post('/bring_gears/update/{bring_gear}', 'Bring_gearController@updateIs_check');
+    Route::post('/bring_gears/create/{user}', 'Bring_gearController@createBring_gear');
+    Route::post('/bring_gears/delete/{user}', 'Bring_gearController@deleteBring_gear');
     
     
     
@@ -51,21 +56,12 @@ Route::group( ['middleware' => 'api'], function(){
     Route::post('/templates/use/{user}', 'TemplateController@useTemplate');
     Route::post('/templates/delete/{user}', 'TemplateController@deleteTemplate');
     
-    Route::post('/create/bring_gears/{user}', 'Bring_gearController@createBring_gear');
-    Route::post('/delete/bring_gears/{bring_gear}', 'Bring_gearController@deleteBring_gear');
     Route::post('/all/delete/bring_gears/{user}', 'Bring_gearController@allDeleteBring_gear');
-    Route::post('/update/gears/{gear}', 'GearController@postUserGearsIs_check');
-    Route::post('/update/bring_gears/{bring_gear}', 'Bring_gearController@postUserBring_gearsIs_check');
     Route::post('/update/save_gears/{save_gear}', 'Save_gearsController@postUserSave_gearsIs_check');
     
     
-    Route::get('/count/true/add/{user}', 'GearController@getCountTrue');
-    Route::get('/count/true/bring/{user}', 'Bring_gearController@getCountTrue');
-    Route::get('/count/true/{user}', 'Save_gearsController@getCountTrue');
     
     
     Route::get('/templates/{user}', 'TemplateController@getTemplates');
     Route::get('/save_gears/{user}', 'Save_gearsController@getUserSave_gears');
-    Route::get('/bring_gears/{user}', 'Bring_gearController@getUserBring_gears');
-    Route::get('/add/gears/{user}', 'GearController@getAddGear');
 });

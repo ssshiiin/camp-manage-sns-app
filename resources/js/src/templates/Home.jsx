@@ -8,7 +8,7 @@ import ScrollToTopOnMount from "./ScrollToTopOnMount";
 
 
 
-const Home = () => {
+const Home = (props) => {
   const dispatch = useDispatch();
   const [Allposts, setAllPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -39,7 +39,7 @@ const Home = () => {
           loader={loader}>
           <div className="home-main-timeline">
             {Allposts.map((post) =>
-              <PostsTimeLine post={post} key={post.id} />
+              <PostsTimeLine user_id={post.user_id} post={post} key={post.id} />
             )}
           </div>
         </InfiniteScroll>

@@ -38,12 +38,12 @@ export const ModalPostEditAction = (modalState) => {
   }
 } 
 
-export const MODAL_GEAR_EDIT_OPEN = "MODAL_GEAR_EDIT_OPEN";
-export const ModalGearEditAction = (modalState) => {
+export const MODAL_BRING_EDIT_OPEN = "MODAL_BRING_EDIT_OPEN";
+export const ModalBringEditAction = (modalState) => {
   return {
-    type: "MODAL_GEAR_EDIT_OPEN",
+    type: "MODAL_BRING_EDIT_OPEN",
     payload: {
-      modal_gear_edit_open: modalState.modal_gear_edit_open
+      modal_bring_edit_open: modalState.modal_bring_edit_open
     }
   }
 } 

@@ -28,41 +28,6 @@ class GearController extends Controller
         return new GetUserGearsResource($gear);
     }
     
-    public function getGearIndex(Gear $gear){
-        return $gear;
-    }
-    
-    public function getAddGear(User $user){
-        $gear = new Gear;
-        $bring_gear = new Bring_gear;
-        
-        $user_id = $user->id;
-    
-        $target = $gear->with("bring_gear")->get()->where("user_id", $user_id)->whereNull("bring_gear.gear_id");
-        
-        $categories = $target->groupBy("category")->values();
-        
-        return Bring_gearsCategoriesResource::collection($categories);
-    }
-    
-    public function getCountTrue(User $user, Gear $gear, Bring_gear $bring_gear){
-        $user_id = $user->id;
-    
-        $trueTarget = $gear->with("bring_gear")->get()->where("user_id", $user_id)->whereNull("bring_gear.gear_id");
-        
-        return response()->json([
-            "countTrue"=>$trueTarget->where("is_check", true)->count(), 
-            "countAll"=>$trueTarget->count()]);
-    }
-    
-    public function postUserGearsIs_check(Request $request, User $user, Bring_gear $bring_gear, Gear $gear){
-        $user_id = $gear->user_id;
-        
-        $gear->is_check = $request->is_check;
-        $gear->update();
-        
-        return app()->make('App\Http\Controllers\GearController')->getAddGear(User::find($user_id));
-    }
     
     public function getCountGear(User $user){
         $user_id = $user->id;
@@ -108,18 +73,18 @@ class GearController extends Controller
                 "image_path" => Storage::disk('s3')->url($path),
             ]);
         }
-
+        
         return app()->make('App\Http\Controllers\GearController')->getUserCategory(User::find($user_id));
     }
-
+    
     public function deleteGear(Gear $gear){
         $user_id = $gear->user_id;
         Gear_image::where("gear_id", $gear->id)->delete();
         $gear->delete();
-
+        
         return app()->make('App\Http\Controllers\GearController')->getUserCategory(User::find($user_id));
     }
-
+    
     public function updateGear(Request $request, Gear $gear){
         $user_id = $gear->user_id;
         $gear_id = $gear->id;
@@ -131,7 +96,7 @@ class GearController extends Controller
         $purchased_day = $request->input("purchasedDay");
         $price = $request->input("price");
         $amount = $request->input("amount");
-
+        
         ///プロフィール画像の変更があったか
         if (empty($fileImage)){
             Gear_image::where("gear_id", $gear_id)->delete();
@@ -143,7 +108,7 @@ class GearController extends Controller
                 ]);
             }
         }
-
+        
         $gear->gear_name = $gear_name;
         $gear->category = $category;
         $gear->brand = $brand;   
@@ -151,8 +116,17 @@ class GearController extends Controller
         $gear->price = $price;   
         $gear->amount = $amount;   
         $gear->update();
-
+        
         return app()->make('App\Http\Controllers\GearController')->getUserCategory(User::find($user_id));
     }
-
+    
+    public function getCountTrue(User $user, Gear $gear, Bring_gear $bring_gear){
+        $user_id = $user->id;
+    
+        $trueTarget = $gear->with("bring_gear")->get()->where("user_id", $user_id)->whereNull("bring_gear.gear_id");
+        
+        return response()->json([
+            "countTrue"=>$trueTarget->where("is_check", true)->count(), 
+            "countAll"=>$trueTarget->count()]);
+    }
 }  

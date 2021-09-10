@@ -22,6 +22,7 @@ import moment from "moment";
 import { TimeLineGearNested } from ".";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
+import { getAddBringGear } from "../reducks/bring_gears/operations";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,13 +61,8 @@ export default function postsTimeLine(props) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    getAddGear();
+    getAddBringGear(props.user_id);
   }, [])
-
-  const getAddGear = async () => {
-    const response = await axios.get(`/api/add/gears/1`);
-    setCategories(response.data.data);
-  }
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

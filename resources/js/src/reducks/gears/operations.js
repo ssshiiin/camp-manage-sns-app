@@ -1,7 +1,7 @@
 import axios from "axios";
 import { push } from "connected-react-router";
 import { AlertOpenAction, StoreAction, SuccessAction } from "../alerts/actions";
-import { ModalGearCreateAction, ModalGearEditAction } from "../modals/actions";
+import { ModalGearCreateAction } from "../modals/actions";
 import { MenuAction } from "../users/actions";
 import { CountGearsAction, CreateAmountAction, CreateBrandAction, CreateCategoryAction, CreateGearNameAction, CreateImagesAction, CreatePriceAction, CreatePurchasedDayAction, GearsAction } from "./actions";
 
@@ -191,9 +191,6 @@ export const updateGear = (gear_id) => {
     dispatch(AlertOpenAction({
       open: false
     }))
-    dispatch(ModalGearEditAction({
-      modal_gear_edit_open: false
-    }));
     dispatch(MenuAction({
       menu_open: null
     }));

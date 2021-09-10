@@ -2,7 +2,7 @@ import { StoreAction } from "../alerts/actions";
 import { handleAlertOpen } from "../alerts/operations";
 import { getShowGears } from "../gears/operations";
 import { CreateContentAction, CreateDayAction, CreateImagesAction, CreatePlaceAction } from "../posts/actions";
-import { ModalGearCreateAction, ModalGearEditAction, ModalPostCreateAction, ModalPostEditAction, ModalProfEditAction } from "./actions"
+import { ModalBringEditAction, ModalGearCreateAction, ModalPostCreateAction, ModalPostEditAction, ModalProfEditAction } from "./actions"
 
 export const handleProfEditModalOpen = () => {
   return (dispatch, getState) => {
@@ -72,11 +72,10 @@ export const handlePostEditModalOpen = () => {
   }
 }
 
-export const handleGearEditModalOpen = (gear_id) => {
-  return async (dispatch, getState) => {
-    await dispatch(getShowGears(gear_id));
-    dispatch(ModalGearEditAction({
-      modal_gear_edit_open: true
+export const handleBringEditModalOpen = (gear_id) => {
+  return (dispatch, getState) => {
+    dispatch(ModalBringEditAction({
+      modal_bring_edit_open: true
     }));
   }
 }
@@ -108,8 +107,8 @@ export const ModalClose = () => {
     dispatch(ModalGearCreateAction({
       modal_gear_create_open: false
     }));
-    dispatch(ModalGearEditAction({
-      modal_gear_edit_open: false
+    dispatch(ModalBringEditAction({
+      modal_bring_edit_open: false
     }));
   }
 }

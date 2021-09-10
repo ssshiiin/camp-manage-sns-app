@@ -1,0 +1,158 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import List from "@material-ui/core/List";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import Checkbox from "@material-ui/core/Checkbox";
+import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import MenuItem from '@material-ui/core/MenuItem';
+
+import SimpleModal from '../../src/components/SimpleModal';
+import { handleAlertClose, handleAlertOpen } from "../reducks/alerts/operations";
+import { handleBringEditModalOpen } from "../reducks/modals/operations";
+import { ShowAdd } from "../components";
+import { createBringGear, deleteBringGear, getCountAllAdd } from "../reducks/bring_gears/operations";
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: "auto"
+  },
+  cardHeader: {
+    padding: theme.spacing(1, 2)
+  },
+  list: {
+    width: 190,
+    height: 400,
+    backgroundColor: theme.palette.background.paper,
+    overflow: "auto"
+  },
+  button: {
+    margin: theme.spacing(0.5, 0)
+  },
+  nestRoot: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper
+  },
+  nested: {
+    paddingLeft: theme.spacing(2),
+  }
+}));
+
+// function not(a, b) {
+//   return a.filter((value) => b.indexOf(value) === -1);
+// }
+
+// function intersection(a, b) {
+//   return a.filter((value) => b.indexOf(value) !== -1);
+// }
+
+// function union(a, b) {
+//   return [...a, ...not(b, a)];
+// }
+
+const EditBring = React.forwardRef((props, ref) => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const mopen = selector.modals.modal_bring_edit_open;
+  const alertOpen = selector.alerts.open;
+  const bring_gears = selector.bring_gears.bring_gears;
+  const add_gears = selector.bring_gears.add_gears;
+  const count_bring = selector.bring_gears.count_all;
+  const count_add = selector.bring_gears.count_add_all;
+
+  const [open, setOpen] = React.useState(true);
+
+  const customList = (title, categories, type, count) => (
+    <Card>
+      <CardHeader
+        className={classes.cardHeader}
+        avatar={
+          <Checkbox
+            // onClick={handleToggleAll(categories)}
+            // checked={
+            //   numberOfChecked(categories) === categories.length && categories.length !== 0
+            // }
+            // indeterminate={
+            //   numberOfChecked(categories) !== categories.length &&
+            //   numberOfChecked(categories) !== 0
+            // }
+            disabled={categories.length === 0}
+            inputProps={{ "aria-label": "all gears selected" }}
+          />
+        }
+        title={title}
+        // subheader={`${numberOfChecked(categories)}/${categories.length} selected`}
+        subheader={`${count.countTrue}/${count.countAll}selected`}
+      />
+      <Divider />
+      <List className={classes.list} dense component="div" role="list">
+        {categories.map((category, i) =>
+          <ShowAdd category={category} key={i} type={type} />
+        )}
+        <ListItem />
+      </List>
+    </Card>
+  );
+
+  return (
+    <MenuItem>
+      <SimpleModal
+        alertOpen={alertOpen}
+        handleAlertOpen={handleAlertOpen}
+        handleAlertClose={handleAlertClose}
+        modalOpen={handleBringEditModalOpen}
+        open={mopen}
+        nav={"持ち物を編集する"}
+        body={
+          <Grid
+            container
+            spacing={2}
+            justifyContent="center"
+            alignItems="center"
+            className={classes.root}
+          >
+            <Grid item>{customList("持ち物", bring_gears, "bring", count_bring)}</Grid>
+            <Grid item>
+              <Grid container direction="column" alignItems="center">
+                <Button
+                  variant="outlined"
+                  size="small"
+                  className={classes.button}
+                  onClick={() => dispatch(deleteBringGear(props.user_id))}
+                  // disabled={leftChecked.length === 0}
+                  aria-label="move selected right"
+                >
+                  &gt;
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  className={classes.button}
+                  onClick={() => dispatch(createBringGear(props.user_id))}
+                  // disabled={rightChecked.length === 0}
+                  aria-label="move selected left"
+                >
+                  &lt;
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid item>{customList("所持ギア", add_gears, "add", count_add)}</Grid>
+          </Grid>}
+      />
+    </MenuItem >
+  );
+})
+
+export default EditBring;

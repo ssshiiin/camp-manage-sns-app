@@ -23,7 +23,7 @@ export const ModalsReducer = (state = initialState.modals, action) => {
         ...state,
         ...action.payload
       }
-    case Actions.MODAL_GEAR_EDIT_OPEN:
+    case Actions.MODAL_BRING_EDIT_OPEN:
       return {
         ...state,
         ...action.payload

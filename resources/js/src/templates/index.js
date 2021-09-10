@@ -1,5 +1,6 @@
 export {default as HomeHeader} from  "./HomeHeader";
 export {default as ProfileHeader} from  "./ProfileHeader";
+export {default as BringHeader} from  "./BringHeader";
 export {default as SideBar} from "./SideBar";
 export {default as Home} from "./Home";
 
@@ -12,5 +13,8 @@ export {default as CreateGear} from "./CreateGear";
 export {default as PostNav} from "./PostNav";
 export {default as EditPost} from "./EditPost";
 export {default as EditGear} from "./EditGear";
+export {default as EditBring} from "./EditBring";
 export {default as GearNav} from "./GearNav";
+
+export {default as Bring} from "./Bring";
 

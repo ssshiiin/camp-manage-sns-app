@@ -26,7 +26,7 @@ const SideBar = () => {
       <ul className="side-nav">
         <li onClick={() => dispatch(push("/"))}><img src={'/images/ホームアイコン.jpeg'} width="36px" height="36px" /><p>Home</p></li>
         <li onClick={() => dispatch(push(`/${user_id}/schedule`))}><img src={'/images/schedule.jpeg'} width="36px" height="36px" /><p>Schedule</p></li>
-        <li onClick={() => dispatch(push(`/${user_id}/bring_lists`))}><img src={'/images/ランタンアイコン1.jpeg'} width="36px" height="36px" /><p>Gear</p></li>
+        <li onClick={() => dispatch(push(`/${user_id}/bring`))}><img src={'/images/ランタンアイコン1.jpeg'} width="36px" height="36px" /><p>Gear</p></li>
         <li onClick={() => dispatch(push(`/${user_id}/dm`))}><img src={'/images/メールの無料アイコンその8.jpeg'} width="36px" height="36px" /><p>Messages</p></li>
         <li onClick={() => dispatch(pushMyProfile(user_id))} ><img src={'/images/履歴書アイコン6.jpeg'} width="36px" height="36px" /><p>Profile</p></li>
       </ul>
