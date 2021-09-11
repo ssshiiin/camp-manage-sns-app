@@ -43,11 +43,11 @@ class ScrapeNap extends Command
     {
         $this->truncateTables();
         $this->saveUrls();
-        $this->saveInfo();
+        $this->saveInfos();
 
     }
 
-    private function saveInfo(){
+    private function saveInfos(){
         foreach (Nap_url::all() as $napUrl){
             $url = $this::HOST . $napUrl->url;
 
@@ -56,6 +56,8 @@ class ScrapeNap extends Command
             $basic_info = $this->getCampNameAndAddress($crawler);
             $camp_name = $basic_info[0];
             $address = $basic_info[1];
+
+            dump($camp_name);
 
             $sales_info = $this->getCheckInAndCheckOut($crawler);
             $checkIn = $sales_info[2];
@@ -67,7 +69,6 @@ class ScrapeNap extends Command
                 'check_in' => $checkIn,
                 'check_out' => $checkOut,
             ]);
-            break;
             sleep(60);
         }
     }
@@ -87,11 +88,12 @@ class ScrapeNap extends Command
     private function truncateTables()
     {
         DB::table('nap_urls')->truncate();
+        DB::table('nap_infos')->truncate();
     }
 
     private function saveUrls()
     {
-        foreach(range(1, 1) as $page){
+        foreach(range(1, 5) as $page){
             dump($page);
             $url = $this::HOST . '/list?sortId=21&pageId=' . $page;
     
