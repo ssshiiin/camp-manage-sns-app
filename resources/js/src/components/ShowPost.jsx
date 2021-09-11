@@ -67,13 +67,7 @@ const ShowPost = (props) => {
   const login_user = selector.users.user_id;
 
   useEffect(() => {
-    getAddGear();
   }, []);
-
-  const getAddGear = async () => {
-    const response = await axios.get(`/api/add/gears/1`);
-    setCategories(response.data.data);
-  }
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

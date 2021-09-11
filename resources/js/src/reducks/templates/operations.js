@@ -1,5 +1,9 @@
+import { AlertOpenAction, StoreAction, SuccessAction } from "../alerts/actions";
+import { BringGearsActions } from "../bring_gears/actions";
+import { ModalTemplatesCreateAction } from "../modals/actions";
 import { createTemplatesAction, getTemplatesAction } from "./actions";
-import { StoreAction } from "../alerts/actions";
+
+
 
 export const getTemplates = (user_id) => {
   return async (dispatch, getState) => {
@@ -9,6 +13,31 @@ export const getTemplates = (user_id) => {
   
     dispatch(getTemplatesAction({
       templates: response.data
+    }));
+  }
+}
+
+export const useTemplate = (useTemplate_name, user_id) => {
+  return async (dispatch, getState) => {
+    console.log("useTemplates");
+    const url = `/api/templates/use/${user_id}`;
+    const response = await axios.post(url
+    , 
+    {
+      useTemplate_name: useTemplate_name
+    });
+
+    dispatch(BringGearsActions({
+      bring_gears: response.data.data
+    }));
+    dispatch(SuccessAction({
+      success: true
+    }));
+    dispatch(AlertOpenAction({
+      open: false
+    }))
+    dispatch(StoreAction({
+      store: true
     }));
   }
 }
@@ -32,6 +61,18 @@ export const createTemplates = () => {
   
     dispatch(getTemplatesAction({
       templates: response.data
+    }));
+    dispatch(SuccessAction({
+      success: true
+    }));
+    dispatch(AlertOpenAction({
+      open: false
+    }))
+    dispatch(ModalTemplatesCreateAction({
+      modal_templates_create_open: false
+    }));
+    dispatch(StoreAction({
+      store: true
     }));
   }
 }

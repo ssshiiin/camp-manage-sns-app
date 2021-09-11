@@ -37,29 +37,21 @@ class TemplateController extends Controller
     
     public function useTemplate(Request $request, User $user){
         $user_id = $user->id;
-        $template_name = $request->input(0);
+        $template_name = $request->useTemplate_name;
         
-        Bring_gear::where("user_id", $user_id)->each(function($i){
-            $i->delete();
+
+        Bring_gear::where("user_id", $user_id)->each(function($bring_gear){
+            $bring_gear->delete();
         });
-        
-        $bring_gear = Bring_gear::withTrashed()->whereNotNull("id")->with(["template" => function ($query) use($template_name){
-            $query->where('templates.template_name', $template_name);
-        }])->with("gear")->where("user_id", $user_id)->get();
 
-        $collection = collect([]);
-
-        $bring_gear->each(function ($i)use($collection, $bring_gear){
-            if($bring_gear->find($i)->template->isNotEmpty()){
-                $collection->push($bring_gear->find($i));  
-                $bring_gear->find($i)->restore();
+        Bring_gear::withTrashed()->where("user_id", $user_id)->with("template", "gear")->get()->each(function ($item) use ($template_name){
+            if ($item->template->where("template_name", $template_name)->isNotEmpty()){
+                $item->restore();
             }
+            
         });
         
-        
-        $categories = $collection->where("user_id", $user_id)->groupBy("gear.category")->values();
-        
-        return Save_gearsCategoryResource::collection($categories);
+        return app()->make('App\Http\Controllers\Bring_gearController')->getUserBring_gears(User::find($user_id));
     }
     
     

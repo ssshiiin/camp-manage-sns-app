@@ -38,6 +38,7 @@ const initialState = {
     modal_post_edit_open: false,
     modal_bring_edit_open: false,
     modal_templates_create_open: false,
+    modal_templates_use_open: false,
   }, 
   alerts: {
     open: false,

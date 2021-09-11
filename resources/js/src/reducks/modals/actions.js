@@ -56,4 +56,14 @@ export const ModalTemplatesCreateAction = (modalState) => {
       modal_templates_create_open: modalState.modal_templates_create_open
     }
   }
+}
+
+export const MODAL_TEMPLATES_USE_OPEN = "MODAL_TEMPLATES_USE_OPEN";
+export const ModalTemplatesUseAction = (modalState) => {
+  return {
+    type: "MODAL_TEMPLATES_USE_OPEN",
+    payload: {
+      modal_templates_use_open: modalState.modal_templates_use_open
+    }
+  }
 } 

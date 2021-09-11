@@ -20,5 +20,6 @@ export {default as EditGear} from "./EditGear";
 export {default as Bring} from "./Bring";
 export {default as EditBring} from "./EditBring";
 export {default as CreateTemplates} from "./CreateTemplates";
+export {default as UseTemplates} from "./UseTemplates";
 
 

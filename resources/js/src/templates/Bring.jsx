@@ -18,6 +18,7 @@ import { ShowBring } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getAddBringGear, getBringGear, getCountAllAdd, getCountAllBring } from '../reducks/bring_gears/operations';
+import { getTemplates } from '../reducks/templates/operations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,19 +51,12 @@ const Bring = (props) => {
     dispatch(getAddBringGear(user_id));
     dispatch(getCountAllBring(user_id));
     dispatch(getCountAllAdd(user_id));
-    // getTemplates();
+    dispatch(getTemplates(user_id));
   }, [])
 
   const handleClick = () => {
     setOpen(!open);
   };
-
-  const useTemplates = async (useTemplate_name) => {
-    const response = await axios.post(`/api/templates/use/${user_id}`
-      , [useTemplate_name]);
-    setCategories(response.data.data);
-    getTemplates();
-  }
 
   const deleteTemplate = async (deleteTemplate_name) => {
     const response = await axios.post(`/api/templates/delete/${user_id}`
@@ -70,13 +64,6 @@ const Bring = (props) => {
 
     getTemplates();
     getGear();
-    getCountBring();
-  }
-
-  const getTemplates = async () => {
-    const response = await axios.get(`/api/templates/${user_id}`);
-
-    setTemplates(response.data);
     getCountBring();
   }
 

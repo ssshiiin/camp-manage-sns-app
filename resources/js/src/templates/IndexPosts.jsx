@@ -9,7 +9,6 @@ const IndexPosts = (props) => {
   const selector = useSelector((state) => state);
   const user_id = props.match.params.id;
   const posts = selector.posts.posts;
-  console.log(posts)
 
   useEffect(() => {
     dispatch(getPosts(user_id));

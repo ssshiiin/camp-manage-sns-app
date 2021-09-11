@@ -2,7 +2,7 @@ import { StoreAction } from "../alerts/actions";
 import { handleAlertOpen } from "../alerts/operations";
 import { getShowGears } from "../gears/operations";
 import { CreateContentAction, CreateDayAction, CreateImagesAction, CreatePlaceAction } from "../posts/actions";
-import { ModalBringEditAction, ModalGearCreateAction, ModalPostCreateAction, ModalPostEditAction, ModalProfEditAction, ModalTemplatesCreateAction } from "./actions"
+import { ModalBringEditAction, ModalGearCreateAction, ModalPostCreateAction, ModalPostEditAction, ModalProfEditAction, ModalTemplatesCreateAction, ModalTemplatesUseAction } from "./actions"
 
 export const handleProfEditModalOpen = () => {
   return (dispatch, getState) => {
@@ -88,6 +88,14 @@ export const handleTemplatesCreateModalOpen = () => {
   }
 }
 
+export const handleTemplatesUseModalOpen = () => {
+  return (dispatch, getState) => {
+    dispatch(ModalTemplatesUseAction({
+      modal_templates_use_open: true
+    }));
+  }
+}
+
 export const ModalClose = () => {
   return (dispatch, getState) => {
     const state = getState();
@@ -120,6 +128,9 @@ export const ModalClose = () => {
     }));
     dispatch(ModalTemplatesCreateAction({
       modal_templates_create_open: false
+    }));
+    dispatch(ModalTemplatesUseAction({
+      modal_templates_use_open: false
     }));
   }
 }

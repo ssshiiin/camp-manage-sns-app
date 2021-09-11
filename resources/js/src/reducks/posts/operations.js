@@ -31,6 +31,7 @@ export const getShowPost = (user_id, post_id) => {
 
     const response = await axios.get(url)
       .catch(err => { console.log('err:', err); });
+    
     dispatch(ShowPostAction({
       post: response.data.data
     }));
@@ -108,6 +109,9 @@ export const createPost = () => {
     dispatch(MenuAction({
       menu_open: null
     }));
+    dispatch(StoreAction({
+      store: true
+    }));
     dispatch(push(`/${user_id}`));
   }
 }
@@ -158,6 +162,9 @@ export const updatePost = (post_id) => {
     dispatch(PostNavAction({
       post_nav: null
     }));
+    dispatch(StoreAction({
+      store: true
+    }));
     dispatch(push(`/${user_id}`));
   }
 }
@@ -180,6 +187,9 @@ export const handleImageChange = (event) => {
     dispatch(StoreAction({
       store: false
     }));
+    dispatch(SuccessAction({
+      success: false
+    }));
   }
 };
 
@@ -190,6 +200,9 @@ export const handlePlaceChange = (event) => {
     }));
     dispatch(StoreAction({
       store: false
+    }));
+    dispatch(SuccessAction({
+      success: false
     }));
   }
 };
@@ -203,6 +216,9 @@ export const handleDayChange = (date) => {
     dispatch(StoreAction({
       store: false
     }));
+    dispatch(SuccessAction({
+      success: false
+    }));
   }
 };
 
@@ -213,6 +229,9 @@ export const handleContentChange = (event) => {
     }));
     dispatch(StoreAction({
       store: false
+    }));
+    dispatch(SuccessAction({
+      success: false
     }));
   }
 };

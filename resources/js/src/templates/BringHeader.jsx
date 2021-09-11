@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MenuAction } from '../reducks/users/actions';
 import EditBring from './EditBring';
 import CreateTemplates from './CreateTemplates';
+import { UseTemplates } from '.';
 
 
 
@@ -90,8 +91,9 @@ function BringHeader(props) {
           open={Boolean(open)}
           onClose={handleClose}
         >
-          <CreateTemplates />
           <EditBring />
+          <UseTemplates />
+          <CreateTemplates />
           <MenuItem>
             設定
           </MenuItem>

@@ -124,6 +124,9 @@ export const createGear = () => {
     dispatch(MenuAction({
       menu_open: null
     }));
+    dispatch(StoreAction({
+      store: true
+    }));
   }
 }
 
@@ -194,6 +197,9 @@ export const updateGear = (gear_id) => {
     dispatch(MenuAction({
       menu_open: null
     }));
+    dispatch(StoreAction({
+      store: true
+    }));
   }
 }
 
@@ -216,6 +222,9 @@ export const handleImageChange = (event) => {
     dispatch(StoreAction({
       store: false
     }));
+    dispatch(SuccessAction({
+      success: false
+    }));
   }
 };
 
@@ -226,6 +235,9 @@ export const handleGearNameChange = (event) => {
     }));
     dispatch(StoreAction({
       store: false
+    }));
+    dispatch(SuccessAction({
+      success: false
     }));
   }
 };
@@ -238,6 +250,9 @@ export const handleCategoryChange = (event) => {
     dispatch(StoreAction({
       store: false
     }));
+    dispatch(SuccessAction({
+      success: false
+    }));
   }
 };
 
@@ -248,6 +263,9 @@ export const handleBrandChange = (event) => {
     }));
     dispatch(StoreAction({
       store: false
+    }));
+    dispatch(SuccessAction({
+      success: false
     }));
   }
 };
@@ -260,6 +278,9 @@ export const handlePriceChange = (event) => {
     dispatch(StoreAction({
       store: false
     }));
+    dispatch(SuccessAction({
+      success: false
+    }));
   }
 };
 
@@ -271,6 +292,9 @@ export const handleAmountChange = (event) => {
     dispatch(StoreAction({
       store: false
     }));
+    dispatch(SuccessAction({
+      success: false
+    }));
   }
 };
 
@@ -281,6 +305,9 @@ export const handlePurchasedDayChange = (date) => {
     }));
     dispatch(StoreAction({
       store: false
+    }));
+    dispatch(SuccessAction({
+      success: false
     }));
   }
 };
