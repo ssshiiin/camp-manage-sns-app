@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCampInfosTable extends Migration
+class CreateNapUrlsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateCampInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('camp_infos', function (Blueprint $table) {
+        Schema::create('nap_urls', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('url');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateCampInfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('camp_infos');
+        Schema::dropIfExists('nap_urls');
     }
 }
