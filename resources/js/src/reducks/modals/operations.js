@@ -104,6 +104,9 @@ export const ModalClose = () => {
 
     if (!store) {
       dispatch(handleAlertOpen());
+      dispatch(StoreAction({
+        store: true
+      }));
       return;
     }
     else {

@@ -19,6 +19,9 @@ Route::get('/test', function () {
     return view("test");
 });
 
+Route::get('/auth/redirect', 'GoogleLoginController@getGoogleAuth');
+Route::get('/login/callback', 'GoogleLoginController@authGoogleCallback');
+
 Route::get('/{any}', function () {
     return view('index');
 })->where('any', '.*');
@@ -28,3 +31,4 @@ Route::get('/{any}', function () {
 //         return view('index');
 //     })->where('any', '.*');
 // });
+

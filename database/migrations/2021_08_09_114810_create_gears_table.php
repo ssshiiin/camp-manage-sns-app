@@ -19,10 +19,10 @@ class CreateGearsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('gear_name');
             $table->string('category');
-            $table->string('brand');
-            $table->bigInteger('price');
-            $table->integer('amount');
-            $table->date('purchased_day');
+            $table->string('brand')->nullable();
+            $table->bigInteger('price')->nullable();
+            $table->integer('amount')->nullable();
+            $table->date('purchased_day')->nullable();
             $table->boolean('is_check');
             $table->timestamps();
         });

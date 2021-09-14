@@ -10,9 +10,6 @@ export const handleAlertOpen = () => {
 export const handleAlertClose = (event, reason) => {
   return (dispatch, getState) => {
     console.log(reason)
-    if (reason === 'clickaway') {
-      return;
-    }
     dispatch(AlertOpenAction({
       open: false
     }))

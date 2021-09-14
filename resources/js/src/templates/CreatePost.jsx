@@ -73,6 +73,8 @@ const CreatePost = React.forwardRef((props, ref) => {
   const open = selector.modals.modal_post_create_open;
   const alertOpen = selector.alerts.open;
 
+  console.log(selector.posts);
+
 
 
   return (
@@ -112,7 +114,7 @@ const CreatePost = React.forwardRef((props, ref) => {
                 id="outlined-textarea"
                 label="キャンプ場"
                 defaultValue={place}
-                placeholder="Placeholder"
+                placeholder="ふもとっぱら"
                 variant="outlined"
                 onChange={(event) => dispatch(handlePlaceChange(event))}
               />
@@ -121,7 +123,7 @@ const CreatePost = React.forwardRef((props, ref) => {
                   <KeyboardDatePicker
                     margin="normal"
                     id="date-picker-dialog"
-                    label="購入日"
+                    label="日付"
                     format="yyyy/MM/dd"
                     value={day}
                     variant="outlined"
