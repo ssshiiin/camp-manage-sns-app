@@ -11,6 +11,7 @@ import { AlertsReducer } from "../alerts/reducers";
 import { MenusReducers } from "../menus/reducers";
 import { BringGearsReducer } from "../bring_gears/reducers";
 import { TemplatesReducers } from "../templates/reducers";
+import { SchedulesReducers } from "../schedules/reducers";
 
 
 
@@ -25,7 +26,8 @@ export default function createStore(history) {
       alerts: AlertsReducer,
       menus: MenusReducers,
       bring_gears: BringGearsReducer,
-      templates: TemplatesReducers
+      templates: TemplatesReducers,
+      schedules: SchedulesReducers
     }),
     applyMiddleware(
       routerMiddleware(history),

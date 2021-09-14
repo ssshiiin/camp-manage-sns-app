@@ -39,6 +39,10 @@ a:active {
   color: black;
 }
 
+.hidden {
+  display: none;
+}
+
 .BringNestedGear span {
   font-size: 0.8em;
 }

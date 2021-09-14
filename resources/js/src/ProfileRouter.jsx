@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { useDispatch, useSelector } from "react-redux";
-import { UserProfile, IndexPosts, IndexGearsNav } from './templates';
+import { UserProfile, IndexPosts, IndexGearsNav, Schedule } from './templates';
 import { ProfileNav, ShowPost } from './components';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';

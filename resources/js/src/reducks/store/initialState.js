@@ -58,6 +58,17 @@ const initialState = {
   templates: {
     templates: [],
     template_name: ""
+  },
+  schedules: {
+    nap_camp: "",
+    nap_check_in: "",
+    nap_check_out: "",
+    nap_address: "",
+    dayout_camp: "",
+    dayout_tel: "",
+    dayout_home_page: "",
+    schedule_place: "",
+    schedule_day: ""
   }
 }
 
