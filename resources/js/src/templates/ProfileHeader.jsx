@@ -46,7 +46,13 @@ const useStyles = makeStyles((theme) => ({
     transform: "translate(0, -50%)",
     backgroundColor: "white",
     color: "black"
-  }
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+  },
+  submit: {
+
+  },
 
 }));
 
@@ -56,6 +62,7 @@ function ProfileHeader(props) {
   const user_id = props.match.params.id;
   const login_user = selector.users.user_id;
   const open = selector.users.menu_open;
+  const [csrf_token, setCsrf_token] = useState(document.head.querySelector('meta[name="csrf-token"]').content);
 
   const handleClick = (event) => {
     dispatch(MenuAction({
@@ -93,6 +100,17 @@ function ProfileHeader(props) {
           <CreatePost />
           <CreateGear />
           <EditProfile />
+          <MenuItem>
+            <form className={classes.form} noValidate method="POST" action="logout">
+              <input type="hidden" name="_token" value={csrf_token} />
+              <button
+                type="submit"
+                style={{ border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left" }}
+              >
+                ログアウト
+              </button>
+            </form>
+          </MenuItem>
           <MenuItem>
             設定
           </MenuItem>
