@@ -1,3 +1,5 @@
+import { now } from "lodash";
+
 const initialState = {
   users: {
     isSignedIn: false,
@@ -24,7 +26,7 @@ const initialState = {
     count_gears: 0,
     gear_name: "",
     gear_category: "",
-    gear_purchased_day: new Date(),
+    gear_purchased_day: now(),
     gear_brand: "",
     gear_price: "",
     gear_amount: "",

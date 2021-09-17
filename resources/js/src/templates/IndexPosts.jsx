@@ -12,7 +12,7 @@ const IndexPosts = (props) => {
 
   useEffect(() => {
     dispatch(getPosts(user_id));
-  }, []);
+  }, [user_id]);
 
 
   return (

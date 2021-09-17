@@ -19,7 +19,7 @@ class PostController extends Controller
     //全ユーザーのpostsを取得
     public function getPosts(Request $request)
     {
-        $posts = Post::orderBy("created_at", "DESC")->simplePaginate(5);
+        $posts = Post::orderBy("created_at", "DESC")->simplePaginate(10);
         
         //profilesのimage_pathを追加する
         return GetPostsResource::collection($posts);

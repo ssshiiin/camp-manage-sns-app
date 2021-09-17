@@ -24,6 +24,7 @@ import {
   handleAmountChange, handleBrandChange, handleCategoryChange, handleGearNameChange,
   handleImageChange, handlePriceChange, handlePurchasedDayChange
 } from '../reducks/gears/operations';
+import { now } from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   root: {

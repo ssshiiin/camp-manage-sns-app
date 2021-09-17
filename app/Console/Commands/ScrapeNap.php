@@ -10,6 +10,7 @@ use App\Nap_info;
 class ScrapeNap extends Command
 {
     const HOST = 'https://www.nap-camp.com';
+    const FILE_PATH = 'app/nap_infos.csv';
     /**
      * The name and signature of the console command.
      *
@@ -41,9 +42,10 @@ class ScrapeNap extends Command
      */
     public function handle()
     {
-        $this->truncateTables();
-        $this->saveUrls();
-        $this->saveInfos();
+        // $this->truncateTables();
+        // $this->saveUrls();
+        // $this->saveInfos();
+        // $this->exportCsv();
 
     }
 
@@ -69,6 +71,7 @@ class ScrapeNap extends Command
                 'check_in' => $checkIn,
                 'check_out' => $checkOut,
             ]);
+          
             sleep(60);
         }
     }
@@ -93,7 +96,7 @@ class ScrapeNap extends Command
 
     private function saveUrls()
     {
-        foreach(range(1, 5) as $page){
+        foreach(range(1, 100) as $page){
             dump($page);
             $url = $this::HOST . '/list?sortId=21&pageId=' . $page;
     
@@ -110,6 +113,15 @@ class ScrapeNap extends Command
 
             sleep(60);
         }
+    }
 
+    private function exportCsv(){
+        $file = fopen(storage_path($this::FILE_PATH), "w");
+
+        fputcsv($file, ["camp_app", "address", "check_in", "check_out"]);
+
+        foreach(Nap_info::all() as $info){
+            fputcsv($file, [$info->camp_name, $info->address, $info->check_in, $info->check_out]);
+        }
     }
 }

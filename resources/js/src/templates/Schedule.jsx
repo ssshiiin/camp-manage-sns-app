@@ -15,6 +15,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { handleSchedulePlaceChange, searchSchedulePlace } from '../reducks/schedules/operations';
+import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,6 +93,7 @@ const Schedule = () => {
 
   return (
     <>
+      <ScrollToTopOnMount />
       <form className={classes.root} noValidate autoComplete="off">
         <div className={classes.textForm}>
           <TextField

@@ -15,7 +15,7 @@ class Bring_gearController extends Controller
     public function getUserBring_gears(User $user){
         $user_id = $user->id;
         
-        $categories = Bring_gear::with("gear")->get()->where("user_id", $user_id)->groupBy("gear.category")->sortByDesc("gear.category")->values()
+        $categories = Bring_gear::with("gear")->get()->where("user_id", $user_id)->sortByDesc("gear.category")->groupBy("gear.category")->values()
 ;
         
         return Save_gearsCategoryResource::collection($categories);
@@ -28,7 +28,7 @@ class Bring_gearController extends Controller
     
         $target = Gear::with("bring_gear")->get()->where("user_id", $user_id)->whereNull("bring_gear.gear_id");
         
-        $categories = $target->groupBy("category")->sortByDesc("gear.category")->values();
+        $categories = $target->sortByDesc("category")->groupBy("category")->values();
         
         return Bring_gearsCategoriesResource::collection($categories);
     }

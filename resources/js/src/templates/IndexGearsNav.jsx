@@ -50,7 +50,7 @@ export default function IndexGearsNav(props) {
 
   useEffect(() => {
     dispatch(getGears(user_id));
-  }, []);
+  }, [user_id]);
 
 
   const handleChange = (event, newValue) => {

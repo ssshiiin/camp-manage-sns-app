@@ -288,7 +288,7 @@ body #root main .main-category .profile .profile-main .profile-main-posts .profi
   font-family: "Raleway", "ヒラギノ角ゴシック", sans-serif;
 }
 body #root main .main-category .gear {
-  width: calc(100% - 259px);
+  width: 100%;
 }
 body #root main .sub-category {
   background-color: #fafafa;

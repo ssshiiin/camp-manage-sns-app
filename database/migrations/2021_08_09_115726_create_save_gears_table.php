@@ -19,7 +19,6 @@ class CreateSaveGearsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->bigInteger('gear_id')->unsigned();
             $table->foreign('gear_id')->references('id')->on('gears');
-            $table->boolean('is_check');
             $table->timestamps();
         });
     }

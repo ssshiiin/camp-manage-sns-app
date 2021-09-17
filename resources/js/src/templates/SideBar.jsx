@@ -16,6 +16,13 @@ const SideBar = () => {
     dispatch(SignIn())
   }, []);
 
+  const handleMyPageClick = () => {
+    if (user_id === undefined) {
+      dispatch(push("/login"));
+    } else {
+      dispatch(pushMyProfile(user_id));
+    }
+  }
 
 
   return (
@@ -28,9 +35,9 @@ const SideBar = () => {
         <li onClick={() => dispatch(push(`/${user_id}/schedule`))}><img src={'/images/schedule.jpeg'} width="36px" height="36px" /><p>Schedule</p></li>
         <li onClick={() => dispatch(push(`/${user_id}/bring`))}><img src={'/images/ランタンアイコン1.jpeg'} width="36px" height="36px" /><p>Gear</p></li>
         <li onClick={() => dispatch(push(`/${user_id}/dm`))}><img src={'/images/メールの無料アイコンその8.jpeg'} width="36px" height="36px" /><p>Messages</p></li>
-        <li onClick={() => dispatch(pushMyProfile(user_id))} ><img src={'/images/履歴書アイコン6.jpeg'} width="36px" height="36px" /><p>Profile</p></li>
+        <li onClick={handleMyPageClick} ><img src={'/images/履歴書アイコン6.jpeg'} width="36px" height="36px" /><p>Profile</p></li>
       </ul>
-    </nav>
+    </nav >
   )
 }
 

@@ -10,6 +10,7 @@ use App\Dayout_info;
 class ScrapeDayOut extends Command
 {
     const HOST = 'https://dayout.today';
+    const FILE_PATH = 'app/dayout_infos.csv';
     /**
      * The name and signature of the console command.
      *
@@ -41,9 +42,10 @@ class ScrapeDayOut extends Command
      */
     public function handle()
     {
-        $this->truncateTables();
+        // $this->truncateTables();
         // $this->saveUrls();
-        $this->saveInfos();
+        // $this->saveInfos();
+        $this->exportCsv();
     }
 
     private function saveInfos(){
@@ -65,7 +67,6 @@ class ScrapeDayOut extends Command
 
 
             dump($camp_name);
-            dump($tel);
 
             Dayout_info::create([
                 'camp_name' => $camp_name[0],
@@ -97,12 +98,12 @@ class ScrapeDayOut extends Command
 
     private function truncateTables()
     {
-        // DB::table('dayout_urls')->truncate();
+        DB::table('dayout_urls')->truncate();
         DB::table('dayout_infos')->truncate();
     }
 
     private function saveUrls(){
-        foreach (range(1, 3) as $page){
+        foreach (range(1, 60) as $page){
             dump($page);
             $url = $this::HOST . '/campsites?page=' . $page;
 
@@ -120,6 +121,16 @@ class ScrapeDayOut extends Command
             DB::table('dayout_urls')->insert($urls);
 
             sleep(60);
+        }
+    }
+
+    private function exportCsv(){
+        $file = fopen(storage_path($this::FILE_PATH), "w");
+
+        fputcsv($file, ["camp_app", "tel", "home_page"]);
+
+        foreach(dayout_info::all() as $info){
+            fputcsv($file, [$info->camp_name, $info->tel, $info->home_page]);
         }
     }
 }

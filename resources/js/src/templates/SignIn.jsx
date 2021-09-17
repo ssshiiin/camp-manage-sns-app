@@ -58,7 +58,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          camin
         </Typography>
         <form className={classes.form} noValidate method="POST" action="login">
           <input type="hidden" name="_token" value={csrf_token} />
@@ -84,11 +84,13 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-            name="remember"
-          />
+          <Grid container>
+            <Grid item xs={12}>
+              <Link href="/auth/redirect" variant="body2">
+                Do you have a Google account?
+              </Link>
+            </Grid>
+          </Grid>
           <Button
             type="submit"
             fullWidth
@@ -118,3 +120,4 @@ export default function SignIn() {
     </Container>
   );
 }
+

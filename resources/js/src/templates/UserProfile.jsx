@@ -18,7 +18,7 @@ const UserProfile = (props) => {
     dispatch(getProfile(user_id));
     dispatch(getCountPosts(user_id));
     dispatch(getCountGears(user_id));
-  }, [])
+  }, [user_id])
 
   return (
     <div className="profile-introduce">
