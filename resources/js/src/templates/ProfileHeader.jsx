@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Typography from "@material-ui/core/Typography";
 
 
 import { CreatePost, EditProfile, CreateGear } from './index';
@@ -64,6 +65,8 @@ function ProfileHeader(props) {
   const open = selector.users.menu_open;
   const [csrf_token, setCsrf_token] = useState(document.head.querySelector('meta[name="csrf-token"]').content);
 
+  const app_name = selector.users.app_name;
+
   const handleClick = (event) => {
     dispatch(MenuAction({
       menu_open: event.currentTarget
@@ -120,7 +123,11 @@ function ProfileHeader(props) {
   }
   else {
     return (
-      <div>他人</div>
+      <>
+        <Typography variant="h5" component="h2">
+          {app_name} さんのページです
+        </Typography>
+      </>
     )
   }
 }

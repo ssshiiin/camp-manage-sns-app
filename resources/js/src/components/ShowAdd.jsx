@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShowAdd = (props) => {
+  console.log("-----ShowAdd");
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);

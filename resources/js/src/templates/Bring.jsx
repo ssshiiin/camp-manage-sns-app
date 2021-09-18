@@ -23,19 +23,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Bring = (props) => {
+  console.log("-----Bring");
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const user_id = props.match.params.id;
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [check, setCheck] = React.useState(0);
 
   const bring_gears = selector.bring_gears.bring_gears;
   const count_all = selector.bring_gears.count_all;
-  const [count, setCount] = useState(0);
-  const [templates, setTemplates] = useState([]);
-
-  console.log(selector)
 
   useEffect(() => {
     dispatch(getBringGear(user_id));
@@ -44,10 +39,6 @@ const Bring = (props) => {
     dispatch(getCountAllAdd(user_id));
     dispatch(getTemplates(user_id));
   }, [])
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
 
   const deleteTemplate = async (deleteTemplate_name) => {
     const response = await axios.post(`/api/templates/delete/${user_id}`

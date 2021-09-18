@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowBring = (props) => {
+const ShowBring = React.memo((props) => {
+  console.log("-----ShowBring");
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -61,5 +62,6 @@ const ShowBring = (props) => {
       </Collapse>
     </>
   );
-}
+})
+
 export default ShowBring;

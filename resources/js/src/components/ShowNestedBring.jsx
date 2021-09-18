@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowNestedBring = (props) => {
+const ShowNestedBring = React.memo((props) => {
+  console.log("-----ShowNestedBring");
   const classes = useStyles();
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(true);
@@ -60,5 +61,6 @@ const ShowNestedBring = (props) => {
       <ListItemText primary={props.gear.gear_name} />
     </ListItem>
   );
-}
+})
+
 export default ShowNestedBring;

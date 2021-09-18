@@ -51,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function BringHeader(props) {
+const BringHeader = (props) => {
+  console.log("-----BringHeader");
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const user_id = props.match.params.id;

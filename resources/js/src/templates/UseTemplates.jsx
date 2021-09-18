@@ -59,7 +59,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const UseTemplates = React.forwardRef((props, ref) => {
+const UseTemplates = React.memo(React.forwardRef((props, ref) => {
+  console.log("------useTemplate");
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
@@ -96,6 +97,6 @@ const UseTemplates = React.forwardRef((props, ref) => {
       />
     </MenuItem>
   )
-})
+}))
 
 export default UseTemplates;

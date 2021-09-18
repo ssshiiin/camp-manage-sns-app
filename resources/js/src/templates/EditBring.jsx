@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 // }
 
 const EditBring = React.forwardRef((props, ref) => {
+  console.log("-----EditBring");
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
