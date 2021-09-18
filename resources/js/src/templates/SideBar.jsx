@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserId } from "../reducks/users/selector";
 import { push } from "connected-react-router";
-import { SignIn } from "../reducks/users/operations";
+import { SignInUser } from "../reducks/users/operations";
 import { pushMyProfile } from "../reducks/posts/operations";
 
 
@@ -13,7 +13,7 @@ const SideBar = () => {
   const user_id = getUserId(selector);
 
   useEffect(() => {
-    dispatch(SignIn())
+    dispatch(SignInUser())
   }, []);
 
   const handleMyPageClick = () => {

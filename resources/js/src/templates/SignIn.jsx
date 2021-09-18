@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
+import { push } from 'connected-react-router';
+import { useDispatch } from 'react-redux';
 
 function Copyright() {
   return (
@@ -47,13 +50,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [csrf_token, setCsrf_token] = useState(document.head.querySelector('meta[name="csrf-token"]').content);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState([]);
 
-  console.log(email);
-  console.log(password);
   const onEmailChanged = (e) => {
     setEmail(e.target.value);
   }
@@ -64,13 +67,25 @@ export default function SignIn() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append('_token', csrf_token);
-    data.append('email', email);
-    data.append('password', password)
 
-    const response = await axios.post('login')
-      .catch((err) => console.log(err.response.data.errors));
+
+    const response = await axios.post('login', {
+      '_token': csrf_token,
+      'email': email,
+      'password': password
+    })
+      .catch((err) => {
+        setError(err.response.data.errors);
+      });
+
+    console.log(response)
+    if (response !== undefined) {
+      if (response.request !== undefined) {
+        const urlSplit = response.request.responseURL.split('/');
+
+        dispatch(push("/" + urlSplit[urlSplit.length - 1]));
+      }
+    }
 
   }
 
@@ -84,13 +99,74 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           camin
         </Typography>
-        <form className={classes.form} noValidate method="POST" action="login">
+        <form className={classes.form} noValidate onSubmit={onSubmit}>
+          {/* <form className={classes.form} noValidate method="POST" action="login" > */}
+          {
+            error.email ? (
+              <TextField
+                error
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                autoComplete="email"
+                autoFocus
+                id="outlined-error-helper-text"
+                label="Error Email"
+                onChange={onEmailChanged}
+                helperText={error.email}
+              />
+            ) : (
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                autoComplete="email"
+                autoFocus
+                onChange={onEmailChanged}
+              />
+            )
+          }
+          {
+            error.password ? (
+              <TextField
+                error
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                label="Password"
+                type="password"
+                id="Error password"
+                autoComplete="current-password"
+                onChange={onPasswordChanged}
+                helperText={error.password}
+              />
+            ) : (
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={onPasswordChanged}
+              />
+            )
+          }
+          {/* <input type="hidden" name="_token" value={csrf_token} />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             id="email"
+            name="email"
             label="Email Address"
             autoComplete="email"
             autoFocus
@@ -104,9 +180,10 @@ export default function SignIn() {
             label="Password"
             type="password"
             id="password"
+            name="password"
             autoComplete="current-password"
             onChange={onPasswordChanged}
-          />
+          /> */}
           <Grid container>
             <Grid item xs={12}>
               <Link href="/auth/redirect" variant="body2">
@@ -120,7 +197,6 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={onSubmit}
           >
             Sign In
           </Button>
@@ -141,7 +217,7 @@ export default function SignIn() {
       <Box mt={8}>
         <Copyright />
       </Box>
-    </Container>
+    </Container >
   );
 }
 

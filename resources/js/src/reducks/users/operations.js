@@ -5,7 +5,7 @@ import { ModalProfEditAction } from "../modals/actions";
 import axios from 'axios';
 
 
-export const SignIn = () => {
+export const SignInUser = () => {
   return async (dispach, getState) => {
     const state = getState()
     const isSignedIn = state.users.isSignIn;
