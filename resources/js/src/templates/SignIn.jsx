@@ -49,6 +49,30 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const [csrf_token, setCsrf_token] = useState(document.head.querySelector('meta[name="csrf-token"]').content);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  console.log(email);
+  console.log(password);
+  const onEmailChanged = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const onPasswordChanged = (e) => {
+    setPassword(e.target.value);
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append('_token', csrf_token);
+    data.append('email', email);
+    data.append('password', password)
+
+    const response = await axios.post('login')
+      .catch((err) => console.log(err.response.data.errors));
+
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -61,7 +85,6 @@ export default function SignIn() {
           camin
         </Typography>
         <form className={classes.form} noValidate method="POST" action="login">
-          <input type="hidden" name="_token" value={csrf_token} />
           <TextField
             variant="outlined"
             margin="normal"
@@ -69,20 +92,20 @@ export default function SignIn() {
             fullWidth
             id="email"
             label="Email Address"
-            name="email"
             autoComplete="email"
             autoFocus
+            onChange={onEmailChanged}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="password"
             label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={onPasswordChanged}
           />
           <Grid container>
             <Grid item xs={12}>
@@ -97,6 +120,7 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={onSubmit}
           >
             Sign In
           </Button>

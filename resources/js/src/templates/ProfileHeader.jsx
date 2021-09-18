@@ -125,7 +125,7 @@ function ProfileHeader(props) {
     return (
       <>
         <Typography variant="h5" component="h2">
-          {app_name} さんのページです
+
         </Typography>
       </>
     )
