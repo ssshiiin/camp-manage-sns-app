@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-sftp": "~1.0",
-        "weidner/goutte": "^1.6"
+        "weidner/goutte": "^1.6",
+        "fzaninotto/faker": "^1.9"
     },
     "require-dev": {
         "facade/ignition": "^1.16.15",
