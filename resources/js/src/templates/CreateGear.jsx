@@ -81,7 +81,8 @@ const CreateGear = React.forwardRef((props, ref) => {
   const alertOpen = selector.alerts.open;
   const errors = selector.gears.create_errors;
 
-  console.log("gears", selector.gears)
+  console.log(selector.gears)
+
 
   return (
     <MenuItem>

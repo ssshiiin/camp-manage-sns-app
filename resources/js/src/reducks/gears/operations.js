@@ -1,5 +1,6 @@
 import axios from "axios";
 import { push } from "connected-react-router";
+import moment from "moment";
 import { AlertOpenAction, StoreAction, SuccessAction } from "../alerts/actions";
 import { ModalGearCreateAction } from "../modals/actions";
 import { MenuAction } from "../users/actions";
@@ -19,6 +20,7 @@ export const getGears = (user_id) => {
   }
 }
 
+//Gearを編集するために各項目をstateに保存する
 export const getShowGears = (gear_id) => {
   return async (dispatch, getState) => {
     console.log("getShowGears");
@@ -88,45 +90,46 @@ export const createGear = () => {
     
     const data = new FormData();
 
-    data.append("gear_name", gear_name)
-    data.append("category", category)
-    data.append("brand", brand)
-    data.append("purchased_day", day)
-    data.append("price", price)
-    data.append("amount", amount)
-    data.append(`img`, image);
+    data.append("gear_name", (gear_name === null) ? "": gear_name)
+    data.append("category", (category === null) ? "": category)
+    data.append("brand", (brand === null) ? "": brand)
+    data.append("purchased_day", (day === null) ? "": moment(day).format("YYYY/MM/DD"))
+    data.append("price", (price === null) ? "": price)
+    data.append("amount", (amount === null) ? "": amount)
+    data.append(`img`, (image === null) ? "": image)
     data.append("_token", csrf_token);
 
     const url = `/api/gears/create/${user_id}`;
-    const response = await axios.post(url, 
+    await axios.post(url, 
       data, 
       {
         headers: {
           'content-type': 'multipart/form-data',
           }
       })
+      .then((res) => {
+        dispatch(GearsAction({
+          gears: res.data.data
+        }));
+        dispatch(SuccessAction({
+          success: true
+        }));
+        dispatch(AlertOpenAction({
+          open: false
+        }))
+        dispatch(ModalGearCreateAction({
+          modal_gear_create_open: false
+        }));
+        dispatch(MenuAction({
+          menu_open: null
+        }));
+        dispatch(StoreAction({
+          store: true
+        }));
+      })
       .catch((err) => {dispatch(CreateErrorsAction({
         create_errors: err.response.data.errors
       }))});
-    
-    dispatch(GearsAction({
-      gears: response.data.data
-    }));
-    dispatch(SuccessAction({
-      success: true
-    }));
-    dispatch(AlertOpenAction({
-      open: false
-    }))
-    dispatch(ModalGearCreateAction({
-      modal_gear_create_open: false
-    }));
-    dispatch(MenuAction({
-      menu_open: null
-    }));
-    dispatch(StoreAction({
-      store: true
-    }));
   }
 }
 
@@ -157,22 +160,18 @@ export const updateGear = (gear_id) => {
     const brand = state.gears.gear_brand;
     const price = state.gears.gear_price;
     const amount = state.gears.gear_amount;
-    const images  = state.gears.gear_images;
+    const image  = state.gears.gear_image;
     const user_id = state.users.user_id;
     
     const data = new FormData();
 
-    data.append("gear_name", gear_name)
-    data.append("category", category)
-    data.append("brand", brand)
-    data.append("purchased_day", day)
-    data.append("price", price)
-    data.append("amount", amount)
-    if(typeof images !== 'undefined'){
-      images.map((image, i) => {
-        data.append(`${i}`, image);
-      });
-    }
+    data.append("gear_name", (gear_name === null) ? "": gear_name)
+    data.append("category", (category === null) ? "": category)
+    data.append("brand", (brand === null) ? "": brand)
+    data.append("purchased_day", (day === null) ? "": moment(day).format("YYYY/MM/DD"))
+    data.append("price", (price === null) ? "": price)
+    data.append("amount", (amount === null) ? "": amount)
+    data.append(`img`, (image === null || typeof image === "undefined") ? "": image)
     data.append("_token", csrf_token);
 
     const url = `/api/gears/update/${gear_id}`;
@@ -185,7 +184,7 @@ export const updateGear = (gear_id) => {
       })
       .then((res) => {
         dispatch(GearsAction({
-          gears: response.data.data
+          gears: res.data.data
         }));
         dispatch(SuccessAction({
           success: true
@@ -193,14 +192,16 @@ export const updateGear = (gear_id) => {
         dispatch(AlertOpenAction({
           open: false
         }))
-        dispatch(MenuAction({
-          menu_open: null
+        dispatch(ModalGearCreateAction({
+          modal_gear_create_open: false
         }));
         dispatch(StoreAction({
           store: true
         }));
       })
-      .catch((err) => {console.log("err:", err)});
+      .catch((err) => {dispatch(CreateErrorsAction({
+        create_errors: err.response.data.errors
+      }))});
   }
 }
 

@@ -50,19 +50,19 @@ export const handleGearCreateModalOpen = () => {
 
     // 新規登録をする際にGearのstateをリセットする
     dispatch(CreateGearNameAction({
-      gear_name: ""
+      gear_name: null
     }));
 
     dispatch(CreateCategoryAction({
-      gear_category: "",
+      gear_category: null,
     }));
 
     dispatch(CreatePriceAction({
-      gear_price: ""
+      gear_price: null
     }));
 
     dispatch(CreateAmountAction({
-      gear_amount: ""
+      gear_amount: null
     }));
 
     dispatch(CreatePurchasedDayAction({
@@ -70,12 +70,12 @@ export const handleGearCreateModalOpen = () => {
     }));
 
     dispatch(CreateBrandAction({
-      gear_brand: ""
+      gear_brand: null
     }));
 
     dispatch(GearImageAction({
       gear_images: null,
-      gear_bolb_urls: ""
+      gear_bolb_urls: null
     }));
 
     dispatch(GearErrorsAction({

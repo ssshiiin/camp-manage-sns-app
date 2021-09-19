@@ -9,6 +9,7 @@ use App\Http\Resources\GetUserGearsResource;
 use App\Http\Resources\Save_gearsCategoryResource;
 use App\Http\Resources\Bring_gearsCategoriesResource;
 use App\Http\Requests\CreateGearRequest;
+use App\Http\Requests\UpdateGearRequest;
 use App\User;
 use App\Gear;
 use App\Gear_image;
@@ -48,6 +49,7 @@ class GearController extends Controller
         $price = $request->input("price");
         $amount = $request->input("amount");
         
+
         
         //gearsを作成し、作成したidをgear_idとして取得する
         $gear = new Gear;
@@ -57,7 +59,7 @@ class GearController extends Controller
             "gear_name" => $gear_name,
             "category" => $category,
             "brand" => $brand,
-            "purchasedDay" => $purchased_day,
+            "purchased_day" => $purchased_day,
             "price" => $price,
             "amount" => $amount,
         ];
@@ -86,7 +88,7 @@ class GearController extends Controller
         return app()->make('App\Http\Controllers\GearController')->getUserCategory(User::find($user_id));
     }
     
-    public function updateGear(Request $request, Gear $gear){
+    public function updateGear(UpdateGearRequest $request, Gear $gear){
         $user_id = $gear->user_id;
         $gear_id = $gear->id;
     
@@ -102,7 +104,7 @@ class GearController extends Controller
         if (empty($fileImage)){
             Gear_image::where("gear_id", $gear_id)->delete();
             foreach ($fileImage as $key => $value){
-                $path = Storage::disk('s3')->putFile('/Gear_images', $request->file($key), 'public');
+                $path = Storage::disk('s3')->putFile('/Gear_images', $request->file("img"), 'public');
                 Gear_image::create([
                     "gear_id" => $gear_id,
                     "image_path" => Storage::disk('s3')->url($path),

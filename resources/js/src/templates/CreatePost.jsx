@@ -68,8 +68,6 @@ const CreatePost = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
 
-  console.log(selector.posts)
-
   const place = selector.posts.post_place;
   const day = selector.posts.post_day;
   const content = selector.posts.post_content;
