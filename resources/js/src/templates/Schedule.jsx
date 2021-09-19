@@ -71,7 +71,8 @@ const Schedule = () => {
   };
 
   const placeCastLatLng = (place) => {
-    Geocode.setApiKey("AIzaSyBqDUefWdsCE0Hd7TONMNlcnXDvLQboztI");
+    console.log(process.env.MIX_GOOGLE_MAP_API)
+    Geocode.setApiKey(process.env.MIX_GOOGLE_MAP_API);
     Geocode.fromAddress(place).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
@@ -172,7 +173,7 @@ const Schedule = () => {
           nap_address &&
           <div>
             address : {nap_address}
-            <LoadScript googleMapsApiKey="AIzaSyBqDUefWdsCE0Hd7TONMNlcnXDvLQboztI">
+            <LoadScript googleMapsApiKey={process.env.MIX_GOOGLE_MAP_API}>
               <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={latLng}
