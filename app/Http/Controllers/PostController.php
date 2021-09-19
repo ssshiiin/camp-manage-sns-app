@@ -7,6 +7,7 @@ use App\Http\Resources\GetPostsResource;
 use App\Http\Resources\PostProfileResource;
 use App\Http\Resources\PostProfileIndexResource;
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use Storage;
 use App\File;
 use App\Post;
@@ -97,7 +98,7 @@ class PostController extends Controller
         return;
     }
 
-    public function updatePost(Request $request, Post $post){
+    public function updatePost(UpdatePostRequest $request, Post $post){
         $user_id = $post->user_id;
         $post_id = $post->id;
     
@@ -106,11 +107,11 @@ class PostController extends Controller
         $place = $request->input("place");
         $day = $request->input("day");
 
-        ///プロフィール画像の変更があったか
+        ///画像の変更があったか
         if (empty($fileImage)){
             Post_image::where("post_id", $post_id)->delete();
             foreach ($fileImage as $key => $value){
-                $path = Storage::disk('s3')->putFile('/Post_images', $request->file($key), 'public');
+                $path = Storage::disk('s3')->putFile('/Post_images', $request->file("img"), 'public');
                 Post_image::create([
                     "post_id" => $post_id,
                     "image_path" => Storage::disk('s3')->url($path),
@@ -123,7 +124,7 @@ class PostController extends Controller
         $post->place = $place;   
         $post->update();
 
-        return;
+        return $this->getShowPost(Post::find($post_id));
     }
 }
 

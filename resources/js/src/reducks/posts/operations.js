@@ -8,6 +8,7 @@ import { ModalPostCreateAction, ModalPostEditAction } from '../modals/actions';
 import { MenuAction } from '../users/actions';
 import { CreatePurchasedDayAction } from '../gears/actions';
 import { PostNavAction } from '../menus/actions';
+import moment from 'moment';
 
 
 export const getPosts = (user_id) => {
@@ -78,10 +79,10 @@ export const createPost = () => {
     
     const data = new FormData();
 
-    data.append("place", place);
-    data.append("day", day);
-    data.append("content", content);
-    data.append(`img`, image);
+    data.append("place", (place === null) ? "": place)
+    data.append("day", (day === null) ? "": moment(day).format("YYYY/MM/DD"))
+    data.append("content", (content === null) ? "": content)
+    data.append(`img`, (image === null) ? "": image)
     data.append("_token", csrf_token);
 
     const url = `/api/posts/create/${user_id}`;
@@ -126,48 +127,50 @@ export const updatePost = (post_id) => {
     const place = state.posts.post_place;
     const day = state.posts.post_day;
     const content = state.posts.post_content;
-    const images = state.posts.post_images;
+    const image = state.posts.post_image;
     const user_id = state.users.user_id;
     
     const data = new FormData();
+    console.log(state.posts)
 
-    data.append("place", place);
-    data.append("day", day);
-    data.append("content", content);
-    if(typeof images !== 'undefined'){
-      images.map((image, i) => {
-        data.append(`${i}`, image);
-      });
-    }
+    data.append("place", (place === null) ? "": place)
+    data.append("day", (day === null) ? "": moment(day).format("YYYY/MM/DD"))
+    data.append("content", (content === null) ? "": content)
+    data.append(`img`, (image === null || typeof image === "undefined") ? "": image)
     data.append("_token", csrf_token);
 
+
     const url = `/api/posts/update/${post_id}`;
-    const response = await axios.post(url, 
+    await axios.post(url, 
       data, 
       {
         headers: {
           'content-type': 'multipart/form-data',
           }
       })
-      .catch((err) => {console.log("err:", err)});
-    
+      .then((res) => {dispatch(ShowPostAction({
+        post: res.data.data
+      }));
+      dispatch(SuccessAction({
+        success: true
+      }));
+      dispatch(AlertOpenAction({
+        open: false
+      }))
+      dispatch(ModalPostEditAction({
+        modal_post_edit_open: false
+      }));
+      dispatch(PostNavAction({
+        post_nav: null
+      }));
+      dispatch(StoreAction({
+        store: true
+      }));
+      })
+      .catch((err) => {dispatch(CreateErrorsAction({
+        create_errors: err.response.data.errors
+      }))});
 
-    dispatch(SuccessAction({
-      success: true
-    }));
-    dispatch(AlertOpenAction({
-      open: false
-    }))
-    dispatch(ModalPostEditAction({
-      modal_post_edit_open: false
-    }));
-    dispatch(PostNavAction({
-      post_nav: null
-    }));
-    dispatch(StoreAction({
-      store: true
-    }));
-    dispatch(push(`/${user_id}`));
   }
 }
 

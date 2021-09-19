@@ -20,7 +20,7 @@ export const handlePostCreateModalOpen = () => {
 
     // 新規登録をする際にPostのstateをリセットする
     dispatch(CreatePlaceAction({
-      post_place: ""
+      post_place: null
     }));
 
     dispatch(CreateDayAction({
@@ -28,7 +28,7 @@ export const handlePostCreateModalOpen = () => {
     }));
 
     dispatch(CreateContentAction({
-      post_content: ""
+      post_content: null
     }));
 
     dispatch(CreateImagesAction({

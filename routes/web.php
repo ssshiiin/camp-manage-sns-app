@@ -10,15 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/test', function () {
-    return view("test");
-});
+// Route::get('/test', function () {
+//     return view("test");
+// });
 
+//googleのログイン機能
 Route::get('/auth/redirect', 'GoogleLoginController@getGoogleAuth');
 Route::get('/login/callback', 'GoogleLoginController@authGoogleCallback');
 

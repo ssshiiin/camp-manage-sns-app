@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 24,
   },
   details: {
+    minWidth: "40%",
     display: 'flex',
     flexDirection: 'column',
   },
@@ -105,7 +106,7 @@ const IndexGears = (props) => {
                 <Typography variant="body2" color="textSecondary">
                   価格 : {Number(gear.price).toLocaleString()} <br />
                   所持数 : {gear.amount} <br />
-                  購入日 : {moment(gear.purchased_day).format("YYYY/MM/DD")} <br />
+                  購入日 : {(gear.purchased_day === null) ? "" : moment(gear.purchased_day).format("YYYY/MM/DD")} <br />
                 </Typography>
               </CardContent>
             </div>

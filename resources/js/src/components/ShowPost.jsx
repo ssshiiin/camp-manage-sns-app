@@ -66,9 +66,6 @@ const ShowPost = (props) => {
   const user_id = props.match.params.id;
   const login_user = selector.users.user_id;
 
-  useEffect(() => {
-  }, []);
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -93,7 +90,7 @@ const ShowPost = (props) => {
               </>
             }
             title={post.app_name}
-            subheader={`${moment(post.day).format("YYYY/MM/DD")} - ${post.place}`}
+            subheader={`${(post.day === null) ? "" : moment(post.day).format("YYYY/MM/DD")} - ${post.place}`}
           />
           <CardMedia
             className={classes.media}

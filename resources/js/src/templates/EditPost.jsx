@@ -16,6 +16,8 @@ import TextField from "@material-ui/core/TextField";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import Typography from '@material-ui/core/Typography';
+
 
 import { SimpleModal } from '../components';
 import { createPost, handleContentChange, handleDayChange, handleImageChange, handlePlaceChange, updatePost } from '../reducks/posts/operations';
@@ -71,6 +73,7 @@ const EditPost = React.forwardRef((props, ref) => {
   const bolb_urls = selector.posts.post_bolb_urls;
   const open = selector.modals.modal_post_edit_open;
   const alertOpen = selector.alerts.open;
+  const errors = selector.posts.create_errors;
 
 
   return (
@@ -85,7 +88,17 @@ const EditPost = React.forwardRef((props, ref) => {
         body=
         {
           <form className={classes.root} noValidate autoComplete="off">
-            <img src={bolb_urls[0]} className={classes.bolb} />
+            <div>
+              <img src={bolb_urls} className={classes.bolb} />
+              {
+                errors.img &&
+                <>
+                  <Typography variant="body2" color="error" align="center">
+                    {errors.img}
+                  </Typography>
+                </>
+              }
+            </div>
             <div className={classes.buttonRoot}>
               <input
                 accept="image/*"
@@ -107,10 +120,12 @@ const EditPost = React.forwardRef((props, ref) => {
             </div>
             <div className={classes.textForm}>
               <TextField
+                error={errors.place !== undefined}
+                helperText={errors.place}
                 id="outlined-textarea"
                 label="キャンプ場"
                 defaultValue={place}
-                placeholder="Placeholder"
+                placeholder="ふもとっぱら"
                 variant="outlined"
                 onChange={(event) => dispatch(handlePlaceChange(event))}
               />
@@ -119,7 +134,7 @@ const EditPost = React.forwardRef((props, ref) => {
                   <KeyboardDatePicker
                     margin="normal"
                     id="date-picker-dialog"
-                    label="購入日"
+                    label="日付"
                     format="yyyy/MM/dd"
                     value={day}
                     variant="outlined"
@@ -132,6 +147,8 @@ const EditPost = React.forwardRef((props, ref) => {
                 </Grid>
               </MuiPickersUtilsProvider>
               <TextField
+                error={errors.content !== undefined}
+                helperText={errors.content}
                 id="outlined-multiline-static"
                 label="キャプション"
                 multiline

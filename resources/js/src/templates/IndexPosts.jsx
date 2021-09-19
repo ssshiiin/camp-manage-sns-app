@@ -19,7 +19,7 @@ const IndexPosts = (props) => {
     <div className="profile-main-posts">
       {posts.map((post) =>
         <div onClick={() => { dispatch(getShowPost(user_id, post.id)) }} style={{ backgroundImage: `url(${post.post_images[0].image_path})` }} className="profile-main-posts-image" key={post.id}>
-          <p className="p-center">{post.place}<br />{moment(post.day).format("YYYY/MM/DD")}</p>
+          <p className="p-center">{post.place}<br />{(post.day === null) ? "" : moment(post.day).format("YYYY/MM/DD")}</p>
         </div>
       )}
     </div>
