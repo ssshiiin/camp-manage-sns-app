@@ -1,6 +1,6 @@
 import { StoreAction } from "../alerts/actions";
 import { handleAlertOpen } from "../alerts/operations";
-import { getShowGears } from "../gears/operations";
+import { CreateImagesAction as GearImageAction ,CreateAmountAction, CreateBrandAction, CreateCategoryAction, CreateGearNameAction, CreatePriceAction, CreatePurchasedDayAction, CreateErrorsAction } from "../gears/actions";
 import { CreateContentAction, CreateDayAction, CreateImagesAction, CreatePlaceAction } from "../posts/actions";
 import { ModalBringEditAction, ModalGearCreateAction, ModalPostCreateAction, ModalPostEditAction, ModalProfEditAction, ModalTemplatesCreateAction, ModalTemplatesUseAction } from "./actions"
 
@@ -18,14 +18,13 @@ export const handlePostCreateModalOpen = () => {
       modal_post_create_open: true
     }));
 
-    console.log("resetPost")
-
+    // 新規登録をする際にPostのstateをリセットする
     dispatch(CreatePlaceAction({
       post_place: ""
     }));
 
     dispatch(CreateDayAction({
-      post_day: new Date(),
+      post_day: null
     }));
 
     dispatch(CreateContentAction({
@@ -33,7 +32,8 @@ export const handlePostCreateModalOpen = () => {
     }));
 
     dispatch(CreateImagesAction({
-      post_bolb_urls: ""
+      post_bolb_urls: "",
+      post_images: null
     }));
   }
 }
@@ -43,6 +43,41 @@ export const handleGearCreateModalOpen = () => {
     dispatch(ModalGearCreateAction({
       modal_gear_create_open: true
     }));
+
+    // 新規登録をする際にGearのstateをリセットする
+    dispatch(CreateGearNameAction({
+      gear_name: ""
+    }));
+
+    dispatch(CreateCategoryAction({
+      gear_category: "",
+    }));
+
+    dispatch(CreatePriceAction({
+      gear_price: ""
+    }));
+
+    dispatch(CreateAmountAction({
+      gear_amount: ""
+    }));
+
+    dispatch(CreatePurchasedDayAction({
+      gear_purchased_day: null
+    }));
+
+    dispatch(CreateBrandAction({
+      gear_brand: ""
+    }));
+
+    dispatch(GearImageAction({
+      gear_images: null,
+      gear_bolb_urls: ""
+    }));
+
+    dispatch(CreateErrorsAction({
+      create_errors: []
+    }))
+
   }
 }
 

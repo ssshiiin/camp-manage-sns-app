@@ -84,7 +84,17 @@ export const CreateImagesAction =  (gearsState) => {
     type: "CREATE_IMAGES",
     payload: {
       gear_bolb_urls: gearsState.gear_bolb_urls,
-      gear_images: gearsState.gear_images,
+      gear_image: gearsState.gear_image,
+    }
+  }
+}
+
+export const CREATE_ERRORS = "CREATE_ERRORS";
+export const CreateErrorsAction = (gearsState) => {
+  return {
+    type: "CREATE_ERRORS",
+    payload: {
+      create_errors: gearsState.create_errors
     }
   }
 }

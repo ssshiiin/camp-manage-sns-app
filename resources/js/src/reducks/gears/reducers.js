@@ -48,6 +48,11 @@ export const GearsReducer = (state = initialState.gears, action) => {
         ...state,
         ...action.payload        
       }
+    case Actions.CREATE_ERRORS:
+      return {
+        ...state,
+        ...action.payload        
+      }
     default: 
       return {
         ...state

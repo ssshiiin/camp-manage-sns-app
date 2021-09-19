@@ -16,7 +16,7 @@ const initialState = {
     posts: [],
     count_posts: 0,
     post_place: "",
-    post_day: new Date(),
+    post_day: null,
     post_content: "",
     post_bolb_urls: [],
     post_images: []
@@ -26,12 +26,13 @@ const initialState = {
     count_gears: 0,
     gear_name: "",
     gear_category: "",
-    gear_purchased_day: now(),
-    gear_brand: "",
-    gear_price: "",
-    gear_amount: "",
+    gear_purchased_day: null,
+    gear_brand: null,
+    gear_price: null,
+    gear_amount: null,
     gear_bolb_urls: [],
-    gear_images: [],
+    gear_image: null,
+    create_errors: []
   }, 
   modals: {
     modal_prof_edit_open: false,

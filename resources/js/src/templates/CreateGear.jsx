@@ -24,7 +24,7 @@ import {
   handleAmountChange, handleBrandChange, handleCategoryChange, handleGearNameChange,
   handleImageChange, handlePriceChange, handlePurchasedDayChange
 } from '../reducks/gears/operations';
-import { now } from 'lodash';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   bolb: {
     width: 400,
+    minWidth: 400,
     objectFit: "cover"
   },
   button: {
@@ -78,7 +79,9 @@ const CreateGear = React.forwardRef((props, ref) => {
   const bolb_urls = selector.gears.gear_bolb_urls
   const open = selector.modals.modal_gear_create_open;
   const alertOpen = selector.alerts.open;
+  const errors = selector.gears.create_errors;
 
+  console.log("gears", selector.gears)
 
   return (
     <MenuItem>
@@ -92,7 +95,17 @@ const CreateGear = React.forwardRef((props, ref) => {
         body=
         {
           <form className={classes.root} noValidate autoComplete="off">
-            <img src={bolb_urls[0]} className={classes.bolb} />
+            <div>
+              <img src={bolb_urls} className={classes.bolb} />
+              {
+                errors.img &&
+                <>
+                  <Typography variant="body2" color="error" align="center">
+                    {errors.img}
+                  </Typography>
+                </>
+              }
+            </div>
             <div className={classes.buttonRoot}>
               <input
                 accept="image/*"
@@ -100,7 +113,6 @@ const CreateGear = React.forwardRef((props, ref) => {
                 id="icon-button-file"
                 type="file"
                 onChange={(event) => dispatch(handleImageChange(event))}
-                multiple
               />
               <label htmlFor="icon-button-file">
                 <IconButton
@@ -114,6 +126,8 @@ const CreateGear = React.forwardRef((props, ref) => {
             </div>
             <div className={classes.textForm}>
               <TextField
+                error={(errors.gear_name !== undefined)}
+                helperText={errors.gear_name}
                 id="outlined-textarea"
                 label="ギア"
                 defaultValue={gear_name}
@@ -122,6 +136,8 @@ const CreateGear = React.forwardRef((props, ref) => {
                 onChange={(event) => dispatch(handleGearNameChange(event))}
               />
               <TextField
+                error={(errors.category !== undefined)}
+                helperText={errors.category}
                 id="outlined-textarea"
                 label="カテゴリー"
                 defaultValue={category}
@@ -130,6 +146,8 @@ const CreateGear = React.forwardRef((props, ref) => {
                 onChange={(event) => dispatch(handleCategoryChange(event))}
               />
               <TextField
+                error={(errors.brand !== undefined)}
+                helperText={errors.brand}
                 id="outlined-textarea"
                 label="メーカー"
                 defaultValue={brand}
@@ -138,6 +156,8 @@ const CreateGear = React.forwardRef((props, ref) => {
                 onChange={(event) => dispatch(handleBrandChange(event))}
               />
               <TextField
+                error={(errors.price !== undefined)}
+                helperText={errors.price}
                 id="outlined-textarea"
                 label="購入額"
                 defaultValue={price}
@@ -163,6 +183,8 @@ const CreateGear = React.forwardRef((props, ref) => {
                 </Grid>
               </MuiPickersUtilsProvider>
               <TextField
+                error={(errors.amount !== undefined)}
+                helperText={errors.amount}
                 id="outlined-textarea"
                 label="所持数"
                 defaultValue={amount}

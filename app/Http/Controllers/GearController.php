@@ -8,6 +8,7 @@ use App\Http\Resources\GearPaginateResource;
 use App\Http\Resources\GetUserGearsResource;
 use App\Http\Resources\Save_gearsCategoryResource;
 use App\Http\Resources\Bring_gearsCategoriesResource;
+use App\Http\Requests\CreateGearRequest;
 use App\User;
 use App\Gear;
 use App\Gear_image;
@@ -37,13 +38,13 @@ class GearController extends Controller
     }
     
     //geatsとgear_imagesを作成して、s3に保存する
-    public function createGear(Request $request, User $user){
+    public function createGear(CreateGearRequest $request, User $user){
         $user_id = $user->id;
         $fileImage = $request->files;
-        $gear_name = $request->input("gearName");
+        $gear_name = $request->input("gear_name");
         $category = $request->input("category");
         $brand = $request->input("brand");
-        $purchased_day = $request->input("purchasedDay");
+        $purchased_day = $request->input("purchased_day");
         $price = $request->input("price");
         $amount = $request->input("amount");
         
@@ -67,7 +68,7 @@ class GearController extends Controller
         
         //s3に画像を保存して、urlをgear_imagesに保存する
         foreach ($fileImage as $key => $value){
-            $path = Storage::disk('s3')->putFile('/Gear_images', $request->file($key), 'public');
+            $path = Storage::disk('s3')->putFile('/Gear_images', $request->file("img"), 'public');
             Gear_image::create([
                 "gear_id" => $gear_id,
                 "image_path" => Storage::disk('s3')->url($path),
@@ -90,10 +91,10 @@ class GearController extends Controller
         $gear_id = $gear->id;
     
         $fileImage = $request->files;
-        $gear_name = $request->input("gearName");
+        $gear_name = $request->input("gear_name");
         $category = $request->input("category");
         $brand = $request->input("brand");
-        $purchased_day = $request->input("purchasedDay");
+        $purchased_day = $request->input("purchased_day");
         $price = $request->input("price");
         $amount = $request->input("amount");
         

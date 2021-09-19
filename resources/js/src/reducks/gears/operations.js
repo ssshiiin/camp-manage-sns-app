@@ -3,7 +3,7 @@ import { push } from "connected-react-router";
 import { AlertOpenAction, StoreAction, SuccessAction } from "../alerts/actions";
 import { ModalGearCreateAction } from "../modals/actions";
 import { MenuAction } from "../users/actions";
-import { CountGearsAction, CreateAmountAction, CreateBrandAction, CreateCategoryAction, CreateGearNameAction, CreateImagesAction, CreatePriceAction, CreatePurchasedDayAction, GearsAction } from "./actions";
+import { CountGearsAction, CreateAmountAction, CreateBrandAction, CreateCategoryAction, CreateErrorsAction, CreateGearNameAction, CreateImagesAction, CreatePriceAction, CreatePurchasedDayAction, GearsAction } from "./actions";
 
 export const getGears = (user_id) => {
   return async (dispatch, getState) => {
@@ -83,20 +83,18 @@ export const createGear = () => {
     const brand = state.gears.gear_brand;
     const price = state.gears.gear_price;
     const amount = state.gears.gear_amount;
-    const images  = state.gears.gear_images;
+    const image  = state.gears.gear_image;
     const user_id = state.users.user_id;
     
     const data = new FormData();
 
-    data.append("gearName", gear_name)
+    data.append("gear_name", gear_name)
     data.append("category", category)
     data.append("brand", brand)
-    data.append("purchasedDay", day)
+    data.append("purchased_day", day)
     data.append("price", price)
     data.append("amount", amount)
-    images.map((image, i) => {
-      data.append(`${i}`, image);
-    });
+    data.append(`img`, image);
     data.append("_token", csrf_token);
 
     const url = `/api/gears/create/${user_id}`;
@@ -107,7 +105,9 @@ export const createGear = () => {
           'content-type': 'multipart/form-data',
           }
       })
-      .catch((err) => {console.log("err:", err)});
+      .catch((err) => {dispatch(CreateErrorsAction({
+        create_errors: err.response.data.errors
+      }))});
     
     dispatch(GearsAction({
       gears: response.data.data
@@ -162,10 +162,10 @@ export const updateGear = (gear_id) => {
     
     const data = new FormData();
 
-    data.append("gearName", gear_name)
+    data.append("gear_name", gear_name)
     data.append("category", category)
     data.append("brand", brand)
-    data.append("purchasedDay", day)
+    data.append("purchased_day", day)
     data.append("price", price)
     data.append("amount", amount)
     if(typeof images !== 'undefined'){
@@ -207,17 +207,11 @@ export const updateGear = (gear_id) => {
 
 export const handleImageChange = (event) => {
   return (dispatch, getState) => {
-    let images = Array();
-    let bolbUrls = Array();
-    const len = event.target.files["length"];
-    for (let i=0; i<len; i++){
-      const image = event.target.files[i];
-      images.push(image);
-      bolbUrls.push(URL.createObjectURL(image));
-    }
+    const image = event.target.files[0];
+    const bolbUrl = (URL.createObjectURL(image));
     dispatch(CreateImagesAction({
-      gear_bolb_urls: bolbUrls,
-      gear_images: images,
+      gear_bolb_urls: bolbUrl,
+      gear_image: image,
     }));
     dispatch(StoreAction({
       store: false
