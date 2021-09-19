@@ -17,6 +17,7 @@ import TextField from "@material-ui/core/TextField";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import Typography from '@material-ui/core/Typography';
 
 import { SimpleModal } from '../components';
 import { createPost, handleContentChange, handleDayChange, handleImageChange, handlePlaceChange, resetPost } from '../reducks/posts/operations';
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   bolb: {
+    minWidth: 400,
     width: 400,
     objectFit: "cover"
   },
@@ -66,15 +68,15 @@ const CreatePost = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
 
+  console.log(selector.posts)
+
   const place = selector.posts.post_place;
   const day = selector.posts.post_day;
   const content = selector.posts.post_content;
   const bolb_urls = selector.posts.post_bolb_urls;
   const open = selector.modals.modal_post_create_open;
   const alertOpen = selector.alerts.open;
-
-  console.log(selector.posts);
-
+  const errors = selector.posts.create_errors;
 
 
   return (
@@ -89,7 +91,17 @@ const CreatePost = React.forwardRef((props, ref) => {
         body=
         {
           <form className={classes.root} noValidate autoComplete="off">
-            <img src={bolb_urls[0]} className={classes.bolb} />
+            <div>
+              <img src={bolb_urls} className={classes.bolb} />
+              {
+                errors.img &&
+                <>
+                  <Typography variant="body2" color="error" align="center">
+                    {errors.img}
+                  </Typography>
+                </>
+              }
+            </div>
             <div className={classes.buttonRoot}>
               <input
                 accept="image/*"
@@ -111,6 +123,8 @@ const CreatePost = React.forwardRef((props, ref) => {
             </div>
             <div className={classes.textForm}>
               <TextField
+                error={errors.place !== undefined}
+                helperText={errors.place}
                 id="outlined-textarea"
                 label="キャンプ場"
                 defaultValue={place}
@@ -136,6 +150,8 @@ const CreatePost = React.forwardRef((props, ref) => {
                 </Grid>
               </MuiPickersUtilsProvider>
               <TextField
+                error={errors.content !== undefined}
+                helperText={errors.content}
                 id="outlined-multiline-static"
                 label="キャプション"
                 multiline

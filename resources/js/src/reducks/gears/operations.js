@@ -176,30 +176,31 @@ export const updateGear = (gear_id) => {
     data.append("_token", csrf_token);
 
     const url = `/api/gears/update/${gear_id}`;
-    const response = await axios.post(url, 
+    await axios.post(url, 
       data, 
       {
         headers: {
           'content-type': 'multipart/form-data',
           }
       })
+      .then((res) => {
+        dispatch(GearsAction({
+          gears: response.data.data
+        }));
+        dispatch(SuccessAction({
+          success: true
+        }));
+        dispatch(AlertOpenAction({
+          open: false
+        }))
+        dispatch(MenuAction({
+          menu_open: null
+        }));
+        dispatch(StoreAction({
+          store: true
+        }));
+      })
       .catch((err) => {console.log("err:", err)});
-    
-    dispatch(GearsAction({
-      gears: response.data.data
-    }));
-    dispatch(SuccessAction({
-      success: true
-    }));
-    dispatch(AlertOpenAction({
-      open: false
-    }))
-    dispatch(MenuAction({
-      menu_open: null
-    }));
-    dispatch(StoreAction({
-      store: true
-    }));
   }
 }
 

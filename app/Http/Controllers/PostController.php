@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\GetPostsResource;
 use App\Http\Resources\PostProfileResource;
 use App\Http\Resources\PostProfileIndexResource;
+use App\Http\Requests\CreatePostRequest;
 use Storage;
 use App\File;
 use App\Post;
@@ -53,7 +54,7 @@ class PostController extends Controller
     }
     
     //postsとpost_imagesを作成し、画像はs3に保存する
-    public function createPost(Request $request, User $user){
+    public function createPost(CreatePostRequest $request, User $user){
         $user_id = $user->id;
     
         $fileImage = $request->files;
@@ -87,7 +88,7 @@ class PostController extends Controller
             ]);
         }
         
-        return;
+        return $this->getUserPosts(User::find($user_id));
     }
 
     public function deletePost(Post $post){

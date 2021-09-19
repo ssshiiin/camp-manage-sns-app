@@ -17,9 +17,9 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->string('place');
-            $table->date('day');
+            $table->date('day')->nullable();
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 import { StoreAction } from "../alerts/actions";
 import { handleAlertOpen } from "../alerts/operations";
-import { CreateImagesAction as GearImageAction ,CreateAmountAction, CreateBrandAction, CreateCategoryAction, CreateGearNameAction, CreatePriceAction, CreatePurchasedDayAction, CreateErrorsAction } from "../gears/actions";
-import { CreateContentAction, CreateDayAction, CreateImagesAction, CreatePlaceAction } from "../posts/actions";
+import { CreateImagesAction as GearImageAction ,CreateAmountAction, CreateBrandAction, CreateCategoryAction, CreateGearNameAction, CreatePriceAction, CreatePurchasedDayAction, CreateErrorsAction as GearErrorsAction } from "../gears/actions";
+import { CreateErrorsAction , CreateContentAction, CreateDayAction, CreateImagesAction, CreatePlaceAction } from "../posts/actions";
 import { ModalBringEditAction, ModalGearCreateAction, ModalPostCreateAction, ModalPostEditAction, ModalProfEditAction, ModalTemplatesCreateAction, ModalTemplatesUseAction } from "./actions"
 
 export const handleProfEditModalOpen = () => {
@@ -33,8 +33,12 @@ export const handlePostCreateModalOpen = () => {
 
     dispatch(CreateImagesAction({
       post_bolb_urls: "",
-      post_images: null
+      post_image: null
     }));
+
+    dispatch(CreateErrorsAction({
+      create_errors: []
+    }))
   }
 }
 
@@ -74,7 +78,7 @@ export const handleGearCreateModalOpen = () => {
       gear_bolb_urls: ""
     }));
 
-    dispatch(CreateErrorsAction({
+    dispatch(GearErrorsAction({
       create_errors: []
     }))
 

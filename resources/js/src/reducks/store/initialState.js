@@ -19,7 +19,8 @@ const initialState = {
     post_day: null,
     post_content: "",
     post_bolb_urls: [],
-    post_images: []
+    post_image: null,
+    create_errors: [],
   },
   gears: {
     gears: [],

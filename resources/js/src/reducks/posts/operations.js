@@ -1,4 +1,4 @@
-import { countPostsAction, CreateContentAction, CreateDayAction, CreateImagesAction, CreatePlaceAction, CREATE_IMAGES, PostsAction, ShowPostAction } from './actions';
+import { countPostsAction, CreateContentAction, CreateDayAction, CreateErrorsAction, CreateImagesAction, CreatePlaceAction, CREATE_IMAGES, PostsAction, ShowPostAction } from './actions';
 import { push } from 'connected-react-router';
 import axios from 'axios';
 import { getProfile } from '../users/operations';
@@ -73,7 +73,7 @@ export const createPost = () => {
     const place = state.posts.post_place;
     const day = state.posts.post_day;
     const content = state.posts.post_content;
-    const images = state.posts.post_images;
+    const image = state.posts.post_image;
     const user_id = state.users.user_id;
     
     const data = new FormData();
@@ -81,38 +81,40 @@ export const createPost = () => {
     data.append("place", place);
     data.append("day", day);
     data.append("content", content);
-    images.map((image, i) => {
-      data.append(`${i}`, image);
-    });
+    data.append(`img`, image);
     data.append("_token", csrf_token);
 
     const url = `/api/posts/create/${user_id}`;
-    const response = await axios.post(url, 
+    await axios.post(url, 
       data, 
       {
         headers: {
           'content-type': 'multipart/form-data',
           }
       })
-      .catch((err) => {console.log("err:", err)});
-    
-
-    dispatch(SuccessAction({
-      success: true
-    }));
-    dispatch(AlertOpenAction({
-      open: false
-    }))
-    dispatch(ModalPostCreateAction({
-      modal_post_create_open: false
-    }));
-    dispatch(MenuAction({
-      menu_open: null
-    }));
-    dispatch(StoreAction({
-      store: true
-    }));
-    dispatch(push(`/${user_id}`));
+      .then((res) => {
+        dispatch(PostsAction({
+          posts: res.data
+        }))
+        dispatch(SuccessAction({
+          success: true
+        }));
+        dispatch(AlertOpenAction({
+          open: false
+        }))
+        dispatch(ModalPostCreateAction({
+          modal_post_create_open: false
+        }));
+        dispatch(MenuAction({
+          menu_open: null
+        }));
+        dispatch(StoreAction({
+          store: true
+        }));
+      })
+      .catch((err) => {dispatch(CreateErrorsAction({
+        create_errors: err.response.data.errors
+      }))});
   }
 }
 
@@ -171,18 +173,11 @@ export const updatePost = (post_id) => {
 
 export const handleImageChange = (event) => {
   return (dispatch, getState) => {
-    let images = Array();
-    let bolbUrls = Array();
-    const len = event.target.files["length"];
-    console.log(len)
-    for (let i=0; i<len; i++){
-      const image = event.target.files[i];
-      images.push(image);
-      bolbUrls.push(URL.createObjectURL(image));
-    }
+    const image = event.target.files[0];
+    const bolbUrl = URL.createObjectURL(image);
     dispatch(CreateImagesAction({
-      post_bolb_urls: bolbUrls,
-      post_images: images,
+      post_bolb_urls: bolbUrl,
+      post_image: image,
     }));
     dispatch(StoreAction({
       store: false

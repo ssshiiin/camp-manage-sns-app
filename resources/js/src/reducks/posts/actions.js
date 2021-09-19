@@ -74,7 +74,17 @@ export const CreateImagesAction =  (postsState) => {
     type: "CREATE_IMAGES",
     payload: {
       post_bolb_urls: postsState.post_bolb_urls,
-      post_images: postsState.post_images,
+      post_image: postsState.post_image,
+    }
+  }
+}
+
+export const CREATE_ERRORS = "CREATE_ERRORS";
+export const CreateErrorsAction = (postsState) => {
+  return {
+    type: "CREATE_ERRORS",
+    payload: {
+      create_errors: postsState.create_errors
     }
   }
 }
