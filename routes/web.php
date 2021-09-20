@@ -23,6 +23,11 @@ Auth::routes(['verify' => true]);
 Route::get('/auth/redirect', 'GoogleLoginController@getGoogleAuth');
 Route::get('/login/callback', 'GoogleLoginController@authGoogleCallback');
 
+//test mailtrap
+Route::get('/mail', 'MailSendController@index');
+
+
+
 Route::get('/{any}', function () {
     return view('index');
 })->where('any', '.*');

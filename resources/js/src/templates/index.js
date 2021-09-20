@@ -24,5 +24,7 @@ export {default as UseTemplates} from "./UseTemplates";
 
 export {default as Schedule} from "./Schedule";
 
+export {default as SignIn} from "./SignIn";
+export {default as Register} from "./Register";
 
 

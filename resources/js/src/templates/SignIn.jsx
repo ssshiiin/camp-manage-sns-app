@@ -21,7 +21,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        camin
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -78,7 +78,6 @@ export default function SignIn() {
         setError(err.response.data.errors);
       });
 
-    console.log(response)
     if (response !== undefined) {
       if (response.request !== undefined) {
         const urlSplit = response.request.responseURL.split('/');
@@ -86,7 +85,16 @@ export default function SignIn() {
         dispatch(push("/" + urlSplit[urlSplit.length - 1]));
       }
     }
+  }
 
+  const pushRegister = (e) => {
+    e.preventDefault();
+    dispatch(push("/register"));
+  }
+
+  const pushPasswordReset = (e) => {
+    e.preventDefault()
+    dispatch(push("/password/reset"));
   }
 
   return (
@@ -100,7 +108,6 @@ export default function SignIn() {
           camin
         </Typography>
         <form className={classes.form} noValidate onSubmit={onSubmit}>
-          {/* <form className={classes.form} noValidate method="POST" action="login" > */}
           {
             error.email ? (
               <TextField
@@ -159,31 +166,6 @@ export default function SignIn() {
               />
             )
           }
-          {/* <input type="hidden" name="_token" value={csrf_token} />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            name="email"
-            label="Email Address"
-            autoComplete="email"
-            autoFocus
-            onChange={onEmailChanged}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label="Password"
-            type="password"
-            id="password"
-            name="password"
-            autoComplete="current-password"
-            onChange={onPasswordChanged}
-          /> */}
           <Grid container>
             <Grid item xs={12}>
               <Link href="/auth/redirect" variant="body2">
@@ -202,12 +184,12 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link onClick={pushPasswordReset} variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link onClick={pushRegister} variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

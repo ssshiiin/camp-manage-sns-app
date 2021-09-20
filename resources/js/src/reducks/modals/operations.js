@@ -108,6 +108,10 @@ export const handlePostEditModalOpen = () => {
     dispatch(CreateImagesAction({
       post_bolb_urls: [state.posts.post[0].image_path[0].image_path],
     }));
+    
+    dispatch(CreateErrorsAction({
+      create_errors: []
+    }))
   }
 }
 

@@ -7,7 +7,7 @@ import createStore from "./reducks/store/store";
 import App from "./App";
 import { ConnectedRouter } from "connected-react-router";
 import { Route, Switch } from "react-router";
-import SignIn from "./templates/SignIn";
+import { Register, SignIn } from "./templates";
 
 const history = History.createBrowserHistory();
 export const store = createStore(history);
@@ -17,6 +17,7 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <Switch>
         <Route path="/login" exact component={SignIn} />
+        <Route path="/register" exact component={Register} />
         <Route path="/" component={App} />
       </Switch>
     </ConnectedRouter>
