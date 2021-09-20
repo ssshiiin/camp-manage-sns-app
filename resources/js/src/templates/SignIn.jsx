@@ -69,22 +69,19 @@ export default function SignIn() {
     e.preventDefault();
 
 
-    const response = await axios.post('login', {
+    const response = await axios.post('/login', {
       '_token': csrf_token,
       'email': email,
       'password': password
     })
+      .then((res) => {
+        const urlSplit = res.request.responseURL.split('/');
+
+        dispatch(push("/" + urlSplit[urlSplit.length - 1]));
+      })
       .catch((err) => {
         setError(err.response.data.errors);
       });
-
-    if (response !== undefined) {
-      if (response.request !== undefined) {
-        const urlSplit = response.request.responseURL.split('/');
-
-        dispatch(push("/" + urlSplit[urlSplit.length - 1]));
-      }
-    }
   }
 
   const pushRegister = (e) => {

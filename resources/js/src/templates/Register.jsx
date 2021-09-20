@@ -75,26 +75,24 @@ export default function Register() {
     e.preventDefault();
 
 
-    const response = await axios.post('register', {
+    const response = await axios.post('/register', {
       '_token': csrf_token,
       'email': email,
       'password': password,
       'password_confirmation': c_password
     })
+      .then((res) => {
+        console.log(res);
+        const urlSplit = res.request.responseURL.split('/');
+
+        dispatch(push("/" + urlSplit[urlSplit.length - 1]));
+      })
       .catch((err) => {
         setError(err.response.data.errors);
         console.log(err.response.data.errors)
       });
 
-    console.log(response);
 
-    if (response !== undefined) {
-      if (response.request !== undefined) {
-        const urlSplit = response.request.responseURL.split('/');
-
-        dispatch(push("/" + urlSplit[urlSplit.length - 1]));
-      }
-    }
   }
 
   const pushSignIn = (e) => {
@@ -182,7 +180,7 @@ export default function Register() {
                       margin="normal"
                       required
                       fullWidth
-                      label="password-confirm"
+                      label="Password Confirm"
                       type="password"
                       id="Error password"
                       autoComplete="current-password"
@@ -195,7 +193,7 @@ export default function Register() {
                       margin="normal"
                       required
                       fullWidth
-                      label="password-confirm"
+                      label="Password Confirm"
                       type="password"
                       id="password"
                       autoComplete="current-password"
@@ -222,7 +220,7 @@ export default function Register() {
                   margin="normal"
                   required
                   fullWidth
-                  label="password-confirm"
+                  label="Password Confirm"
                   type="password"
                   id="password"
                   autoComplete="current-password"
