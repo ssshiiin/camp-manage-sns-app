@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { useDispatch, useSelector } from "react-redux";
-import { UserProfile, IndexPosts, IndexGearsNav, Schedule } from './templates';
+import { UserProfile, IndexPosts, IndexGearsNav, IndexPostsNav } from './templates';
 import { ProfileNav, ShowPost } from './components';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
@@ -34,7 +34,7 @@ function ProfileRouter(props) {
           <UserProfile user_id={user_id} />
           <ProfileNav user_id={user_id} />
           <Switch>
-            <Route path="/:id" exact component={IndexPosts} />
+            <Route path="/:id" exact component={IndexPostsNav} />
             <Route path="/:id/gear" exact component={IndexGearsNav} />
             <Route path="/:id/post/:post_id" exact component={ShowPost} />
           </Switch>

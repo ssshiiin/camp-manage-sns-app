@@ -21,14 +21,15 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 Route::group( ['middleware' => 'api'], function(){
     Route::get('/users', 'UserController@getUserId');
     
-
+    
     Route::get('/posts', 'PostController@getPosts');
-    Route::get('/posts/{user}', 'PostController@getUserPosts');
     Route::get('/posts/show/{post}', 'PostController@getShowPost');
+    Route::get('/posts/place', 'PostController@getPlacePosts');
+    Route::get('/posts/{user}', 'PostController@getUserPosts');
     Route::post('/posts/create/{user}', 'PostController@createPost');
     Route::post('/posts/delete/{post}', 'PostController@deletePost');
     Route::post('/posts/update/{post}', 'PostController@updatePost');
-
+    
     
     Route::get('/profiles/{user}', 'ProfileController@getProfile');
     Route::post('/profiles/edit/{user}', 'ProfileController@createOrEditProfile');

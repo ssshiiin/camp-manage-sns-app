@@ -1,4 +1,4 @@
-import { countPostsAction, CreateContentAction, CreateDayAction, CreateErrorsAction, CreateImagesAction, CreatePlaceAction, CREATE_IMAGES, PostsAction, ShowPostAction } from './actions';
+import { countPostsAction, CreateContentAction, CreateDayAction, CreateErrorsAction, CreateImagesAction, CreatePlaceAction, CREATE_IMAGES, PlacePostsAction, PostsAction, ShowPostAction } from './actions';
 import { push } from 'connected-react-router';
 import axios from 'axios';
 import { getProfile } from '../users/operations';
@@ -22,6 +22,26 @@ export const getPosts = (user_id) => {
     dispatch(PostsAction({
       posts: response.data
     }));
+  }
+}
+
+export const getPlacePosts = (place) => {
+  return async (dispatch, getState) => {
+    console.log("getPlacePosts");
+
+    const url = `/api/posts/place`;
+
+    await axios.get(url, {
+      params: {
+        place: place
+      }
+    })
+      .then((res) => (
+        dispatch(PlacePostsAction({
+          place_posts:  res.data
+        }))
+      ))
+      .catch((err) => {console.log(err)});
   }
 }
 

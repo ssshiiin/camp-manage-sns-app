@@ -9,12 +9,11 @@ export const handleSchedulePlaceChange = (event) => {
   }
 };
 
-export const searchSchedulePlace = () => {
+export const searchSchedulePlace = (e) => {
   return async (dispatch, getState) => {
+    e.preventDefault();
     const state = getState();
     const place = state.schedules.schedule_place;
-
-    console.log(place);
 
     const url = '/api/schedule/search/place';
 

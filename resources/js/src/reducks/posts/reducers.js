@@ -8,6 +8,11 @@ export const PostsReducer = (state = initialState.posts, action) => {
         ...state,
         ...action.payload
       }
+    case Actions.PLACE_POSTS:
+      return {
+        ...state,
+        ...action.payload
+      }
     case Actions.SHOW_POST:
       return {
         ...state,

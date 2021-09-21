@@ -14,6 +14,7 @@ const initialState = {
   posts: {
     post: [],
     posts: [],
+    place_posts: [],
     count_posts: 0,
     post_place: "",
     post_day: null,
@@ -64,13 +65,13 @@ const initialState = {
     template_name: ""
   },
   schedules: {
-    nap_camp: "",
-    nap_check_in: "",
-    nap_check_out: "",
-    nap_address: "",
-    dayout_camp: "",
-    dayout_tel: "",
-    dayout_home_page: "",
+    nap_camp: "ふもとっぱら",
+    nap_check_in: "宿泊施設15：00～、キャンプ8：30～",
+    nap_check_out: "宿泊施設～11：00、キャンプ～14：00",
+    nap_address: "静岡県富士宮市麓156",
+    dayout_camp: "ふもとっぱら",
+    dayout_tel: "0544-52-2112",
+    dayout_home_page: "http://fumotoppara.net/",
     schedule_place: "",
     schedule_day: ""
   }

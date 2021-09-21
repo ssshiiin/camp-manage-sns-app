@@ -14,3 +14,6 @@ export {default as ShowAdd} from "./ShowAdd";
 export {default as ShowNestedBring} from "./ShowNestedBring";
 export {default as ShowNestedAdd} from "./ShowNestedAdd";
 export {default as CheckBoxes} from "./CheckBoxes";
+
+export {default as CampInfo} from "./CampInfo";
+export {default as IndexPosts} from "./IndexPosts";

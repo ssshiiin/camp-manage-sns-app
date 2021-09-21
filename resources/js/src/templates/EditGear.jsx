@@ -91,7 +91,6 @@ const EditGear = React.forwardRef((props, ref) => {
   const errors = selector.gears.create_errors;
 
   console.log(errors);
-  console.log(selector.gears)
 
 
   return (

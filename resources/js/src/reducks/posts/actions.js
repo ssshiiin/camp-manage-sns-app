@@ -8,6 +8,16 @@ export const PostsAction = (postsState) => {
   }
 }
 
+export const PLACE_POSTS = "PLACE_POSTS";
+export const PlacePostsAction = (postsState) => {
+  return {
+    type: "PLACE_POSTS",
+    payload: {
+      place_posts: postsState.place_posts,
+    }
+  }
+}
+
 export const SHOW_POST = "SHOW_POST";
 export const ShowPostAction = (postsState) => {
   return {

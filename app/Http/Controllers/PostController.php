@@ -37,6 +37,12 @@ class PostController extends Controller
         
         // return PostProfileResource::collection($post->whereUser_idOrderByCreated_at($user_id));
     }
+
+    public function getPlacePosts(Request $request){
+        $place = $request->place;
+
+        return Post::with("Post_images")->where('place', 'like', "%$place%")->orderBy('day', 'DESC')->take(21)->get();
+    }
     
     //postsの詳細を取得する
     public function getShowPost(Post $post)
