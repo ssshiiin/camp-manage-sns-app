@@ -15,10 +15,12 @@ class Bring_gearController extends Controller
     public function getUserBring_gears(User $user){
         $user_id = $user->id;
         
-        $categories = Bring_gear::with("gear")->get()->where("user_id", $user_id)->sortByDesc("gear.category")->groupBy("gear.category")->values()
-;
+        $categories = Bring_gear::with("gear")->get()->where("user_id", $user_id)->sortByDesc("gear.category")->groupBy("gear.category")->values();
         
-        return Save_gearsCategoryResource::collection($categories);
+        
+        return [
+            "bring" => Save_gearsCategoryResource::collection($categories), 
+            "bring_all_count" => $this->getCountAll($user)];
     }
 
     public function getAddGear(User $user){
@@ -30,24 +32,26 @@ class Bring_gearController extends Controller
         
         $categories = $target->sortByDesc("category")->groupBy("category")->values();
         
-        return Bring_gearsCategoriesResource::collection($categories);
+        return [
+            "add" => Bring_gearsCategoriesResource::collection($categories),
+            "add_all_count" => $this->getCountAllAdd($user)
+        ];
     }
     
-    public function getCountAll(User $user,Bring_gear $bring_gear){
+    public function getCountAll(User $user){
         $user_id = $user->id;
-        $categories = $bring_gear->with("gear")->get()->where("user_id", $user_id)->groupBy("gear.category");
         
-        return response()->json([
-            "countTrue"=>$bring_gear->where("user_id", $user_id)->where("is_check", true)->count(), 
-            "countAll"=>$bring_gear->where("user_id", $user_id)->count()]);
+        return [
+            "countTrue"=>Bring_gear::where("user_id", $user_id)->where("is_check", true)->count(), 
+            "countAll"=>Bring_gear::where("user_id", $user_id)->count()];
     }
 
     public function getCountAllAdd(User $user){
         $user_id = $user->id;
 
-        return response()->json([
+        return [
             "countTrue"=>Gear::with("bring_gear")->get()->where("user_id", $user_id)->where("is_check", true)->whereNull("bring_gear.gear_id")->count(), 
-            "countAll"=>Gear::with("bring_gear")->get()->where("user_id", $user_id)->whereNull("bring_gear.gear_id")->count()]);
+            "countAll"=>Gear::with("bring_gear")->get()->where("user_id", $user_id)->whereNull("bring_gear.gear_id")->count()];
     }
     
     public function updateIs_check(Request $request, Bring_gear $bring_gear){
@@ -56,7 +60,7 @@ class Bring_gearController extends Controller
         $bring_gear->is_check = $request->is_check;
         $bring_gear->update();
         
-        return app()->make('App\Http\Controllers\Bring_gearController')->getUserBring_gears(User::find($user_id));
+        return $this->getUserBring_gears(User::find($user_id));
     }
 
     public function updateAllIs_check(Request $request, User $user){
@@ -75,7 +79,7 @@ class Bring_gearController extends Controller
             $bring_gear->update();
         }
         
-        return app()->make('App\Http\Controllers\Bring_gearController')->getUserBring_gears(User::find($user_id));
+        return $this->getUserBring_gears(User::find($user_id));
     }
 
     public function updateAddIs_check(Request $request, Gear $gear){
@@ -84,7 +88,7 @@ class Bring_gearController extends Controller
         $gear->is_check = $request->is_check;
         $gear->update();
         
-        return app()->make('App\Http\Controllers\Bring_gearController')->getAddGear(User::find($user_id));
+        return $this->getAddGear(User::find($user_id));
     }
 
     public function updateAllAddIs_check(Request $request, User $user){
@@ -103,7 +107,7 @@ class Bring_gearController extends Controller
             $gear->update();
         }
         
-        return app()->make('App\Http\Controllers\Bring_gearController')->getAddGear(User::find($user_id));
+        return $this->getAddGear(User::find($user_id));
     }
     
     public function createBring_gear(User $user){
@@ -120,7 +124,10 @@ class Bring_gearController extends Controller
             $gear->update();
         }
         
-        return app()->make('App\Http\Controllers\Bring_gearController')->getUserBring_gears(User::find($user_id));
+        return [
+            "bring" => $this->getUserBring_gears(User::find($user_id)),
+            "add" => $this->getAddGear(User::find($user_id))
+        ];
     }
     
     public function deleteBring_gear(User $user){
@@ -131,6 +138,9 @@ class Bring_gearController extends Controller
             $bring_gear->delete();
         }
 
-        return app()->make('App\Http\Controllers\Bring_gearController')->getUserBring_gears(User::find($user_id));
+        return [
+            "bring" => $this->getUserBring_gears(User::find($user_id)),
+            "add" => $this->getAddGear(User::find($user_id))
+        ];
     }
 }

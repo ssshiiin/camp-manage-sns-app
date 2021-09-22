@@ -20,8 +20,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShowNestedAdd = (props) => {
-  console.log("-----ShowNestedAdd");
-  const classes = useStyles();
   const dispatch = useDispatch();
   const [checked, setChecked] = React.useState(props.gear.is_check);
 

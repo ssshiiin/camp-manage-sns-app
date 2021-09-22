@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavBring = (props) => {
+  console.log("Nav")
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const user_id = props.user_id;
