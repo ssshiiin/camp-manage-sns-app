@@ -15,7 +15,7 @@ import { SimpleModal } from '../components';
 import { createPost, handleContentChange, handleDayChange, handleImageChange, handlePlaceChange, resetPost } from '../reducks/posts/operations';
 import { handlePostCreateModalOpen, handlePostEditModalOpen, handleTemplatesCreateModalOpen, handleTemplatesUseModalOpen, ModalClose } from '../reducks/modals/operations';
 import { handleAlertClose, handleAlertOpen } from '../reducks/alerts/operations';
-import { useTemplate } from '../reducks/templates/operations';
+import { getTemplates, useTemplate } from '../reducks/templates/operations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 const UseTemplates = React.memo(React.forwardRef((props, ref) => {
-  console.log("------useTemplate");
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
@@ -69,6 +68,10 @@ const UseTemplates = React.memo(React.forwardRef((props, ref) => {
   const templates = selector.templates.templates;
   const open = selector.modals.modal_templates_use_open;
   const alertOpen = selector.alerts.open;
+
+  useEffect(() => {
+    dispatch(getTemplates(user_id));
+  }, [])
 
 
 

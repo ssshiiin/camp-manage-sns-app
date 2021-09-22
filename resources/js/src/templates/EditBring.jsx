@@ -20,7 +20,7 @@ import SimpleModal from '../../src/components/SimpleModal';
 import { handleAlertClose, handleAlertOpen } from "../reducks/alerts/operations";
 import { handleBringEditModalOpen } from "../reducks/modals/operations";
 import { ShowAdd } from "../components";
-import { AddAllIs_check, BringAllIs_check, createBringGear, deleteBringGear, getCountAllAdd } from "../reducks/bring_gears/operations";
+import { AddAllIs_check, BringAllIs_check, createBringGear, deleteBringGear, getAddBringGear, getCountAllAdd, getCountAllBring } from "../reducks/bring_gears/operations";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,18 +49,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// function not(a, b) {
-//   return a.filter((value) => b.indexOf(value) === -1);
-// }
-
-// function intersection(a, b) {
-//   return a.filter((value) => b.indexOf(value) !== -1);
-// }
-
-// function union(a, b) {
-//   return [...a, ...not(b, a)];
-// }
-
 const EditBring = React.forwardRef((props, ref) => {
   console.log("-----EditBring");
   const classes = useStyles();
@@ -74,7 +62,11 @@ const EditBring = React.forwardRef((props, ref) => {
   const count_bring = selector.bring_gears.count_all;
   const count_add = selector.bring_gears.count_add_all;
 
-  const [open, setOpen] = React.useState(true);
+
+  useEffect(() => {
+    dispatch(getAddBringGear(user_id));
+    dispatch(getCountAllAdd(user_id));
+  }, [])
 
   const handleClick = (event, type) => {
     console.log(event.target.checked)
@@ -93,19 +85,11 @@ const EditBring = React.forwardRef((props, ref) => {
         avatar={
           <Checkbox
             onClick={(event) => handleClick(event, type)}
-            // checked={
-            //   numberOfChecked(categories) === categories.length && categories.length !== 0
-            // }
-            // indeterminate={
-            //   numberOfChecked(categories) !== categories.length &&
-            //   numberOfChecked(categories) !== 0
-            // }
             disabled={categories.length === 0}
             inputProps={{ "aria-label": "all gears selected" }}
           />
         }
         title={title}
-        // subheader={`${numberOfChecked(categories)}/${categories.length} selected`}
         subheader={`${count.countTrue}/${count.countAll}selected`}
       />
       <Divider />
@@ -143,7 +127,6 @@ const EditBring = React.forwardRef((props, ref) => {
                   size="small"
                   className={classes.button}
                   onClick={() => dispatch(deleteBringGear(user_id))}
-                  // disabled={leftChecked.length === 0}
                   aria-label="move selected right"
                 >
                   &gt;
@@ -153,7 +136,6 @@ const EditBring = React.forwardRef((props, ref) => {
                   size="small"
                   className={classes.button}
                   onClick={() => dispatch(createBringGear(user_id))}
-                  // disabled={rightChecked.length === 0}
                   aria-label="move selected left"
                 >
                   &lt;

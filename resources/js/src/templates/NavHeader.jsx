@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Typography from '@material-ui/core/Typography';
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
-import { BringNav, ProfileNav } from ".";
+import { NavBring, NavProfile } from ".";
 
 const NavHeader = (props) => {
   if (props.type == "Profile") {
@@ -20,7 +20,7 @@ const NavHeader = (props) => {
         <h2>
           {name}
         </h2>
-        <ProfileNav user_id={props.user_id} />
+        <NavProfile user_id={props.user_id} />
       </>
     )
   }
@@ -30,7 +30,7 @@ const NavHeader = (props) => {
         <h2>
           {props.title}
         </h2>
-        <BringNav user_id={props.user_id} />
+        <NavBring user_id={props.user_id} />
       </>
     )
   }

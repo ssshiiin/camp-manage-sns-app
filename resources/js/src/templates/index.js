@@ -3,8 +3,8 @@ export {default as SideBar} from "./SideBar";
 export {default as Home} from "./Home";
 
 export {default as NavHeader} from  "./NavHeader";
-export {default as ProfileNav} from  "./ProfileNav";
-export {default as BringNav} from  "./BringNav";
+export {default as NavProfile} from  "./NavProfile";
+export {default as NavBring} from  "./NavBring";
 
 export {default as UserProfile} from "./UserProfile";
 export {default as EditProfile} from "./EditProfile";
@@ -19,7 +19,8 @@ export {default as GearNav} from "./GearNav";
 export {default as CreateGear} from "./CreateGear";
 export {default as EditGear} from "./EditGear";
 
-export {default as Bring} from "./Bring";
+export {default as IndexBring} from "./IndexBring";
+export {default as IndexSave} from "./IndexSave";
 export {default as EditBring} from "./EditBring";
 export {default as CreateTemplates} from "./CreateTemplates";
 export {default as UseTemplates} from "./UseTemplates";
