@@ -1,13 +1,14 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import { BringHeader, HomeHeader, ProfileHeader } from "./templates";
+import { Header, NavHeader } from "./templates";
 
 const HeaderRouter = () => {
   return (
     <Switch>
-      <Route path="(/)?" exact component={HomeHeader} />
-      <Route path="/:id/bring" exact component={BringHeader} />
-      <Route path="/:id" component={ProfileHeader} />
+      <Route path="(/)?" exact render={() => <Header title={"Home"} />} />
+      <Route path="/site" exact render={() => <Header title={"Camp Site"} />} />
+      <Route path="/:id/bring" exact render={(p) => <NavHeader user_id={p.match.params.id} title={"Gear"} type={"Bring"} />} />
+      <Route path="/:id" render={(p) => <NavHeader user_id={p.match.params.id} type={"Profile"} />} />
     </Switch>
   )
 }

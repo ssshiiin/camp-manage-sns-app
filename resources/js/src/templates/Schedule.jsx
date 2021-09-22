@@ -108,12 +108,12 @@ const Schedule = () => {
       .catch((err) => { console.log(err) });
   }
 
-  console.log(selector.posts)
-
   useEffect(() => {
     placeCastLatLng(nap_address);
     dispatch(getPlacePosts(nap_camp));
   }, [nap_camp, nap_address])
+
+  console.log(selector.schedules)
 
 
   return (
@@ -173,7 +173,7 @@ const Schedule = () => {
                 <GoogleMap
                   mapContainerStyle={containerStyle}
                   center={latLng}
-                  zoom={14}
+                  zoom={9}
                 >
                   <Marker position={latLng} />
                 </GoogleMap>

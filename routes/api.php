@@ -67,7 +67,9 @@ Route::group( ['middleware' => 'api'], function(){
     Route::post('/schedule/search/place', 'ScheduleController@searchSchedulePlace');
     
     
-    
+    Route::get('/save_gears/{user}', 'Save_gearsController@getUserSaveGears');
+    Route::post('save_gears/create', 'Save_gearsController@createSaveGears');
+
+
     Route::post('/update/save_gears/{save_gear}', 'Save_gearsController@postUserSave_gearsIs_check');
-    Route::get('/save_gears/{user}', 'Save_gearsController@getUserSave_gears');
 });

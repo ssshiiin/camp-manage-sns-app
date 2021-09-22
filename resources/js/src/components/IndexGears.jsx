@@ -9,6 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import { GearNav } from "../templates";
 
 
@@ -85,6 +86,7 @@ const IndexGears = (props) => {
   const category = props.category;
   const index = props.index;
   const value = props.value;
+  console.log(category)
 
   return (
     <React.Fragment>

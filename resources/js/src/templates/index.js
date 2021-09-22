@@ -1,8 +1,10 @@
-export {default as HomeHeader} from  "./HomeHeader";
-export {default as ProfileHeader} from  "./ProfileHeader";
-export {default as BringHeader} from  "./BringHeader";
+export {default as Header} from  "./Header";
 export {default as SideBar} from "./SideBar";
 export {default as Home} from "./Home";
+
+export {default as NavHeader} from  "./NavHeader";
+export {default as ProfileNav} from  "./ProfileNav";
+export {default as BringNav} from  "./BringNav";
 
 export {default as UserProfile} from "./UserProfile";
 export {default as EditProfile} from "./EditProfile";

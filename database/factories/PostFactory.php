@@ -10,6 +10,6 @@ $factory->define(Post::class, function (Faker $faker) {
         "user_id" => $faker->numberBetween(1, 10),
         'content' => $faker-> text,
         'day' => $faker-> dateTimeBetween($startDate = '-10 years', $endDate = 'now')->format('Y/m/d'),
-        'place' => '中禅寺湖キャンプ場'
+        'place' => 'ふもとっぱら'
     ];
 });

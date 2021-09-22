@@ -102,6 +102,15 @@ body #root main header {
   padding-right: 258px;
   z-index: 10;
   box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.2), 0px 2px 3px 0px rgba(0, 0, 0, 0.14), 0px 1px 4px 0px rgba(0, 0, 0, 0.12);
+  display: flex;
+}
+body #root main header h2 {
+  height: 80px;
+  font-family: "Roboto", "Helvetica", "Arial", "游明朝体", "游ゴシック体", "ヒラギノ角ゴシック", sans-serif;
+  font-weight: 400;
+  line-height: 80px;
+  font-size: 1.5em;
+  padding-left: 20px;
 }
 body #root main .side-bar {
   background-color: #646464;

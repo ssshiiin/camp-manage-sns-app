@@ -10,6 +10,9 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteGear } from '../reducks/gears/operations';
 import { EditGear } from '.';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import { createSaveGears } from '../reducks/save_gears/operations';
+
 
 const StyledMenu = withStyles({
   paper: {
@@ -47,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
   },
   settingIcon: {
     height: 50,
-    marginTop: 10
   }
 }));
 
@@ -59,7 +61,11 @@ const GearNav = React.forwardRef((props, ref) => {
   const [open, setOpen] = useState(null)
 
   const handleClick = (event) => {
-    setOpen(event.currentTarget);
+    if (props.user_id == login_user) {
+      setOpen(event.currentTarget);
+    } else {
+      dispatch(createSaveGears(props.gear_id));
+    }
   }
 
   const handleClose = () => {
@@ -72,7 +78,11 @@ const GearNav = React.forwardRef((props, ref) => {
   return (
     <React.Fragment>
       <IconButton className={classes.settingIcon} aria-label="settings" onClick={handleClick}>
-        <MoreVertIcon />
+        {(props.user_id == login_user) ? (
+          <MoreVertIcon />
+        ) : (
+          <BookmarkBorderIcon />
+        )}
       </IconButton>
       {(props.user_id == login_user) &&
         <StyledMenu
