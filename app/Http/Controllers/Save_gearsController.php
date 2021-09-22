@@ -8,16 +8,19 @@ use App\Save_gear;
 use App\Gear;
 use App\Http\Resources\Save_gearsCategoryResource;
 use App\Http\Resources\Save_gearsCategoryIs_checkResource;
+use App\Http\Resources\SaveGearsYearMonthResource;
 
 class Save_gearsController extends Controller
 {
     public function getUserSaveGears(User $user){
         $user_id = $user->id;
-        dd($user_id);
+
+        $year_month = Save_gear::where('user_id', $user_id)->get()->map(function ($row) use ($user_id) {
+            return ["year_month" => $row->created_at->format('Y/m'), 
+            "user_id" => $user_id];
+        })->unique("year_month")->sortByDesc("year_month");
         
-        // $categories = ->with("gear")->get()->where("user_id", $user_id)->groupBy("gear.category")->values();
-        
-        // return Save_gearsCategoryResource::collection($categories);
+        return SaveGearsYearMonthResource::collection($year_month);
     }
 
     public function createSaveGears(Request $request){

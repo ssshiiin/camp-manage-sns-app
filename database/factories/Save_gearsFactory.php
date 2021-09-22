@@ -9,6 +9,6 @@ $factory->define(Save_gear::class, function (Faker $faker) {
     return [
         'user_id' => $faker-> numberBetween($min = 1, $max = 10),  
         'gear_id' => $faker-> unique->numberBetween($min = 1, $max = 200),  
-        'is_check' => $faker-> numberBetween($min = 0, $max = 1),  
+        'created_at' => $faker->dateTimeBetween($startDate = '-10 years', $endDate = 'now')
     ];
 });

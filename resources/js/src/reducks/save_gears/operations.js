@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getSaveGearsAction } from "./actions";
 
 export const createSaveGears = (gear_id) => { 
   return async (dispatch, getState) => {
@@ -6,7 +7,6 @@ export const createSaveGears = (gear_id) => {
     const state = getState();
     const user_id = state.users.user_id;
     const url = '/api/save_gears/create';
-
 
     await axios.post(url,{
       user_id: user_id,
@@ -18,17 +18,18 @@ export const createSaveGears = (gear_id) => {
   }
 }
 
-export const getSaveGears = () => {
+export const getSaveGears = (user_id) => {
   return async (dispatch, getState) => {
     console.log("getSaveGears");
     const state = getState();
-    const user_id = state.users.user_id;
     const url = `/api/save_gears/${user_id}`;
     
 
     await axios.get(url)
       .then((res) => {
-        console.log(res);
+        dispatch(getSaveGearsAction({
+          save_gears: res.data.data
+        }));
       })
       .catch((err) => {
         console.log(err);

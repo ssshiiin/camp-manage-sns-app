@@ -18,3 +18,5 @@ export {default as CheckBoxes} from "./CheckBoxes";
 
 export {default as CampInfo} from "./CampInfo";
 export {default as IndexPosts} from "./IndexPosts";
+
+export {default as CardGear} from "./CardGear";

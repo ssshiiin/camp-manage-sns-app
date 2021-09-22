@@ -15,7 +15,7 @@ export {default as CreatePost} from "./CreatePost";
 export {default as EditPost} from "./EditPost";
 
 export {default as IndexGearsNav} from "./IndexGearsNav";
-export {default as GearNav} from "./GearNav";
+export {default as NavGear} from "./NavGear";
 export {default as CreateGear} from "./CreateGear";
 export {default as EditGear} from "./EditGear";
 

@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment'
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
-import { GearNav } from "../templates";
+import { CardGear } from ".";
 
 
 function TabPanel(props) {
@@ -81,40 +76,17 @@ const IndexGears = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const user_id = props.user_id
 
+  const user_id = props.user_id
   const category = props.category;
   const index = props.index;
   const value = props.value;
-  console.log(category)
 
   return (
     <React.Fragment>
       <TabPanel value={value} index={index}>
         {category.gears.map((gear, i) =>
-          <Card className={classes.root} key={i}>
-            <CardMedia
-              className={classes.cover}
-              image={gear.image_path[0].image_path}
-              title="Gear image"
-            />
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Typography variant="subtitle1" >
-                  {gear.gear_name}
-                </Typography>
-                <Typography variant="subtitle2" color="textSecondary">
-                  {gear.brand}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  価格 : {Number(gear.price).toLocaleString()} <br />
-                  所持数 : {gear.amount} <br />
-                  購入日 : {(gear.purchased_day === null) ? "" : moment(gear.purchased_day).format("YYYY/MM/DD")} <br />
-                </Typography>
-              </CardContent>
-            </div>
-            <GearNav user_id={user_id} gear_id={gear.id} />
-          </Card>
+          <CardGear user_id={user_id} gear={gear} key={i} />
         )}
       </TabPanel>
     </React.Fragment>

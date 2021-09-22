@@ -81,7 +81,7 @@ a:active {
 }
 
 body {
-  background-color: #fafafa;
+  background-color: #F5F5F5;
   width: 100%;
 }
 body #root {
@@ -325,7 +325,7 @@ body #root main .main-category .gear {
   width: 100%;
 }
 body #root main .sub-category {
-  background-color: #fafafa;
+  background-color: #F5F5F5;
   position: fixed;
   z-index: 20;
   top: 0;

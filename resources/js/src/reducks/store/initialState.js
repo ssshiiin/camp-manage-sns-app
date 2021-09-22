@@ -60,6 +60,9 @@ const initialState = {
     count_all: {},
     count_add_all: {},
   },
+  save_gears: {
+    save_gears: []
+  },
   templates: {
     templates: [],
     template_name: ""
