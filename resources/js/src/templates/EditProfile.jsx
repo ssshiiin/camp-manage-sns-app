@@ -8,6 +8,9 @@ import TextField from "@material-ui/core/TextField";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import Typography from '@material-ui/core/Typography';
+
+import MediaQuery from "react-responsive";
 
 
 import { SimpleModal } from '../components';
@@ -20,12 +23,19 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "25ch"
-    }
+    },
+    minWidth: 300,
   },
   bolb: {
     width: 160,
     height: 160,
+    borderRadius: "100%",
+    objectFit: "cover"
+  },
+  mobileBolb: {
+    margin: 10,
+    width: 80,
+    height: 80,
     borderRadius: "100%",
     objectFit: "cover"
   },
@@ -36,8 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonRoot: {
     "& > *": {
-      margin: theme.spacing(1)
-    }
+      margin: theme.spacing(1),
+    },
+    textAlign: "right"
   },
   input: {
     display: "none"
@@ -47,9 +58,18 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#1876d1",
     color: "white"
   },
+  mobileUpImg: {
+    margin: theme.spacing(1),
+    backgroundColor: "#1876d1",
+    color: "white"
+  },
   textForm: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    minWidth: 200
+  },
+  mobileTextForm: {
+    display: "flex",
   }
 }));
 
@@ -63,6 +83,9 @@ const EditProfile = React.forwardRef((props, ref) => {
   const prof_bolb_url = selector.users.prof_bolb_url;
   const open = selector.modals.modal_prof_edit_open;
   const alertOpen = selector.alerts.open;
+  const errors = selector.users.errors;
+
+  console.log(selector.users);
 
   return (
     <MenuItem>
@@ -75,61 +98,144 @@ const EditProfile = React.forwardRef((props, ref) => {
         nav={"プロフィールを編集する"}
         body=
         {
-          <form className={classes.root} noValidate autoComplete="off">
-            {prof_bolb_url &&
-              <img src={prof_bolb_url} className={classes.bolb} />
-            }
-            <div className={classes.buttonRoot}>
-              <input
-                accept="image/*"
-                className={classes.input}
-                id="icon-button-file"
-                type="file"
-                onChange={(event) => dispatch(handleImageChange(event))}
-              />
-              <label htmlFor="icon-button-file">
-                <IconButton
-                  className={classes.button}
-                  aria-label="upload picture"
-                  component="span"
-                >
-                  <PhotoCamera />
-                </IconButton>
-              </label>
-            </div>
-            <div className={classes.textForm}>
-              <TextField
-                id="outlined-textarea"
-                label="表示名"
-                defaultValue={app_name}
-                placeholder="Placeholder"
-                variant="outlined"
-                onChange={(event) => dispatch(handleApp_nameChange(event))}
-              />
-              <TextField
-                id="outlined-multiline-static"
-                label="プロフィール"
-                multiline
-                rows={6}
-                defaultValue={prof_content}
-                variant="outlined"
-                onChange={(event) => dispatch(handleProfileChange(event))}
-              />
-            </div>
-            <div>
-              <Button
-                variant="contained"
-                className={classes.upImg}
-                startIcon={<CloudUploadIcon />}
-                onClick={() => dispatch(handleSubmit())}
-              >
-                保存する
-              </Button>
-            </div>
-          </form>
+          <>
+            <MediaQuery minWidth={767} >
+              <form className={classes.root} noValidate autoComplete="off">
+                <img src={prof_bolb_url} className={classes.bolb} />
+                {
+                  errors.img &&
+                  <>
+                    <Typography variant="body2" color="error" align="center">
+                      {errors.img}
+                    </Typography>
+                  </>
+                }
+                <div className={classes.buttonRoot}>
+                  <input
+                    accept="image/*"
+                    className={classes.input}
+                    id="icon-button-file"
+                    type="file"
+                    onChange={(event) => dispatch(handleImageChange(event))}
+                  />
+                  <label htmlFor="icon-button-file">
+                    <IconButton
+                      className={classes.button}
+                      aria-label="upload picture"
+                      component="span"
+                    >
+                      <PhotoCamera />
+                    </IconButton>
+                  </label>
+                </div>
+                <div className={classes.textForm}>
+                  <TextField
+                    error={errors.app_name !== undefined}
+                    helperText={errors.app_name}
+                    id="outlined-textarea"
+                    label="表示名"
+                    defaultValue={app_name}
+                    placeholder="Placeholder"
+                    variant="outlined"
+                    fullWidth
+                    onChange={(event) => dispatch(handleApp_nameChange(event))}
+                  />
+                  <TextField
+                    error={errors.profile !== undefined}
+                    helperText={errors.profile}
+                    id="outlined-multiline-static"
+                    label="プロフィール"
+                    multiline
+                    rows={6}
+                    fullWidth
+                    defaultValue={prof_content}
+                    variant="outlined"
+                    onChange={(event) => dispatch(handleProfileChange(event))}
+                  />
+                </div>
+                <div>
+                  <Button
+                    variant="contained"
+                    className={classes.upImg}
+                    fullWidth
+                    startIcon={<CloudUploadIcon />}
+                    onClick={() => dispatch(handleSubmit())}
+                  >
+                    保存する
+                  </Button>
+                </div>
+              </form>
+            </MediaQuery>
+            <MediaQuery maxWidth={767} >
+              <form className={classes.root} noValidate autoComplete="off">
+                <div className={classes.mobileTextForm}>
+                  <div>
+                    <img src={prof_bolb_url} className={classes.mobileBolb} />
+                    {
+                      errors.img &&
+                      <>
+                        <Typography variant="body2" color="error" align="center">
+                          {errors.img}
+                        </Typography>
+                      </>
+                    }
+                    <div className={classes.buttonRoot}>
+                      <input
+                        accept="image/*"
+                        className={classes.input}
+                        id="icon-button-file"
+                        type="file"
+                        onChange={(event) => dispatch(handleImageChange(event))}
+                      />
+                      <label htmlFor="icon-button-file">
+                        <IconButton
+                          className={classes.button}
+                          aria-label="upload picture"
+                          component="span"
+                        >
+                          <PhotoCamera />
+                        </IconButton>
+                      </label>
+                    </div>
+                  </div>
+                  <div className={classes.textForm} >
+                    <TextField
+                      error={errors.app_name !== undefined}
+                      helperText={errors.app_name}
+                      id="outlined-textarea"
+                      label="表示名"
+                      defaultValue={app_name}
+                      placeholder="Placeholder"
+                      variant="outlined"
+                      onChange={(event) => dispatch(handleApp_nameChange(event))}
+                    />
+                    <TextField
+                      error={errors.profile !== undefined}
+                      helperText={errors.profile}
+                      id="outlined-multiline-static"
+                      label="プロフィール"
+                      multiline
+                      rows={6}
+                      defaultValue={prof_content}
+                      variant="outlined"
+                      onChange={(event) => dispatch(handleProfileChange(event))}
+                    />
+                    <Button
+                      variant="contained"
+                      className={classes.mobileUpImg}
+                      startIcon={<CloudUploadIcon />}
+                      onClick={() => dispatch(handleSubmit())}
+                    >
+                      保存する
+                    </Button>
+                  </div>
+                </div>
+              </form>
+            </MediaQuery>
+          </>
         }
       />
-    </MenuItem>
+    </MenuItem >
   )
 })
 

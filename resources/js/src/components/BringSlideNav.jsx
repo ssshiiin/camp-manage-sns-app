@@ -14,6 +14,7 @@ const useStyles = makeStyles({
 });
 
 const ProfileSlideNav = (props) => {
+  console.log("SlideNav")
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const classes = useStyles();

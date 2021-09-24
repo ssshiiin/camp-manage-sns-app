@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShowBring = React.memo((props) => {
-  console.log("show")
+  console.log("showBring")
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 

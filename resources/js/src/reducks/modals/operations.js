@@ -2,6 +2,7 @@ import { StoreAction } from "../alerts/actions";
 import { handleAlertOpen } from "../alerts/operations";
 import { CreateImagesAction as GearImageAction ,CreateAmountAction, CreateBrandAction, CreateCategoryAction, CreateGearNameAction, CreatePriceAction, CreatePurchasedDayAction, CreateErrorsAction as GearErrorsAction } from "../gears/actions";
 import { CreateErrorsAction , CreateContentAction, CreateDayAction, CreateImagesAction, CreatePlaceAction } from "../posts/actions";
+import { errorAction } from "../users/actions";
 import { ModalBringEditAction, ModalGearCreateAction, ModalPostCreateAction, ModalPostEditAction, ModalProfEditAction, ModalTemplatesCreateAction, ModalTemplatesUseAction } from "./actions"
 
 export const handleProfEditModalOpen = () => {
@@ -9,6 +10,9 @@ export const handleProfEditModalOpen = () => {
     dispatch(ModalProfEditAction({
       modal_prof_edit_open: true
     }));
+    dispatch(errorAction({
+      errors: []
+    }))
   }
 }
 

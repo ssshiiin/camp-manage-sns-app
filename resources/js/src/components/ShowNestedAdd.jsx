@@ -8,18 +8,9 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { useDispatch } from "react-redux";
 import { AddIs_check, BringIs_check } from "../reducks/bring_gears/operations";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  },
-  nested: {
-    paddingLeft: theme.spacing(4)
-  }
-}));
 
 const ShowNestedAdd = (props) => {
+  console.log("showNestedAdd")
   const dispatch = useDispatch();
   const [checked, setChecked] = React.useState(props.gear.is_check);
 
@@ -34,17 +25,12 @@ const ShowNestedAdd = (props) => {
   };
 
   return (
-    <ListItem
-      button
-      style={{ padding: 0 }}
-    >
-      <ListItemIcon>
-        <Checkbox
-          checked={checked}
-          onChange={handleChange}
-          disableRipple
-        />
-      </ListItemIcon>
+    <ListItem style={{ padding: 0 }}>
+      <Checkbox
+        checked={checked}
+        onChange={handleChange}
+        disableRipple
+      />
       <ListItemText primary={props.gear.gear_name} className="BringNestedGear" />
     </ListItem>
   );

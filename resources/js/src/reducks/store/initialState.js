@@ -10,6 +10,7 @@ const initialState = {
     prof_bolb_url: "",
     prof_image: "",
     menu_open: null,
+    errors: []
   },
   posts: {
     post: [],

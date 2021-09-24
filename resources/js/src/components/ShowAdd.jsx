@@ -10,6 +10,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import ShowNestedAdd from "./ShowNestedAdd";
 
 const ShowAdd = (props) => {
+  console.log("showAdd")
   const category = props.category;
 
   const [open, setOpen] = React.useState(false);

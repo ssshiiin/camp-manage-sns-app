@@ -3,7 +3,8 @@ export const BringGearsActions = (bring_gearsState) => {
   return {
     type: "BRING_GEARS",
     payload: {
-      bring_gears: bring_gearsState.bring_gears
+      bring_gears: bring_gearsState.bring_gears,
+      count_all: bring_gearsState.count_all
     }
   }
 }
@@ -13,7 +14,8 @@ export const AddGearsActions = (bring_gearsState) => {
   return {
     type: "ADD_GEARS",
     payload: {
-      add_gears: bring_gearsState.add_gears
+      add_gears: bring_gearsState.add_gears,
+      count_add_all: bring_gearsState.count_add_all
     }
   }
 }

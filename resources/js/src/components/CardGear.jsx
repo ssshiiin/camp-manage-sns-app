@@ -8,6 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { NavGear } from "../templates";
 
+import MediaQuery from "react-responsive";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,6 +21,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     width: "44%",
     margin: 24,
+  },
+  mobileRoot: {
+    display: 'flex',
+    width: "100%",
+    margin: 8,
   },
   details: {
     minWidth: "40%",
@@ -45,34 +52,65 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CardGear = (props) => {
+  console.log("Card");
   const classes = useStyles();
   const gear = props.gear;
   const user_id = props.user_id;
 
   return (
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.cover}
-        image={gear.gear_images[0].image_path}
-        title="Gear image"
-      />
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography variant="subtitle1" >
-            {gear.gear_name}
-          </Typography>
-          <Typography variant="subtitle2" color="textSecondary">
-            {gear.brand}
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            価格 : {Number(gear.price).toLocaleString()} <br />
-            所持数 : {gear.amount} <br />
-            購入日 : {(gear.purchased_day === null) ? "" : moment(gear.purchased_day).format("YYYY/MM/DD")} <br />
-          </Typography>
-        </CardContent>
-      </div>
-      <NavGear user_id={user_id} gear_id={gear.id} />
-    </Card>
+    <>
+      <MediaQuery query="(min-width: 767px)">
+        <Card className={classes.root}>
+          <CardMedia
+            className={classes.cover}
+            image={gear.gear_images[0].image_path}
+            title="Gear image"
+          />
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
+              <Typography variant="subtitle1" >
+                {gear.gear_name}
+              </Typography>
+              <Typography variant="subtitle2" color="textSecondary">
+                {gear.brand}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                価格 : {Number(gear.price).toLocaleString()} <br />
+                所持数 : {gear.amount} <br />
+                購入日 : {(gear.purchased_day === null) ? "" : moment(gear.purchased_day).format("YYYY/MM/DD")} <br />
+              </Typography>
+            </CardContent>
+          </div>
+          <NavGear user_id={user_id} gear_id={gear.id} />
+        </Card>
+      </MediaQuery>
+      <MediaQuery query="(max-width: 767px)">
+        <Card className={classes.mobileRoot}>
+          <CardMedia
+            className={classes.cover}
+            image={gear.gear_images[0].image_path}
+            title="Gear image"
+          />
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
+              <Typography variant="subtitle1" >
+                {gear.gear_name}
+              </Typography>
+              <Typography variant="subtitle2" color="textSecondary">
+                {gear.brand}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                価格 : {Number(gear.price).toLocaleString()} <br />
+                所持数 : {gear.amount} <br />
+                購入日 : {(gear.purchased_day === null) ? "" : moment(gear.purchased_day).format("YYYY/MM/DD")} <br />
+              </Typography>
+            </CardContent>
+          </div>
+          <NavGear user_id={user_id} gear_id={gear.id} />
+        </Card>
+
+      </MediaQuery>
+    </>
   )
 }
 

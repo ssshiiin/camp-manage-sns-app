@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import moment from "moment";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { createStyles, makeStyles, Theme, createTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { getShowPost } from "../reducks/posts/operations";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   }
 }));
 

@@ -8,7 +8,7 @@ import { ShowBring } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CountAllBring, getBringGear, getCountAllBring } from '../reducks/bring_gears/operations';
-import { Test } from '../components/Test';
+import { AllSelected } from '../components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,18 +22,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IndexBring = React.memo((props) => {
-  console.log("index")
+  console.log("indexBring")
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const classes = useStyles();
 
-  const user_id = props.user_id;
-
+  const user_id = selector.users.user_id;
   const bring_gears = selector.bring_gears.bring_gears;
 
   useEffect(() => {
-    dispatch(getBringGear(user_id));
-  }, [])
+    if (typeof user_id !== "undefined") {
+      dispatch(getBringGear(user_id));
+    }
+  }, [user_id])
 
   return (
     <>
@@ -41,7 +42,7 @@ const IndexBring = React.memo((props) => {
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={
-          <Test />
+          <AllSelected />
         }
         className={classes.root}
       >

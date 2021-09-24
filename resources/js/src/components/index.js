@@ -20,3 +20,6 @@ export {default as CampInfo} from "./CampInfo";
 export {default as IndexPosts} from "./IndexPosts";
 
 export {default as CardGear} from "./CardGear";
+export {default as AllSelected} from "./AllSelected";
+
+export {default as Loading} from "./Loading";

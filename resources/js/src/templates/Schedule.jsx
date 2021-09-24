@@ -2,18 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Geocode from "react-geocode";
-
-import 'date-fns';
 import Link from '@material-ui/core/Link';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { handleSchedulePlaceChange, searchSchedulePlace } from '../reducks/schedules/operations';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 
@@ -21,8 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { CampInfo, IndexPosts } from '../components';
 import { getPlacePosts } from '../reducks/posts/operations';
 
@@ -72,11 +62,6 @@ const containerStyle = {
   height: "100%",
 };
 
-const center = {
-  lat: 35.69575,
-  lng: 139.77521,
-};
-
 
 const Schedule = () => {
   const classes = useStyles();
@@ -113,15 +98,13 @@ const Schedule = () => {
     dispatch(getPlacePosts(nap_camp));
   }, [nap_camp, nap_address])
 
-  console.log(selector.schedules)
-
 
   return (
     <>
       <ScrollToTopOnMount />
       <Container className={classes.root}>
         <Grid container spacing={3}>
-          <Grid container item xs={7}>
+          <Grid container item md={7} xs={12}>
             <Paper className={classes.paper}>
               <form noValidate autoComplete="off" className={classes.textForm} onSubmit={(e) => { dispatch(searchSchedulePlace(e)) }}>
                 <div style={{ width: "65%" }}>
@@ -167,7 +150,7 @@ const Schedule = () => {
               </Grid >
             </Paper>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item md={5} xs={12}>
             <Paper style={{ minHeight: 392, width: "100%" }}>
               <LoadScript googleMapsApiKey={process.env.MIX_GOOGLE_MAP_API}>
                 <GoogleMap

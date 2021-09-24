@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const UseTemplates = React.memo(React.forwardRef((props, ref) => {
+  console.log("useTem");
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);

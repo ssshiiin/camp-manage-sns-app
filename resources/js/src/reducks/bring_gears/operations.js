@@ -3,16 +3,14 @@ import { AddCountAllActions, AddGearsActions, BringCountAllActions, BringGearsAc
 
 export const getBringGear = (user_id) => {
   return async (dispatch, getState) => {
-    console.log("getBringGear")
+    console.log("getBringGear-----");
 
     const url = `/api/bring_gears/${user_id}`;
 
     await axios.get(url)
       .then((res) => {
         dispatch(BringGearsActions({
-          bring_gears: res.data.bring
-        }));
-        dispatch(BringCountAllActions({
+          bring_gears: res.data.bring,
           count_all: res.data.bring_all_count
         }));
       })
@@ -22,16 +20,14 @@ export const getBringGear = (user_id) => {
 
 export const getAddBringGear = (user_id) => {
   return async (dispatch, getState) => {
-    console.log("getAddGear")
+    console.log("getAddGear-----")
 
     const url = `/api/bring_gears/add/${user_id}`;
 
     await axios.get(url)
       .then((res) => {
         dispatch(AddGearsActions({
-          add_gears: res.data.add
-        }));
-        dispatch(AddCountAllActions({
+          add_gears: res.data.add,
           count_add_all: res.data.add_all_count
         }));
       })
@@ -42,7 +38,7 @@ export const getAddBringGear = (user_id) => {
 
 export const getCountAllBring = (user_id) => {
   return async (dispatch, getState) => {
-    console.log("getCountAllBring")
+    console.log("getCountAllBring-----")
 
     const url = `/api/bring_gears/countAll/${user_id}`;
 
@@ -57,7 +53,7 @@ export const getCountAllBring = (user_id) => {
 
 export const getCountAllAdd = (user_id) => {
   return async (dispatch, getState) => {
-    console.log("getCountAllAdd")
+    console.log("getCountAllAdd-----")
 
     const url = `/api/bring_gears/countAll/add/${user_id}`;
 
@@ -72,9 +68,7 @@ export const getCountAllAdd = (user_id) => {
 
 export const BringIs_check = (is_check, id) => {
   return async (dispatch, getState) => {
-    console.log("BringIs_check")
-    const state = getState();
-    const user_id = state.users.user_id;
+    console.log("BringIs_check-----")
 
     const url = `/api/bring_gears/update/${id}`;
     await axios.post(url,
@@ -83,9 +77,7 @@ export const BringIs_check = (is_check, id) => {
       })
       .then((res) => {
         dispatch(BringGearsActions({
-          bring_gears: res.data.bring
-        }));
-        dispatch(BringCountAllActions({
+          bring_gears: res.data.bring,
           count_all: res.data.bring_all_count
         }));
       })
@@ -95,7 +87,7 @@ export const BringIs_check = (is_check, id) => {
 
 export const BringAllIs_check = (user_id, is_check) => {
   return async (dispatch, getState) => {
-    console.log("BringAllIs_check")
+    console.log("BringAllIs_check-----")
     const state = getState();
 
     const url = `/api/bring_gears/update/all/${user_id}`;
@@ -105,9 +97,7 @@ export const BringAllIs_check = (user_id, is_check) => {
       })
       .then((res) => {
         dispatch(BringGearsActions({
-          bring_gears: res.data.bring
-        }));
-        dispatch(BringCountAllActions({
+          bring_gears: res.data.bring,
           count_all: res.data.bring_all_count
         }));
       })
@@ -118,7 +108,7 @@ export const BringAllIs_check = (user_id, is_check) => {
 
 export const AddIs_check = (is_check, id) => {
   return async (dispatch, getState) => {
-    console.log("AddIs_check")
+    console.log("AddIs_check-----")
     const state = getState();
     const user_id = state.users.user_id;
 
@@ -129,9 +119,7 @@ export const AddIs_check = (is_check, id) => {
       })
       .then((res) => {
         dispatch(AddGearsActions({
-          add_gears: res.data.add
-        }));
-        dispatch(AddCountAllActions({
+          add_gears: res.data.add,
           count_add_all: res.data.add_all_count
         }));
       })
@@ -141,7 +129,7 @@ export const AddIs_check = (is_check, id) => {
 
 export const AddAllIs_check = (user_id, is_check) => {
   return async (dispatch, getState) => {
-    console.log("AddAllIs_check")
+    console.log("AddAllIs_check-----")
     const state = getState();
 
     const url = `/api/bring_gears/update/add/all/${user_id}`;
@@ -151,9 +139,7 @@ export const AddAllIs_check = (user_id, is_check) => {
       })
       .then((res) => {
         dispatch(AddGearsActions({
-          add_gears: res.data.add
-        }));
-        dispatch(AddCountAllActions({
+          add_gears: res.data.add,
           count_add_all: res.data.add_all_count
         }));
       })
@@ -163,7 +149,7 @@ export const AddAllIs_check = (user_id, is_check) => {
 
 export const createBringGear = (id) => {
   return async (dispatch, getState) => {
-    console.log("createBringGear")
+    console.log("createBringGear-----")
     const state = getState();
     const user_id = state.users.user_id;
     
@@ -171,15 +157,11 @@ export const createBringGear = (id) => {
     await axios.post(url)
     .then((res) => {
       dispatch(BringGearsActions({
-        bring_gears: res.data.bring.bring
-      }));
-      dispatch(BringCountAllActions({
+        bring_gears: res.data.bring.bring,
         count_all: res.data.bring.bring_all_count
       }));
       dispatch(AddGearsActions({
-        add_gears: res.data.add.add
-      }));
-      dispatch(AddCountAllActions({
+        add_gears: res.data.add.add,
         count_add_all: res.data.add.add_all_count
       }));
     })
@@ -191,7 +173,7 @@ export const createBringGear = (id) => {
 
 export const deleteBringGear = (id) => {
   return async (dispatch, getState) => {
-    console.log("deleteBringGear")
+    console.log("deleteBringGear-----")
     const state = getState();
     const user_id = state.users.user_id;
     
@@ -199,15 +181,11 @@ export const deleteBringGear = (id) => {
     await axios.post(url)
     .then((res) => {
       dispatch(BringGearsActions({
-        bring_gears: res.data.bring.bring
-      }));
-      dispatch(BringCountAllActions({
+        bring_gears: res.data.bring.bring,
         count_all: res.data.bring.bring_all_count
       }));
       dispatch(AddGearsActions({
-        add_gears: res.data.add.add
-      }));
-      dispatch(AddCountAllActions({
+        add_gears: res.data.add.add,
         count_add_all: res.data.add.add_all_count
       }));
     })

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\GetUserGearsResource;
+use Illuminate\Database\Eloquent\Builder;
 use App\Gear;
 
 class SaveGearsYearMonthResource extends JsonResource
@@ -21,10 +22,10 @@ class SaveGearsYearMonthResource extends JsonResource
         return [
             'year_month' => $year_month, 
             'gears' => GetUserGearsResource::collection(
-                Gear::with("save_gear")->get()->
-                where("save_gear.user_id", $user_id)->sortByDesc("save_gear.created_at")->
-                map(function ($row) use ($year_month) {
-                    if ($row->save_gear->created_at->format('Y/m') == $year_month){
+                Gear::whereHas("save_gear", function (Builder $row) use ($user_id) {
+                    $row->where("user_id", $user_id);
+                })->with('save_gear')->get()->map(function ($row) use ($year_month, $user_id) {
+                    if ($row->save_gear->where("user_id", $user_id)->first()->created_at->format('Y/m') == $year_month){
                         return $row;
                     }
                 })->whereNotNull("id"))

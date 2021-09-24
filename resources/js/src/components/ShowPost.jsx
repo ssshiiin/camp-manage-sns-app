@@ -22,7 +22,7 @@ import { TimeLineGearNested } from ".";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { getShowPost } from "../reducks/posts/operations";
-import { PostNav } from "../templates";
+import { NavPost } from "../templates";
 import { handlePostNavClick } from "../reducks/menus/operations";
 
 const useStyles = makeStyles((theme) => ({
@@ -85,7 +85,7 @@ const ShowPost = (props) => {
                   <MoreVertIcon />
                 </IconButton>
                 {(user_id == login_user) &&
-                  <PostNav post_id={post.id} />
+                  <NavPost post_id={post.id} />
                 }
               </>
             }

@@ -60,3 +60,14 @@ export const MenuAction = (userState) => {
     }
   }
 } 
+
+
+export const ERROR = "ERROR";
+export const errorAction = (userState) => {
+  return {
+    type: "ERROR",
+    payload: {
+      errors: userState.errors
+    }
+  }
+}

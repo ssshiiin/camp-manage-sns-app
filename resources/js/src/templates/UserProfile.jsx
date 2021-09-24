@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCountGears } from "../reducks/gears/operations";
 import { getCountPosts } from "../reducks/posts/operations";
 import { getProfile } from "../reducks/users/operations";
+import Avatar from "@material-ui/core/Avatar";
 
 const UserProfile = (props) => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const UserProfile = (props) => {
 
   return (
     <div className="profile-introduce">
-      <div className="profile-image" style={{ backgroundImage: `url(${image})` }}></div>
+      <Avatar aria-label="recipe" className="profile-image" src={image} />
       <div className="profile-content">
         <div className="profileColumn">
           <p className="profileName">{app_name}</p>
@@ -33,7 +34,7 @@ const UserProfile = (props) => {
         </div>
         <div className="profileContent">{content}</div>
       </div>
-    </div>
+    </div >
   )
 
 }

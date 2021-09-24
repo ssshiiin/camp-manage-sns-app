@@ -1,31 +1,36 @@
 import { ProfileAction, signInAction, MenuAction,
-  editAppNameAction, editProfBolbAction, editProfContentAction } from "./actions";
+  editAppNameAction, editProfBolbAction, editProfContentAction, errorAction } from "./actions";
 import { AlertOpenAction, StoreAction, SuccessAction } from "../alerts/actions";
 import { ModalProfEditAction } from "../modals/actions";
 import axios from 'axios';
 
 
-export const SignInUser = () => {
+//ユーザーがサインインしているか確認
+export const signInUser = () => {
   return async (dispach, getState) => {
     const state = getState()
-    const isSignedIn = state.users.isSignIn;
+    const isSignedIn = state.users.isSignedIn;
     
 
     if (!isSignedIn) {
       console.log("getUser");
       const url = "/api/user";
 
-      const response = await axios.get(url)
+      await axios.get(url)
+        .then((res) => {
+          dispach(signInAction({
+            isSignedIn: true,
+            user_name: res.data.name,
+            user_id: res.data.id
+          }))
+        })
         .catch(err => { console.log('err:', err); });
       
-      dispach(signInAction({
-        user_name: response.data.name,
-        user_id: response.data.id
-      }))
     }
   }
 }
 
+//プロフィール取得
 export const getProfile = (user_id) => {
   return async (dispatch, getState) => {
     console.log("getProfile");
@@ -57,6 +62,7 @@ export const getProfile = (user_id) => {
   }
 }
 
+//プロフィールの更新
 export const updateProfile = (user_id) => {
   return async (dispatch, getState) => {
     console.log("updateProfile");
@@ -67,37 +73,43 @@ export const updateProfile = (user_id) => {
     const prof_image = state.users.prof_image;
     const data = new FormData();
 
-    data.append("app_name", app_name);
-    data.append("profile", prof_content);
-    data.append("0", prof_image);
+    data.append("app_name", (app_name === null) ? "": app_name)
+    data.append("profile", (prof_content === null) ? "": prof_content)
+    data.append(`img`, (prof_image === null || typeof prof_image === "undefined") ? "": prof_image)
     data.append("_token", csrf_token);
 
     const url = `/api/profiles/edit/${user_id}`;
-    const response = await axios.post(url, 
+    await axios.post(url, 
       data, 
       {
         headers: {
           'content-type': 'multipart/form-data',
           }
       })
-      .catch((err) => {console.log("err:", err)});
+      .then((res) => {
+        dispatch(ProfileAction({
+          profile: res.data
+        }));
+        dispatch(SuccessAction({
+          success: true
+        }));
+        dispatch(AlertOpenAction({
+          open: false
+        }))
+        dispatch(ModalProfEditAction({
+          modal_prof_edit_open: false
+        }));
+        dispatch(MenuAction({
+          menu_open: null
+        }));
+      })
+      .catch((err) => {
+        dispatch(errorAction({
+          errors: err.response.data.errors
+        }))
+      });
     
 
-    dispatch(ProfileAction({
-      profile: response.data
-    }));
-    dispatch(SuccessAction({
-      success: true
-    }));
-    dispatch(AlertOpenAction({
-      open: false
-    }))
-    dispatch(ModalProfEditAction({
-      modal_prof_edit_open: false
-    }));
-    dispatch(MenuAction({
-      menu_open: null
-    }));
   }
 }
 

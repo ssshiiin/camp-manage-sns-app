@@ -7,11 +7,12 @@ import { push } from "connected-react-router";
 import { NavBring, NavProfile } from ".";
 
 const NavHeader = (props) => {
+  console.log("NavHeader")
+  const selector = useSelector((state) => state);
+  const dispatch = useDispatch();
   if (props.type == "Profile") {
-    const selector = useSelector((state) => state);
-    const dispatch = useDispatch();
     const name = selector.users.profile.app_name;
-    console.log(name);
+
     return (
       <>
         <h2>
@@ -25,12 +26,16 @@ const NavHeader = (props) => {
     )
   }
   else if (props.type == "Bring") {
+    const login = selector.users.user_id;
     return (
       <>
         <h2>
           {props.title}
         </h2>
-        <NavBring user_id={props.user_id} />
+        {
+          props.user_id == login &&
+          <NavBring />
+        }
       </>
     )
   }

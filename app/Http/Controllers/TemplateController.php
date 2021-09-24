@@ -47,11 +47,12 @@ class TemplateController extends Controller
         Bring_gear::withTrashed()->where("user_id", $user_id)->with("template", "gear")->get()->each(function ($item) use ($template_name){
             if ($item->template->where("template_name", $template_name)->isNotEmpty()){
                 $item->restore();
-            }
-            
+                $item->is_check = false;
+                $item->update();
+            } 
         });
         
-        return app()->make('App\Http\Controllers\Bring_gearController')->getUserBring_gears(User::find($user_id));
+        return app()->make('App\Http\Controllers\Bring_gearController')->getUserBring_gears($user);
     }
     
     

@@ -26,7 +26,7 @@ class Gear extends Model
     }
     
     public function save_gear(){
-        return $this->hasOne('App\Save_gear', 'gear_id');
+        return $this->hasMany('App\Save_gear', 'gear_id');
     }
     
     public function bring_gear(){

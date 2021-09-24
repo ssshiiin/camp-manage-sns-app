@@ -10,7 +10,7 @@ export {default as UserProfile} from "./UserProfile";
 export {default as EditProfile} from "./EditProfile";
 
 export {default as IndexPostsNav} from "./IndexPostsNav";
-export {default as PostNav} from "./PostNav";
+export {default as NavPost} from "./NavPost";
 export {default as CreatePost} from "./CreatePost";
 export {default as EditPost} from "./EditPost";
 

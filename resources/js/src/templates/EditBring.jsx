@@ -10,20 +10,25 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import MenuItem from '@material-ui/core/MenuItem';
+import MediaQuery from "react-responsive";
 
 import SimpleModal from '../../src/components/SimpleModal';
 import { handleAlertClose, handleAlertOpen } from "../reducks/alerts/operations";
 import { handleBringEditModalOpen } from "../reducks/modals/operations";
 import { ShowAdd } from "../components";
-import { AddAllIs_check, BringAllIs_check, createBringGear, deleteBringGear, getAddBringGear, getCountAllAdd, getCountAllBring } from "../reducks/bring_gears/operations";
+import { AddAllIs_check, BringAllIs_check, createBringGear, deleteBringGear, getAddBringGear, getBringGear, getCountAllAdd, getCountAllBring } from "../reducks/bring_gears/operations";
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: "auto"
+    margin: "auto",
+    width: "100%"
   },
   cardHeader: {
     padding: theme.spacing(1, 2)
+  },
+  mobileCardHeader: {
+    padding: theme.spacing(0)
   },
   list: {
     width: 190,
@@ -31,20 +36,23 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     overflow: "auto"
   },
+  mobileList: {
+    width: "100%",
+    height: 300,
+    backgroundColor: theme.palette.background.paper,
+    overflow: "auto"
+  },
   button: {
     margin: theme.spacing(0.5, 0)
   },
-  nestRoot: {
+  mobileButton: {
+    margin: theme.spacing(0),
     width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+    marginTop: 10
   },
-  nested: {
-    paddingLeft: theme.spacing(2),
-  }
 }));
 
-const EditBring = React.forwardRef((props, ref) => {
+const EditBring = React.memo(React.forwardRef((props, ref) => {
   console.log("Edit");
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -73,27 +81,54 @@ const EditBring = React.forwardRef((props, ref) => {
   }
 
   const customList = (title, categories, type, count) => (
-    <Card>
-      <CardHeader
-        className={classes.cardHeader}
-        avatar={
-          <Checkbox
-            onClick={(event) => handleClick(event, type)}
-            disabled={categories.length === 0}
-            inputProps={{ "aria-label": "all gears selected" }}
+    <>
+      <MediaQuery query="(min-width: 767px)" >
+        <Card>
+          <CardHeader
+            className={classes.cardHeader}
+            avatar={
+              <Checkbox
+                onClick={(event) => handleClick(event, type)}
+                disabled={categories.length === 0}
+                inputProps={{ "aria-label": "all gears selected" }}
+              />
+            }
+            title={title}
+            subheader={`${count.countTrue}/${count.countAll}selected`}
           />
-        }
-        title={title}
-        subheader={`${count.countTrue}/${count.countAll}selected`}
-      />
-      <Divider />
-      <List className={classes.list} dense component="div" role="list">
-        {categories.map((category, i) =>
-          <ShowAdd category={category} key={i} type={type} />
-        )}
-        <ListItem />
-      </List>
-    </Card>
+          <Divider />
+          <List className={classes.list} dense component="div" role="list">
+            {categories.map((category, i) =>
+              <ShowAdd category={category} key={i} type={type} />
+            )}
+            <ListItem />
+          </List>
+        </Card>
+      </MediaQuery>
+      <MediaQuery query="(max-width: 767px)" >
+        <Card>
+          <CardHeader
+            className={classes.mobileCardHeader}
+            avatar={
+              <Checkbox
+                onClick={(event) => handleClick(event, type)}
+                disabled={categories.length === 0}
+                inputProps={{ "aria-label": "all gears selected" }}
+              />
+            }
+            title={title}
+            subheader={`${count.countTrue}/${count.countAll}selected`}
+          />
+          <Divider />
+          <List className={classes.mobileList} dense component="div" role="list">
+            {categories.map((category, i) =>
+              <ShowAdd category={category} key={i} type={type} />
+            )}
+            <ListItem />
+          </List>
+        </Card>
+      </MediaQuery>
+    </>
   );
 
   return (
@@ -106,41 +141,80 @@ const EditBring = React.forwardRef((props, ref) => {
         open={mopen}
         nav={"持ち物を編集する"}
         body={
-          <Grid
-            container
-            spacing={2}
-            justifyContent="center"
-            alignItems="center"
-            className={classes.root}
-          >
-            <Grid item>{customList("持ち物", bring_gears, "bring", count_bring)}</Grid>
-            <Grid item>
-              <Grid container direction="column" alignItems="center">
-                <Button
-                  variant="outlined"
-                  size="small"
-                  className={classes.button}
-                  onClick={() => dispatch(deleteBringGear(user_id))}
-                  aria-label="move selected right"
-                >
-                  &gt;
-                </Button>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  className={classes.button}
-                  onClick={() => dispatch(createBringGear(user_id))}
-                  aria-label="move selected left"
-                >
-                  &lt;
-                </Button>
+          <>
+            <MediaQuery query="(min-width: 767px)" >
+              <Grid
+                container
+                spacing={2}
+                justifyContent="center"
+                alignItems="center"
+                className={classes.root}
+                style={{ minWidth: 360 }}
+              >
+                <Grid item>{customList("持ち物", bring_gears, "bring", count_bring)}</Grid>
+                <Grid item>
+                  <Grid container direction="column" alignItems="center">
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      className={classes.button}
+                      onClick={() => dispatch(deleteBringGear(user_id))}
+                      aria-label="move selected right"
+                    >
+                      &gt;
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      className={classes.button}
+                      onClick={() => dispatch(createBringGear(user_id))}
+                      aria-label="move selected left"
+                    >
+                      &lt;
+                    </Button>
+                  </Grid>
+                </Grid>
+                <Grid item>{customList("所持ギア", add_gears, "add", count_add)}</Grid>
               </Grid>
-            </Grid>
-            <Grid item>{customList("所持ギア", add_gears, "add", count_add)}</Grid>
-          </Grid>}
+            </MediaQuery>
+            <MediaQuery query="(max-width: 767px)" >
+              <Grid
+                container
+                spacing={2}
+                justifyContent="center"
+                alignItems="center"
+                className={classes.root}
+                style={{ minWidth: 360 }}
+              >
+                <Grid item xs={6}>{customList("持ち物", bring_gears, "bring", count_bring)}
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    className={classes.mobileButton}
+                    onClick={() => dispatch(deleteBringGear(user_id))}
+                    aria-label="move selected right"
+                  >
+                    &gt;
+                  </Button>
+                </Grid>
+                <Grid item xs={6}>{customList("所持ギア", add_gears, "add", count_add)}
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    className={classes.mobileButton}
+                    onClick={() => dispatch(createBringGear(user_id))}
+                    aria-label="move selected left"
+                  >
+                    &lt;
+                  </Button>
+                </Grid>
+              </Grid>
+            </MediaQuery>
+          </>
+        }
       />
     </MenuItem >
   );
-})
+}))
 
 export default EditBring;

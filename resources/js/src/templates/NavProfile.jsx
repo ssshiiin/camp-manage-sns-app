@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from "@material-ui/core/Typography";
+import MediaQuery from "react-responsive";
 
 
 import { CreatePost, EditProfile, CreateGear } from './index';
@@ -40,11 +41,22 @@ const useStyles = makeStyles((theme) => ({
     height: 80,
     marginLeft: "auto",
   },
-  NavButton: {
+  navButton: {
     top: "50%",
     transform: "translate(0, -50%)",
     backgroundColor: "white",
     color: "black",
+    marginRight: 20
+  },
+  mobileRoot: {
+    height: 60,
+    marginLeft: "auto",
+  },
+  mobileNavButton: {
+    top: "50%",
+    transform: "translate(0, -50%)",
+    backgroundColor: "darkslategray",
+    color: "white",
     marginRight: 20
   },
 }));
@@ -75,52 +87,80 @@ function NavProfile(props) {
 
   if (user_id == login_user) {
     return (
-      <div className={classes.root}>
-        <Button
-          className={classes.NavButton}
-          aria-controls="customized-menu"
-          aria-haspopup="true"
-          variant="contained"
-          onClick={handleClick}
-        >
-          <MoreHorizOutlined fontSize="large" />
-        </Button>
-        <StyledMenu
-          id="customized-menu"
-          anchorEl={open}
-          keepMounted
-          open={Boolean(open)}
-          onClose={handleClose}
-        >
-          <CreatePost />
-          <CreateGear />
-          <EditProfile />
-          <MenuItem>
-            <form className={classes.form} noValidate method="POST" action="logout">
-              <input type="hidden" name="_token" value={csrf_token} />
-              <button
-                type="submit"
-                style={{ border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left" }}
-              >
-                ログアウト
-              </button>
-            </form>
-          </MenuItem>
-          <MenuItem>
-            設定
-          </MenuItem>
-        </StyledMenu>
-      </div >
+      <>
+        <MediaQuery query="(min-width: 767px)" >
+          <div className={classes.root}>
+            <Button
+              className={classes.navButton}
+              aria-controls="customized-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreHorizOutlined fontSize="large" />
+            </Button>
+            <StyledMenu
+              id="customized-menu"
+              anchorEl={open}
+              keepMounted
+              open={Boolean(open)}
+              onClose={handleClose}
+            >
+              <CreatePost />
+              <CreateGear />
+              <EditProfile />
+              <MenuItem>
+                <form className={classes.form} noValidate method="POST" action="logout">
+                  <input type="hidden" name="_token" value={csrf_token} />
+                  <button
+                    type="submit"
+                    style={{ border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left" }}
+                  >
+                    ログアウト
+                  </button>
+                </form>
+              </MenuItem>
+            </StyledMenu>
+          </div >
+        </MediaQuery>
+        <MediaQuery query="(max-width: 767px)" >
+          <div className={classes.mobileRoot}>
+            <Button
+              className={classes.mobileNavButton}
+              aria-controls="customized-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreHorizOutlined fontSize="large" />
+            </Button>
+            <StyledMenu
+              id="customized-menu"
+              anchorEl={open}
+              keepMounted
+              open={Boolean(open)}
+              onClose={handleClose}
+            >
+              <CreatePost />
+              <CreateGear />
+              <EditProfile />
+              <MenuItem>
+                <form className={classes.form} noValidate method="POST" action="logout">
+                  <input type="hidden" name="_token" value={csrf_token} />
+                  <button
+                    type="submit"
+                    style={{ border: 'none', backgroundColor: 'white', minWidth: "120px", textAlign: "left" }}
+                  >
+                    ログアウト
+                  </button>
+                </form>
+              </MenuItem>
+            </StyledMenu>
+          </div >
+        </MediaQuery>
+      </>
     )
   }
   else {
-    return (
-      <>
-        <Typography variant="h5" component="h2">
-
-        </Typography>
-      </>
-    )
+    return (null)
   }
 }
 

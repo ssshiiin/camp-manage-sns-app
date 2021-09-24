@@ -4,8 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import MediaQuery from "react-responsive";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getGears } from '../reducks/gears/operations';
@@ -26,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
   },
   tab: {
     minWidth: 140,
+    backgroundColor: "rgb(250, 250, 250)",
+  },
+  mobileTab: {
+    minWidth: 75,
     backgroundColor: "rgb(250, 250, 250)",
   },
   pag: {
@@ -60,23 +63,45 @@ export default function IndexGearsNav(props) {
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default" component="nav" className={classes.bar}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="scrollable"
-          scrollButtons="auto"
-          aria-label="category nav"
-          className={classes.pag}
-        >
+        <MediaQuery query="(min-width: 767px)">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="category nav"
+            className={classes.pag}
+          >
+
+            {categories.map((category, i) =>
+              <Tab label={category.category} {...a11yProps(i)} className={classes.tab} key={i} />
+            )}
+          </Tabs>
           {categories.map((category, i) =>
-            <Tab label={category.category} {...a11yProps(i)} className={classes.tab} key={i} />
+            <IndexGears user_id={user_id} category={category} index={i} value={value} key={i} />
           )}
-        </Tabs>
-        {categories.map((category, i) =>
-          <IndexGears user_id={user_id} category={category} index={i} value={value} key={i} />
-        )}
+        </MediaQuery>
+        <MediaQuery query="(max-width: 767px)">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="category nav"
+            className={classes.pag}
+          >
+            {categories.map((category, i) =>
+              <Tab label={category.category} {...a11yProps(i)} className={classes.mobileTab} key={i} />
+            )}
+          </Tabs>
+          {categories.map((category, i) =>
+            <IndexGears user_id={user_id} category={category} index={i} value={value} key={i} />
+          )}
+        </MediaQuery>
       </AppBar>
     </div>
   );

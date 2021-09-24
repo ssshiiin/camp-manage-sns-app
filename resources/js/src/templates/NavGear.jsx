@@ -6,6 +6,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MediaQuery from "react-responsive";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteGear } from '../reducks/gears/operations';
@@ -36,20 +37,9 @@ const StyledMenu = withStyles({
 ));
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    height: 80,
-    position: "relative"
-  },
-  NavButton: {
-    position: "absolute",
-    top: "50%",
-    right: "20px",
-    transform: "translate(0, -50%)",
-    backgroundColor: "white",
-    color: "black"
-  },
   settingIcon: {
     height: 50,
+    marginLeft: "auto"
   }
 }));
 
@@ -95,9 +85,6 @@ const NavGear = React.forwardRef((props, ref) => {
           <EditGear gear_id={props.gear_id} />
           <MenuItem onClick={() => dispatch(deleteGear(props.gear_id))}>
             削除
-          </MenuItem>
-          <MenuItem>
-            設定
           </MenuItem>
         </StyledMenu>
       }

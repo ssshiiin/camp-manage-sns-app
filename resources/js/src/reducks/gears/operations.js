@@ -55,7 +55,7 @@ export const getShowGears = (gear_id) => {
     }))
 
     dispatch(CreateImagesAction({
-      gear_bolb_urls: [response.data.data.image_path[0].image_path]
+      gear_bolb_urls: [response.data.data.gear_images[0].image_path]
     }))
 
     dispatch(CreateErrorsAction({

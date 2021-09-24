@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import InfiniteScroll from 'react-infinite-scroller';
 
-import { PostHeader, PostImage, PostContent, PostsTimeLine } from "../components";
+import { PostHeader, PostImage, PostContent, PostsTimeLine, Loading } from "../components";
 import ScrollToTopOnMount from "./ScrollToTopOnMount";
 
 
@@ -26,7 +26,7 @@ const Home = (props) => {
     setAllPosts([...Allposts, ...response.data.data]);
   }
 
-  const loader = <div className="loader" key={0}>Loading ...</div>;
+  const loader = <Loading key={0} />;
 
   return (
     <React.Fragment>

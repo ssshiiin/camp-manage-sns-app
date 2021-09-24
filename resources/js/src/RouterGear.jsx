@@ -24,7 +24,7 @@ const RouterGear = (props) => {
         <BringSlideNav />
         <Switch>
           <Route path={`/${user_id}/bring/save`} exact render={() => <IndexSave user_id={user_id} />} />
-          <Route path={`/${user_id}/bring`} exact render={() => <IndexBring user_id={user_id} />} />
+          <Route path={`/${user_id}/bring`} exact render={() => <IndexBring />} />
         </Switch>
       </div>
     </>

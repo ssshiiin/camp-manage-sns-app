@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import MediaQuery from "react-responsive";
 
 function getModalStyle() {
   const top = 50;
@@ -23,7 +24,14 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1400,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(4),
+  },
+  mobilePaper: {
+    position: 'absolute',
+    maxWidth: 1400,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(0),
   },
   root: {
     width: '100%',
@@ -50,27 +58,52 @@ const GearEditModal = React.forwardRef((props, ref) => {
           保存されていません
         </Alert>
       </Snackbar>
-      <div style={modalStyle} className={classes.paper}>
-        <div id="simple-modal-description">
-          {props.body}
+      <MediaQuery minWidth={767}>
+        <div style={modalStyle} className={classes.paper}>
+          <div id="simple-modal-description">
+            {props.body}
+          </div>
         </div>
-      </div>
+      </MediaQuery>
+      <MediaQuery maxWidth={767}>
+        <div style={modalStyle} className={classes.mobilePaper}>
+          <div id="simple-modal-description">
+            {props.body}
+          </div>
+        </div>
+      </MediaQuery>
     </React.Fragment>
   );
 
   return (
     <div>
-      <button type="button" onClick={props.modalOpen} style={{ border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left" }}>
-        {props.nav}
-      </button>
-      <Modal
-        open={props.open}
-        onClose={props.modalClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
+      <MediaQuery minWidth={767}>
+        <button type="button" onClick={props.modalOpen} style={{ border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left" }}>
+          {props.nav}
+        </button>
+        <Modal
+          open={props.open}
+          onClose={props.modalClose}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          {body}
+        </Modal>
+      </MediaQuery>
+      <MediaQuery maxWidth={767}>
+        <button type="button" onClick={props.modalOpen} style={{ border: 'none', backgroundColor: 'white', minWidth: "50px", textAlign: "left" }}>
+          {props.nav}
+        </button>
+        <Modal
+          open={props.open}
+          onClose={props.modalClose}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          style={{ overflow: "scroll", margin: "80px 0" }}
+        >
+          {body}
+        </Modal>
+      </MediaQuery>
     </div >
   );
 })

@@ -19,10 +19,9 @@ function TabPanel(props) {
       id={`scrollable-auto-tabpanel-${index}`}
       aria-labelledby={`scrollable-auto-tab-${index}`}
       {...other}
-      style={{ minHeight: "100vh" }}
     >
       {value === index && (
-        <Box p={3}>
+        <Box p={0}>
           <Typography className={classes.tabPanel} component={'span'}>{children}</Typography>
         </Box>
       )}

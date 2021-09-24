@@ -9,25 +9,16 @@ import { useDispatch } from "react-redux";
 import { BringIs_check } from "../reducks/bring_gears/operations";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  },
   nested: {
     paddingLeft: theme.spacing(4)
   }
 }));
 
 const ShowNestedBring = React.memo((props) => {
-  console.log("showNest")
+  console.log("showNestBring")
   const classes = useStyles();
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(true);
-
-  const handleNestClick = () => {
-    setOpen(!open);
-  };
 
   const [checked, setChecked] = React.useState(props.gear.is_check);
 
@@ -37,9 +28,7 @@ const ShowNestedBring = React.memo((props) => {
   };
 
   return (
-    <ListItem
-      button
-    >
+    <ListItem>
       <ListItemIcon>
         <Checkbox
           checked={checked}

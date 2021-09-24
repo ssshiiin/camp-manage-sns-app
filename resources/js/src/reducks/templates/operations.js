@@ -21,24 +21,18 @@ export const useTemplate = (useTemplate_name, user_id) => {
   return async (dispatch, getState) => {
     console.log("useTemplates");
     const url = `/api/templates/use/${user_id}`;
-    const response = await axios.post(url
-    , 
+    await axios.post(url, 
     {
       useTemplate_name: useTemplate_name
+    })
+    .then((res) => {
+      dispatch(BringGearsActions({
+        bring_gears: res.data.bring
+      }));
+    })
+    .catch((err) => {
+      console.log(err);
     });
-
-    dispatch(BringGearsActions({
-      bring_gears: response.data.data
-    }));
-    dispatch(SuccessAction({
-      success: true
-    }));
-    dispatch(AlertOpenAction({
-      open: false
-    }))
-    dispatch(StoreAction({
-      store: true
-    }));
   }
 }
 
@@ -49,31 +43,32 @@ export const createTemplates = () => {
     const template_name = state.templates.template_name;
     const bring_gears = state.bring_gears.bring_gears;
     const user_id = state.users.user_id;
-    console.log(state.templates)
 
     const url = `/api/templates/create/${user_id}`;
-    const response = await axios.post(url, 
+    await axios.post(url, 
       {
         template_name: template_name,
         bring_gears: bring_gears
       })
-      .catch((err) => {console.log(err)})
+      .then((res) => {
+        dispatch(getTemplatesAction({
+          templates: res.data
+        }));
+        dispatch(SuccessAction({
+          success: true
+        }));
+        dispatch(AlertOpenAction({
+          open: false
+        }))
+        dispatch(ModalTemplatesCreateAction({
+          modal_templates_create_open: false
+        }));
+        dispatch(StoreAction({
+          store: true
+        }));
+      })
+      .catch((err) => {console.log(err)});
   
-    dispatch(getTemplatesAction({
-      templates: response.data
-    }));
-    dispatch(SuccessAction({
-      success: true
-    }));
-    dispatch(AlertOpenAction({
-      open: false
-    }))
-    dispatch(ModalTemplatesCreateAction({
-      modal_templates_create_open: false
-    }));
-    dispatch(StoreAction({
-      store: true
-    }));
   }
 }
 

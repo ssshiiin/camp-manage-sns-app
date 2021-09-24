@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import MediaQuery from "react-responsive";
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +14,6 @@ import { MenuAction } from '../reducks/users/actions';
 import EditBring from './EditBring';
 import CreateTemplates from './CreateTemplates';
 import { UseTemplates } from '.';
-
 
 
 const StyledMenu = withStyles({
@@ -41,21 +41,30 @@ const useStyles = makeStyles((theme) => ({
     height: 80,
     marginLeft: "auto",
   },
-  NavButton: {
+  navButton: {
     top: "50%",
     transform: "translate(0, -50%)",
     backgroundColor: "white",
     color: "black",
     marginRight: 20
-  }
+  },
+  mobileRoot: {
+    height: 60,
+    marginLeft: "auto",
+  },
+  mobileNavButton: {
+    top: "50%",
+    transform: "translate(0, -50%)",
+    backgroundColor: "darkslategray",
+    color: "white",
+    marginRight: 20
+  },
 }));
 
-const NavBring = (props) => {
-  console.log("Nav")
+const NavBring = () => {
+  console.log("Nav");
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const user_id = props.user_id;
-  const login_user = selector.users.user_id;
   const open = selector.users.menu_open;
 
 
@@ -72,43 +81,58 @@ const NavBring = (props) => {
   };
 
 
-
   const classes = useStyles();
 
-  if (user_id == login_user) {
-    return (
-      <div className={classes.root}>
-        <Button
-          className={classes.NavButton}
-          aria-controls="customized-menu"
-          aria-haspopup="true"
-          variant="contained"
-          onClick={handleClick}
-        >
-          <MoreHorizOutlined fontSize="large" />
-        </Button>
-        <StyledMenu
-          id="customized-menu"
-          anchorEl={open}
-          keepMounted
-          open={Boolean(open)}
-          onClose={handleClose}
-        >
-          <EditBring />
-          <UseTemplates />
-          <CreateTemplates />
-          <MenuItem>
-            設定
-          </MenuItem>
-        </StyledMenu>
-      </div >
-    )
-  }
-  else {
-    return (
-      <div>他人</div>
-    )
-  }
+  return (
+    <>
+      <MediaQuery query="(min-width: 767px)" >
+        <div className={classes.root}>
+          <Button
+            className={classes.navButton}
+            aria-controls="customized-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <MoreHorizOutlined fontSize="large" />
+          </Button>
+          <StyledMenu
+            id="customized-menu"
+            anchorEl={open}
+            keepMounted
+            open={Boolean(open)}
+            onClose={handleClose}
+          >
+            <EditBring />
+            <UseTemplates />
+            <CreateTemplates />
+          </StyledMenu>
+        </div >
+      </MediaQuery>
+      <MediaQuery query="(max-width: 767px)" >
+        <div className={classes.mobileRoot}>
+          <Button
+            className={classes.mobileNavButton}
+            aria-controls="customized-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <MoreHorizOutlined fontSize="large" />
+          </Button>
+          <StyledMenu
+            id="customized-menu"
+            anchorEl={open}
+            keepMounted
+            open={Boolean(open)}
+            onClose={handleClose}
+          >
+            <EditBring />
+            <UseTemplates />
+            <CreateTemplates />
+          </StyledMenu>
+        </div >
+      </MediaQuery>
+    </>
+  )
 }
 
 export default NavBring;
