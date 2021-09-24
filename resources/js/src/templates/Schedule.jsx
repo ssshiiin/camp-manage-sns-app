@@ -67,7 +67,7 @@ const Schedule = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const [latLng, setlatLng] = useState({});
+  const [latLng, setlatLng] = useState();
   const [marker, setMarker] = useState({});
 
   const place = selector.schedules.schedule_place;
@@ -91,6 +91,20 @@ const Schedule = () => {
         });
       })
       .catch((err) => { console.log(err) });
+  }
+
+  const googleMap = () => {
+    return (
+      <LoadScript googleMapsApiKey={process.env.MIX_GOOGLE_MAP_API}>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={latLng}
+          zoom={9}
+        >
+          <Marker position={latLng} />
+        </GoogleMap>
+      </LoadScript>
+    )
   }
 
   useEffect(() => {
@@ -152,15 +166,7 @@ const Schedule = () => {
           </Grid>
           <Grid item md={5} xs={12}>
             <Paper style={{ minHeight: 392, width: "100%" }}>
-              <LoadScript googleMapsApiKey={process.env.MIX_GOOGLE_MAP_API}>
-                <GoogleMap
-                  mapContainerStyle={containerStyle}
-                  center={latLng}
-                  zoom={9}
-                >
-                  <Marker position={latLng} />
-                </GoogleMap>
-              </LoadScript>
+              {googleMap()}
             </Paper>
           </Grid>
         </Grid>
