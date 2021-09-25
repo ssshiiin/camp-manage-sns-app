@@ -12,13 +12,11 @@ const UserProfile = (props) => {
   const app_name = selector.users.app_name;
   const content = selector.users.prof_content;
   const image = selector.users.prof_bolb_url;
-  const count_posts = selector.posts.count_posts;
-  const count_gears = selector.gears.count_gears;
+  const count_posts = selector.posts.posts_count;
+  const count_gears = selector.posts.gears_count;
 
   useEffect(() => {
     dispatch(getProfile(user_id));
-    dispatch(getCountPosts(user_id));
-    dispatch(getCountGears(user_id));
   }, [user_id])
 
   return (

@@ -12,8 +12,8 @@ use App\Http\Requests\CreateGearRequest;
 use App\Http\Requests\UpdateGearRequest;
 use App\Models\User;
 use App\Models\Gear;
-use App\Gear_image;
-use App\Bring_gear;
+use App\Models\GearImage;
+use App\Models\BringGear;
 use Storage;
 
 class GearController extends Controller

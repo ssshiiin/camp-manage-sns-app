@@ -49,11 +49,7 @@ export default function IndexGearsNav(props) {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
 
-  const categories = selector.gears.gears;
-
-  useEffect(() => {
-    dispatch(getGears(user_id));
-  }, [user_id]);
+  const categories = selector.posts.gears_profile;
 
 
   const handleChange = (event, newValue) => {

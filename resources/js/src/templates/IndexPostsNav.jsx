@@ -4,14 +4,11 @@ import { getPosts } from '../reducks/posts/operations';
 import { IndexPosts } from "../components";
 
 const IndexPostsNav = (props) => {
-  const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const user_id = props.match.params.id;
-  const posts = selector.posts.posts;
+  const posts = selector.posts.posts_profile;
 
-  useEffect(() => {
-    dispatch(getPosts(user_id));
-  }, [user_id]);
+  console.log("posts", selector.posts)
 
 
   return (

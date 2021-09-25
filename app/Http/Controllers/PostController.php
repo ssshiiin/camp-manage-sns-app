@@ -39,7 +39,7 @@ class PostController extends Controller
             "posts_profile" => $posts_profile,
             "posts_count" => $posts_count,
             "gears_profile" => $gears_profile,
-            "gears_count" => $gears_profile,
+            "gears_count" => $gears_count,
         ];
     }
     

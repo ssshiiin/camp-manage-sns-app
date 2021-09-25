@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router';
 import { useDispatch, useSelector } from "react-redux";
 import { UserProfile, IndexPosts, IndexGearsNav, IndexPostsNav } from './templates';
@@ -7,6 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import { SuccessAction } from './reducks/alerts/actions';
 import ScrollToTopOnMount from './templates/ScrollToTopOnMount';
+import { getPosts } from './reducks/posts/operations';
 
 
 
@@ -25,6 +26,10 @@ function RouterProfile(props) {
       success: false
     }))
   };
+
+  useEffect(() => {
+    dispatch(getPosts(user_id));
+  }, [user_id]);
 
   return (
     <React.Fragment>

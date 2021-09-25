@@ -1,4 +1,4 @@
-import { countPostsAction, CreateContentAction, CreateDayAction, CreateErrorsAction, CreateImagesAction, CreatePlaceAction, CREATE_IMAGES, PlacePostsAction, PostsAction, ShowPostAction } from './actions';
+import { countPostsAction, CreateContentAction, CreateDayAction, CreateErrorsAction, CreateImagesAction, CreatePlaceAction, getPostsAction, PlacePostsAction, PostsAction, ShowPostAction } from './actions';
 import { push } from 'connected-react-router';
 import axios from 'axios';
 import { getProfile } from '../users/operations';
@@ -14,14 +14,20 @@ import moment from 'moment';
 export const getPosts = (user_id) => {
   return async (dispatch, getState) => {
     console.log("getPosts");
-    const url = `/api/posts/${user_id}`;
+    const url = `/posts/profile/${user_id}`;
 
-    const response = await axios.get(url)
+    await axios.get(url)
+      .then((res) => {
+        console.log(res.data)
+        dispatch(getPostsAction({
+          posts_profile: res.data.posts_profile,
+          posts_count: res.data.posts_count,
+          gears_profile: res.data.gears_profile,
+          gears_count: res.data.gears_count,
+        }));
+      })
       .catch(err => { console.log('err:', err); });
-    
-    dispatch(PostsAction({
-      posts: response.data
-    }));
+
   }
 }
 
@@ -38,10 +44,10 @@ export const getPlacePosts = (place) => {
     })
       .then((res) => (
         dispatch(PlacePostsAction({
-          place_posts:  res.data
+          place_posts: res.data
         }))
       ))
-      .catch((err) => {console.log(err)});
+      .catch((err) => { console.log(err) });
   }
 }
 
@@ -52,7 +58,7 @@ export const getShowPost = (user_id, post_id) => {
 
     const response = await axios.get(url)
       .catch(err => { console.log('err:', err); });
-    
+
     dispatch(ShowPostAction({
       post: response.data.data
     }));
@@ -65,19 +71,19 @@ export const getCountPosts = (user_id) => {
   return async (dispatch, getState) => {
     console.log("getCountPosts");
     const url = `/api/count/posts/${user_id}`;
-    
+
     const response = await axios.get(url)
-      .catch((err) => {console.log("err:", err)})
+      .catch((err) => { console.log("err:", err) })
 
     dispatch(countPostsAction({
       count_posts: response.data
     }))
-  } 
+  }
 }
 
 //他人のプロフィールからsidebarから自分のプロフィールに飛んだときの再描画
 export const pushMyProfile = (user_id) => {
-  return async(dispatch, getState) => {
+  return async (dispatch, getState) => {
     dispatch(getPosts(user_id));
     dispatch(getProfile(user_id));
     dispatch(getCountPosts(user_id));
@@ -96,22 +102,22 @@ export const createPost = () => {
     const content = state.posts.post_content;
     const image = state.posts.post_image;
     const user_id = state.users.user_id;
-    
+
     const data = new FormData();
 
-    data.append("place", (place === null) ? "": place)
-    data.append("day", (day === null) ? "": moment(day).format("YYYY/MM/DD"))
-    data.append("content", (content === null) ? "": content)
-    data.append(`img`, (image === null) ? "": image)
+    data.append("place", (place === null) ? "" : place)
+    data.append("day", (day === null) ? "" : moment(day).format("YYYY/MM/DD"))
+    data.append("content", (content === null) ? "" : content)
+    data.append(`img`, (image === null) ? "" : image)
     data.append("_token", csrf_token);
 
     const url = `/api/posts/create/${user_id}`;
-    await axios.post(url, 
-      data, 
+    await axios.post(url,
+      data,
       {
         headers: {
           'content-type': 'multipart/form-data',
-          }
+        }
       })
       .then((res) => {
         dispatch(PostsAction({
@@ -133,9 +139,11 @@ export const createPost = () => {
           store: true
         }));
       })
-      .catch((err) => {dispatch(CreateErrorsAction({
-        create_errors: err.response.data.errors
-      }))});
+      .catch((err) => {
+        dispatch(CreateErrorsAction({
+          create_errors: err.response.data.errors
+        }))
+      });
   }
 }
 
@@ -149,47 +157,50 @@ export const updatePost = (post_id) => {
     const content = state.posts.post_content;
     const image = state.posts.post_image;
     const user_id = state.users.user_id;
-    
+
     const data = new FormData();
     console.log(state.posts)
 
-    data.append("place", (place === null) ? "": place)
-    data.append("day", (day === null) ? "": moment(day).format("YYYY/MM/DD"))
-    data.append("content", (content === null) ? "": content)
-    data.append(`img`, (image === null || typeof image === "undefined") ? "": image)
+    data.append("place", (place === null) ? "" : place)
+    data.append("day", (day === null) ? "" : moment(day).format("YYYY/MM/DD"))
+    data.append("content", (content === null) ? "" : content)
+    data.append(`img`, (image === null || typeof image === "undefined") ? "" : image)
     data.append("_token", csrf_token);
 
 
     const url = `/api/posts/update/${post_id}`;
-    await axios.post(url, 
-      data, 
+    await axios.post(url,
+      data,
       {
         headers: {
           'content-type': 'multipart/form-data',
-          }
+        }
       })
-      .then((res) => {dispatch(ShowPostAction({
-        post: res.data.data
-      }));
-      dispatch(SuccessAction({
-        success: true
-      }));
-      dispatch(AlertOpenAction({
-        open: false
-      }))
-      dispatch(ModalPostEditAction({
-        modal_post_edit_open: false
-      }));
-      dispatch(PostNavAction({
-        post_nav: null
-      }));
-      dispatch(StoreAction({
-        store: true
-      }));
+      .then((res) => {
+        dispatch(ShowPostAction({
+          post: res.data.data
+        }));
+        dispatch(SuccessAction({
+          success: true
+        }));
+        dispatch(AlertOpenAction({
+          open: false
+        }))
+        dispatch(ModalPostEditAction({
+          modal_post_edit_open: false
+        }));
+        dispatch(PostNavAction({
+          post_nav: null
+        }));
+        dispatch(StoreAction({
+          store: true
+        }));
       })
-      .catch((err) => {dispatch(CreateErrorsAction({
-        create_errors: err.response.data.errors
-      }))});
+      .catch((err) => {
+        dispatch(CreateErrorsAction({
+          create_errors: err.response.data.errors
+        }))
+      });
 
   }
 }
@@ -261,7 +272,7 @@ export const deletePost = (post_id) => {
     const url = `/api/posts/delete/${post_id}`;
 
     const response = await axios.post(url)
-      .catch((err) => {console.log(err);});
+      .catch((err) => { console.log(err); });
 
     dispatch(push(`/${user_id}`));
   }

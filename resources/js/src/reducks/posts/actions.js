@@ -1,9 +1,12 @@
 export const POSTS = "POSTS";
-export const PostsAction = (postsState) => {
+export const getPostsAction = (posts_state) => {
   return {
     type: "POSTS",
     payload: {
-      posts: postsState.posts,
+      posts_profile: posts_state.posts_profile,
+      posts_count: posts_state.posts_count,
+      gears_profile: posts_state.gears_profile,
+      gears_count: posts_state.gears_count, 
     }
   }
 }
