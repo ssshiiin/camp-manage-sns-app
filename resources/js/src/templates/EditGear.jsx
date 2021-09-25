@@ -100,8 +100,6 @@ const EditGear = React.forwardRef((props, ref) => {
   const alertOpen = selector.alerts.open;
   const errors = selector.gears.create_errors;
 
-  console.log(errors);
-
 
   return (
     <MenuItem>

@@ -56,7 +56,6 @@ const CardGear = (props) => {
   const classes = useStyles();
   const gear = props.gear;
   const user_id = props.user_id;
-  console.log(gear)
 
   return (
     <>

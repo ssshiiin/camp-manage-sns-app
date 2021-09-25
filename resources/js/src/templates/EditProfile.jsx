@@ -85,7 +85,6 @@ const EditProfile = React.forwardRef((props, ref) => {
   const alertOpen = selector.alerts.open;
   const errors = selector.users.errors;
 
-  console.log(selector.users);
 
   return (
     <MenuItem>

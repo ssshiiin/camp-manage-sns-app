@@ -49,7 +49,6 @@ const GearEditModal = React.forwardRef((props, ref) => {
 
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  console.log(props)
 
   const body = (
     <React.Fragment>

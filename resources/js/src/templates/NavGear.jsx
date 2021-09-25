@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavGear = React.forwardRef((props, ref) => {
-  console.log(props)
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const login_user = selector.users.user_id;
