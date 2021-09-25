@@ -13,10 +13,6 @@ const initialState = {
     errors: []
   },
   posts: {
-    posts_profile: [],
-    posts_count: 0,
-    gears_profile: [],
-    gears_count: 0,
     post: [],
     posts: [],
     place_posts: [],

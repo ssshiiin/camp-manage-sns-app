@@ -18,6 +18,15 @@ use Storage;
 
 class GearController extends Controller
 {
+    public function indexGear(User $user){
+        $user_id = $user->id;
+
+        $gears = new Gear;
+        $gears_profile = $gears->getUserCategory($user_id);
+
+        return ["gears_profile" => $gears_profile];
+    }
+
     public function Show(Gear $gear){
         return new GetUserGearsResource($gear);
     }
@@ -61,7 +70,7 @@ class GearController extends Controller
             ]);
         }
         
-        return app()->make('App\Http\Controllers\GearController')->getUserCategory(User::find($user_id));
+        return $this->indexGear($user);
     }
     
     
@@ -97,7 +106,7 @@ class GearController extends Controller
         $gear->amount = $amount;   
         $gear->update();
         
-        return app()->make('App\Http\Controllers\GearController')->getUserCategory(User::find($user_id));
+        return $this->indexGear(User::find($user_id));
     }
     
     public function delete(Gear $gear){
@@ -105,6 +114,6 @@ class GearController extends Controller
         Gear_image::where("gear_id", $gear->id)->delete();
         $gear->delete();
         
-        return app()->make('App\Http\Controllers\GearController')->getUserCategory(User::find($user_id));
+        return $this->indexGear(User::find($user_id));
     }
 }  

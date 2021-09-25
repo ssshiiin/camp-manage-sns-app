@@ -22,25 +22,14 @@ class PostController extends Controller
     }
     
     //プロフィール一覧表示
-    public function indexProfile(User $user)
+    public function indexPosts(User $user)
     {
         $user_id = $user->id;
 
         $posts = new Post;
-        $gears = new Gear;
-
         $posts_profile = $posts->getUserPosts($user_id);
-        $posts_count = $posts->getCountPost($user_id);
-
-        $gears_profile = $gears->getUserCategory($user_id);
-        $gears_count = $gears->getCountGear($user_id);
-
-        return [
-            "posts_profile" => $posts_profile,
-            "posts_count" => $posts_count,
-            "gears_profile" => $gears_profile,
-            "gears_count" => $gears_count,
-        ];
+        
+        return ["posts_profile" => $posts_profile];
     }
     
     //postsの詳細を取得する
@@ -94,7 +83,7 @@ class PostController extends Controller
             ]);
         }
         
-        return $this->getUserPosts(User::find($user_id));
+        return $this->indexPosts(User::find($user_id));
     }
 
     
@@ -124,7 +113,7 @@ class PostController extends Controller
         $post->place = $place;   
         $post->update();
         
-        return $this->getShowPost(Post::find($post_id));
+        return $this->show(Post::find($post_id));
     }
     
     public function destroy(Post $post){
