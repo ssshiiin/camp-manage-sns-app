@@ -6,7 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 
 import { useDispatch } from "react-redux";
-import { BringIs_check } from "../reducks/bring_gears/operations";
+import { updateBringCheck } from "../reducks/bring_gears/operations";
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -24,7 +24,7 @@ const ShowNestedBring = React.memo((props) => {
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
-    dispatch(BringIs_check(!checked, props.gear.id));
+    dispatch(updateBringCheck(!checked, props.gear.id));
   };
 
   return (

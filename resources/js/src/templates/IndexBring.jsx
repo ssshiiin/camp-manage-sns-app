@@ -7,7 +7,7 @@ import List from "@material-ui/core/List";
 import { ShowBring } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CountAllBring, getBringGear, getCountAllBring } from '../reducks/bring_gears/operations';
+import { CountAllBring, getBring, getBringGear, getCountAllBring } from '../reducks/bring_gears/operations';
 import { AllSelected } from '../components';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,11 +28,13 @@ const IndexBring = React.memo((props) => {
   const classes = useStyles();
 
   const user_id = selector.users.user_id;
-  const bring_gears = selector.bring_gears.bring_gears;
+  const brings = selector.bring_gears.brings;
+
+  console.log(selector.bring_gears)
 
   useEffect(() => {
     if (typeof user_id !== "undefined") {
-      dispatch(getBringGear(user_id));
+      dispatch(getBring(user_id));
     }
   }, [user_id])
 
@@ -46,8 +48,8 @@ const IndexBring = React.memo((props) => {
         }
         className={classes.root}
       >
-        {bring_gears.map((bring_gear, i) =>
-          <ShowBring bring_gear={bring_gear} key={i} />
+        {brings.map((category, i) =>
+          <ShowBring category={category} key={i} />
         )}
       </List>
     </>

@@ -1,41 +1,38 @@
-export const BRING_GEARS = "BRING_GEARS";
-export const BringGearsActions = (bring_gearsState) => {
+export const GET_BRINGS = "GET_BRINGS";
+export const getBringsAction = (bring_gears_state) => {
   return {
-    type: "BRING_GEARS",
+    type: "GET_BRINGS",
     payload: {
-      bring_gears: bring_gearsState.bring_gears,
-      count_all: bring_gearsState.count_all
+      brings: bring_gears_state.brings,
+      brings_count_all: bring_gears_state.brings_count_all,
+      brings_count_true: bring_gears_state.brings_count_true,
+      not_brings: bring_gears_state.not_brings,
+      not_brings_count_all: bring_gears_state.not_brings_count_all,
+      not_brings_count_true: bring_gears_state.not_brings_count_true,
     }
   }
 }
 
-export const ADD_GEARS = "ADD_GEARS";
-export const AddGearsActions = (bring_gearsState) => {
+export const UPDATE_BRINGS = "UPDATE_BRINGS";
+export const updateBringAction = (bring_gears_state) => {
   return {
-    type: "ADD_GEARS",
+    type: "UPDATE_BRINGS",
     payload: {
-      add_gears: bring_gearsState.add_gears,
-      count_add_all: bring_gearsState.count_add_all
+      brings: bring_gears_state.brings,
+      brings_count_all: bring_gears_state.brings_count_all,
+      brings_count_true: bring_gears_state.brings_count_true,
     }
   }
 }
 
-export const BRING_COUNT_ALL = "BRING_COUNT_ALL";
-export const BringCountAllActions = (bring_gearsState) => {
+export const UPDATE_NOT_BRINGS = "UPDATE_NOT_BRINGS";
+export const updateNotBringAction = (bring_gears_state) => {
   return {
-    type: "BRING_COUNT_ALL",
+    type: "UPDATE_NOT_BRINGS",
     payload: {
-      count_all: bring_gearsState.count_all
-    }
-  }
-}
-
-export const ADD_COUNT_ALL = "ADD_COUNT_ALL";
-export const AddCountAllActions = (bring_gearsState) => {
-  return {
-    type: "ADD_COUNT_ALL",
-    payload: {
-      count_add_all: bring_gearsState.count_add_all
+      not_brings: bring_gears_state.not_brings,
+      not_brings_count_all: bring_gears_state.not_brings_count_all,
+      not_brings_count_true: bring_gears_state.not_brings_count_true,
     }
   }
 }

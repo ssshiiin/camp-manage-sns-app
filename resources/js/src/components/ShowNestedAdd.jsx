@@ -6,7 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 
 import { useDispatch } from "react-redux";
-import { AddIs_check, BringIs_check } from "../reducks/bring_gears/operations";
+import { updateBringCheck, updateNotBringCheck } from "../reducks/bring_gears/operations";
 
 
 const ShowNestedAdd = (props) => {
@@ -17,10 +17,10 @@ const ShowNestedAdd = (props) => {
   const handleChange = (event) => {
     setChecked(event.target.checked);
     if (props.type == "bring") {
-      dispatch(BringIs_check(!checked, props.gear.id));
+      dispatch(updateBringCheck(!checked, props.gear.id));
     }
     else if (props.type == "add") {
-      dispatch(AddIs_check(!checked, props.gear.gear_id))
+      dispatch(updateNotBringCheck(!checked, props.gear.gear_id))
     }
   };
 

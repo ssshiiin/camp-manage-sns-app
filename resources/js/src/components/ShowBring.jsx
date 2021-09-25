@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowBring = React.memo((props) => {
+const ShowBring = (props) => {
   console.log("showBring")
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -41,19 +41,19 @@ const ShowBring = React.memo((props) => {
         onClick={handleNestClick}
         className={classes.subHeader}
       >
-        <ListItemText primary={`${props.bring_gear.category}`} style={{ flex: "initial" }} />
-        <ListItemText secondary={`${props.bring_gear.countTrue}/${props.bring_gear.countAll}  selected`} style={{ flex: "1", marginLeft: 20 }} />
+        <ListItemText primary={`${props.category.category}`} style={{ flex: "initial" }} />
+        <ListItemText secondary={`${props.category.count_true}/${props.category.count_all}  selected`} style={{ flex: "1", marginLeft: 20 }} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {props.bring_gear.gearList.map((gear, i) =>
+          {props.category.gear_list.map((gear, i) =>
             <ShowNestedBring gear={gear} key={i} />
           )}
         </List>
       </Collapse>
     </>
   );
-})
+}
 
 export default ShowBring;

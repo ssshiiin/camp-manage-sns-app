@@ -16,7 +16,7 @@ import SimpleModal from '../../src/components/SimpleModal';
 import { handleAlertClose, handleAlertOpen } from "../reducks/alerts/operations";
 import { handleBringEditModalOpen } from "../reducks/modals/operations";
 import { ShowAdd } from "../components";
-import { AddAllIs_check, BringAllIs_check, createBringGear, deleteBringGear, getAddBringGear, getBringGear, getCountAllAdd, getCountAllBring } from "../reducks/bring_gears/operations";
+import { createBringGear, createBrings, deleteBringGear, deleteBrings, getAddBringGear, getBringGear, getCountAllAdd, getCountAllBring, updateBringsAllCheck, updateNotBringsAllCheck } from "../reducks/bring_gears/operations";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,27 +60,25 @@ const EditBring = React.memo(React.forwardRef((props, ref) => {
   const user_id = selector.users.user_id;
   const mopen = selector.modals.modal_bring_edit_open;
   const alertOpen = selector.alerts.open;
-  const bring_gears = selector.bring_gears.bring_gears;
-  const add_gears = selector.bring_gears.add_gears;
-  const count_bring = selector.bring_gears.count_all;
-  const count_add = selector.bring_gears.count_add_all;
+  const brings = selector.bring_gears.brings;
+  const brings_count_all = selector.bring_gears.brings_count_all;
+  const brings_count_true = selector.bring_gears.brings_count_true;
+  const not_brings = selector.bring_gears.not_brings;
+  const not_brings_count_all = selector.bring_gears.not_brings_count_all;
+  const not_brings_count_true = selector.bring_gears.not_brings_count_true;
 
-
-  useEffect(() => {
-    dispatch(getAddBringGear(user_id));
-  }, [])
 
   const handleClick = (event, type) => {
     console.log(event.target.checked)
     if (type == "bring") {
-      dispatch(BringAllIs_check(user_id, event.target.checked));
+      dispatch(updateBringsAllCheck(user_id, event.target.checked));
     }
     else if (type == "add") {
-      dispatch(AddAllIs_check(user_id, event.target.checked));
+      dispatch(updateNotBringsAllCheck(user_id, event.target.checked));
     }
   }
 
-  const customList = (title, categories, type, count) => (
+  const customList = (title, categories, type, count_all, count_true) => (
     <>
       <MediaQuery query="(min-width: 767px)" >
         <Card>
@@ -94,7 +92,7 @@ const EditBring = React.memo(React.forwardRef((props, ref) => {
               />
             }
             title={title}
-            subheader={`${count.countTrue}/${count.countAll}selected`}
+            subheader={`${count_true}/${count_all}selected`}
           />
           <Divider />
           <List className={classes.list} dense component="div" role="list">
@@ -117,7 +115,7 @@ const EditBring = React.memo(React.forwardRef((props, ref) => {
               />
             }
             title={title}
-            subheader={`${count.countTrue}/${count.countAll}selected`}
+            subheader={`${count_all}/${count_true}selected`}
           />
           <Divider />
           <List className={classes.mobileList} dense component="div" role="list">
@@ -151,14 +149,14 @@ const EditBring = React.memo(React.forwardRef((props, ref) => {
                 className={classes.root}
                 style={{ minWidth: 360 }}
               >
-                <Grid item>{customList("持ち物", bring_gears, "bring", count_bring)}</Grid>
+                <Grid item>{customList("持ち物", brings, "bring", brings_count_all, brings_count_true)}</Grid>
                 <Grid item>
                   <Grid container direction="column" alignItems="center">
                     <Button
                       variant="outlined"
                       size="small"
                       className={classes.button}
-                      onClick={() => dispatch(deleteBringGear(user_id))}
+                      onClick={() => dispatch(deleteBrings(user_id))}
                       aria-label="move selected right"
                     >
                       &gt;
@@ -167,14 +165,14 @@ const EditBring = React.memo(React.forwardRef((props, ref) => {
                       variant="outlined"
                       size="small"
                       className={classes.button}
-                      onClick={() => dispatch(createBringGear(user_id))}
+                      onClick={() => dispatch(createBrings(user_id))}
                       aria-label="move selected left"
                     >
                       &lt;
                     </Button>
                   </Grid>
                 </Grid>
-                <Grid item>{customList("所持ギア", add_gears, "add", count_add)}</Grid>
+                <Grid item>{customList("所持ギア", not_brings, "add", not_brings_count_all, not_brings_count_true)}</Grid>
               </Grid>
             </MediaQuery>
             <MediaQuery query="(max-width: 767px)" >
@@ -186,7 +184,7 @@ const EditBring = React.memo(React.forwardRef((props, ref) => {
                 className={classes.root}
                 style={{ minWidth: 360 }}
               >
-                <Grid item xs={6}>{customList("持ち物", bring_gears, "bring", count_bring)}
+                <Grid item>{customList("持ち物", brings, "bring", brings_count_all, brings_count_true)}
                   <Button
                     variant="outlined"
                     size="small"
@@ -197,7 +195,7 @@ const EditBring = React.memo(React.forwardRef((props, ref) => {
                     &gt;
                   </Button>
                 </Grid>
-                <Grid item xs={6}>{customList("所持ギア", add_gears, "add", count_add)}
+                <Grid item>{customList("所持ギア", not_brings, "add", not_brings_count_all, not_brings_count_true)}
                   <Button
                     variant="outlined"
                     size="small"

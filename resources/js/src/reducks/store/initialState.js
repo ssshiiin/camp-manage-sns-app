@@ -56,10 +56,12 @@ const initialState = {
     gear_nav: null,
   },
   bring_gears: {
-    bring_gears: [],
-    add_gears: [],
-    count_all: {},
-    count_add_all: {},
+    brings: [],
+    brings_count_all: undefined,
+    brings_count_true: undefined,
+    not_brings: [],
+    not_brings_count_all: undefined,
+    not_brings_count_true: undefined,
   },
   save_gears: {
     save_gears: []

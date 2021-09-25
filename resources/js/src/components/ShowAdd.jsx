@@ -26,12 +26,12 @@ const ShowAdd = (props) => {
         button
         onClick={handleNestClick}
       >
-        <ListItemText primary={`${category.category}`} secondary={`${category.countTrue}/${category.countAll}  selected`} />
+        <ListItemText primary={`${category.category}`} secondary={`${category.count_true}/${category.count_all}  selected`} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {category.gearList.map((gear, i) =>
+          {category.gear_list.map((gear, i) =>
             <ShowNestedAdd gear={gear} key={i} type={props.type} />
           )}
         </List>
