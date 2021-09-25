@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Gear_image::class, function (Faker $faker) {
     return [
-        "gear_id" => $faker->numberBetween(1, 200),
+        "gear_id" => $faker->unique()->numberBetween(1, 200),
         "image_path" => $faker->randomElement(
             $array = [
                 'https://camp-manage-sns-app.s3.ap-northeast-1.amazonaws.com/Post_images/7qlXlHDa7TazruVt6BZN4lZt2nTR6NervniYmbm7.jpg', 

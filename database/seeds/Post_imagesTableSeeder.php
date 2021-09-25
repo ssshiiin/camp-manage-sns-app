@@ -11,6 +11,6 @@ class Post_imagesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Post_image::class, 600)->create();
+        factory(App\Post_image::class, 100)->create();
     }
 }

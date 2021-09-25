@@ -109,7 +109,7 @@ function NavProfile(props) {
               <CreateGear />
               <EditProfile />
               <MenuItem>
-                <form className={classes.form} noValidate method="POST" action="logout">
+                <form className={classes.form} noValidate method="POST" action="/logout">
                   <input type="hidden" name="_token" value={csrf_token} />
                   <button
                     type="submit"

@@ -8,7 +8,7 @@ class Dayout_infosTableSeeder extends CsvSeeder
     public function __construct()
     {
         $this->table = 'dayout_infos';
-        $this->filename = base_path().'/storage/app/dayout_infos.csv';
+        $this->filename = env('DAYOUT_CSV_PATH');
     }
 
     public function run()

@@ -47,7 +47,8 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 300,
     width: 300,
     objectFit: "cover",
-    maxHeight: 235
+    maxHeight: 235,
+    borderBottom: "solid 1px rgb(219, 219, 219)"
   },
   textForm: {
     display: "flex",

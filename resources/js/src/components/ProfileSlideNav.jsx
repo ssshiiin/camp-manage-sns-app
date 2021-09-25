@@ -9,6 +9,8 @@ import Tab from '@material-ui/core/Tab';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+    backgroundColor: "#FAFAFA",
+    borderRadius: 0,
   },
 });
 
@@ -31,7 +33,7 @@ const ProfileSlideNav = (props) => {
         textColor="primary"
         centered
       >
-        <Tab label="Achivement" onClick={() => { dispatch(push(`/${user_id}`)) }} />
+        <Tab label="Achievement" onClick={() => { dispatch(push(`/${user_id}`)) }} />
         <Tab label="Gear Lists" onClick={() => { dispatch(push(`/${user_id}/gear`)) }} />
       </Tabs>
     </Paper>

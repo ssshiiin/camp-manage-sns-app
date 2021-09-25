@@ -44,6 +44,13 @@ a:active {
   color: black;
 }
 
+p {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+  -webkit-margin-after: 0;
+          margin-block-end: 0;
+}
+
 .hidden {
   display: none;
 }
@@ -191,7 +198,7 @@ body #root main .side-bar .side-nav li {
 @media screen and (max-width: 767px) {
   body #root main .side-bar .side-nav li {
     border-bottom: 0;
-    margin: 10px 0px;
+    margin: 15px 0px;
   }
 }
 body #root main .side-bar .side-nav li img {
@@ -274,9 +281,10 @@ body #root main .main-category .profile .profile-main {
 }
 body #root main .main-category .profile .profile-main .profile-introduce {
   width: 100%;
-  height: 200px;
+  max-height: 300px;
   display: flex;
   border-bottom: 1px solid #dbdbdb;
+  background-color: #FAFAFA;
 }
 @media screen and (max-width: 767px) {
   body #root main .main-category .profile .profile-main .profile-introduce {
@@ -301,11 +309,7 @@ body #root main .main-category .profile .profile-main .profile-introduce .profil
 }
 body #root main .main-category .profile .profile-main .profile-introduce .profile-content {
   flex: 1;
-  max-height: 200px;
-  -webkit-padding-start: 40px;
-          padding-inline-start: 40px;
-  -webkit-padding-before: 40px;
-          padding-block-start: 40px;
+  padding: 40px;
 }
 @media screen and (max-width: 767px) {
   body #root main .main-category .profile .profile-main .profile-introduce .profile-content {
@@ -318,31 +322,25 @@ body #root main .main-category .profile .profile-main .profile-introduce .profil
 }
 body #root main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn {
   display: flex;
-  justify-content: space-between;
-}
-@media screen and (max-width: 767px) {
-  body #root main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn {
-    justify-content: flex-start;
-  }
+  flex-direction: column;
 }
 body #root main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn .profileName {
-  font-size: 24px;
+  font-size: 20px;
 }
 @media screen and (max-width: 767px) {
   body #root main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn .profileName {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 48px;
   }
 }
 body #root main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn .profileCount {
   display: flex;
   width: 300px;
+  font-size: 16px;
+  margin-top: 20px;
 }
 @media screen and (max-width: 767px) {
   body #root main .main-category .profile .profile-main .profile-introduce .profile-content .profileColumn .profileCount {
-    flex: 1;
-    text-align: center;
-    display: block;
     width: auto;
   }
 }
@@ -355,6 +353,7 @@ body #root main .main-category .profile .profile-main .profile-introduce .profil
 @media screen and (max-width: 767px) {
   body #root main .main-category .profile .profile-main .profile-introduce .profile-content .profileContent {
     font-size: 12px;
+    margin-top: 10px;
   }
 }
 body #root main .main-category .gear {

@@ -43,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 300,
     width: 300,
     maxHeight: 168,
-    objectFit: "cover"
+    objectFit: "cover",
+    borderBottom: "solid 1px rgb(219, 219, 219)"
   },
   button: {
     margin: theme.spacing(1),

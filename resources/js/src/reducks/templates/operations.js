@@ -27,7 +27,8 @@ export const useTemplate = (useTemplate_name, user_id) => {
     })
     .then((res) => {
       dispatch(BringGearsActions({
-        bring_gears: res.data.bring
+        bring_gears: res.data.bring,
+        count_all: res.data.bring_all_count
       }));
     })
     .catch((err) => {

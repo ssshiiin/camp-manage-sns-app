@@ -74,7 +74,7 @@ export default function postsTimeLine(props) {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar} src={props.post.profile_image} />
+          <Avatar aria-label="recipe" className={classes.avatar} src={props.post.profile_image} onClick={() => dispatch(push(`/${props.post.user_id}`))} />
         }
         action={
           <IconButton aria-label="settings">
@@ -83,7 +83,6 @@ export default function postsTimeLine(props) {
         }
         title={props.post.app_name}
         subheader={`${moment(props.post.day).format("YYYY/MM/DD")} - ${props.post.place}`}
-        onClick={() => dispatch(push(`/${props.post.user_id}`))}
       />
       <CardMedia
         className={classes.media}

@@ -30,14 +30,16 @@ const useStyles = makeStyles((theme) => ({
     width: 160,
     height: 160,
     borderRadius: "100%",
-    objectFit: "cover"
+    objectFit: "cover",
+    border: "solid 1px rgb(219, 219, 219)"
   },
   mobileBolb: {
     margin: 10,
     width: 80,
     height: 80,
     borderRadius: "100%",
-    objectFit: "cover"
+    objectFit: "cover",
+    border: "solid 1px rgb(219, 219, 219)"
   },
   button: {
     margin: theme.spacing(1),
