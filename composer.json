@@ -52,9 +52,9 @@
         ],
         "files":[
             "app\\ModificationVendor\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\RegistersUsers.php",
-            "app\\ModificationVendor\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\AuthenticatesUsers.php",
-            "app\\ModificationVendor\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\ResetsPasswords.php",
-            "app\\ModificationVendor\\Vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\SendsPasswordResetEmails.php"
+            "app\\ModificationVendor\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\AuthenticatesUsers.php",
+            "app\\ModificationVendor\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\ResetsPasswords.php",
+            "app\\ModificationVendor\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\SendsPasswordResetEmails.php"
         ]
     },
     "autoload-dev": {
