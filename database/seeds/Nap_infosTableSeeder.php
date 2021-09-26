@@ -8,9 +8,14 @@ class Nap_infosTableSeeder extends CsvSeeder
     public function __construct()
     {
         $this->table = 'nap_infos';
-        $this->filename = env('NAP_CSV_PATH');
-    }
 
+        $s3_file = Storage::disk('s3')->get(env('NAP_CSV_PATH'));
+
+        $path = Storage::put("nap_infos.csv", $s3_file);
+
+        $this->filename = storage_path('app/nap_infos.csv');
+    }
+    
     public function run()
     {
         DB::disableQueryLog();

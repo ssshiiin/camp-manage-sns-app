@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GearsTableSeeder::class);
         $this->call(Nap_infosTableSeeder::class);
         $this->call(Dayout_infosTableSeeder::class);
-        // $this->call(Save_gearsTableSeeder::class);
+        $this->call(Save_gearsTableSeeder::class);
         // $this->call(Gear_imagesTableSeeder::class);
         
         // $this->call(Post_imagesTableSeeder::class);
