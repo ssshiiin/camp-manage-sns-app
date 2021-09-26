@@ -62,6 +62,7 @@ class GearController extends Controller
             "purchased_day" => $purchased_day,
             "price" => $price,
             "amount" => $amount,
+            "is_check" => 0,
         ];
         
         $gear->fill($input)->save();
