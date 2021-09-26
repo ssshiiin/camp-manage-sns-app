@@ -10,7 +10,7 @@ class Gear extends Model
     
     
     protected $fillable = [
-        'user_id', 'category', 'gear_name', 'brand', 'purchased_day', 'price', 'amount', 'image_path'
+        'user_id', 'category', 'gear_name', 'brand', 'purchased_day', 'price', 'amount', 'image_path', "is_check"
     ];
     
     public function whereUser_idAndWhereCategory($user_id, $category){
