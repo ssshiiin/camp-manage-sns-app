@@ -108,36 +108,36 @@ const CreateGear = React.forwardRef((props, ref) => {
           <>
             <MediaQuery minWidth={767} >
               <form className={classes.root} noValidate autoComplete="off">
-                <div>
-                  <img src={bolb_urls} className={classes.bolb} />
-                  {
-                    errors.img &&
-                    <>
-                      <Typography variant="body2" color="error" align="center">
-                        {errors.img}
-                      </Typography>
-                    </>
-                  }
-                </div>
-                <div className={classes.buttonRoot}>
-                  <input
-                    accept="image/*"
-                    className={classes.input}
-                    id="icon-button-file"
-                    type="file"
-                    onChange={(event) => dispatch(handleImageChange(event))}
-                  />
-                  <label htmlFor="icon-button-file">
-                    <IconButton
-                      className={classes.button}
-                      aria-label="upload picture"
-                      component="span"
-                    >
-                      <PhotoCamera />
-                    </IconButton>
-                  </label>
-                </div>
                 <div className={classes.textForm}>
+                  <div>
+                    <img src={bolb_urls} className={classes.bolb} />
+                    {
+                      errors.img &&
+                      <>
+                        <Typography variant="body2" color="error" align="center">
+                          {errors.img}
+                        </Typography>
+                      </>
+                    }
+                  </div>
+                  <div className={classes.buttonRoot}>
+                    <input
+                      accept="image/*"
+                      className={classes.input}
+                      id="icon-button-file"
+                      type="file"
+                      onChange={(event) => dispatch(handleImageChange(event))}
+                    />
+                    <label htmlFor="icon-button-file">
+                      <IconButton
+                        className={classes.button}
+                        aria-label="upload picture"
+                        component="span"
+                      >
+                        <PhotoCamera />
+                      </IconButton>
+                    </label>
+                  </div>
                   <TextField
                     error={(errors.gear_name !== undefined)}
                     helperText={errors.gear_name}
