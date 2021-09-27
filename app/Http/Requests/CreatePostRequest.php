@@ -28,7 +28,7 @@ class CreatePostRequest extends FormRequest
         return [
             'place' => 'required | string | max:16',
             'content' => 'nullable | string | max:256',
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:8196',
         ];
     }
 

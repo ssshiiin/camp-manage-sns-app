@@ -32,7 +32,7 @@ class UpdateGearRequest extends FormRequest
             'price' => 'nullable | integer | min:0',
             'amount' => 'nullable | integer | min:0',
             'purchased_day' => 'nullable|string',
-            'img' => 'nullable | image | mimes:jpeg,png,jpg,gif | max:1024',
+            'img' => 'nullable | image | mimes:jpeg,png,jpg,gif | max:8196',
         ];
     }
 

@@ -29,7 +29,7 @@ class UpdatePostRequest extends FormRequest
             'place' => 'required | string | max:16',
             'content' => 'nullable | string | max:256',
             'day' => 'nullable|string',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024'
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8196'
         ];
     }
 

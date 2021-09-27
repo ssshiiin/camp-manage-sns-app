@@ -28,7 +28,7 @@ class EditProfileRequest extends FormRequest
         return [
             'app_name' => 'required | string | max:16',
             'profile' => 'nullable | string | max:256',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8196',
         ];
     }
 
