@@ -39,7 +39,7 @@ const SideBar = () => {
     <nav className="side-bar">
       <MediaQuery query="(min-width: 767px)">
         <div className="logo" style={{ height: 70, width: 218, paddingLeft: 14, marginTop: 10 }}>
-          <img src={'/images/logoWide.png'} width="178px" height="55px" />
+          <img src={'/images/logoWideUnderBar.png'} width="178px" height="55px" />
         </div>
         <ul className="side-nav">
           <li onClick={() => dispatch(push("/"))}><img src={'/images/Home.png'} width="36px" height="36px" /><p>Home</p></li>

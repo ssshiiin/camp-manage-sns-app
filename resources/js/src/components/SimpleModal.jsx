@@ -9,13 +9,13 @@ import Alert from '@material-ui/lab/Alert';
 import { ModalClose } from '../reducks/modals/operations';
 
 function getModalStyle() {
-  const top = 50;
+  const top = 0;
   const left = 50;
 
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
+    transform: `translate(-50%, 0%)`,
   };
 }
 
@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1400,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(4),
+    padding: theme.spacing(0),
+    width: 700,
   },
   mobilePaper: {
     position: 'absolute',
@@ -86,6 +87,7 @@ const SimpleModal = React.memo(React.forwardRef((props, ref) => {
           onClose={() => dispatch(ModalClose())}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
+          style={{ overflow: "scroll", margin: "60px 0 60px 0" }}
         >
           {body}
         </Modal>

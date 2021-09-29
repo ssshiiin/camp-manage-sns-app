@@ -38,16 +38,14 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 300
   },
   bolb: {
-    width: 400,
-    minWidth: 400,
+    width: 700,
+    minWidth: 700,
     objectFit: "cover",
-    maxHeight: 313
   },
   mobileBolb: {
     minWidth: 300,
     width: 300,
     objectFit: "cover",
-    maxHeight: 235,
     borderBottom: "solid 1px rgb(219, 219, 219)"
   },
   textForm: {
