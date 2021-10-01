@@ -1,49 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
-import moment from "moment";
+import moment from 'moment';
 
-import { TimeLineGearNested } from ".";
-import { useDispatch } from "react-redux";
-import { push } from "connected-react-router";
-import { getAddBringGear } from "../reducks/bring_gears/operations";
+import { TimeLineGearNested } from '.';
+import { useDispatch } from 'react-redux';
+import { push } from 'connected-react-router';
+import { getAddBringGear } from '../reducks/bring_gears/operations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: "static",
-    zIndex: "1",
-    maxWidth: "100%",
-    margin: "auto"
+    position: 'static',
+    zIndex: '1',
+    maxWidth: '100%',
+    margin: 'auto',
   },
   media: {
-    height: 0,
-    paddingTop: "56.25%" // 16:9
+    width: '100%',
+    objectFit: 'cover',
   },
   expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
   },
   expandOpen: {
-    transform: "rotate(180deg)"
+    transform: 'rotate(180deg)',
   },
   list: {
     width: '100%',
@@ -62,19 +62,22 @@ export default function postsTimeLine(props) {
 
   useEffect(() => {
     getAddBringGear(props.user_id);
-  }, [])
+  }, []);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-
-
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar} src={props.post.profile_image} onClick={() => dispatch(push(`/${props.post.user_id}`))} />
+          <Avatar
+            aria-label="recipe"
+            className={classes.avatar}
+            src={props.post.profile_image}
+            onClick={() => dispatch(push(`/${props.post.user_id}`))}
+          />
         }
         action={
           <IconButton aria-label="settings">
@@ -82,13 +85,11 @@ export default function postsTimeLine(props) {
           </IconButton>
         }
         title={props.post.app_name}
-        subheader={`${moment(props.post.day).format("YYYY/MM/DD")} - ${props.post.place}`}
+        subheader={`${props.post.day === null ? '' : moment(props.post.day).format('YYYY/MM/DD')} - ${
+          props.post.place
+        }`}
       />
-      <CardMedia
-        className={classes.media}
-        image={props.post.image_path[0].image_path}
-        title="Paella dish"
-      />
+      <img src={props.post.image_path[0].image_path} className={classes.media} />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {props.post.content}
@@ -103,7 +104,7 @@ export default function postsTimeLine(props) {
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
+            [classes.expandOpen]: expanded,
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
@@ -124,9 +125,9 @@ export default function postsTimeLine(props) {
             }
             className={classes.list}
           >
-            {categories.map((category) =>
+            {categories.map((category) => (
               <TimeLineGearNested category={category} key={category.category} />
-            )}
+            ))}
           </List>
         </CardContent>
       </Collapse>

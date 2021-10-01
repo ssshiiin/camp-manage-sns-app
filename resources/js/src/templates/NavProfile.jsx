@@ -6,15 +6,12 @@ import { withStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Typography from "@material-ui/core/Typography";
-import MediaQuery from "react-responsive";
+import Typography from '@material-ui/core/Typography';
+import MediaQuery from 'react-responsive';
 
-
-import { CreatePost, EditProfile, CreateGear } from './index';
+import { CreatePost, EditProfile, CreateGear } from './Profile';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuAction } from '../reducks/users/actions';
-
-
 
 const StyledMenu = withStyles({
   paper: {
@@ -39,25 +36,25 @@ const StyledMenu = withStyles({
 const useStyles = makeStyles((theme) => ({
   root: {
     height: 80,
-    marginLeft: "auto",
+    marginLeft: 'auto',
   },
   navButton: {
-    top: "50%",
-    transform: "translate(0, -50%)",
-    backgroundColor: "white",
-    color: "black",
-    marginRight: 20
+    top: '50%',
+    transform: 'translate(0, -50%)',
+    backgroundColor: 'white',
+    color: 'black',
+    marginRight: 20,
   },
   mobileRoot: {
     height: 60,
-    marginLeft: "auto",
+    marginLeft: 'auto',
   },
   mobileNavButton: {
-    top: "50%",
-    transform: "translate(0, -50%)",
-    backgroundColor: "darkslategray",
-    color: "white",
-    marginRight: 20
+    top: '50%',
+    transform: 'translate(0, -50%)',
+    backgroundColor: 'darkslategray',
+    color: 'white',
+    marginRight: 20,
   },
 }));
 
@@ -72,15 +69,19 @@ function NavProfile(props) {
   const app_name = selector.users.app_name;
 
   const handleClick = (event) => {
-    dispatch(MenuAction({
-      menu_open: event.currentTarget
-    }))
+    dispatch(
+      MenuAction({
+        menu_open: event.currentTarget,
+      })
+    );
   };
 
   const handleClose = () => {
-    dispatch(MenuAction({
-      menu_open: null
-    }));
+    dispatch(
+      MenuAction({
+        menu_open: null,
+      })
+    );
   };
 
   const classes = useStyles();
@@ -88,7 +89,7 @@ function NavProfile(props) {
   if (user_id == login_user) {
     return (
       <>
-        <MediaQuery query="(min-width: 767px)" >
+        <MediaQuery query="(min-width: 767px)">
           <div className={classes.root}>
             <Button
               className={classes.navButton}
@@ -98,13 +99,7 @@ function NavProfile(props) {
             >
               <MoreHorizOutlined fontSize="large" />
             </Button>
-            <StyledMenu
-              id="customized-menu"
-              anchorEl={open}
-              keepMounted
-              open={Boolean(open)}
-              onClose={handleClose}
-            >
+            <StyledMenu id="customized-menu" anchorEl={open} keepMounted open={Boolean(open)} onClose={handleClose}>
               <CreatePost />
               <CreateGear />
               <EditProfile />
@@ -113,16 +108,16 @@ function NavProfile(props) {
                   <input type="hidden" name="_token" value={csrf_token} />
                   <button
                     type="submit"
-                    style={{ border: 'none', backgroundColor: 'white', minWidth: "180px", textAlign: "left" }}
+                    style={{ border: 'none', backgroundColor: 'white', minWidth: '180px', textAlign: 'left' }}
                   >
                     ログアウト
                   </button>
                 </form>
               </MenuItem>
             </StyledMenu>
-          </div >
+          </div>
         </MediaQuery>
-        <MediaQuery query="(max-width: 767px)" >
+        <MediaQuery query="(max-width: 767px)">
           <div className={classes.mobileRoot}>
             <Button
               className={classes.mobileNavButton}
@@ -132,13 +127,7 @@ function NavProfile(props) {
             >
               <MoreHorizOutlined fontSize="large" />
             </Button>
-            <StyledMenu
-              id="customized-menu"
-              anchorEl={open}
-              keepMounted
-              open={Boolean(open)}
-              onClose={handleClose}
-            >
+            <StyledMenu id="customized-menu" anchorEl={open} keepMounted open={Boolean(open)} onClose={handleClose}>
               <CreatePost />
               <CreateGear />
               <EditProfile />
@@ -147,20 +136,19 @@ function NavProfile(props) {
                   <input type="hidden" name="_token" value={csrf_token} />
                   <button
                     type="submit"
-                    style={{ border: 'none', backgroundColor: 'white', minWidth: "120px", textAlign: "left" }}
+                    style={{ border: 'none', backgroundColor: 'white', minWidth: '120px', textAlign: 'left' }}
                   >
                     ログアウト
                   </button>
                 </form>
               </MenuItem>
             </StyledMenu>
-          </div >
+          </div>
         </MediaQuery>
       </>
-    )
-  }
-  else {
-    return (null)
+    );
+  } else {
+    return null;
   }
 }
 

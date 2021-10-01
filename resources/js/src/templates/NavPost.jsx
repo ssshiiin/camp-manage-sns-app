@@ -8,13 +8,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePost } from '../reducks/posts/operations';
 import { handlePostNavClose } from '../reducks/menus/operations';
-import EditPost from './EditPost';
-import MediaQuery from "react-responsive";
+import { EditPost } from './Profile';
+import MediaQuery from 'react-responsive';
 
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
-    color: "black"
+    color: 'black',
   },
 })((props) => (
   <Menu
@@ -35,24 +35,22 @@ const StyledMenu = withStyles({
 const useStyles = makeStyles((theme) => ({
   root: {
     height: 80,
-    position: "relative"
+    position: 'relative',
   },
   NavButton: {
-    position: "absolute",
-    top: "50%",
-    right: "20px",
-    transform: "translate(0, -50%)",
-    backgroundColor: "white",
-    color: "black"
-  }
-
+    position: 'absolute',
+    top: '50%',
+    right: '20px',
+    transform: 'translate(0, -50%)',
+    backgroundColor: 'white',
+    color: 'black',
+  },
 }));
 
 const NavPost = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const open = selector.menus.post_nav;
-
 
   const classes = useStyles();
 
@@ -66,12 +64,10 @@ const NavPost = React.forwardRef((props, ref) => {
         onClose={() => dispatch(handlePostNavClose())}
       >
         <EditPost post_id={props.post_id} />
-        <MenuItem onClick={() => dispatch(deletePost(props.post_id))}>
-          削除
-        </MenuItem>
+        <MenuItem onClick={() => dispatch(deletePost(props.post_id))}>削除</MenuItem>
       </StyledMenu>
-    </React.Fragment >
-  )
-})
+    </React.Fragment>
+  );
+});
 
 export default NavPost;
