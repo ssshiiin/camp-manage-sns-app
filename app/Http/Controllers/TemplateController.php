@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTemplateRequest;
-use App\models\User; 
-use App\models\Template; 
-use App\models\BringGear;
+use App\Models\User; 
+use App\Models\Template; 
+use App\Models\BringGear;
 use App\Http\Resources\Save_gearsCategoryResource;
 
 class TemplateController extends Controller
