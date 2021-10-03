@@ -33,7 +33,7 @@ export const changeImageAction = (profileState) => {
   return {
     type: 'CHANGE_IMAGE',
     payload: {
-      bolbUrl: profileState.bolbUrl,
+      profUrl: profileState.profUrl,
       image: profileState.image,
     },
   };

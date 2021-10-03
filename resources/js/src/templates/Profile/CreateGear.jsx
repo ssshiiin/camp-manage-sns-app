@@ -16,7 +16,6 @@ import Typography from '@material-ui/core/Typography';
 import MediaQuery from 'react-responsive';
 
 import { SimpleModal } from '../../components/Modal';
-import { handleAlertClose, handleAlertOpen } from '../../reducks/alerts/operations';
 import { closeModalGearCreate, openModalGearCreate } from '../../reducks/modals/operations';
 import {
   create,
@@ -38,33 +37,34 @@ const useStyles = makeStyles((theme) => ({
     },
     minWidth: 300,
   },
+  mobileRoot: {
+    margin: theme.spacing(2),
+    display: 'flex',
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+    },
+    minWidth: 300,
+  },
   bolb: {
     minWidth: 800,
     width: 800,
     objectFit: 'cover',
-    maxHeight: 538,
   },
   mobileBolb: {
     minWidth: 300,
     width: 300,
     objectFit: 'cover',
-    borderBottom: 'solid 1px rgb(219, 219, 219)',
-  },
-  textForm: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-  },
-  button: {
-    margin: theme.spacing(1),
-    backgroundColor: '#1876d1',
-    color: 'white',
   },
   buttonRoot: {
     '& > *': {
       margin: theme.spacing(1),
     },
     textAlign: 'right',
+  },
+  button: {
+    margin: theme.spacing(1),
+    backgroundColor: '#1876d1',
+    color: 'white',
   },
   input: {
     display: 'none',
@@ -73,6 +73,16 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
     backgroundColor: '#1876d1',
     color: 'white',
+  },
+  textForm: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+  },
+  mobileTextForm: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: 'calc(100% - 32px)',
   },
 }));
 
@@ -97,17 +107,17 @@ const CreateGear = memo(
 
     return (
       <MenuItem>
-        <SimpleModal
-          top={20}
-          left={50}
-          transX={50}
-          modalOpen={openModalGearCreate}
-          modalClose={closeModalGearCreate}
-          open={open}
-          nav={'ギアを登録する'}
-          body={
-            <>
-              <MediaQuery minWidth={767}>
+        <MediaQuery minWidth={767}>
+          <SimpleModal
+            top={20}
+            left={50}
+            transX={50}
+            modalOpen={openModalGearCreate}
+            modalClose={closeModalGearCreate}
+            open={open}
+            nav={'ギアを登録する'}
+            body={
+              <>
                 <img src={bolbUrl} className={classes.bolb} />
                 <form className={classes.root} noValidate autoComplete="off">
                   <div className={classes.textForm}>
@@ -129,7 +139,11 @@ const CreateGear = memo(
                         onChange={(event) => dispatch(handleImageChange(event))}
                       />
                       <label htmlFor="icon-button-file">
-                        <IconButton className={classes.button} aria-label="upload picture" component="span">
+                        <IconButton
+                          className={classes.button}
+                          aria-label="upload picture"
+                          component="span"
+                        >
                           <PhotoCamera />
                         </IconButton>
                       </label>
@@ -210,12 +224,26 @@ const CreateGear = memo(
                     </Button>
                   </div>
                 </form>
-              </MediaQuery>
-              <MediaQuery maxWidth={767}>
-                <form className={classes.root} noValidate autoComplete="off">
-                  <div className={classes.textForm}>
+              </>
+            }
+          />
+        </MediaQuery>
+        <MediaQuery maxWidth={767}>
+          <SimpleModal
+            top={20}
+            left={50}
+            transX={50}
+            width={300}
+            modalOpen={openModalGearCreate}
+            modalClose={closeModalGearCreate}
+            open={open}
+            nav={'ギアを登録する'}
+            body={
+              <>
+                <img src={bolbUrl} className={classes.mobileBolb} />
+                <form className={classes.mobileRoot} noValidate autoComplete="off">
+                  <div className={classes.mobileTextForm}>
                     <div>
-                      <img src={bolbUrl} className={classes.mobileBolb} />
                       {errors.img && (
                         <>
                           <Typography variant="body2" color="error" align="center">
@@ -233,7 +261,11 @@ const CreateGear = memo(
                         onChange={(event) => dispatch(handleImageChange(event))}
                       />
                       <label htmlFor="icon-button-file">
-                        <IconButton className={classes.button} aria-label="upload picture" component="span">
+                        <IconButton
+                          className={classes.button}
+                          aria-label="upload picture"
+                          component="span"
+                        >
                           <PhotoCamera />
                         </IconButton>
                       </label>
@@ -279,21 +311,19 @@ const CreateGear = memo(
                       onChange={(event) => dispatch(handlePriceChange(event))}
                     />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <Grid container justifyContent="space-around">
-                        <KeyboardDatePicker
-                          margin="normal"
-                          id="date-picker-dialog"
-                          label="購入日"
-                          format="yyyy/MM/dd"
-                          value={purchased_day}
-                          variant="outlined"
-                          disableFuture="true"
-                          onChange={(date) => dispatch(handlePurchasedDayChange(date))}
-                          KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                          }}
-                        />
-                      </Grid>
+                      <KeyboardDatePicker
+                        margin="normal"
+                        id="date-picker-dialog"
+                        label="購入日"
+                        format="yyyy/MM/dd"
+                        value={purchased_day}
+                        variant="outlined"
+                        disableFuture="true"
+                        onChange={(date) => dispatch(handlePurchasedDayChange(date))}
+                        KeyboardButtonProps={{
+                          'aria-label': 'change date',
+                        }}
+                      />
                     </MuiPickersUtilsProvider>
                     <TextField
                       error={errors.amount !== undefined}
@@ -317,10 +347,10 @@ const CreateGear = memo(
                     </Button>
                   </div>
                 </form>
-              </MediaQuery>
-            </>
-          }
-        />
+              </>
+            }
+          />
+        </MediaQuery>
       </MenuItem>
     );
   })

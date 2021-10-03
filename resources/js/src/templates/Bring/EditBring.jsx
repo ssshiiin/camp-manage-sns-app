@@ -131,18 +131,18 @@ const EditBring = React.memo(
 
     return (
       <MenuItem>
-        <SimpleModal
-          top={50}
-          left={50}
-          transX={50}
-          transY={50}
-          modalOpen={openModalBringEdit}
-          modalClose={closeModalBringEdit}
-          open={open}
-          nav={'持ち物を編集する'}
-          body={
-            <>
-              <MediaQuery query="(min-width: 767px)">
+        <MediaQuery query="(min-width: 767px)">
+          <SimpleModal
+            top={50}
+            left={50}
+            transX={50}
+            transY={50}
+            modalOpen={openModalBringEdit}
+            modalClose={closeModalBringEdit}
+            open={open}
+            nav={'持ち物を編集する'}
+            body={
+              <>
                 <Grid
                   container
                   spacing={6}
@@ -193,8 +193,23 @@ const EditBring = React.memo(
                     )}
                   </Grid>
                 </Grid>
-              </MediaQuery>
-              <MediaQuery query="(max-width: 767px)">
+              </>
+            }
+          />
+        </MediaQuery>
+        <MediaQuery query="(max-width: 767px)">
+          <SimpleModal
+            top={50}
+            left={50}
+            transX={50}
+            transY={50}
+            width={360}
+            modalOpen={openModalBringEdit}
+            modalClose={closeModalBringEdit}
+            open={open}
+            nav={'持ち物を編集する'}
+            body={
+              <>
                 <Grid
                   container
                   spacing={2}
@@ -242,10 +257,10 @@ const EditBring = React.memo(
                     </Button>
                   </Grid>
                 </Grid>
-              </MediaQuery>
-            </>
-          }
-        />
+              </>
+            }
+          />
+        </MediaQuery>
       </MenuItem>
     );
   })

@@ -4,10 +4,6 @@ import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import MediaQuery from 'react-responsive';
 
-import Snackbar from '@material-ui/core/Snackbar';
-import Alert from '@material-ui/lab/Alert';
-import { ModalClose } from '../../reducks/modals/operations';
-
 function getModalStyle(top, left, transX, transY, width) {
   return {
     width: `${typeof width !== 'undefined' ? width : 800}px`,
@@ -37,7 +33,9 @@ const SimpleModal = React.memo(
     console.log('Modal');
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [modalStyle] = React.useState(getModalStyle(props.top, props.left, props.transX, props.transY, props.width));
+    const [modalStyle] = React.useState(
+      getModalStyle(props.top, props.left, props.transX, props.transY, props.width)
+    );
 
     const body = (
       <React.Fragment>
@@ -92,7 +90,11 @@ const SimpleModal = React.memo(
           >
             {props.nav}
           </button>
-          <Modal open={props.open} onClose={() => dispatch(props.modalClose())} style={{ overflow: 'scroll' }}>
+          <Modal
+            open={props.open}
+            onClose={() => dispatch(props.modalClose())}
+            style={{ overflow: 'scroll' }}
+          >
             {body}
           </Modal>
         </MediaQuery>

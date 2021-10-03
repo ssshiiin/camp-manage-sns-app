@@ -1,5 +1,3 @@
-import { StoreAction } from '../alerts/actions';
-import { handleAlertOpen } from '../alerts/operations';
 import {
   changeAmountAction,
   changeBrandAction,
@@ -281,64 +279,6 @@ export const closeModalTemplateUse = () => {
     dispatch(
       openModalTemplateUseAction({
         modalTemplateUse: false,
-      })
-    );
-  };
-};
-
-export const ModalClose = () => {
-  return (dispatch, getState) => {
-    const state = getState();
-    const store = state.alerts.store;
-
-    if (!store) {
-      dispatch(handleAlertOpen());
-      dispatch(
-        StoreAction({
-          store: true,
-        })
-      );
-      return;
-    } else {
-      dispatch(
-        StoreAction({
-          store: true,
-        })
-      );
-    }
-    dispatch(
-      ModalProfEditAction({
-        modal_prof_edit_open: false,
-      })
-    );
-    dispatch(
-      ModalPostCreateAction({
-        modal_post_create_open: false,
-      })
-    );
-    dispatch(
-      ModalPostEditAction({
-        modal_post_edit_open: false,
-      })
-    );
-    dispatch(
-      ModalGearCreateAction({
-        modal_gear_create_open: false,
-      })
-    );
-    dispatch(
-      ModalBringEditAction({
-        modal_bring_edit_open: false,
-      })
-    );
-    dispatch(
-      ModalTemplatesCreateAction({
-        modal_templates_create_open: false,
-      })
-    );
-    dispatch(
-      ModalTemplatesUseAction({
-        modal_templates_use_open: false,
       })
     );
   };

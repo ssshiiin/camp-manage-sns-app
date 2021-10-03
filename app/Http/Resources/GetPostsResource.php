@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\models\Profile;
+use App\Models\Profile;
 
 class GetPostsResource extends JsonResource
 {

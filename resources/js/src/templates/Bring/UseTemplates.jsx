@@ -18,34 +18,8 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   },
-  bolb: {
-    width: 400,
-    objectFit: 'cover',
-  },
-  button: {
-    margin: theme.spacing(1),
-    backgroundColor: '#1876d1',
-    color: 'white',
-  },
-  buttonRoot: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-  input: {
-    display: 'none',
-  },
-  upImg: {
-    margin: 7,
-    backgroundColor: '#1876d1',
-    color: 'white',
-  },
-  textForm: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
   paper: {
-    minWidth: 350,
+    minWidth: 300,
     border: '1px solid #d3d4d5',
   },
 }));
@@ -77,7 +51,7 @@ const UseTemplates = React.memo(
           top={20}
           left={50}
           transX={50}
-          width={400}
+          width={300}
           modalOpen={openModalTemplateUse}
           modalClose={closeModalTemplateUse}
           open={open}

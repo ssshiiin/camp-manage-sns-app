@@ -1,13 +1,12 @@
 const initialState = {
   users: {
     isSignedIn: false,
-    menu_open: null,
   },
   profiles: {
     profile: {},
     appName: '',
     profContent: '',
-    bolbUrl: '',
+    profUrl: '',
     image: '',
     errors: [],
   },

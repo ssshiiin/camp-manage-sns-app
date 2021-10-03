@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-
-import Snackbar from '@material-ui/core/Snackbar';
-import Alert from '@material-ui/lab/Alert';
 import MediaQuery from 'react-responsive';
 
 function getModalStyle(top, left, transX, transY, width) {
   return {
-    width: `${width !== null ? width : 800}`,
+    width: `${typeof width !== 'undefined' ? width : 800}px`,
     top: `${top ? top : 0}%`,
     left: `${left ? left : 0}%`,
     transform: `translate(-${transX ? transX : 0}%, 
@@ -33,21 +30,14 @@ const useStyles = makeStyles((theme) => ({
 
 const GearEditModal = React.forwardRef((props, ref) => {
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle(props.top, props.left, props.transX, props.transY, props.width));
+  const [modalStyle] = React.useState(
+    getModalStyle(props.top, props.left, props.transX, props.transY, props.width)
+  );
 
   const dispatch = useDispatch();
 
   const body = (
     <React.Fragment>
-      <Snackbar
-        open={props.alertOpen}
-        autoHideDuration={6000}
-        onClose={(event, reason) => dispatch(props.handleAlertClose(event, reason))}
-      >
-        <Alert onClose={(event, reason) => dispatch(props.handleAlertClose(event, reason))} severity="warning">
-          保存されていません
-        </Alert>
-      </Snackbar>
       <MediaQuery minWidth={767}>
         <div style={modalStyle} className={classes.paper}>
           <div id="simple-modal-description">{props.body}</div>

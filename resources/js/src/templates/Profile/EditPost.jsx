@@ -23,13 +23,7 @@ import {
   handlePlaceChange,
   update,
 } from '../../reducks/posts/operations';
-import {
-  closeModalPostEdit,
-  handlePostCreateModalOpen,
-  handlePostEditModalOpen,
-  ModalClose,
-  openModalPostEdit,
-} from '../../reducks/modals/operations';
+import { closeModalPostEdit, openModalPostEdit } from '../../reducks/modals/operations';
 import { handleAlertClose, handleAlertOpen } from '../../reducks/alerts/operations';
 import MediaQuery from 'react-responsive';
 
@@ -42,6 +36,14 @@ const useStyles = makeStyles((theme) => ({
     },
     minWidth: 300,
   },
+  mobileRoot: {
+    margin: theme.spacing(2),
+    display: 'flex',
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+    },
+    minWidth: 300,
+  },
   bolb: {
     minWidth: 800,
     width: 800,
@@ -50,9 +52,7 @@ const useStyles = makeStyles((theme) => ({
   mobileBolb: {
     minWidth: 300,
     width: 300,
-    maxHeight: 168,
     objectFit: 'cover',
-    borderBottom: 'solid 1px rgb(219, 219, 219)',
   },
   buttonRoot: {
     '& > *': {
@@ -78,6 +78,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     width: '100%',
   },
+  mobileTextForm: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: 'calc(100% - 32px)',
+  },
 }));
 
 const EditPost = React.forwardRef((props, ref) => {
@@ -98,17 +103,17 @@ const EditPost = React.forwardRef((props, ref) => {
 
   return (
     <MenuItem>
-      <SimpleModal
-        top={20}
-        left={50}
-        transX={50}
-        modalOpen={openModalPostEdit}
-        modalClose={closeModalPostEdit}
-        open={open}
-        nav={'編集する'}
-        body={
-          <>
-            <MediaQuery query="(min-width: 767px)">
+      <MediaQuery query="(min-width: 767px)">
+        <SimpleModal
+          top={20}
+          left={50}
+          transX={50}
+          modalOpen={openModalPostEdit}
+          modalClose={closeModalPostEdit}
+          open={open}
+          nav={'編集する'}
+          body={
+            <>
               <img src={bolbUrl} className={classes.bolb} />
               <form className={classes.root} noValidate autoComplete="off">
                 <div className={classes.textForm}>
@@ -130,7 +135,11 @@ const EditPost = React.forwardRef((props, ref) => {
                       onChange={(event) => dispatch(handleImageChange(event))}
                     />
                     <label htmlFor="icon-button-file">
-                      <IconButton className={classes.button} aria-label="upload picture" component="span">
+                      <IconButton
+                        className={classes.button}
+                        aria-label="upload picture"
+                        component="span"
+                      >
                         <PhotoCamera />
                       </IconButton>
                     </label>
@@ -184,12 +193,26 @@ const EditPost = React.forwardRef((props, ref) => {
                   </Button>
                 </div>
               </form>
-            </MediaQuery>
-            <MediaQuery query="(max-width: 767px)">
-              <form className={classes.root} noValidate autoComplete="off">
-                <div className={classes.textForm}>
+            </>
+          }
+        />
+      </MediaQuery>
+      <MediaQuery query="(max-width: 767px)">
+        <SimpleModal
+          top={20}
+          left={50}
+          transX={50}
+          width={300}
+          modalOpen={openModalPostEdit}
+          modalClose={closeModalPostEdit}
+          open={open}
+          nav={'編集する'}
+          body={
+            <>
+              <img src={bolbUrl} className={classes.mobileBolb} />
+              <form className={classes.mobileRoot} noValidate autoComplete="off">
+                <div className={classes.mobileTextForm}>
                   <div>
-                    <img src={bolbUrl} className={classes.mobileBolb} />
                     {errors.img && (
                       <>
                         <Typography variant="body2" color="error" align="center">
@@ -208,7 +231,11 @@ const EditPost = React.forwardRef((props, ref) => {
                       multiple
                     />
                     <label htmlFor="icon-button-file">
-                      <IconButton className={classes.button} aria-label="upload picture" component="span">
+                      <IconButton
+                        className={classes.button}
+                        aria-label="upload picture"
+                        component="span"
+                      >
                         <PhotoCamera />
                       </IconButton>
                     </label>
@@ -224,21 +251,19 @@ const EditPost = React.forwardRef((props, ref) => {
                     onChange={(event) => dispatch(handlePlaceChange(event))}
                   />
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Grid container justifyContent="space-around">
-                      <KeyboardDatePicker
-                        margin="normal"
-                        id="date-picker-dialog"
-                        label="日付"
-                        format="yyyy/MM/dd"
-                        value={day}
-                        variant="outlined"
-                        disableFuture="true"
-                        onChange={(date) => dispatch(handleDayChange(date))}
-                        KeyboardButtonProps={{
-                          'aria-label': 'change date',
-                        }}
-                      />
-                    </Grid>
+                    <KeyboardDatePicker
+                      margin="normal"
+                      id="date-picker-dialog"
+                      label="日付"
+                      format="yyyy/MM/dd"
+                      value={day}
+                      variant="outlined"
+                      disableFuture="true"
+                      onChange={(date) => dispatch(handleDayChange(date))}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                    />
                   </MuiPickersUtilsProvider>
                   <TextField
                     error={errors.content !== undefined}
@@ -265,10 +290,10 @@ const EditPost = React.forwardRef((props, ref) => {
                   </Button>
                 </div>
               </form>
-            </MediaQuery>
-          </>
-        }
-      />
+            </>
+          }
+        />
+      </MediaQuery>
     </MenuItem>
   );
 });

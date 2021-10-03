@@ -34,7 +34,7 @@ export const getProfile = (user_id) => {
           );
           dispatch(
             changeImageAction({
-              bolbUrl: res.data.profile.image_path,
+              profUrl: res.data.profile.image_path,
             })
           );
         }
@@ -107,7 +107,7 @@ export const handleImageChange = (event) => {
     const bolbUrl = URL.createObjectURL(image);
     dispatch(
       changeImageAction({
-        bolbUrl: bolbUrl,
+        profUrl: bolbUrl,
         image: image,
       })
     );

@@ -25,14 +25,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#1876d1',
     color: 'white',
   },
-  buttonRoot: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-  input: {
-    display: 'none',
-  },
   upImg: {
     margin: 7,
     backgroundColor: '#1876d1',
@@ -41,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   textForm: {
     display: 'flex',
     flexDirection: 'column',
-    width: 368,
+    width: 'calc(100% - 32px)',
   },
 }));
 
@@ -64,7 +56,7 @@ const CreateTemplates = React.memo(
           left={50}
           transX={50}
           transY={50}
-          width={400}
+          width={300}
           modalOpen={openModalTemplateCreate}
           modalClose={closeModalTemplateCreate}
           open={open}

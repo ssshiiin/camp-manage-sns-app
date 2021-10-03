@@ -6,15 +6,18 @@ import { getProfile } from '../reducks/profiles/operations';
 const UserProfile = (props) => {
   console.log('userProfile');
   const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
   const posts = useSelector((state) => state.posts);
   const gears = useSelector((state) => state.gears);
   const profiles = useSelector((state) => state.profiles);
   const userId = props.userId;
   const app_name = profiles.appName;
   const content = profiles.profContent;
-  const image = profiles.bolbUrl;
+  const image = profiles.profUrl;
   const countPosts = posts.countPosts;
   const countGears = gears.countGears;
+
+  console.log(selector);
 
   useEffect(() => {
     dispatch(getProfile(userId));

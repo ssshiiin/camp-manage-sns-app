@@ -37,6 +37,14 @@ const useStyles = makeStyles((theme) => ({
     },
     minWidth: 300,
   },
+  mobileRoot: {
+    margin: theme.spacing(2),
+    display: 'flex',
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+    },
+    minWidth: 300,
+  },
   bolb: {
     minWidth: 800,
     width: 800,
@@ -53,6 +61,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+  },
+  mobileTextForm: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: 'calc(100% - 32px)',
   },
   button: {
     margin: theme.spacing(1),
@@ -145,17 +158,17 @@ const EditGear = memo(
 
     return (
       <MenuItem>
-        <GearEditModal
-          top={20}
-          left={50}
-          transX={50}
-          modalOpen={handleClick}
-          modalClose={handleClose}
-          open={mopen}
-          nav={'編集する'}
-          body={
-            <>
-              <MediaQuery minWidth={767}>
+        <MediaQuery minWidth={767}>
+          <GearEditModal
+            top={20}
+            left={50}
+            transX={50}
+            modalOpen={handleClick}
+            modalClose={handleClose}
+            open={mopen}
+            nav={'編集する'}
+            body={
+              <>
                 <img src={bolbUrl} className={classes.bolb} />
                 <form className={classes.root} noValidate autoComplete="off">
                   <div className={classes.textForm}>
@@ -260,12 +273,26 @@ const EditGear = memo(
                     </Button>
                   </div>
                 </form>
-              </MediaQuery>
-              <MediaQuery maxWidth={767}>
-                <form className={classes.root} noValidate autoComplete="off">
-                  <div className={classes.textForm}>
+              </>
+            }
+          />
+        </MediaQuery>
+        <MediaQuery maxWidth={767}>
+          <GearEditModal
+            top={20}
+            left={50}
+            transX={50}
+            width={300}
+            modalOpen={handleClick}
+            modalClose={handleClose}
+            open={mopen}
+            nav={'編集する'}
+            body={
+              <>
+                <img src={bolbUrl} className={classes.mobileBolb} />
+                <form className={classes.mobileRoot} noValidate autoComplete="off">
+                  <div className={classes.mobileTextForm}>
                     <div>
-                      <img src={bolbUrl} className={classes.mobileBolb} />
                       {errors.img && (
                         <>
                           <Typography variant="body2" color="error" align="center">
@@ -333,21 +360,19 @@ const EditGear = memo(
                       onChange={(event) => dispatch(handlePriceChange(event))}
                     />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <Grid container justifyContent="space-around">
-                        <KeyboardDatePicker
-                          margin="normal"
-                          id="date-picker-dialog"
-                          label="購入日"
-                          format="yyyy/MM/dd"
-                          value={purchasedDay}
-                          variant="outlined"
-                          disableFuture="true"
-                          onChange={(date) => dispatch(handlePurchasedDayChange(date))}
-                          KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                          }}
-                        />
-                      </Grid>
+                      <KeyboardDatePicker
+                        margin="normal"
+                        id="date-picker-dialog"
+                        label="購入日"
+                        format="yyyy/MM/dd"
+                        value={purchasedDay}
+                        variant="outlined"
+                        disableFuture="true"
+                        onChange={(date) => dispatch(handlePurchasedDayChange(date))}
+                        KeyboardButtonProps={{
+                          'aria-label': 'change date',
+                        }}
+                      />
                     </MuiPickersUtilsProvider>
                     <TextField
                       error={errors.amount !== undefined}
@@ -369,10 +394,10 @@ const EditGear = memo(
                     </Button>
                   </div>
                 </form>
-              </MediaQuery>
-            </>
-          }
-        />
+              </>
+            }
+          />
+        </MediaQuery>
       </MenuItem>
     );
   })

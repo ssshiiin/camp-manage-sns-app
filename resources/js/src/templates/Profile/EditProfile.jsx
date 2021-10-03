@@ -13,7 +13,12 @@ import Typography from '@material-ui/core/Typography';
 import MediaQuery from 'react-responsive';
 
 import { SimpleModal } from '../../components/Modal';
-import { handleAppNameChange, handleImageChange, handleProfileChange, update } from '../../reducks/profiles/operations';
+import {
+  handleAppNameChange,
+  handleImageChange,
+  handleProfileChange,
+  update,
+} from '../../reducks/profiles/operations';
 import { closeModalProfEdit, openModalProfEdit } from '../../reducks/modals/operations';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   mobileRoot: {
-    margin: theme.spacing(4),
+    margin: theme.spacing(2),
     display: 'flex',
     '& .MuiTextField-root': {
-      margin: theme.spacing(2),
+      margin: theme.spacing(1),
     },
     minWidth: 300,
   },
@@ -98,18 +103,18 @@ const EditProfile = React.forwardRef((props, ref) => {
 
   return (
     <MenuItem>
-      <SimpleModal
-        top={20}
-        left={50}
-        transX={50}
-        width={600}
-        modalOpen={openModalProfEdit}
-        modalClose={closeModalProfEdit}
-        open={open}
-        nav={'プロフィールを編集する'}
-        body={
-          <>
-            <MediaQuery minWidth={767}>
+      <MediaQuery minWidth={767}>
+        <SimpleModal
+          top={20}
+          left={50}
+          transX={50}
+          width={600}
+          modalOpen={openModalProfEdit}
+          modalClose={closeModalProfEdit}
+          open={open}
+          nav={'プロフィールを編集する'}
+          body={
+            <>
               <form className={classes.root} noValidate autoComplete="off">
                 <img src={bolbUrl} className={classes.bolb} />
                 {errors.img && (
@@ -128,7 +133,11 @@ const EditProfile = React.forwardRef((props, ref) => {
                     onChange={(event) => dispatch(handleImageChange(event))}
                   />
                   <label htmlFor="icon-button-file">
-                    <IconButton className={classes.button} aria-label="upload picture" component="span">
+                    <IconButton
+                      className={classes.button}
+                      aria-label="upload picture"
+                      component="span"
+                    >
                       <PhotoCamera />
                     </IconButton>
                   </label>
@@ -165,8 +174,22 @@ const EditProfile = React.forwardRef((props, ref) => {
                   </Button>
                 </div>
               </form>
-            </MediaQuery>
-            <MediaQuery maxWidth={767}>
+            </>
+          }
+        />
+      </MediaQuery>
+      <MediaQuery maxWidth={767}>
+        <SimpleModal
+          top={20}
+          left={50}
+          transX={50}
+          width={300}
+          modalOpen={openModalProfEdit}
+          modalClose={closeModalProfEdit}
+          open={open}
+          nav={'プロフィールを編集する'}
+          body={
+            <>
               <form className={classes.mobileRoot} noValidate autoComplete="off">
                 <div className={classes.mobileTextForm}>
                   <div>
@@ -187,7 +210,11 @@ const EditProfile = React.forwardRef((props, ref) => {
                         onChange={(event) => dispatch(handleImageChange(event))}
                       />
                       <label htmlFor="icon-button-file">
-                        <IconButton className={classes.button} aria-label="upload picture" component="span">
+                        <IconButton
+                          className={classes.button}
+                          aria-label="upload picture"
+                          component="span"
+                        >
                           <PhotoCamera />
                         </IconButton>
                       </label>
@@ -226,10 +253,10 @@ const EditProfile = React.forwardRef((props, ref) => {
                   </div>
                 </div>
               </form>
-            </MediaQuery>
-          </>
-        }
-      />
+            </>
+          }
+        />
+      </MediaQuery>
     </MenuItem>
   );
 });
