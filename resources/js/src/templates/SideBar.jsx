@@ -36,8 +36,19 @@ const SideBar = memo(() => {
   return (
     <nav className="side-bar">
       <MediaQuery query="(min-width: 767px)">
-        <div className="logo" style={{ height: 66, width: 241, paddingLeft: 17, marginTop: 14 }}>
-          <img src={'/images/mainLogo.png'} width="220px" height="68px" />
+        <div
+          className="logo"
+          style={{
+            display: 'flex',
+            position: 'relative',
+            height: 66,
+            width: 241,
+            paddingLeft: 17,
+            marginTop: 14,
+          }}
+        >
+          <img src={'/images/shortLogo.png'} width="58px" height="68px" />
+          <p className="side-header">Camin</p>
         </div>
         <ul className="side-nav">
           <li onClick={() => dispatch(push('/'))}>

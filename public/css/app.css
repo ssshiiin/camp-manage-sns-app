@@ -104,7 +104,7 @@ p {
 }
 
 body {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   width: 100%;
 }
 body #root {
@@ -171,11 +171,16 @@ body #root main .side-bar {
     box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.2), 0px -2px 2px 0px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.12);
   }
 }
-body #root main .side-bar .logo {
-  height: 70px;
-  width: 218px;
-  padding-left: 14;
-  margin-top: 10;
+body #root main .side-bar .side-header {
+  top: 28px;
+  left: 66px;
+  position: absolute;
+  color: white;
+  text-align: center;
+  font-size: 2.5em;
+  font-family: "Raleway", "ヒラギノ角ゴシック", sans-serif;
+  font-weight: 300;
+  padding: 0px 20px;
 }
 body #root main .side-bar .side-nav {
   min-height: 100vh;
@@ -284,7 +289,7 @@ body #root main .main-category .profile .profile-main .profile-introduce {
   max-height: 300px;
   display: flex;
   border-bottom: 1px solid #dbdbdb;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 @media screen and (max-width: 767px) {
   body #root main .main-category .profile .profile-main .profile-introduce {
@@ -360,7 +365,7 @@ body #root main .main-category .gear {
   width: 100%;
 }
 body #root main .sub-category {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   position: fixed;
   z-index: 20;
   top: 0;

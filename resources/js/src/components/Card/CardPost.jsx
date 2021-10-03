@@ -83,9 +83,9 @@ const CardPost = (props) => {
           </IconButton>
         }
         title={props.post.app_name}
-        subheader={`${props.post.day === null ? '' : moment(props.post.day).format('YYYY/MM/DD')} - ${
-          props.post.place
-        }`}
+        subheader={`${
+          props.post.day === null ? '' : moment(props.post.day).format('YYYY/MM/DD')
+        } - ${props.post.place}`}
       />
       <img src={props.post.image_path[0].image_path} className={classes.media} />
       <CardContent>
