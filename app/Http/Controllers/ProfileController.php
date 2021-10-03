@@ -4,23 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\EditProfileRequest;
-use App\User;
-use App\Profile;
+use App\Models\User;
+use App\Models\Profile;
+use App\Models\Post;
+use App\Models\Gear;
 use Storage;
 
 class ProfileController extends Controller
 {
-    // ログインユーザーのプロフィール情報の取得
-    public function getProfile(User $user){
+    // プロフィール情報一覧の表示
+    public function index(User $user){
         $user_id = $user->id;
+
+        $profiles = new Profile;
+
+        $profile_info = $profiles->getProfile($user_id);
         
-        return Profile::where("user_id", $user_id)->first();
+        return [
+            "profile" => $profile_info, 
+        ];
     }
     
     
     // プロフィールが存在しなかったら、作成
     // プロフィールが存在したら、編集
-    public function createOrEditProfile(EditProfileRequest $request, User $user)
+    public function create(EditProfileRequest $request, User $user)
     {
         $user_id = $user->id;
         $image_file = $request->file("img");
@@ -64,7 +72,9 @@ class ProfileController extends Controller
         }
         
         
-        // getProfileをレスポンスとして返す
-        return app()->make('App\Http\Controllers\ProfileController')->getProfile(User::find($user_id));
+        // Profileをレスポンスとして返す
+        $profiles = new Profile;
+
+        return $this->index(User::find($user_id));
     }
 }

@@ -58,24 +58,14 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBring = () => {
   console.log('Nav');
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const open = selector.users.menu_open;
+  const [open, setOpen] = useState(null);
 
   const handleClick = (event) => {
-    dispatch(
-      MenuAction({
-        menu_open: event.currentTarget,
-      })
-    );
+    setOpen(event.currentTarget);
   };
 
   const handleClose = () => {
-    dispatch(
-      MenuAction({
-        menu_open: null,
-      })
-    );
+    setOpen(null);
   };
 
   const classes = useStyles();
@@ -92,7 +82,13 @@ const NavBring = () => {
           >
             <MoreHorizOutlined fontSize="large" />
           </Button>
-          <StyledMenu id="customized-menu" anchorEl={open} keepMounted open={Boolean(open)} onClose={handleClose}>
+          <StyledMenu
+            id="customized-menu"
+            anchorEl={open}
+            keepMounted
+            open={Boolean(open)}
+            onClose={handleClose}
+          >
             <EditBring />
             <UseTemplates />
             <CreateTemplates />
@@ -109,7 +105,13 @@ const NavBring = () => {
           >
             <MoreHorizOutlined fontSize="large" />
           </Button>
-          <StyledMenu id="customized-menu" anchorEl={open} keepMounted open={Boolean(open)} onClose={handleClose}>
+          <StyledMenu
+            id="customized-menu"
+            anchorEl={open}
+            keepMounted
+            open={Boolean(open)}
+            onClose={handleClose}
+          >
             <EditBring />
             <UseTemplates />
             <CreateTemplates />

@@ -8,7 +8,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import { BringIs_check } from '../reducks/bring_gears/operations';
 import { CheckBoxes } from './Form';
 import { FlexListSubheader } from './Header';
 
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // props = {category, type, mode}
-const ShowBring = React.memo((props) => {
+const ShowBring = (props) => {
   console.log('showBring');
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -39,33 +38,20 @@ const ShowBring = React.memo((props) => {
 
   return (
     <>
-      <ListItem
-        role="listitem"
-        button
-        onClick={handleNestClick}
-        className={classes.subHeader}
-      >
+      <ListItem role="listitem" button onClick={handleNestClick} className={classes.subHeader}>
         <FlexListSubheader
           title={props.category.category}
-          countTrue={props.category.countTrue}
-          countAll={props.category.countAll}
+          countTrue={props.category.count_true}
+          countAll={props.category.count_all}
         />
-        {open ? (
-          <ExpandLess style={{ marginLeft: 'auto' }} />
-        ) : (
-          <ExpandMore style={{ marginLeft: 'auto' }} />
-        )}
+        {open ? <ExpandLess style={{ marginLeft: 'auto' }} /> : <ExpandMore style={{ marginLeft: 'auto' }} />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {props.category.gearList.map((gear, i) => (
+          {props.category.gear_list.map((gear, i) => (
             <ListItem key={i} style={{ padding: '0px 8px' }}>
               <ListItemIcon>
-                <CheckBoxes
-                  gear={gear}
-                  updateIsCheck={BringIs_check}
-                  type={props.type}
-                />
+                <CheckBoxes gear={gear} updateIsCheck={props.updateIsCheck} />
               </ListItemIcon>
               <ListItemText primary={gear.gear_name} />
             </ListItem>
@@ -74,6 +60,6 @@ const ShowBring = React.memo((props) => {
       </Collapse>
     </>
   );
-});
+};
 
 export default ShowBring;

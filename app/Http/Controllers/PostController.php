@@ -4,133 +4,136 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\GetPostsResource;
-use App\Http\Resources\PostProfileResource;
-use App\Http\Resources\PostProfileIndexResource;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Storage;
 use App\File;
-use App\Post;
-use App\User;
-use App\Post_image;
-use App\Profile;
-
+use App\Models\Post;
+use App\Models\PostImage;
+use App\Models\User;
+use App\Models\Gear;
 
 class PostController extends Controller
 {
-    //全ユーザーのpostsを取得
-    public function getPosts(Request $request)
-    {
-        $posts = Post::orderBy("created_at", "DESC")->simplePaginate(15);
-        
-        //profilesのimage_pathを追加する
-        return GetPostsResource::collection($posts);
+    // タイムライン一覧表示
+    public function indexHome()
+    {   
+        $posts = new Post;
+        return $posts->getTimeLinePosts();
     }
     
-    //ユーザーのpostsを取得
-    //post_imagesをリレーションする
-    public function getUserPosts(User $user)
+    //プロフィール一覧表示
+    public function index(User $user)
     {
         $user_id = $user->id;
+
+        $posts = new Post;
+        $posts_profile = $posts->getUserPosts($user_id);
+
+        $posts_count = $posts->getCountPost($user_id);
         
-        return Post::with("Post_images")->where('user_id', $user_id)->orderBy('created_at', 'DESC')->get();
-        
-        // return PostProfileResource::collection($post->whereUser_idOrderByCreated_at($user_id));
+        return [
+            "postsProfile" => $posts_profile,
+            "countPosts" => $posts_count, 
+        ];
+    }
+    
+    //postsの詳細を取得する
+    public function show(Post $post)
+    {    
+        return new GetPostsResource($post);
     }
 
+    // キャンプサイトの検索結果を取得
     public function getPlacePosts(Request $request){
         $place = $request->place;
 
         return Post::with("Post_images")->where('place', 'like', "%$place%")->orderBy('day', 'DESC')->take(21)->get();
     }
     
-    //postsの詳細を取得する
-    public function getShowPost(Post $post)
-    {
-        $post_id = $post->id;
-        $post = Post::where("id", $post_id)->get();
-        //profilesのimage_pathを追加する
-        return GetPostsResource::collection($post);
-    }
-    
-    public function getCountPost(User $user){
-        $user_id = $user->id;
-        
-        $count = Post::where("user_id", $user_id)->count();
-        return $count;
-    }
-    
     //postsとpost_imagesを作成し、画像はs3に保存する
-    public function createPost(CreatePostRequest $request, User $user){
-        $user_id = $user->id;
-    
-        $fileImage = $request->files;
-        $content = $request->input("content");
-        $place = $request->input("place");
-        $day = $request->input("day");
+    public function create(CreatePostRequest $request, User $user){
+        try{
+            $user_id = $user->id;
         
+            $file_image = $request->file("img");
+            $content = $request->input("content");
+            $place = $request->input("place");
+            $day = $request->input("day");
+            
+            //postsを作成し、作成したidをpost_idとして取得する
+            $post = new Post;
+            
+            $input = [
+                "user_id" => $user_id,
+                "content" => $content,
+                "place" => $place,
+                "day" => $day,
+            ];
+            
+            $post->fill($input)->save();
+            $post_id = $post->id;
+            
+            
+            //s3に画像を保存して、urlをpost_imagesに保存する
+            $post_image = new PostImage;
         
-        //postsを作成し、作成したidをpost_idとして取得する
-        $post = new Post;
-        
-        $input = [
-            "user_id" => $user_id,
-            "content" => $content,
-            "place" => $place,
-            "day" => $day,
-        ];
-        
-        $post->fill($input)->save();
-        $post_id = $post->id;
-        
-        
-        //s3に画像を保存して、urlをpost_imagesに保存する
-        $post_image = new Post_image;
-    
-        foreach ($fileImage as $key => $value){
-            $path = Storage::disk('s3')->putFile('/Post_images', $request->file($key), 'public');
-            Post_image::create([
+            $path = Storage::disk('s3')->putFile('/Post_images', $file_image, 'public');
+
+            if (empty($path)){
+                throw new Exception("s3に保存できませんでした");
+            } 
+            PostImage::create([
                 "post_id" => $post_id,
                 "image_path" => Storage::disk('s3')->url($path),
             ]);
+        } catch (Exception $es) {
+            Post::delete($post);
+        } finally {
+            return $this->index(User::find($user_id));
         }
-        
-        return $this->getUserPosts(User::find($user_id));
     }
 
-    public function deletePost(Post $post){
-        Post_image::where("post_id", $post->id)->delete();
-        $post->delete();
-        return;
-    }
-
-    public function updatePost(UpdatePostRequest $request, Post $post){
-        $user_id = $post->user_id;
-        $post_id = $post->id;
     
-        $fileImage = $request->files;
-        $content = $request->input("content");
-        $place = $request->input("place");
-        $day = $request->input("day");
+    public function update(UpdatePostRequest $request, Post $post){
+        try {
+            $user_id = $post->user_id;
+            $post_id = $post->id;
+            
+            $file_image = $request->file("img");
+            $content = $request->input("content");
+            $place = $request->input("place");
+            $day = $request->input("day");
+    
+            ///画像の変更があったか
+            if (!empty($file_image)){
+                $path = Storage::disk('s3')->putFile('/Post_images', $file_image, 'public');
+                if (empty($path)) {
+                    throw new Exception("s3に保存できませんでした");
+                }
+                $post_image = PostImage::where("post_id", $post_id)->first();
+                $post_image->image_path = Storage::disk('s3')->url($path);
+                $post_image->update();
 
-        ///画像の変更があったか
-        if (empty($fileImage)){
-            Post_image::where("post_id", $post_id)->delete();
-            foreach ($fileImage as $key => $value){
-                $path = Storage::disk('s3')->putFile('/Post_images', $request->file("img"), 'public');
-                Post_image::create([
-                    "post_id" => $post_id,
-                    "image_path" => Storage::disk('s3')->url($path),
-                ]);
             }
+            
+            $post->content = $content;
+            $post->day = $day;
+            $post->place = $place;   
+            $post->update();
+        } finally {
+            return $this->show(Post::find($post_id));
         }
         
-        $post->content = $content;
-        $post->day = $day;
-        $post->place = $place;   
-        $post->update();
+    }
+    
+    public function destroy(Post $post){
+        $user_id = $post->user_id;
 
-        return $this->getShowPost(Post::find($post_id));
+        PostImage::where("post_id", $post->id)->delete();
+        $post->delete();
+
+        return $this->index(User::find($user_id));
     }
 }
 

@@ -13,14 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import MediaQuery from 'react-responsive';
 
 import { SimpleModal } from '../../components/Modal';
-import {
-  handleApp_nameChange,
-  handleImageChange,
-  handleProfileChange,
-  handleSubmit,
-} from '../../reducks/users/operations';
-import { handleProfEditModalOpen, ModalClose } from '../../reducks/modals/operations';
-import { handleAlertClose, handleAlertOpen } from '../../reducks/alerts/operations';
+import { handleAppNameChange, handleImageChange, handleProfileChange, update } from '../../reducks/profiles/operations';
+import { closeModalProfEdit, openModalProfEdit } from '../../reducks/modals/operations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -89,18 +83,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const EditProfile = React.forwardRef((props, ref) => {
+  console.log('ModalProfile');
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const profiles = useSelector((state) => state.profiles);
+  const modals = useSelector((state) => state.modals);
 
-  const app_name = selector.users.app_name;
-  const prof_content = selector.users.prof_content;
-  const prof_bolb_url = selector.users.prof_bolb_url;
-  const open = selector.modals.modal_prof_edit_open;
-  const alertOpen = selector.alerts.open;
-  const errors = selector.users.errors;
+  const appName = profiles.appName;
+  const profContent = profiles.profContent;
+  const bolbUrl = profiles.bolbUrl;
+  const errors = profiles.errors;
 
-  console.log(selector.users);
+  const open = modals.modalProfEdit;
 
   return (
     <MenuItem>
@@ -109,17 +103,15 @@ const EditProfile = React.forwardRef((props, ref) => {
         left={50}
         transX={50}
         width={600}
-        alertOpen={alertOpen}
-        handleAlertOpen={handleAlertOpen}
-        handleAlertClose={handleAlertClose}
-        modalOpen={handleProfEditModalOpen}
+        modalOpen={openModalProfEdit}
+        modalClose={closeModalProfEdit}
         open={open}
         nav={'プロフィールを編集する'}
         body={
           <>
             <MediaQuery minWidth={767}>
               <form className={classes.root} noValidate autoComplete="off">
-                <img src={prof_bolb_url} className={classes.bolb} />
+                <img src={bolbUrl} className={classes.bolb} />
                 {errors.img && (
                   <>
                     <Typography variant="body2" color="error" align="center">
@@ -147,10 +139,10 @@ const EditProfile = React.forwardRef((props, ref) => {
                     helperText={errors.app_name}
                     id="outlined-textarea"
                     label="表示名"
-                    defaultValue={app_name}
+                    defaultValue={appName}
                     placeholder="Placeholder"
                     variant="outlined"
-                    onChange={(event) => dispatch(handleApp_nameChange(event))}
+                    onChange={(event) => dispatch(handleAppNameChange(event))}
                   />
                   <TextField
                     error={errors.profile !== undefined}
@@ -159,7 +151,7 @@ const EditProfile = React.forwardRef((props, ref) => {
                     label="プロフィール"
                     multiline
                     rows={6}
-                    defaultValue={prof_content}
+                    defaultValue={profContent}
                     variant="outlined"
                     onChange={(event) => dispatch(handleProfileChange(event))}
                   />
@@ -167,7 +159,7 @@ const EditProfile = React.forwardRef((props, ref) => {
                     variant="contained"
                     className={classes.upImg}
                     startIcon={<CloudUploadIcon />}
-                    onClick={() => dispatch(handleSubmit())}
+                    onClick={() => dispatch(update())}
                   >
                     保存する
                   </Button>
@@ -178,7 +170,7 @@ const EditProfile = React.forwardRef((props, ref) => {
               <form className={classes.mobileRoot} noValidate autoComplete="off">
                 <div className={classes.mobileTextForm}>
                   <div>
-                    <img src={prof_bolb_url} className={classes.mobileBolb} />
+                    <img src={bolbUrl} className={classes.mobileBolb} />
                     {errors.img && (
                       <>
                         <Typography variant="body2" color="error" align="center">
@@ -207,10 +199,10 @@ const EditProfile = React.forwardRef((props, ref) => {
                       helperText={errors.app_name}
                       id="outlined-textarea"
                       label="表示名"
-                      defaultValue={app_name}
+                      defaultValue={appName}
                       placeholder="Placeholder"
                       variant="outlined"
-                      onChange={(event) => dispatch(handleApp_nameChange(event))}
+                      onChange={(event) => dispatch(handleAppNameChange(event))}
                     />
                     <TextField
                       error={errors.profile !== undefined}
@@ -219,7 +211,7 @@ const EditProfile = React.forwardRef((props, ref) => {
                       label="プロフィール"
                       multiline
                       rows={6}
-                      defaultValue={prof_content}
+                      defaultValue={profContent}
                       variant="outlined"
                       onChange={(event) => dispatch(handleProfileChange(event))}
                     />
@@ -227,7 +219,7 @@ const EditProfile = React.forwardRef((props, ref) => {
                       variant="contained"
                       className={classes.mobileUpImg}
                       startIcon={<CloudUploadIcon />}
-                      onClick={() => dispatch(handleSubmit())}
+                      onClick={() => dispatch(update())}
                     >
                       保存する
                     </Button>

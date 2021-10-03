@@ -1,69 +1,69 @@
-export const MODAL_PROF_EDIT_OPEN = "MODAL_PROF_EDIT_OPEN";
-export const ModalProfEditAction = (modalState) => {
+export const MODAL_PROF_EDIT = 'MODAL_PROF_EDIT';
+export const openModalProfEditAction = (modalState) => {
   return {
-    type: "MODAL_PROF_EDIT_OPEN",
+    type: 'MODAL_PROF_EDIT',
     payload: {
-      modal_prof_edit_open: modalState.modal_prof_edit_open
-    }
-  }
-}
+      modalProfEdit: modalState.modalProfEdit,
+    },
+  };
+};
 
-export const MODAL_POST_CREATE_OPEN = "MODAL_POST_CREATE_OPEN";
-export const ModalPostCreateAction = (modalState) => {
+export const MODAL_POST_CREATE = 'MODAL_POST_CREATE';
+export const openModalPostCreateAction = (modalState) => {
   return {
-    type: "MODAL_POST_CREATE_OPEN",
+    type: 'MODAL_POST_CREATE',
     payload: {
-      modal_post_create_open: modalState.modal_post_create_open
-    }
-  }
-} 
+      modalPostCreate: modalState.modalPostCreate,
+    },
+  };
+};
 
-export const MODAL_GEAR_CREATE_OPEN = "MODAL_GEAR_CREATE_OPEN";
-export const ModalGearCreateAction = (modalState) => {
+export const MODAL_GEAR_CREATE = 'MODAL_GEAR_CREATE';
+export const openModalGearCreateAction = (modalState) => {
   return {
-    type: "MODAL_GEAR_CREATE_OPEN",
+    type: 'MODAL_GEAR_CREATE',
     payload: {
-      modal_gear_create_open: modalState.modal_gear_create_open
-    }
-  }
-}
+      modalGearCreate: modalState.modalGearCreate,
+    },
+  };
+};
 
-export const MODAL_POST_EDIT_OPEN = "MODAL_POST_EDIT_OPEN";
-export const ModalPostEditAction = (modalState) => {
+export const MODAL_POST_EDIT = 'MODAL_POST_EDIT';
+export const openModalPostEditAction = (modalState) => {
   return {
-    type: "MODAL_POST_EDIT_OPEN",
+    type: 'MODAL_POST_EDIT',
     payload: {
-      modal_post_edit_open: modalState.modal_post_edit_open
-    }
-  }
-} 
+      modalPostEdit: modalState.modalPostEdit,
+    },
+  };
+};
 
-export const MODAL_BRING_EDIT_OPEN = "MODAL_BRING_EDIT_OPEN";
-export const ModalBringEditAction = (modalState) => {
+export const MODAL_BRING_EDIT = 'MODAL_BRING_EDIT';
+export const openModalBringEditAction = (modalState) => {
   return {
-    type: "MODAL_BRING_EDIT_OPEN",
+    type: 'MODAL_BRING_EDIT',
     payload: {
-      modal_bring_edit_open: modalState.modal_bring_edit_open
-    }
-  }
-}
+      modalBringEdit: modalState.modalBringEdit,
+    },
+  };
+};
 
-export const MODAL_TEMPLATES_CREATE_OPEN = "MODAL_TEMPLATES_CREATE_OPEN";
-export const ModalTemplatesCreateAction = (modalState) => {
+export const MODAL_TEMPLATE_CREATE = 'MODAL_TEMPLATE_CREATE';
+export const openModalTemplateCreateAction = (modalState) => {
   return {
-    type: "MODAL_TEMPLATES_CREATE_OPEN",
+    type: 'MODAL_TEMPLATE_CREATE',
     payload: {
-      modal_templates_create_open: modalState.modal_templates_create_open
-    }
-  }
-}
+      modalTemplateCreate: modalState.modalTemplateCreate,
+    },
+  };
+};
 
-export const MODAL_TEMPLATES_USE_OPEN = "MODAL_TEMPLATES_USE_OPEN";
-export const ModalTemplatesUseAction = (modalState) => {
+export const MODAL_TEMPLATE_USE = 'MODAL_TEMPLATE_USE';
+export const openModalTemplateUseAction = (modalState) => {
   return {
-    type: "MODAL_TEMPLATES_USE_OPEN",
+    type: 'MODAL_TEMPLATE_USE',
     payload: {
-      modal_templates_use_open: modalState.modal_templates_use_open
-    }
-  }
-} 
+      modalTemplateUse: modalState.modalTemplateUse,
+    },
+  };
+};

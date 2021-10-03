@@ -1,13 +1,12 @@
 import React from 'react';
-import { Route, Switch } from "react-router";
-
+import { Route, Switch } from 'react-router';
 
 import { BringSlideNav } from './components';
 import ScrollToTopOnMount from './templates/ScrollToTopOnMount';
 import { IndexBring, IndexSave } from './templates';
 
 const RouterGear = (props) => {
-  const user_id = props.match.params.id;
+  const userId = props.match.params.id;
   // const deleteTemplate = async (deleteTemplate_name) => {
   //   const response = await axios.post(`/api/templates/delete/${user_id}`
   //     , [deleteTemplate_name]);
@@ -23,12 +22,16 @@ const RouterGear = (props) => {
       <div className="gear">
         <BringSlideNav />
         <Switch>
-          <Route path={`/${user_id}/bring/save`} exact render={() => <IndexSave user_id={user_id} />} />
-          <Route path={`/${user_id}/bring`} exact render={() => <IndexBring />} />
+          <Route
+            path={`/${userId}/bring/save`}
+            exact
+            render={() => <IndexSave userId={userId} />}
+          />
+          <Route path={`/${userId}/bring`} exact render={() => <IndexBring />} />
         </Switch>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default RouterGear;

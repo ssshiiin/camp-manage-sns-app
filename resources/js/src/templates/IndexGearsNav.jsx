@@ -4,57 +4,43 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import MediaQuery from "react-responsive";
+import MediaQuery from 'react-responsive';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getGears } from '../reducks/gears/operations';
 import { IndexGears } from '../components';
-
-function a11yProps(index) {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
-  };
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: "rgb(250, 250, 250)",
+    backgroundColor: 'rgb(250, 250, 250)',
   },
   tab: {
     minWidth: 140,
-    backgroundColor: "rgb(250, 250, 250)",
+    backgroundColor: 'rgb(250, 250, 250)',
   },
   mobileTab: {
     minWidth: 75,
-    backgroundColor: "rgb(250, 250, 250)",
+    backgroundColor: 'rgb(250, 250, 250)',
   },
   pag: {
-    backgroundColor: "rgb(250, 250, 250)",
+    backgroundColor: 'rgb(250, 250, 250)',
   },
   bar: {
-    borderTop: "1px solid rgb(219, 219, 219)",
-    borderBottom: "1px solid rgb(219, 219, 219)",
-    boxShadow: "none",
-  }
+    borderTop: '1px solid rgb(219, 219, 219)',
+    borderBottom: '1px solid rgb(219, 219, 219)',
+    boxShadow: 'none',
+  },
 }));
 
 export default function IndexGearsNav(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
-  const user_id = props.match.params.id;
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const userId = props.match.params.id;
+  const selector = useSelector((state) => state.gears);
 
-  const categories = selector.gears.gears;
-
-  useEffect(() => {
-    dispatch(getGears(user_id));
-  }, [user_id]);
-
+  const categories = selector.gears;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -74,14 +60,13 @@ export default function IndexGearsNav(props) {
             aria-label="category nav"
             className={classes.pag}
           >
-
-            {categories.map((category, i) =>
-              <Tab label={category.category} {...a11yProps(i)} className={classes.tab} key={i} />
-            )}
+            {categories.map((category, i) => (
+              <Tab label={category.category} className={classes.tab} key={i} />
+            ))}
           </Tabs>
-          {categories.map((category, i) =>
-            <IndexGears user_id={user_id} category={category} index={i} value={value} key={i} />
-          )}
+          {categories.map((category, i) => (
+            <IndexGears userId={userId} category={category} index={i} value={value} key={i} />
+          ))}
         </MediaQuery>
         <MediaQuery query="(max-width: 767px)">
           <Tabs
@@ -94,13 +79,13 @@ export default function IndexGearsNav(props) {
             aria-label="category nav"
             className={classes.pag}
           >
-            {categories.map((category, i) =>
-              <Tab label={category.category} {...a11yProps(i)} className={classes.mobileTab} key={i} />
-            )}
+            {categories.map((category, i) => (
+              <Tab label={category.category} className={classes.mobileTab} key={i} />
+            ))}
           </Tabs>
-          {categories.map((category, i) =>
-            <IndexGears user_id={user_id} category={category} index={i} value={value} key={i} />
-          )}
+          {categories.map((category, i) => (
+            <IndexGears userId={userId} category={category} index={i} value={value} key={i} />
+          ))}
         </MediaQuery>
       </AppBar>
     </div>

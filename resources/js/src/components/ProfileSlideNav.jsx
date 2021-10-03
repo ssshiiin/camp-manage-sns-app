@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,16 +9,17 @@ import Tab from '@material-ui/core/Tab';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-    backgroundColor: "#FAFAFA",
+    backgroundColor: '#FAFAFA',
     borderRadius: 0,
   },
 });
 
-const ProfileSlideNav = (props) => {
+const ProfileSlideNav = memo((props) => {
+  console.log('profileSlideNav');
   const dispatch = useDispatch();
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const user_id = props.user_id;
+  const userId = props.userId;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -26,18 +27,22 @@ const ProfileSlideNav = (props) => {
 
   return (
     <Paper className={classes.root}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
-        centered
-      >
-        <Tab label="Achievement" onClick={() => { dispatch(push(`/${user_id}`)) }} />
-        <Tab label="Gear Lists" onClick={() => { dispatch(push(`/${user_id}/gear`)) }} />
+      <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" centered>
+        <Tab
+          label="Achievement"
+          onClick={() => {
+            dispatch(push(`/${userId}`));
+          }}
+        />
+        <Tab
+          label="Gear Lists"
+          onClick={() => {
+            dispatch(push(`/${userId}/gear`));
+          }}
+        />
       </Tabs>
     </Paper>
-  )
-}
+  );
+});
 
 export default ProfileSlideNav;

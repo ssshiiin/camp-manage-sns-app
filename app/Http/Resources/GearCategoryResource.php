@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Http\Resources\GetUserGearsResource;
 
-use App\Gear;
+use App\Models\Gear;
 
 class GearCategoryResource extends JsonResource
 {

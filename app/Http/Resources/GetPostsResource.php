@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Profile;
+use App\models\Profile;
 
 class GetPostsResource extends JsonResource
 {
@@ -27,10 +27,9 @@ class GetPostsResource extends JsonResource
             'id' => $this->id, 
             'user_id' => $this->user_id, 
             'content' => $this->content, 
-            'image_path' => $this->post_images,
+            'image_path' => $this->postImages,
             'place' => $this->place, 
             'day' => $this->day, 
-            'tags' => $this->tags,
             'tags' => $this->tags,
             'app_name' => $app_name,
             'profile_image' => $profile_image,

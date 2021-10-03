@@ -1,100 +1,101 @@
-export const GEARS = "GEARS";
-export const  GearsAction = (gearsState) => {
+export const GEARS = 'GEARS';
+export const getGearsAction = (gearState) => {
   return {
-    type: "GEARS",
+    type: 'GEARS',
     payload: {
-      gears: gearsState.gears
-    }
-  }
-}
+      gears: gearState.gears,
+      countGears: gearState.countGears,
+    },
+  };
+};
 
-export const COUNT_GEARS = "COUNT_GEARS";
-export const CountGearsAction = (gearsState) => {
+export const COUNT_GEARS = 'COUNT_GEARS';
+export const CountGearsAction = (gearState) => {
   return {
-    type: "COUNT_GEARS",
+    type: 'COUNT_GEARS',
     payload: {
-      count_gears: gearsState.count_gears
-    }
-  }
-}
+      count_gears: gearState.count_gears,
+    },
+  };
+};
 
-export const CREATE_GEAR_NAME = "CREATE_GEAR_NAME"
-export const CreateGearNameAction =  (gearsState) => {
+export const CHANGE_GEAR_NAME = 'CHANGE_GEAR_NAME';
+export const changeGearNameAction = (gearState) => {
   return {
-    type: "CREATE_GEAR_NAME",
+    type: 'CHANGE_GEAR_NAME',
     payload: {
-      gear_name: gearsState.gear_name,
-    }
-  }
-}
+      gearName: gearState.gearName,
+    },
+  };
+};
 
-export const CREATE_CATEGORY = "CREATE_CATEGORY"
-export const CreateCategoryAction =  (gearsState) => {
+export const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
+export const changeCategoryAction = (gearState) => {
   return {
-    type: "CREATE_CATEGORY",
+    type: 'CHANGE_CATEGORY',
     payload: {
-      gear_category: gearsState.gear_category,
-    }
-  }
-}
+      category: gearState.category,
+    },
+  };
+};
 
-export const CREATE_PURCHASED_DAY = "CREATE_PURCHASED_DAY"
-export const CreatePurchasedDayAction =  (gearsState) => {
+export const CHANGE_PURCHASED_DAY = 'CHANGE_PURCHASED_DAY';
+export const changePurchasedDayAction = (gearState) => {
   return {
-    type: "CREATE_PURCHASED_DAY",
+    type: 'CHANGE_PURCHASED_DAY',
     payload: {
-      gear_purchased_day: gearsState.gear_purchased_day,
-    }
-  }
-}
+      purchasedDay: gearState.purchasedDay,
+    },
+  };
+};
 
-export const CREATE_BRAND = "CREATE_BRAND"
-export const CreateBrandAction =  (gearsState) => {
+export const CHANGE_BRAND = 'CHANGE_BRAND';
+export const changeBrandAction = (gearState) => {
   return {
-    type: "CREATE_BRAND",
+    type: 'CHANGE_BRAND',
     payload: {
-      gear_brand: gearsState.gear_brand,
-    }
-  }
-}
+      brand: gearState.brand,
+    },
+  };
+};
 
-export const CREATE_PRICE = "CREATE_PRICE"
-export const CreatePriceAction =  (gearsState) => {
+export const CHANGE_PRICE = 'CHANGE_PRICE';
+export const changePriceAction = (gearState) => {
   return {
-    type: "CREATE_PRICE",
+    type: 'CHANGE_PRICE',
     payload: {
-      gear_price: gearsState.gear_price,
-    }
-  }
-}
+      price: gearState.price,
+    },
+  };
+};
 
-export const CREATE_AMOUNT = "CREATE_AMOUNT"
-export const CreateAmountAction =  (gearsState) => {
+export const CHANGE_AMOUNT = 'CHANGE_AMOUNT';
+export const changeAmountAction = (gearState) => {
   return {
-    type: "CREATE_AMOUNT",
+    type: 'CHANGE_AMOUNT',
     payload: {
-      gear_amount: gearsState.gear_amount,
-    }
-  }
-}
+      amount: gearState.amount,
+    },
+  };
+};
 
-export const CREATE_IMAGES = "CREATE_IMAGES"
-export const CreateImagesAction =  (gearsState) => {
+export const CHANGE_IMAGE = 'CHANGE_IMAGE';
+export const changeImageAction = (gearState) => {
   return {
-    type: "CREATE_IMAGES",
+    type: 'CHANGE_IMAGE',
     payload: {
-      gear_bolb_urls: gearsState.gear_bolb_urls,
-      gear_image: gearsState.gear_image,
-    }
-  }
-}
+      bolbUrl: gearState.bolbUrl,
+      image: gearState.image,
+    },
+  };
+};
 
-export const CREATE_ERRORS = "CREATE_ERRORS";
-export const CreateErrorsAction = (gearsState) => {
+export const CATCH_ERRORS = 'CATCH_ERRORS';
+export const catchErrorsAction = (gearState) => {
   return {
-    type: "CREATE_ERRORS",
+    type: 'CATCH_ERRORS',
     payload: {
-      create_errors: gearsState.create_errors
-    }
-  }
-}
+      errors: gearState.errors,
+    },
+  };
+};

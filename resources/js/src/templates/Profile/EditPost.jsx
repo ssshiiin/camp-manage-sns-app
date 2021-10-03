@@ -17,14 +17,19 @@ import Typography from '@material-ui/core/Typography';
 
 import { SimpleModal } from '../../components/Modal';
 import {
-  createPost,
   handleContentChange,
   handleDayChange,
   handleImageChange,
   handlePlaceChange,
-  updatePost,
+  update,
 } from '../../reducks/posts/operations';
-import { handlePostCreateModalOpen, handlePostEditModalOpen, ModalClose } from '../../reducks/modals/operations';
+import {
+  closeModalPostEdit,
+  handlePostCreateModalOpen,
+  handlePostEditModalOpen,
+  ModalClose,
+  openModalPostEdit,
+} from '../../reducks/modals/operations';
 import { handleAlertClose, handleAlertOpen } from '../../reducks/alerts/operations';
 import MediaQuery from 'react-responsive';
 
@@ -78,15 +83,18 @@ const useStyles = makeStyles((theme) => ({
 const EditPost = React.forwardRef((props, ref) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+  const posts = useSelector((state) => state.posts);
+  const modals = useSelector((state) => state.modals);
 
-  const place = selector.posts.post_place;
-  const day = selector.posts.post_day;
-  const content = selector.posts.post_content;
-  const bolbUrl = selector.posts.post_bolb_urls;
-  const open = selector.modals.modal_post_edit_open;
-  const alertOpen = selector.alerts.open;
-  const errors = selector.posts.create_errors;
+  const place = posts.place;
+  const day = posts.day;
+  const content = posts.content;
+  const bolbUrl = posts.bolbUrl;
+  const errors = posts.errors;
+
+  const open = modals.modalPostEdit;
+
+  console.log(posts);
 
   return (
     <MenuItem>
@@ -94,10 +102,8 @@ const EditPost = React.forwardRef((props, ref) => {
         top={20}
         left={50}
         transX={50}
-        alertOpen={alertOpen}
-        handleAlertOpen={handleAlertOpen}
-        handleAlertClose={handleAlertClose}
-        modalOpen={handlePostEditModalOpen}
+        modalOpen={openModalPostEdit}
+        modalClose={closeModalPostEdit}
         open={open}
         nav={'編集する'}
         body={
@@ -168,7 +174,11 @@ const EditPost = React.forwardRef((props, ref) => {
                     variant="contained"
                     className={classes.upImg}
                     startIcon={<CloudUploadIcon />}
-                    onClick={() => dispatch(createPost())}
+                    onClick={() => {
+                      dispatch(update(props.post.id));
+                      // handleClose();
+                      // props.menuClose();
+                    }}
                   >
                     保存する
                   </Button>
@@ -245,7 +255,11 @@ const EditPost = React.forwardRef((props, ref) => {
                     variant="contained"
                     className={classes.upImg}
                     startIcon={<CloudUploadIcon />}
-                    onClick={() => dispatch(createPost())}
+                    onClick={() => {
+                      handleClose();
+                      props.menuClose();
+                      dispatch(update(props.post.id));
+                    }}
                   >
                     保存する
                   </Button>

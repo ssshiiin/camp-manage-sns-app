@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import { makeStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import { ShowBring } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  CountAllBring,
-  getBringGear,
-  getCountAllBring,
-} from '../reducks/bring_gears/operations';
-import { AllSelected, FlexListSubheader } from '../components/Header';
+import { FlexListSubheader } from '../components/Header';
+import { getBring, updateBringCheck } from '../reducks/bring_gears/operations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,21 +20,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const IndexBring = React.memo((props) => {
+const IndexBring = () => {
   console.log('indexBring');
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const classes = useStyles();
 
-  const user_id = selector.users.user_id;
-  const bringGears = selector.bring_gears.bring_gears;
-  const countBring = selector.bring_gears.count_all;
+  const userId = selector.users.user_id;
+  const bringGears = selector.bring_gears.brings;
+  const bringsCountAll = selector.bring_gears.brings_count_all;
+  const bringsCountTrue = selector.bring_gears.brings_count_true;
 
   useEffect(() => {
-    if (typeof user_id !== 'undefined') {
-      dispatch(getBringGear(user_id));
+    if (typeof userId !== 'undefined') {
+      dispatch(getBring(userId));
     }
-  }, [user_id]);
+  }, [userId]);
 
   return (
     <>
@@ -51,8 +46,8 @@ const IndexBring = React.memo((props) => {
           <div style={{ display: 'flex', padding: '16px 16px' }}>
             <FlexListSubheader
               title={'持ち物リスト'}
-              countTrue={countBring.countTrue}
-              countAll={countBring.countAll}
+              countTrue={bringsCountTrue}
+              countAll={bringsCountAll}
             />
           </div>
         }
@@ -60,16 +55,11 @@ const IndexBring = React.memo((props) => {
       >
         <Divider />
         {bringGears.map((category, i) => (
-          <ShowBring
-            category={category}
-            type={'Bring'}
-            mode={'Bring'}
-            key={i}
-          />
+          <ShowBring category={category} updateIsCheck={updateBringCheck} mode={'Bring'} key={i} />
         ))}
       </List>
     </>
   );
-});
+};
 
 export default IndexBring;

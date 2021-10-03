@@ -8,9 +8,8 @@ import TextField from '@material-ui/core/TextField';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 import { SimpleModal } from '../../components/Modal';
-import { handleTemplatesCreateModalOpen } from '../../reducks/modals/operations';
-import { handleAlertClose, handleAlertOpen } from '../../reducks/alerts/operations';
-import { createTemplates, handleTemplate_nameChange } from '../../reducks/templates/operations';
+import { closeModalTemplateCreate, openModalTemplateCreate } from '../../reducks/modals/operations';
+import { create, handleTemplateNameChange } from '../../reducks/templates/operations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,11 +50,12 @@ const CreateTemplates = React.memo(
     console.log('CreateTem');
     const classes = useStyles();
     const dispatch = useDispatch();
-    const selector = useSelector((state) => state);
+    const users = useSelector((state) => state.users);
+    const templatesSelector = useSelector((state) => state.templates);
+    const modals = useSelector((state) => state.modals);
 
-    const template_name = selector.templates.template_name;
-    const open = selector.modals.modal_templates_create_open;
-    const alertOpen = selector.alerts.open;
+    const templateName = templatesSelector.template_name;
+    const open = modals.modalTemplateCreate;
 
     return (
       <MenuItem>
@@ -65,10 +65,8 @@ const CreateTemplates = React.memo(
           transX={50}
           transY={50}
           width={400}
-          alertOpen={alertOpen}
-          handleAlertOpen={handleAlertOpen}
-          handleAlertClose={handleAlertClose}
-          modalOpen={handleTemplatesCreateModalOpen}
+          modalOpen={openModalTemplateCreate}
+          modalClose={closeModalTemplateCreate}
           open={open}
           nav={'テンプレートとして保存する'}
           body={
@@ -77,16 +75,16 @@ const CreateTemplates = React.memo(
                 <TextField
                   id="outlined-textarea"
                   label="テンプレート名"
-                  defaultValue={template_name}
+                  defaultValue={templateName}
                   placeholder="必需品"
                   variant="outlined"
-                  onChange={(event) => dispatch(handleTemplate_nameChange(event))}
+                  onChange={(event) => dispatch(handleTemplateNameChange(event))}
                 />
                 <Button
                   variant="contained"
                   className={classes.upImg}
                   startIcon={<CloudUploadIcon />}
-                  onClick={() => dispatch(createTemplates())}
+                  onClick={() => dispatch(create())}
                 >
                   保存する
                 </Button>

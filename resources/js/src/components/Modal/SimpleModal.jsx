@@ -32,89 +32,72 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SimpleModal = React.forwardRef((props, ref) => {
-  console.log('Modal');
-  const classes = useStyles();
-  console.log(props);
-  const [modalStyle] = React.useState(getModalStyle(props.top, props.left, props.transX, props.transY, props.width));
+const SimpleModal = React.memo(
+  React.forwardRef((props, ref) => {
+    console.log('Modal');
+    const classes = useStyles();
+    const dispatch = useDispatch();
+    const [modalStyle] = React.useState(getModalStyle(props.top, props.left, props.transX, props.transY, props.width));
 
-  const dispatch = useDispatch();
+    const body = (
+      <React.Fragment>
+        <MediaQuery query="(min-width: 767px)">
+          <div style={modalStyle} className={classes.paper}>
+            <div id="simple-modal-description">{props.body}</div>
+          </div>
+        </MediaQuery>
+        <MediaQuery query="(max-width: 767px)">
+          <div style={modalStyle} className={classes.mobilePaper}>
+            <div id="simple-modal-description">{props.body}</div>
+          </div>
+        </MediaQuery>
+      </React.Fragment>
+    );
 
-  const body = (
-    <React.Fragment>
-      <Snackbar
-        open={props.alertOpen}
-        autoHideDuration={6000}
-        onClose={(event, reason) => dispatch(props.handleAlertClose(event, reason))}
-      >
-        <Alert onClose={(event, reason) => dispatch(props.handleAlertClose(event, reason))} severity="warning">
-          保存されていません
-        </Alert>
-      </Snackbar>
-      <MediaQuery query="(min-width: 767px)">
-        <div style={modalStyle} className={classes.paper}>
-          <div id="simple-modal-description">{props.body}</div>
-        </div>
-      </MediaQuery>
-      <MediaQuery query="(max-width: 767px)">
-        <div style={modalStyle} className={classes.mobilePaper}>
-          <div id="simple-modal-description">{props.body}</div>
-        </div>
-      </MediaQuery>
-    </React.Fragment>
-  );
-
-  return (
-    <div>
-      <MediaQuery query="(min-width: 767px)">
-        <button
-          type="button"
-          onClick={() => dispatch(props.modalOpen(props.gear_id))}
-          style={{
-            border: 'none',
-            backgroundColor: 'white',
-            minWidth: '50px',
-            textAlign: 'left',
-          }}
-        >
-          {props.nav}
-        </button>
-        <Modal
-          open={props.open}
-          onClose={() => dispatch(ModalClose())}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          style={{
-            overflow: 'scroll',
-          }}
-        >
-          {body}
-        </Modal>
-      </MediaQuery>
-      <MediaQuery query="(max-width: 767px)">
-        <button
-          type="button"
-          onClick={() => dispatch(props.modalOpen(props.gear_id))}
-          style={{
-            border: 'none',
-            backgroundColor: 'white',
-            minWidth: '50px',
-            textAlign: 'left',
-          }}
-        >
-          {props.nav}
-        </button>
-        <Modal
-          open={props.open}
-          onClose={() => dispatch(ModalClose())}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          style={{ overflow: 'scroll' }}
-        >
-          {body}
-        </Modal>
-      </MediaQuery>
-    </div>
-  );
-});
+    return (
+      <div>
+        <MediaQuery query="(min-width: 767px)">
+          <button
+            type="button"
+            onClick={() => dispatch(props.modalOpen())}
+            style={{
+              border: 'none',
+              backgroundColor: 'white',
+              minWidth: '212px',
+              textAlign: 'left',
+            }}
+          >
+            {props.nav}
+          </button>
+          <Modal
+            open={props.open}
+            onClose={() => dispatch(props.modalClose())}
+            style={{
+              overflow: 'scroll',
+            }}
+          >
+            {body}
+          </Modal>
+        </MediaQuery>
+        <MediaQuery query="(max-width: 767px)">
+          <button
+            type="button"
+            onClick={() => dispatch(props.modalOpen())}
+            style={{
+              border: 'none',
+              backgroundColor: 'white',
+              minWidth: '50px',
+              textAlign: 'left',
+            }}
+          >
+            {props.nav}
+          </button>
+          <Modal open={props.open} onClose={() => dispatch(props.modalClose())} style={{ overflow: 'scroll' }}>
+            {body}
+          </Modal>
+        </MediaQuery>
+      </div>
+    );
+  })
+);
 export default SimpleModal;

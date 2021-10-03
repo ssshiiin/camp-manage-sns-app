@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
 import MoreHorizOutlined from '@material-ui/icons/MoreHorizOutlined';
 import Button from '@material-ui/core/Button';
@@ -58,35 +58,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NavProfile(props) {
+const NavProfile = (props) => {
+  console.log('nav profile');
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const user_id = props.user_id;
-  const login_user = selector.users.user_id;
-  const open = selector.users.menu_open;
+  const selector = useSelector((state) => state.users);
+  const userId = props.userId;
+  const loginUser = selector.user_id;
   const [csrf_token, setCsrf_token] = useState(document.head.querySelector('meta[name="csrf-token"]').content);
-
-  const app_name = selector.users.app_name;
+  const [open, setOpen] = useState(false);
 
   const handleClick = (event) => {
-    dispatch(
-      MenuAction({
-        menu_open: event.currentTarget,
-      })
-    );
+    setOpen(event.currentTarget);
   };
 
   const handleClose = () => {
-    dispatch(
-      MenuAction({
-        menu_open: null,
-      })
-    );
+    setOpen(false);
   };
 
   const classes = useStyles();
 
-  if (user_id == login_user) {
+  if (userId == loginUser) {
     return (
       <>
         <MediaQuery query="(min-width: 767px)">
@@ -100,9 +91,9 @@ function NavProfile(props) {
               <MoreHorizOutlined fontSize="large" />
             </Button>
             <StyledMenu id="customized-menu" anchorEl={open} keepMounted open={Boolean(open)} onClose={handleClose}>
-              <CreatePost />
-              <CreateGear />
-              <EditProfile />
+              <CreatePost menuClose={handleClose} />
+              <CreateGear menuClose={handleClose} />
+              <EditProfile menuClose={handleClose} />
               <MenuItem>
                 <form className={classes.form} noValidate method="POST" action="/logout">
                   <input type="hidden" name="_token" value={csrf_token} />
@@ -128,9 +119,9 @@ function NavProfile(props) {
               <MoreHorizOutlined fontSize="large" />
             </Button>
             <StyledMenu id="customized-menu" anchorEl={open} keepMounted open={Boolean(open)} onClose={handleClose}>
-              <CreatePost />
-              <CreateGear />
-              <EditProfile />
+              <CreatePost menuClose={handleClose} />
+              <CreateGear menuClose={handleClose} />
+              <EditProfile menuClose={handleClose} />
               <MenuItem>
                 <form className={classes.form} noValidate method="POST" action="logout">
                   <input type="hidden" name="_token" value={csrf_token} />
@@ -150,6 +141,6 @@ function NavProfile(props) {
   } else {
     return null;
   }
-}
+};
 
 export default NavProfile;

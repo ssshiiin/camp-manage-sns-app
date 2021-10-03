@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Nap_info;
-use App\Dayout_info;
+use App\Models\Nap_info;
+use App\Models\Dayout_info;
 
 class ScheduleController extends Controller
 {
-    public function searchSchedulePlace(Request $request){
+    public function search(Request $request){
         $search = $request->place;
         
         $nap = Nap_info::where("camp_name", "like", "%$search%")->first();

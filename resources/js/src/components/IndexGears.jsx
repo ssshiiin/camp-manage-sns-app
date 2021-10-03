@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { CardGear } from ".";
-
+import { CardGear } from './Card';
 
 function TabPanel(props) {
   const classes = useStyles();
@@ -22,7 +21,9 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={0}>
-          <Typography className={classes.tabPanel} component={'span'}>{children}</Typography>
+          <Typography className={classes.tabPanel} component={'span'}>
+            {children}
+          </Typography>
         </Box>
       )}
     </div>
@@ -37,22 +38,22 @@ TabPanel.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
   tabPanel: {
-    display: "flex",
-    flexWrap: "wrap",
+    display: 'flex',
+    flexWrap: 'wrap',
   },
   root: {
     display: 'flex',
-    width: "44%",
+    width: '44%',
     margin: 24,
   },
   details: {
-    minWidth: "40%",
+    minWidth: '40%',
     display: 'flex',
     flexDirection: 'column',
   },
   content: {
     flex: '1 0 auto',
-    padding: "16px 0px 16px 16px"
+    padding: '16px 0px 16px 16px',
   },
   cover: {
     width: 190,
@@ -66,17 +67,14 @@ const useStyles = makeStyles((theme) => ({
   playIcon: {
     height: 38,
     width: 38,
-  }
+  },
 }));
-
-
 
 const IndexGears = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
 
-  const user_id = props.user_id
+  const userId = props.userId;
   const category = props.category;
   const index = props.index;
   const value = props.value;
@@ -84,13 +82,12 @@ const IndexGears = (props) => {
   return (
     <React.Fragment>
       <TabPanel value={value} index={index}>
-        {category.gears.map((gear, i) =>
-          <CardGear user_id={user_id} gear={gear} key={i} />
-        )}
+        {category.gears.map((gear, i) => (
+          <CardGear userId={userId} gear={gear} key={i} />
+        ))}
       </TabPanel>
     </React.Fragment>
-  )
-
-}
+  );
+};
 
 export default IndexGears;

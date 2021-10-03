@@ -1,39 +1,45 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { push } from 'connected-react-router';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import { PostsTimeLine, Loading } from '../components';
+import { Loading } from '../components/Loading';
+import { CardPost } from '../components/Card';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 
+const loader = <Loading key={0} />;
+
 const Home = (props) => {
-  const dispatch = useDispatch();
-  const [Allposts, setAllPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
+  console.log(allPosts);
 
   const getAllPosts = async (page) => {
-    console.log('getAllPosts');
-    const response = await axios.get(`/api/posts?page=${page}`).catch((err) => {
-      console.log('err:', err);
-    });
-
-    if (response.data.data.length < 1) {
-      setHasMore(false);
-      return;
-    }
-    setAllPosts([...Allposts, ...response.data.data]);
+    const url = `/posts?page=${page}`;
+    await axios
+      .get(url)
+      .then((res) => {
+        if (res.data.data.length < 1) {
+          setHasMore(false);
+          return;
+        }
+        setAllPosts([...allPosts, ...res.data.data]);
+      })
+      .catch((err) => {
+        console.log('err:', err);
+      });
   };
-
-  const loader = <Loading key={0} />;
 
   return (
     <React.Fragment>
-      <ScrollToTopOnMount />
       <div className="home">
-        <InfiniteScroll className="home-main" loadMore={getAllPosts} hasMore={hasMore} loader={loader}>
+        <InfiniteScroll
+          className="home-main"
+          loadMore={getAllPosts}
+          hasMore={hasMore}
+          loader={loader}
+        >
           <div className="home-main-timeline">
-            {Allposts.map((post) => (
-              <PostsTimeLine user_id={post.user_id} post={post} key={post.id} />
+            {allPosts.map((post, i) => (
+              <CardPost post={post} key={i} />
             ))}
           </div>
         </InfiniteScroll>

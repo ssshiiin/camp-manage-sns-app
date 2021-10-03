@@ -14,15 +14,15 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MediaQuery from 'react-responsive';
 
 import { SimpleModal } from '../../components/Modal';
-import { handleAlertClose, handleAlertOpen } from '../../reducks/alerts/operations';
-import { handleBringEditModalOpen } from '../../reducks/modals/operations';
+import { closeModalBringEdit, openModalBringEdit } from '../../reducks/modals/operations';
 import { ShowBring } from '../../components';
 import {
-  AddAllIs_check,
-  BringAllIs_check,
-  createBringGear,
-  deleteBringGear,
-  getAddBringGear,
+  updateNotBringsAllCheck,
+  updateBringsAllCheck,
+  updateBringCheck,
+  updateNotBringCheck,
+  create,
+  destroy,
 } from '../../reducks/bring_gears/operations';
 import { FlexListSubheader } from '../../components/Header';
 
@@ -65,42 +65,44 @@ const EditBring = React.memo(
     console.log('Edit');
     const classes = useStyles();
     const dispatch = useDispatch();
-    const selector = useSelector((state) => state);
-    const user_id = selector.users.user_id;
-    const mopen = selector.modals.modal_bring_edit_open;
-    const alertOpen = selector.alerts.open;
-    const bring_gears = selector.bring_gears.bring_gears;
-    const add_gears = selector.bring_gears.add_gears;
-    const count_bring = selector.bring_gears.count_all;
-    const count_add = selector.bring_gears.count_add_all;
-
-    useEffect(() => {
-      dispatch(getAddBringGear(user_id));
-    }, []);
+    const users = useSelector((state) => state.users);
+    const modals = useSelector((state) => state.modals);
+    const bringGears = useSelector((state) => state.bring_gears);
+    const userId = users.user_id;
+    const open = modals.modalBringEdit;
+    const brings = bringGears.brings;
+    const notBrings = bringGears.not_brings;
+    const countAllBrings = bringGears.brings_count_all;
+    const countTrueBrings = bringGears.brings_count_true;
+    const countAllNotBrings = bringGears.not_brings_count_all;
+    const countTrueNotBrings = bringGears.not_brings_count_true;
 
     const handleClick = (event, type) => {
       console.log(event.target.checked);
       if (type == 'Bring') {
-        dispatch(BringAllIs_check(user_id, event.target.checked));
+        dispatch(updateBringsAllCheck(userId, event.target.checked));
       } else if (type == 'NotBring') {
-        dispatch(AddAllIs_check(user_id, event.target.checked));
+        dispatch(updateNotBringsAllCheck(userId, event.target.checked));
       }
     };
 
-    const customList = (title, categories, type, count) => (
+    const customList = (title, categories, updateIsCheck, countAll, countTrue, type) => (
       <>
         <MediaQuery query="(min-width: 767px)">
           <Card>
             <div className={classes.cardHeader}>
               <ListItemIcon>
-                <Checkbox onClick={(event) => handleClick(event, type)} disabled={categories.length === 0} />
+                <Checkbox
+                  onClick={(event) => handleClick(event, type)}
+                  disabled={categories.length === 0}
+                />
               </ListItemIcon>
-              <FlexListSubheader title={title} countTrue={count.countAll} countAll={count.countAll} />
+              <FlexListSubheader title={title} countTrue={countTrue} countAll={countAll} />
             </div>
             <Divider />
             <List className={classes.list} dense component="div" role="list">
               {categories.map((category, i) => (
-                <ShowBring category={category} type={type} mode={'Edit'} key={i} />
+                <ShowBring category={category} updateIsCheck={updateIsCheck} key={i} />
               ))}
               <ListItem />
             </List>
@@ -109,13 +111,16 @@ const EditBring = React.memo(
         <MediaQuery query="(max-width: 767px)">
           <Card>
             <div className={classes.cardHeader}>
-              <Checkbox onClick={(event) => handleClick(event, type)} disabled={categories.length === 0} />
-              <FlexListSubheader title={title} countTrue={count.countAll} countAll={count.countAll} />
+              <Checkbox
+                onClick={(event) => handleClick(event, type)}
+                disabled={categories.length === 0}
+              />
+              <FlexListSubheader title={title} countTrue={countTrue} countAll={countAll} />
             </div>
             <Divider />
             <List className={classes.mobileList} dense component="div" role="list">
               {categories.map((category, i) => (
-                <ShowBring category={category} type={type} mode={'Edit'} key={i} />
+                <ShowBring category={category} updateIsCheck={updateIsCheck} key={i} />
               ))}
               <ListItem />
             </List>
@@ -131,18 +136,29 @@ const EditBring = React.memo(
           left={50}
           transX={50}
           transY={50}
-          alertOpen={alertOpen}
-          handleAlertOpen={handleAlertOpen}
-          handleAlertClose={handleAlertClose}
-          modalOpen={handleBringEditModalOpen}
-          open={mopen}
+          modalOpen={openModalBringEdit}
+          modalClose={closeModalBringEdit}
+          open={open}
           nav={'持ち物を編集する'}
           body={
             <>
               <MediaQuery query="(min-width: 767px)">
-                <Grid container spacing={6} justifyContent="center" alignItems="center" className={classes.root}>
+                <Grid
+                  container
+                  spacing={6}
+                  justifyContent="center"
+                  alignItems="center"
+                  className={classes.root}
+                >
                   <Grid item xs={5}>
-                    {customList('持ち物', bring_gears, 'Bring', count_bring)}
+                    {customList(
+                      '持ち物',
+                      brings,
+                      updateBringCheck,
+                      countAllBrings,
+                      countTrueBrings,
+                      'Bring'
+                    )}
                   </Grid>
                   <Grid item xs={2}>
                     <Grid container direction="column" alignItems="center">
@@ -150,7 +166,7 @@ const EditBring = React.memo(
                         variant="outlined"
                         size="small"
                         className={classes.button}
-                        onClick={() => dispatch(deleteBringGear(user_id))}
+                        onClick={() => dispatch(destroy(userId))}
                         aria-label="move selected right"
                       >
                         &gt;
@@ -159,7 +175,7 @@ const EditBring = React.memo(
                         variant="outlined"
                         size="small"
                         className={classes.button}
-                        onClick={() => dispatch(createBringGear(user_id))}
+                        onClick={() => dispatch(create(userId))}
                         aria-label="move selected left"
                       >
                         &lt;
@@ -167,7 +183,14 @@ const EditBring = React.memo(
                     </Grid>
                   </Grid>
                   <Grid item xs={5}>
-                    {customList('所持ギア', add_gears, 'NotBring', count_add)}
+                    {customList(
+                      '所持ギア',
+                      notBrings,
+                      updateNotBringCheck,
+                      countAllNotBrings,
+                      countTrueNotBrings,
+                      'NotBring'
+                    )}
                   </Grid>
                 </Grid>
               </MediaQuery>
@@ -181,24 +204,38 @@ const EditBring = React.memo(
                   style={{ minWidth: 360 }}
                 >
                   <Grid item xs={6}>
-                    {customList('持ち物', bring_gears, 'bring', count_bring)}
+                    {customList(
+                      '持ち物',
+                      brings,
+                      updateBringCheck,
+                      countAllBrings,
+                      countTrueBrings,
+                      'Bring'
+                    )}
                     <Button
                       variant="outlined"
                       size="small"
                       className={classes.mobileButton}
-                      onClick={() => dispatch(deleteBringGear(user_id))}
+                      onClick={() => dispatch(destroy(userId))}
                       aria-label="move selected right"
                     >
                       &gt;
                     </Button>
                   </Grid>
                   <Grid item xs={6}>
-                    {customList('所持ギア', add_gears, 'add', count_add)}
+                    {customList(
+                      '所持ギア',
+                      notBrings,
+                      updateNotBringCheck,
+                      countAllNotBrings,
+                      countTrueNotBrings,
+                      'NotBring'
+                    )}
                     <Button
                       variant="outlined"
                       size="small"
                       className={classes.mobileButton}
-                      onClick={() => dispatch(createBringGear(user_id))}
+                      onClick={() => dispatch(create(userId))}
                       aria-label="move selected left"
                     >
                       &lt;

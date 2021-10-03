@@ -1,186 +1,345 @@
-import { StoreAction } from "../alerts/actions";
-import { handleAlertOpen } from "../alerts/operations";
-import { CreateImagesAction as GearImageAction ,CreateAmountAction, CreateBrandAction, CreateCategoryAction, CreateGearNameAction, CreatePriceAction, CreatePurchasedDayAction, CreateErrorsAction as GearErrorsAction } from "../gears/actions";
-import { CreateErrorsAction , CreateContentAction, CreateDayAction, CreateImagesAction, CreatePlaceAction } from "../posts/actions";
-import { errorAction } from "../users/actions";
-import { ModalBringEditAction, ModalGearCreateAction, ModalPostCreateAction, ModalPostEditAction, ModalProfEditAction, ModalTemplatesCreateAction, ModalTemplatesUseAction } from "./actions"
+import { StoreAction } from '../alerts/actions';
+import { handleAlertOpen } from '../alerts/operations';
+import {
+  changeAmountAction,
+  changeBrandAction,
+  changeCategoryAction,
+  changeGearNameAction,
+  changePriceAction,
+  changePurchasedDayAction,
+  changeImageAction as changeGearImageAction,
+  catchErrorsAction as catchGearErrorsAction,
+} from '../gears/actions';
+import {
+  changeContentAction,
+  changeDayAction,
+  catchErrorsAction,
+  changePlaceAction,
+  changeImageAction,
+} from '../posts/actions';
+import { catchErrorsAction as catchProfileErrorsAction } from '../profiles/actions';
+import {
+  openModalProfEditAction,
+  openModalGearCreateAction,
+  openModalPostCreateAction,
+  openModalBringEditAction,
+  openModalPostEditAction,
+  openModalTemplateCreateAction,
+  openModalTemplateUseAction,
+} from './actions';
 
-export const handleProfEditModalOpen = () => {
+export const openModalProfEdit = () => {
   return (dispatch, getState) => {
-    dispatch(ModalProfEditAction({
-      modal_prof_edit_open: true
-    }));
-    dispatch(errorAction({
-      errors: []
-    }))
-  }
-}
+    dispatch(
+      openModalProfEditAction({
+        modalProfEdit: true,
+      })
+    );
+    dispatch(
+      catchProfileErrorsAction({
+        errors: [],
+      })
+    );
+  };
+};
 
-export const handlePostCreateModalOpen = () => {
+export const closeModalProfEdit = () => {
   return (dispatch, getState) => {
-    dispatch(ModalPostCreateAction({
-      modal_post_create_open: true
-    }));
+    dispatch(
+      openModalProfEditAction({
+        modalProfEdit: false,
+      })
+    );
+  };
+};
+
+export const openModalPostCreate = () => {
+  return (dispatch, getState) => {
+    dispatch(
+      openModalPostCreateAction({
+        modalPostCreate: true,
+      })
+    );
 
     // 新規登録をする際にPostのstateをリセットする
-    dispatch(CreatePlaceAction({
-      post_place: null
-    }));
+    dispatch(
+      changePlaceAction({
+        place: null,
+      })
+    );
 
-    dispatch(CreateDayAction({
-      post_day: null
-    }));
+    dispatch(
+      changeDayAction({
+        day: null,
+      })
+    );
 
-    dispatch(CreateContentAction({
-      post_content: null
-    }));
+    dispatch(
+      changeContentAction({
+        content: null,
+      })
+    );
 
-    dispatch(CreateImagesAction({
-      post_bolb_urls: "",
-      post_image: null
-    }));
+    dispatch(
+      changeImageAction({
+        bolbUrl: '',
+        image: null,
+      })
+    );
 
-    dispatch(CreateErrorsAction({
-      create_errors: []
-    }))
-  }
-}
-
-export const handleGearCreateModalOpen = () => {
+    dispatch(
+      catchErrorsAction({
+        errors: [],
+      })
+    );
+  };
+};
+export const closeModalPostCreate = () => {
   return (dispatch, getState) => {
-    dispatch(ModalGearCreateAction({
-      modal_gear_create_open: true
-    }));
+    dispatch(
+      openModalPostCreateAction({
+        modalPostCreate: false,
+      })
+    );
+  };
+};
+
+export const openModalGearCreate = () => {
+  return (dispatch, getState) => {
+    dispatch(
+      openModalGearCreateAction({
+        modalGearCreate: true,
+      })
+    );
 
     // 新規登録をする際にGearのstateをリセットする
-    dispatch(CreateGearNameAction({
-      gear_name: null
-    }));
+    dispatch(
+      changeGearNameAction({
+        gearName: null,
+      })
+    );
 
-    dispatch(CreateCategoryAction({
-      gear_category: null,
-    }));
+    dispatch(
+      changeCategoryAction({
+        category: null,
+      })
+    );
 
-    dispatch(CreatePriceAction({
-      gear_price: null
-    }));
+    dispatch(
+      changePriceAction({
+        price: null,
+      })
+    );
 
-    dispatch(CreateAmountAction({
-      gear_amount: null
-    }));
+    dispatch(
+      changeAmountAction({
+        amount: null,
+      })
+    );
 
-    dispatch(CreatePurchasedDayAction({
-      gear_purchased_day: null
-    }));
+    dispatch(
+      changePurchasedDayAction({
+        purchasedDay: null,
+      })
+    );
 
-    dispatch(CreateBrandAction({
-      gear_brand: null
-    }));
+    dispatch(
+      changeBrandAction({
+        brand: null,
+      })
+    );
 
-    dispatch(GearImageAction({
-      gear_images: null,
-      gear_bolb_urls: null
-    }));
+    dispatch(
+      changeGearImageAction({
+        image: null,
+        bolbUrl: null,
+      })
+    );
 
-    dispatch(GearErrorsAction({
-      create_errors: []
-    }))
+    dispatch(
+      catchGearErrorsAction({
+        errors: [],
+      })
+    );
+  };
+};
 
-  }
-}
+export const closeModalGearCreate = () => {
+  return (dispatch, getState) => {
+    dispatch(
+      openModalGearCreateAction({
+        modalGearCreate: false,
+      })
+    );
+  };
+};
 
-export const handlePostEditModalOpen = () => {
+export const openModalPostEdit = () => {
   return (dispatch, getState) => {
     const state = getState();
 
-    dispatch(ModalPostEditAction({
-      modal_post_edit_open: true
-    }));
+    dispatch(
+      openModalPostEditAction({
+        modalPostEdit: true,
+      })
+    );
 
-    dispatch(CreatePlaceAction({
-      post_place: state.posts.post[0].place,
-    }));
+    dispatch(
+      changePlaceAction({
+        place: state.posts.post.place,
+      })
+    );
 
-    dispatch(CreateDayAction({
-      post_day: state.posts.post[0].day,
-    }));
+    dispatch(
+      changeDayAction({
+        day: state.posts.post.day,
+      })
+    );
 
-    dispatch(CreateContentAction({
-      post_content: state.posts.post[0].content,
-    }));
+    dispatch(
+      changeContentAction({
+        content: state.posts.post.content,
+      })
+    );
 
-    dispatch(CreateImagesAction({
-      post_bolb_urls: [state.posts.post[0].image_path[0].image_path],
-    }));
-    
-    dispatch(CreateErrorsAction({
-      create_errors: []
-    }))
-  }
-}
+    dispatch(
+      changeImageAction({
+        bolbUrl: state.posts.post.image_path[0].image_path,
+      })
+    );
 
-export const handleBringEditModalOpen = () => {
+    dispatch(
+      catchErrorsAction({
+        errors: [],
+      })
+    );
+  };
+};
+
+export const closeModalPostEdit = () => {
   return (dispatch, getState) => {
-    dispatch(ModalBringEditAction({
-      modal_bring_edit_open: true
-    }));
-  }
-}
+    dispatch(
+      openModalPostEditAction({
+        modalPostEdit: false,
+      })
+    );
+  };
+};
 
-export const handleTemplatesCreateModalOpen = () => {
+export const openModalBringEdit = () => {
   return (dispatch, getState) => {
-    dispatch(ModalTemplatesCreateAction({
-      modal_templates_create_open: true
-    }));
-  }
-}
+    dispatch(
+      openModalBringEditAction({
+        modalBringEdit: true,
+      })
+    );
+  };
+};
 
-export const handleTemplatesUseModalOpen = () => {
+export const closeModalBringEdit = () => {
   return (dispatch, getState) => {
-    dispatch(ModalTemplatesUseAction({
-      modal_templates_use_open: true
-    }));
-  }
-}
+    dispatch(
+      openModalBringEditAction({
+        modalBringEdit: false,
+      })
+    );
+  };
+};
+
+export const openModalTemplateCreate = () => {
+  return (dispatch, getState) => {
+    dispatch(
+      openModalTemplateCreateAction({
+        modalTemplateCreate: true,
+      })
+    );
+  };
+};
+
+export const closeModalTemplateCreate = () => {
+  return (dispatch, getState) => {
+    dispatch(
+      openModalTemplateCreateAction({
+        modalTemplateCreate: false,
+      })
+    );
+  };
+};
+
+export const openModalTemplateUse = () => {
+  return (dispatch, getState) => {
+    dispatch(
+      openModalTemplateUseAction({
+        modalTemplateUse: true,
+      })
+    );
+  };
+};
+
+export const closeModalTemplateUse = () => {
+  return (dispatch, getState) => {
+    dispatch(
+      openModalTemplateUseAction({
+        modalTemplateUse: false,
+      })
+    );
+  };
+};
 
 export const ModalClose = () => {
   return (dispatch, getState) => {
     const state = getState();
     const store = state.alerts.store;
-  
 
     if (!store) {
       dispatch(handleAlertOpen());
-      dispatch(StoreAction({
-        store: true
-      }));
+      dispatch(
+        StoreAction({
+          store: true,
+        })
+      );
       return;
+    } else {
+      dispatch(
+        StoreAction({
+          store: true,
+        })
+      );
     }
-    else {
-      dispatch(StoreAction({
-        store: true
-      }));
-    }
-    dispatch(ModalProfEditAction({
-      modal_prof_edit_open: false
-    }))
-    dispatch(ModalPostCreateAction({
-      modal_post_create_open: false
-    }))
-    dispatch(ModalPostEditAction({
-      modal_post_edit_open: false
-    }));
-    dispatch(ModalGearCreateAction({
-      modal_gear_create_open: false
-    }));
-    dispatch(ModalBringEditAction({
-      modal_bring_edit_open: false
-    }));
-    dispatch(ModalTemplatesCreateAction({
-      modal_templates_create_open: false
-    }));
-    dispatch(ModalTemplatesUseAction({
-      modal_templates_use_open: false
-    }));
-  }
-}
+    dispatch(
+      ModalProfEditAction({
+        modal_prof_edit_open: false,
+      })
+    );
+    dispatch(
+      ModalPostCreateAction({
+        modal_post_create_open: false,
+      })
+    );
+    dispatch(
+      ModalPostEditAction({
+        modal_post_edit_open: false,
+      })
+    );
+    dispatch(
+      ModalGearCreateAction({
+        modal_gear_create_open: false,
+      })
+    );
+    dispatch(
+      ModalBringEditAction({
+        modal_bring_edit_open: false,
+      })
+    );
+    dispatch(
+      ModalTemplatesCreateAction({
+        modal_templates_create_open: false,
+      })
+    );
+    dispatch(
+      ModalTemplatesUseAction({
+        modal_templates_use_open: false,
+      })
+    );
+  };
+};

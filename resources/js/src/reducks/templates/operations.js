@@ -1,85 +1,95 @@
-import { AlertOpenAction, StoreAction, SuccessAction } from "../alerts/actions";
-import { BringGearsActions } from "../bring_gears/actions";
-import { ModalTemplatesCreateAction } from "../modals/actions";
-import { createTemplatesAction, getTemplatesAction } from "./actions";
+import { getBringsAction } from '../bring_gears/actions';
+import { openModalTemplateCreateAction, openModalTemplateUseAction } from '../modals/actions';
+import { createTemplatesAction, getTemplatesAction } from './actions';
 
-
-
-export const getTemplates = (user_id) => {
+export const getTemplates = (userId) => {
   return async (dispatch, getState) => {
-    console.log("getTemplates");
-    const url = `/api/templates/${user_id}`;
-    const response = await axios.get(url);
-  
-    dispatch(getTemplatesAction({
-      templates: response.data
-    }));
-  }
-}
+    console.log('getTemplates');
+    const url = `/templates/${userId}`;
+    await axios
+      .get(url)
+      .then((res) => {
+        dispatch(
+          getTemplatesAction({
+            templates: res.data.templates,
+          })
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
 
-export const useTemplate = (useTemplate_name, user_id) => {
+export const useTemplate = (templateName, userId) => {
   return async (dispatch, getState) => {
-    console.log("useTemplates");
-    const url = `/api/templates/use/${user_id}`;
-    await axios.post(url, 
-    {
-      useTemplate_name: useTemplate_name
-    })
-    .then((res) => {
-      dispatch(BringGearsActions({
-        bring_gears: res.data.bring,
-        count_all: res.data.bring_all_count
-      }));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
-}
-
-export const createTemplates = () => {
-  return async (dispatch, getState) => {
-    console.log("createTemplates");
-    const state = getState();
-    const template_name = state.templates.template_name;
-    const bring_gears = state.bring_gears.bring_gears;
-    const user_id = state.users.user_id;
-
-    const url = `/api/templates/create/${user_id}`;
-    await axios.post(url, 
-      {
-        template_name: template_name,
-        bring_gears: bring_gears
+    console.log('useTemplates');
+    const url = `/templates/show/${userId}`;
+    await axios
+      .post(url, {
+        template_name: templateName,
       })
       .then((res) => {
-        dispatch(getTemplatesAction({
-          templates: res.data
-        }));
-        dispatch(SuccessAction({
-          success: true
-        }));
-        dispatch(AlertOpenAction({
-          open: false
-        }))
-        dispatch(ModalTemplatesCreateAction({
-          modal_templates_create_open: false
-        }));
-        dispatch(StoreAction({
-          store: true
-        }));
+        dispatch(
+          getBringsAction({
+            brings: res.data.brings,
+            brings_count_all: res.data.brings_count_all,
+            brings_count_true: res.data.brings_count_true,
+            not_brings: res.data.not_brings,
+            not_brings_count_all: res.data.not_brings_count_all,
+            not_brings_count_true: res.data.not_brings_count_true,
+          })
+        );
+        dispatch(
+          openModalTemplateUseAction({
+            modalTemplateUse: false,
+          })
+        );
       })
-      .catch((err) => {console.log(err)});
-  
-  }
-}
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
 
-export const handleTemplate_nameChange = (event) => {
+export const create = () => {
+  return async (dispatch, getState) => {
+    console.log('createTemplates');
+    const state = getState();
+    const templateName = state.templates.template_name;
+    const brings = state.bring_gears.brings;
+    const userId = state.users.user_id;
+
+    const url = `/templates/create/${userId}`;
+    await axios
+      .post(url, {
+        template_name: templateName,
+        bring_gears: brings,
+      })
+      .then((res) => {
+        dispatch(
+          getTemplatesAction({
+            templates: res.data.templates,
+          })
+        );
+        dispatch(
+          openModalTemplateCreateAction({
+            modalTemplateCreate: false,
+          })
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const handleTemplateNameChange = (event) => {
   return (dispatch, getState) => {
-    dispatch(createTemplatesAction({
-      template_name: event.target.value,
-    }));
-    dispatch(StoreAction({
-      store: false
-    }));
-  }
+    dispatch(
+      createTemplatesAction({
+        template_name: event.target.value,
+      })
+    );
+  };
 };
