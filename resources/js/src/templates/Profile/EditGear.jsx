@@ -1,6 +1,7 @@
 import React, { useState, useEffect, memo, forwardRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import moment from 'moment';
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';

@@ -184,8 +184,6 @@ const EditPost = React.forwardRef((props, ref) => {
                     startIcon={<CloudUploadIcon />}
                     onClick={() => {
                       dispatch(update(props.post.id));
-                      // handleClose();
-                      // props.menuClose();
                     }}
                   >
                     保存する
@@ -280,8 +278,6 @@ const EditPost = React.forwardRef((props, ref) => {
                     className={classes.upImg}
                     startIcon={<CloudUploadIcon />}
                     onClick={() => {
-                      handleClose();
-                      props.menuClose();
                       dispatch(update(props.post.id));
                     }}
                   >
