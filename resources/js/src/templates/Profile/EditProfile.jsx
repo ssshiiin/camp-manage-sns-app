@@ -96,7 +96,7 @@ const EditProfile = React.forwardRef((props, ref) => {
 
   const appName = profiles.appName;
   const profContent = profiles.profContent;
-  const bolbUrl = profiles.bolbUrl;
+  const bolbUrl = profiles.profUrl;
   const errors = profiles.errors;
 
   const open = modals.modalProfEdit;

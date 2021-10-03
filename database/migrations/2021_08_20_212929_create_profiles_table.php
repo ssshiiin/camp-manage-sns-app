@@ -17,9 +17,9 @@ class CreateProfilesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
             $table->string('app_name');
-            $table->text('profile');
+            $table->text('profile')->nullable();
             $table->timestamps();
         });
     }

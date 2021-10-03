@@ -105,6 +105,7 @@ export const handleImageChange = (event) => {
   return (dispatch, getState) => {
     const image = event.target.files[0];
     const bolbUrl = URL.createObjectURL(image);
+
     dispatch(
       changeImageAction({
         profUrl: bolbUrl,

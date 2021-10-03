@@ -24,7 +24,6 @@ import {
   update,
 } from '../../reducks/posts/operations';
 import { closeModalPostEdit, openModalPostEdit } from '../../reducks/modals/operations';
-import { handleAlertClose, handleAlertOpen } from '../../reducks/alerts/operations';
 import MediaQuery from 'react-responsive';
 
 const useStyles = makeStyles((theme) => ({
