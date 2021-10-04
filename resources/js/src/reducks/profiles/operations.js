@@ -37,6 +37,22 @@ export const getProfile = (user_id) => {
               profUrl: res.data.profile.image_path,
             })
           );
+        } else {
+          dispatch(
+            changeAppNameAction({
+              appName: '',
+            })
+          );
+          dispatch(
+            changeProfContentAction({
+              profContent: '',
+            })
+          );
+          dispatch(
+            changeImageAction({
+              profUrl: '',
+            })
+          );
         }
       })
       .catch((err) => {
