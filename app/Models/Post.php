@@ -17,7 +17,7 @@ class Post extends Model
     
     // タイムライン用の投稿を取得
     public function getTimeLinePosts($limit = 15){
-        $posts = $this->orderBy("created_at", "DESC")->simplePaginate(15);
+        $posts = $this->with("nices")->orderBy("created_at", "DESC")->simplePaginate(15);
         
         return GetPostsResource::collection($posts);
     }
@@ -44,6 +44,10 @@ class Post extends Model
     
     public function postImages(){
         return $this->hasMany('App\Models\PostImage');
+    }
+
+    public function nices(){
+        return $this->hasMany('App\Models\Nice');
     }
     
     public function user(){

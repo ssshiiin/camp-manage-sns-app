@@ -5,6 +5,7 @@ import RouterProfile from './RouterProfile';
 import RouterGear from './RouterGear';
 const Router = () => {
   const { listen } = useHistory();
+  const trackingId = process.env.MIX_TRACKING_ID;
 
   useEffect(() => {
     const unlisten = listen((location) => {

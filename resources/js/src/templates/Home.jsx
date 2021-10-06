@@ -10,7 +10,6 @@ const loader = <Loading key={0} />;
 const Home = (props) => {
   const [allPosts, setAllPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  console.log(allPosts);
 
   const getAllPosts = async (page) => {
     const url = `/posts?page=${page}`;

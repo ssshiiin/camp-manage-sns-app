@@ -53,6 +53,8 @@ Route::post('/templates/create/{user}', 'TemplateController@store');
 
 Route::post('save_gears/create', 'SaveGearsController@store');
 
+Route::post('/nices', 'NiceController@store');
+
 //更新
 Route::post('/posts/update/{post}', 'PostController@update');
 Route::post('/gears/update/{gear}', 'GearController@update');
@@ -68,14 +70,9 @@ Route::delete('/gears/delete/{gear}', 'GearController@destroy');
 
 Route::delete('/bring_gears/delete/{user}', 'BringGearController@destroy');
 
+Route::post('/nices/destroy', 'NiceController@destroy');
 
-Route::post('/templates/delete/{user}', 'TemplateController@deleteTemplate');
-
-
-
-
-
-
+//未実装orテスト
 
 
 

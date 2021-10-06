@@ -30,7 +30,7 @@ class GetPostsResource extends JsonResource
             'image_path' => $this->postImages,
             'place' => $this->place, 
             'day' => $this->day, 
-            'tags' => $this->tags,
+            'nices' => $this->nices,
             'app_name' => $app_name,
             'profile_image' => $profile_image,
         ];

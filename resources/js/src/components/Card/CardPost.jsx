@@ -7,8 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -20,6 +20,7 @@ import moment from 'moment';
 import { TimeLineGearNested } from '../';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
+import NiceButton from '../Form/NiceButton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -94,9 +95,7 @@ const CardPost = (props) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
+        <NiceButton postId={props.post.id} nices={props.post.nices} />
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>

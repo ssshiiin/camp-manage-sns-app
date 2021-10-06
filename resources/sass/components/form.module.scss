@@ -1,0 +1,10 @@
+@import '../variables';
+
+.count {
+  margin: 10px;
+  font-size: 18px;
+  @include mobile {
+    margin: 7px;
+    font-size: 14px;
+  }
+}
