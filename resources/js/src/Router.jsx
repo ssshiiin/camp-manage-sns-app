@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router';
 import { Home, Schedule } from './templates/index';
 import RouterProfile from './RouterProfile';
