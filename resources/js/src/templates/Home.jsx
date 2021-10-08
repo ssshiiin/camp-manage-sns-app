@@ -3,7 +3,6 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 import { Loading } from '../components/Loading';
 import { CardPost } from '../components/Card';
-import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 const loader = <Loading key={0} />;
 
@@ -30,12 +29,7 @@ const Home = (props) => {
   return (
     <React.Fragment>
       <div className="home">
-        <InfiniteScroll
-          className="home-main"
-          loadMore={getAllPosts}
-          hasMore={hasMore}
-          loader={loader}
-        >
+        <InfiniteScroll className="home-main" loadMore={getAllPosts} hasMore={hasMore} loader={loader}>
           <div className="home-main-timeline">
             {allPosts.map((post, i) => (
               <CardPost post={post} key={i} />

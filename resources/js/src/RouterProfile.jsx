@@ -3,12 +3,9 @@ import { Route, Switch } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserProfile, IndexPosts, IndexGearsNav, IndexPostsNav } from './templates';
 import { ProfileSlideNav, ShowPost } from './components';
-import Snackbar from '@material-ui/core/Snackbar';
-import Alert from '@material-ui/lab/Alert';
-import { SuccessAction } from './reducks/alerts/actions';
-import ScrollToTopOnMount from './templates/ScrollToTopOnMount';
 import { getPosts } from './reducks/posts/operations';
 import { getGears } from './reducks/gears/operations';
+import { ScrollToTopOnMount } from './components/Utility';
 
 function RouterProfile(props) {
   console.log('RouterProfile');

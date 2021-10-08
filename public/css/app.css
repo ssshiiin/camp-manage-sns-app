@@ -1,6 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Sacramento);
 @import url(https://fonts.googleapis.com/css?family=Raleway:200,100,400);
 @charset "UTF-8";
+.MuiInputBase-input {
+  color: red;
+}
+@media screen and (max-width: 767px) {
+  .MuiInputBase-input {
+    font-size: 16px;
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -9,7 +18,7 @@
 }
 @media screen and (max-width: 767px) {
   * {
-    font-size: 11px;
+    font-size: 14px;
   }
 }
 

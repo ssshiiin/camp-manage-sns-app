@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import form from '../../../../sass/components/form.module.scss';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { CheckNIce } from '../../Function/Form/CheckNice';
 
 import { store, destroy } from '../../reducks/nices/operations';
+import { checkNice } from '../../Function';
 
 const NiceButton = (props) => {
   console.log('button');
@@ -18,12 +18,10 @@ const NiceButton = (props) => {
   const [count, setCount] = useState();
 
   useEffect(() => {
-    const [checkNice, count] = CheckNIce(nices, userId);
-    setNice(checkNice);
+    const [nice, count] = checkNice(nices, userId);
+    setNice(nice);
     setCount(count);
   }, [userId]);
-  console.log(nice);
-  console.log(count);
 
   if (nice) {
     return (

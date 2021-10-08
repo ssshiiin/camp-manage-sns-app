@@ -20,7 +20,7 @@ const initialState = {
     day: null,
     bolbUrl: [],
     image: null,
-    errors: [],
+    postCreateErrors: [],
   },
   gears: {
     gears: [],

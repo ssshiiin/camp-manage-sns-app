@@ -15,15 +15,21 @@ $mb: 767px;
   }
 }
 
+.MuiInputBase-input {
+  color: red;
+  @include mobile {
+    font-size: 16px;
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
   font-size: 1em;
-  font-family: 'Roboto', 'Helvetica', 'Arial', '游明朝体', '游ゴシック体', 'ヒラギノ角ゴシック',
-    sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', '游明朝体', '游ゴシック体', 'ヒラギノ角ゴシック', sans-serif;
 
   @include mobile {
-    font-size: 11px;
+    font-size: 14px;
   }
 }
 
@@ -109,8 +115,7 @@ p {
     font-weight: 100;
     opacity: 0.7;
     color: white;
-    font-family: 'Raleway', 'Roboto', 'Helvetica', 'Arial', '游明朝体', '游ゴシック体',
-      'ヒラギノ角ゴシック', sans-serif;
+    font-family: 'Raleway', 'Roboto', 'Helvetica', 'Arial', '游明朝体', '游ゴシック体', 'ヒラギノ角ゴシック', sans-serif;
 
     @include mobile {
       font-size: 9px;
@@ -139,8 +144,7 @@ body {
         padding-left: 258px;
         padding-right: 258px;
         z-index: 10;
-        box-shadow: 0px 1px 3px -1px rgb(0 0 0 / 20%), 0px 2px 3px 0px rgb(0 0 0 / 14%),
-          0px 1px 4px 0px rgb(0 0 0 / 12%);
+        box-shadow: 0px 1px 3px -1px rgb(0 0 0 / 20%), 0px 2px 3px 0px rgb(0 0 0 / 14%), 0px 1px 4px 0px rgb(0 0 0 / 12%);
         display: flex;
 
         @include mobile {
@@ -148,14 +152,12 @@ body {
           padding: 0;
           height: 60px;
           background-color: $side-color;
-          box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 4px 6px 0px rgb(0 0 0 / 14%),
-            0px 2px 7px 0px rgb(0 0 0 / 12%);
+          box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 4px 6px 0px rgb(0 0 0 / 14%), 0px 2px 7px 0px rgb(0 0 0 / 12%);
         }
 
         h2 {
           height: 80px;
-          font-family: 'Roboto', 'Helvetica', 'Arial', '游明朝体', '游ゴシック体',
-            'ヒラギノ角ゴシック', sans-serif;
+          font-family: 'Roboto', 'Helvetica', 'Arial', '游明朝体', '游ゴシック体', 'ヒラギノ角ゴシック', sans-serif;
           font-weight: 400;
           line-height: 80px;
           font-size: 1.5em;
@@ -177,8 +179,7 @@ body {
         z-index: 20;
         top: 0;
         left: 0;
-        box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
-          0px 1px 10px 0px rgb(0 0 0 / 12%);
+        box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
 
         @include mobile {
           width: 100%;
@@ -186,8 +187,7 @@ body {
           top: auto;
           bottom: 0;
           background-color: white;
-          box-shadow: 0px 1px 1px 1px rgb(0 0 0 / 20%), 0px -2px 2px 0px rgb(0 0 0 / 14%),
-            0px 2px 2px 0px rgb(0 0 0 / 12%);
+          box-shadow: 0px 1px 1px 1px rgb(0 0 0 / 20%), 0px -2px 2px 0px rgb(0 0 0 / 14%), 0px 2px 2px 0px rgb(0 0 0 / 12%);
         }
 
         .side-header {

@@ -16,15 +16,10 @@ import Typography from '@material-ui/core/Typography';
 import MediaQuery from 'react-responsive';
 
 import { SimpleModal } from '../../components/Modal';
-import {
-  create,
-  handleContentChange,
-  handleDayChange,
-  handleImageChange,
-  handlePlaceChange,
-} from '../../reducks/posts/operations';
+import { create } from '../../reducks/posts/operations';
 import { closeModalPostCreate, openModalPostCreate } from '../../reducks/modals/operations';
-import { handleAlertClose, handleAlertOpen } from '../../reducks/alerts/operations';
+import { InputText, SelectDate, SubmitButton, UploadButton } from '../../components/Form';
+import { useDate, useString, useImage } from '../../Function';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,11 +87,11 @@ const CreatePost = memo(
     const posts = useSelector((state) => state.posts);
     const modals = useSelector((state) => state.modals);
 
-    const place = posts.place;
-    const day = posts.day;
-    const content = posts.content;
-    const bolbUrl = posts.bolbUrl;
-    const errors = posts.errors;
+    const [place, handlePlace] = useString();
+    const [date, handleDate] = useDate(null);
+    const [content, handleContent] = useString();
+    const [bolb, image, handleImage] = useImage();
+    const errors = posts.postCreateErrors;
 
     const open = modals.modalPostCreate;
 
@@ -113,7 +108,7 @@ const CreatePost = memo(
             nav={'投稿する'}
             body={
               <>
-                <img src={bolbUrl} className={classes.bolb} />
+                <img src={bolb} className={classes.bolb} />
                 <form className={classes.root} noValidate autoComplete="off">
                   <div className={classes.textForm}>
                     <div>
@@ -126,68 +121,25 @@ const CreatePost = memo(
                       )}
                     </div>
                     <div className={classes.buttonRoot}>
-                      <input
-                        accept="image/*"
-                        className={classes.input}
-                        id="icon-button-file"
-                        type="file"
-                        onChange={(event) => dispatch(handleImageChange(event))}
-                      />
-                      <label htmlFor="icon-button-file">
-                        <IconButton
-                          className={classes.button}
-                          aria-label="upload picture"
-                          component="span"
-                        >
-                          <PhotoCamera />
-                        </IconButton>
-                      </label>
+                      <UploadButton onChange={handleImage} />
                     </div>
-                    <TextField
-                      error={errors.place !== undefined}
-                      helperText={errors.place}
-                      id="outlined-textarea"
-                      label="キャンプ場"
-                      defaultValue={place}
-                      placeholder="ふもとっぱら"
-                      variant="outlined"
-                      onChange={(event) => dispatch(handlePlaceChange(event))}
+                    <InputText
+                      value={place}
+                      onChange={handlePlace}
+                      placeholder={'キャンプ場'}
+                      label={'ふもとっぱら'}
+                      error={errors.place}
                     />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <KeyboardDatePicker
-                        id="date-picker-dialog"
-                        label="日付"
-                        format="yyyy/MM/dd"
-                        value={day}
-                        variant="outlined"
-                        disableFuture="true"
-                        onChange={(date) => dispatch(handleDayChange(date))}
-                        KeyboardButtonProps={{
-                          'aria-label': 'change date',
-                        }}
-                      />
-                    </MuiPickersUtilsProvider>
-                    <TextField
-                      error={errors.content !== undefined}
-                      helperText={errors.content}
-                      id="outlined-multiline-static"
-                      label="キャプション"
-                      multiline
+                    <SelectDate value={date} onChange={handleDate} label={'日付'} />
+                    <InputText
+                      value={content}
+                      onChange={handleContent}
+                      label={'キャプション'}
+                      error={errors.content}
+                      multiline={true}
                       rows={6}
-                      defaultValue={content}
-                      variant="outlined"
-                      onChange={(event) => dispatch(handleContentChange(event))}
                     />
-                    <Button
-                      variant="contained"
-                      className={classes.upImg}
-                      startIcon={<CloudUploadIcon />}
-                      onClick={() => {
-                        dispatch(create());
-                      }}
-                    >
-                      保存する
-                    </Button>
+                    <SubmitButton label={'保存する'} onClick={create} />
                   </div>
                 </form>
               </>
@@ -206,7 +158,7 @@ const CreatePost = memo(
             nav={'投稿する'}
             body={
               <>
-                <img src={bolbUrl} className={classes.mobileBolb} />
+                <img src={bolb} className={classes.mobileBolb} />
                 <form className={classes.mobileRoot} noValidate autoComplete="off">
                   <div className={classes.mobileTextForm}>
                     <div>
@@ -227,50 +179,26 @@ const CreatePost = memo(
                         onChange={(event) => dispatch(handleImageChange(event))}
                       />
                       <label htmlFor="icon-button-file">
-                        <IconButton
-                          className={classes.button}
-                          aria-label="upload picture"
-                          component="span"
-                        >
+                        <IconButton className={classes.button} aria-label="upload picture" component="span">
                           <PhotoCamera />
                         </IconButton>
                       </label>
                     </div>
-                    <TextField
-                      error={errors.place !== undefined}
-                      helperText={errors.place}
-                      id="outlined-textarea"
-                      label="キャンプ場"
-                      defaultValue={place}
-                      placeholder="ふもとっぱら"
-                      variant="outlined"
-                      onChange={(event) => dispatch(handlePlaceChange(event))}
+                    <InputText
+                      value={place}
+                      onChange={handlePlace}
+                      placeholder={'キャンプ場'}
+                      label={'ふもとっぱら'}
+                      error={errors.place}
                     />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <KeyboardDatePicker
-                        margin="normal"
-                        id="date-picker-dialog"
-                        label="日付"
-                        format="yyyy/MM/dd"
-                        value={day}
-                        variant="outlined"
-                        disableFuture="true"
-                        onChange={(date) => dispatch(handleDayChange(date))}
-                        KeyboardButtonProps={{
-                          'aria-label': 'change date',
-                        }}
-                      />
-                    </MuiPickersUtilsProvider>
-                    <TextField
-                      error={errors.content !== undefined}
-                      helperText={errors.content}
-                      id="outlined-multiline-static"
-                      label="キャプション"
-                      multiline
+                    <SelectDate value={date} onChange={handleDate} label={'日付'} />
+                    <InputText
+                      value={content}
+                      onChange={handleContent}
+                      label={'キャプション'}
+                      error={errors.content}
+                      multiline={true}
                       rows={6}
-                      defaultValue={content}
-                      variant="outlined"
-                      onChange={(event) => dispatch(handleContentChange(event))}
                     />
                     <Button
                       variant="contained"

@@ -1,0 +1,21 @@
+@import '../variables';
+
+.modal {
+  overflow: scroll;
+  &__button {
+    border: none;
+    background-color: white;
+    min-width: 212px;
+    text-align: left;
+
+    @include mobile {
+      min-width: 150px;
+    }
+  }
+
+  &__paper {
+    background-color: white;
+    box-shadow: $boxShadow;
+    position: absolute;
+  }
+}

@@ -18,8 +18,7 @@ class PostController extends Controller
     // タイムライン一覧表示
     public function indexHome()
     {   
-        $posts = new Post;
-        return $posts->getTimeLinePosts();
+        return Post::getTimeLinePosts();
     }
     
     //プロフィール一覧表示
