@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -15,6 +11,10 @@ import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { push } from 'connected-react-router';
 import { useDispatch } from 'react-redux';
+import { InputText } from '../../components/Form';
+import { useString } from '../../Function';
+import { signInUser } from '../../reducks/users/operations';
+import { signInAction } from '../../reducks/users/actions';
 
 function Copyright() {
   return (
@@ -53,50 +53,48 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [csrf_token, setCsrf_token] = useState(document.head.querySelector('meta[name="csrf-token"]').content);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, handleEmail] = useString();
+  const [password, handlePassword] = useString();
   const [error, setError] = useState([]);
-
-  const onEmailChanged = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const onPasswordChanged = (e) => {
-    setPassword(e.target.value);
-  }
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-
-    const response = await axios.post('/login', {
-      '_token': csrf_token,
-      'email': email,
-      'password': password
-    })
+    await axios
+      .post('/login', {
+        _token: csrf_token,
+        email: email,
+        password: password,
+      })
       .then((res) => {
         const urlSplit = res.request.responseURL.split('/');
+        const userId = urlSplit[urlSplit.length - 1];
 
-        dispatch(push("/" + urlSplit[urlSplit.length - 1]));
+        dispatch(push('/' + userId));
+        dispatch(
+          signInAction({
+            isSignedIn: true,
+            user_id: userId,
+          })
+        );
       })
       .catch((err) => {
         setError(err.response.data.errors);
       });
-  }
+  };
 
   const pushRegister = (e) => {
     e.preventDefault();
-    dispatch(push("/register"));
-  }
+    dispatch(push('/register'));
+  };
 
   const pushPasswordReset = (e) => {
-    e.preventDefault()
-    dispatch(push("/password/reset"));
-  }
+    e.preventDefault();
+    dispatch(push('/password/reset'));
+  };
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -105,89 +103,43 @@ export default function SignIn() {
           camin
         </Typography>
         <form className={classes.form} noValidate onSubmit={onSubmit}>
-          {
-            error.email ? (
-              <TextField
-                error
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                autoComplete="email"
-                autoFocus
-                id="outlined-error-helper-text"
-                label="Error Email"
-                onChange={onEmailChanged}
-                helperText={error.email}
-              />
-            ) : (
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                autoComplete="email"
-                autoFocus
-                onChange={onEmailChanged}
-              />
-            )
-          }
-          {
-            error.password ? (
-              <TextField
-                error
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                label="Password"
-                type="password"
-                id="Error password"
-                autoComplete="current-password"
-                onChange={onPasswordChanged}
-                helperText={error.password}
-              />
-            ) : (
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={onPasswordChanged}
-              />
-            )
-          }
+          <InputText
+            value={email}
+            label={'Email Address'}
+            error={error.email}
+            required={true}
+            fullWidth={true}
+            autoFocus={true}
+            onChange={handleEmail}
+          />
+          <InputText
+            value={password}
+            label={'Password'}
+            error={error.password}
+            required={true}
+            fullWidth={true}
+            type={'password'}
+            onChange={handlePassword}
+          />
           <Grid container>
             <Grid item xs={12}>
               <Link href="/auth/redirect" variant="body2">
-                Do you have a Google account?
+                Googleアカウントをお持ちですか？
               </Link>
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             Sign In
           </Button>
           <Grid container>
             <Grid item xs>
               <Link onClick={pushPasswordReset} variant="body2">
-                Forgot password?
+                パスワードの再設定
               </Link>
             </Grid>
             <Grid item>
               <Link onClick={pushRegister} variant="body2">
-                {"Don't have an account? Sign Up"}
+                新規アカウントの作成
               </Link>
             </Grid>
           </Grid>
@@ -196,7 +148,6 @@ export default function SignIn() {
       <Box mt={8}>
         <Copyright />
       </Box>
-    </Container >
+    </Container>
   );
 }
-

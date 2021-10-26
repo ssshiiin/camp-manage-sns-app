@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 
 const useImage = (initialState = '') => {
   const [bolb, setBolb] = useState(initialState);
-  const [image, setImage] = useState(initialState);
+  const [image, setImage] = useState();
 
   const handleState = useCallback(
     (event) => {

@@ -11,6 +11,6 @@ class Gear_imagesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Gear_image::class, 200)->create();
+        factory(App\Models\GearImage::class, 200)->create();
     }
 }

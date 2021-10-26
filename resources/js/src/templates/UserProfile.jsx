@@ -1,34 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
-import { getProfile } from '../reducks/profiles/operations';
+import { useImage, useString } from '../Function';
 
-const UserProfile = (props) => {
+const UserProfile = memo((props) => {
   console.log('userProfile');
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
   const posts = useSelector((state) => state.posts);
   const gears = useSelector((state) => state.gears);
   const profiles = useSelector((state) => state.profiles);
-  const userId = props.userId;
-  const app_name = profiles.appName;
-  const content = profiles.profContent;
-  const image = profiles.profUrl;
+  const profile = profiles.profile;
   const countPosts = posts.countPosts;
   const countGears = gears.countGears;
-
-  console.log(selector);
-
-  useEffect(() => {
-    dispatch(getProfile(userId));
-  }, [userId]);
+  const name = profile.app_name;
+  const content = profile.profile;
+  const bolb = profile.image_path;
 
   return (
     <div className="profile-introduce">
-      <Avatar aria-label="recipe" className="profile-image" src={image} />
+      <Avatar aria-label="recipe" className="profile-image" src={bolb} />
       <div className="profile-content">
         <div className="profileColumn">
-          <p className="profileName">{app_name}</p>
+          <p className="profileName">{name}</p>
           <div className="profileCount">
             <p>実績 : {countPosts}</p>
             <p>所持ギア : {countGears}</p>
@@ -38,6 +30,6 @@ const UserProfile = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default UserProfile;

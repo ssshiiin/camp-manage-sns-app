@@ -1,5 +1,4 @@
 import { getBringsAction } from '../bring_gears/actions';
-import { openModalTemplateCreateAction, openModalTemplateUseAction } from '../modals/actions';
 import { createTemplatesAction, getTemplatesAction } from './actions';
 
 export const getTemplates = (userId) => {
@@ -52,11 +51,10 @@ export const useTemplate = (templateName, userId) => {
   };
 };
 
-export const create = () => {
+export const create = (templateName, setOpen) => {
   return async (dispatch, getState) => {
     console.log('createTemplates');
     const state = getState();
-    const templateName = state.templates.template_name;
     const brings = state.bring_gears.brings;
     const userId = state.users.user_id;
 
@@ -72,24 +70,10 @@ export const create = () => {
             templates: res.data.templates,
           })
         );
-        dispatch(
-          openModalTemplateCreateAction({
-            modalTemplateCreate: false,
-          })
-        );
+        setOpen(false);
       })
       .catch((err) => {
         console.log(err);
       });
-  };
-};
-
-export const handleTemplateNameChange = (event) => {
-  return (dispatch, getState) => {
-    dispatch(
-      createTemplatesAction({
-        template_name: event.target.value,
-      })
-    );
   };
 };

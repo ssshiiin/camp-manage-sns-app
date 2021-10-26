@@ -1,11 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Sacramento'); //font-family: 'Sacramento', cursive;
 @import url('https://fonts.googleapis.com/css?family=Raleway:200,100,400'); //font-family: 'Raleway', sans-serif;
-
-$border-color: rgb(219, 219, 219);
-$side-color: darkslategray;
-$header-color: rgb(250, 250, 250);
-$back-color: #f5f5f5;
-$main-color: white;
+@import './variables';
 
 $mb: 767px;
 
@@ -99,6 +94,16 @@ p {
   position: relative;
   border: 1px solid $border-color;
 
+  @include large {
+    width: 33%;
+    padding-top: 33%;
+  }
+
+  @include regular {
+    width: 32.9%;
+    padding-top: 32.9%;
+  }
+
   @include mobile {
     width: 32.7%;
     padding-top: 32.7%;
@@ -130,41 +135,56 @@ body {
   #root {
     min-height: 100vh;
     width: 100%;
+    @include mobile {
+      min-height: auto;
+    }
 
     main {
       width: 100%;
       min-height: 100vh;
+      background-color: #f5f5f5;
+      @include mobile {
+        min-height: auto;
+      }
 
       header {
         top: 0;
         background-color: white;
         position: fixed;
-        width: calc(100% - 516px);
+        width: calc(100% - 258px);
         height: 80px;
         padding-left: 258px;
         padding-right: 258px;
         z-index: 10;
-        box-shadow: 0px 1px 3px -1px rgb(0 0 0 / 20%), 0px 2px 3px 0px rgb(0 0 0 / 14%), 0px 1px 4px 0px rgb(0 0 0 / 12%);
+        box-shadow: 0px 1px 3px -1px rgb(0 0 0 / 20%), 0px 2px 3px 0px rgb(0 0 0 / 14%),
+          0px 1px 4px 0px rgb(0 0 0 / 12%);
         display: flex;
 
+        @include middle {
+          width: 100%;
+          padding: 0;
+        }
         @include mobile {
           width: 100%;
           padding: 0;
           height: 60px;
           background-color: $side-color;
-          box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 4px 6px 0px rgb(0 0 0 / 14%), 0px 2px 7px 0px rgb(0 0 0 / 12%);
+          box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 4px 6px 0px rgb(0 0 0 / 14%),
+            0px 2px 7px 0px rgb(0 0 0 / 12%);
         }
 
         h2 {
           height: 80px;
           font-family: 'Roboto', 'Helvetica', 'Arial', '游明朝体', '游ゴシック体', 'ヒラギノ角ゴシック', sans-serif;
-          font-weight: 400;
+          font-weight: 700;
           line-height: 80px;
-          font-size: 1.5em;
+          font-size: 26px;
           padding-left: 20px;
 
           @include mobile {
+            font-weight: 400;
             height: 60px;
+            font-size: 20px;
             line-height: 60px;
             color: white;
           }
@@ -179,15 +199,21 @@ body {
         z-index: 20;
         top: 0;
         left: 0;
-        box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+        box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
+          0px 1px 10px 0px rgb(0 0 0 / 12%);
 
-        @include mobile {
+        @include middle {
           width: 100%;
-          height: 60px;
+          height: 80px;
           top: auto;
           bottom: 0;
+          box-shadow: 0px 1px 1px 1px rgb(0 0 0 / 20%), 0px -2px 2px 0px rgb(0 0 0 / 14%),
+            0px 2px 2px 0px rgb(0 0 0 / 12%);
+        }
+
+        @include mobile {
+          height: 60px;
           background-color: white;
-          box-shadow: 0px 1px 1px 1px rgb(0 0 0 / 20%), 0px -2px 2px 0px rgb(0 0 0 / 14%), 0px 2px 2px 0px rgb(0 0 0 / 12%);
         }
 
         .side-header {
@@ -207,7 +233,7 @@ body {
           margin: 0;
           padding: 0;
 
-          @include mobile {
+          @include middle {
             min-height: 60px;
             display: flex;
             justify-content: space-between;
@@ -219,7 +245,7 @@ body {
             margin: 20px 0px;
             border-bottom: 1px solid $border-color;
 
-            @include mobile {
+            @include middle {
               border-bottom: 0;
               margin: 15px 0px;
             }
@@ -248,8 +274,14 @@ body {
         padding-right: 258px;
         border-left: 1px solid $border-color;
 
+        @include middle {
+          width: calc(100% - 258px);
+          padding: 80px 0;
+        }
+
         @include mobile {
           width: 100%;
+          min-height: auto;
           padding: 60px 0 60px 0;
         }
 
@@ -410,14 +442,35 @@ body {
       }
 
       .sub-category {
-        background-color: $back-color;
         position: fixed;
-        z-index: 20;
         top: 0;
         right: 0;
         width: 258px;
         height: 100vh;
         border-left: 1px solid $border-color;
+        background-color: white;
+        margin-top: 80px;
+        .paper {
+          margin: 20px;
+          background-color: $back-color;
+          border-radius: 20px;
+        }
+
+        .search {
+          width: calc(100% - 60px);
+          margin: 20px;
+          background-color: $back-color;
+          border-radius: 20px;
+          border: none;
+          padding: 10px;
+          font-size: 20px;
+
+          &:focus {
+            outline: none;
+            border: 1px solid $primary;
+            background-color: white;
+          }
+        }
 
         @include mobile {
           display: none;

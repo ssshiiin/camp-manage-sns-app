@@ -14,7 +14,7 @@ const SubmitButton = (props) => {
       className={styles.submit}
       startIcon={<CloudUploadIcon />}
       onClick={() => {
-        dispatch(onClick());
+        dispatch(onClick);
       }}
       fullWidth={fullWidth}
     >

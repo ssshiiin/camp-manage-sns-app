@@ -1,21 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import Card from '@material-ui/core/Card';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-
-import ListItem from '@material-ui/core/ListItem';
-import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
 import MenuItem from '@material-ui/core/MenuItem';
 import MediaQuery from 'react-responsive';
 
 import { SimpleModal } from '../../components/Modal';
-import { closeModalBringEdit, openModalBringEdit } from '../../reducks/modals/operations';
-import { ShowBring } from '../../components';
 import {
   updateNotBringsAllCheck,
   updateBringsAllCheck,
@@ -24,7 +15,7 @@ import {
   create,
   destroy,
 } from '../../reducks/bring_gears/operations';
-import { FlexListSubheader } from '../../components/Header';
+import { CardCustomList } from '../../components/Card';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,10 +57,8 @@ const EditBring = React.memo(
     const classes = useStyles();
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users);
-    const modals = useSelector((state) => state.modals);
     const bringGears = useSelector((state) => state.bring_gears);
     const userId = users.user_id;
-    const open = modals.modalBringEdit;
     const brings = bringGears.brings;
     const notBrings = bringGears.not_brings;
     const countAllBrings = bringGears.brings_count_all;
@@ -77,88 +66,32 @@ const EditBring = React.memo(
     const countAllNotBrings = bringGears.not_brings_count_all;
     const countTrueNotBrings = bringGears.not_brings_count_true;
 
-    const handleClick = (event, type) => {
-      console.log(event.target.checked);
-      if (type == 'Bring') {
-        dispatch(updateBringsAllCheck(userId, event.target.checked));
-      } else if (type == 'NotBring') {
-        dispatch(updateNotBringsAllCheck(userId, event.target.checked));
-      }
-    };
-
-    const customList = (title, categories, updateIsCheck, countAll, countTrue, type) => (
-      <>
-        <MediaQuery query="(min-width: 767px)">
-          <Card>
-            <div className={classes.cardHeader}>
-              <ListItemIcon>
-                <Checkbox
-                  onClick={(event) => handleClick(event, type)}
-                  disabled={categories.length === 0}
-                />
-              </ListItemIcon>
-              <FlexListSubheader title={title} countTrue={countTrue} countAll={countAll} />
-            </div>
-            <Divider />
-            <List className={classes.list} dense component="div" role="list">
-              {categories.map((category, i) => (
-                <ShowBring category={category} updateIsCheck={updateIsCheck} key={i} />
-              ))}
-              <ListItem />
-            </List>
-          </Card>
-        </MediaQuery>
-        <MediaQuery query="(max-width: 767px)">
-          <Card>
-            <div className={classes.cardHeader}>
-              <Checkbox
-                onClick={(event) => handleClick(event, type)}
-                disabled={categories.length === 0}
-              />
-              <FlexListSubheader title={title} countTrue={countTrue} countAll={countAll} />
-            </div>
-            <Divider />
-            <List className={classes.mobileList} dense component="div" role="list">
-              {categories.map((category, i) => (
-                <ShowBring category={category} updateIsCheck={updateIsCheck} key={i} />
-              ))}
-              <ListItem />
-            </List>
-          </Card>
-        </MediaQuery>
-      </>
-    );
+    const [open, setOpen] = useState(false);
 
     return (
-      <MenuItem>
+      <>
         <MediaQuery query="(min-width: 767px)">
           <SimpleModal
             top={50}
             left={50}
             transX={50}
             transY={50}
-            modalOpen={openModalBringEdit}
-            modalClose={closeModalBringEdit}
+            setOpen={setOpen}
             open={open}
-            nav={'持ち物を編集する'}
+            nav={'追加'}
             body={
               <>
-                <Grid
-                  container
-                  spacing={6}
-                  justifyContent="center"
-                  alignItems="center"
-                  className={classes.root}
-                >
+                <Grid container spacing={6} justifyContent="center" alignItems="center" className={classes.root}>
                   <Grid item xs={5}>
-                    {customList(
-                      '持ち物',
-                      brings,
-                      updateBringCheck,
-                      countAllBrings,
-                      countTrueBrings,
-                      'Bring'
-                    )}
+                    <CardCustomList
+                      userId={userId}
+                      title={'持ち物'}
+                      categories={brings}
+                      update={updateBringCheck}
+                      updateAll={updateBringsAllCheck}
+                      countAll={countAllBrings}
+                      countTrue={countTrueBrings}
+                    />
                   </Grid>
                   <Grid item xs={2}>
                     <Grid container direction="column" alignItems="center">
@@ -183,14 +116,15 @@ const EditBring = React.memo(
                     </Grid>
                   </Grid>
                   <Grid item xs={5}>
-                    {customList(
-                      '所持ギア',
-                      notBrings,
-                      updateNotBringCheck,
-                      countAllNotBrings,
-                      countTrueNotBrings,
-                      'NotBring'
-                    )}
+                    <CardCustomList
+                      userId={userId}
+                      title={'所持ギア'}
+                      categories={notBrings}
+                      update={updateNotBringCheck}
+                      updateAll={updateNotBringsAllCheck}
+                      countAll={countAllNotBrings}
+                      countTrue={countTrueNotBrings}
+                    />
                   </Grid>
                 </Grid>
               </>
@@ -204,8 +138,7 @@ const EditBring = React.memo(
             transX={50}
             transY={50}
             width={360}
-            modalOpen={openModalBringEdit}
-            modalClose={closeModalBringEdit}
+            setOpen={setOpen}
             open={open}
             nav={'持ち物を編集する'}
             body={
@@ -219,14 +152,15 @@ const EditBring = React.memo(
                   style={{ minWidth: 360 }}
                 >
                   <Grid item xs={6}>
-                    {customList(
-                      '持ち物',
-                      brings,
-                      updateBringCheck,
-                      countAllBrings,
-                      countTrueBrings,
-                      'Bring'
-                    )}
+                    <CardCustomList
+                      userId={userId}
+                      title={'持ち物'}
+                      categories={brings}
+                      update={updateBringCheck}
+                      updateAll={updateBringsAllCheck}
+                      countAll={countAllBrings}
+                      countTrue={countTrueBrings}
+                    />
                     <Button
                       variant="outlined"
                       size="small"
@@ -238,14 +172,15 @@ const EditBring = React.memo(
                     </Button>
                   </Grid>
                   <Grid item xs={6}>
-                    {customList(
-                      '所持ギア',
-                      notBrings,
-                      updateNotBringCheck,
-                      countAllNotBrings,
-                      countTrueNotBrings,
-                      'NotBring'
-                    )}
+                    <CardCustomList
+                      userId={userId}
+                      title={'所持ギア'}
+                      categories={notBrings}
+                      update={updateNotBringCheck}
+                      updateAll={updateNotBringsAllCheck}
+                      countAll={countAllNotBrings}
+                      countTrue={countTrueNotBrings}
+                    />
                     <Button
                       variant="outlined"
                       size="small"
@@ -261,7 +196,7 @@ const EditBring = React.memo(
             }
           />
         </MediaQuery>
-      </MenuItem>
+      </>
     );
   })
 );

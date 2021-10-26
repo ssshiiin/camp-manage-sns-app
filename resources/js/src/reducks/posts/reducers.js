@@ -23,31 +23,6 @@ export const PostsReducer = (state = initialState.posts, action) => {
         ...state,
         ...action.payload,
       };
-    case Actions.CHANGE_PLACE:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case Actions.CHANGE_DAY:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case Actions.CHANGE_CONTENT:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case Actions.CHANGE_IMAGE:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case Actions.CATCH_ERRORS:
-      return {
-        ...state,
-        ...action.payload,
-      };
     default:
       return state;
   }

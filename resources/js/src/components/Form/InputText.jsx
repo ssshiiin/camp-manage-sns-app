@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import styles from '../../../../sass/components/form.module.scss';
 
 const InputText = (props) => {
-  const dispatch = useDispatch();
   const {
     value,
     onChange,
@@ -14,6 +13,9 @@ const InputText = (props) => {
     fullWidth = false,
     multiline = false,
     rows = 1,
+    required = false,
+    autoFocus = false,
+    type = 'text',
   } = props;
 
   return (
@@ -25,11 +27,14 @@ const InputText = (props) => {
       placeholder={placeholder}
       variant="outlined"
       onChange={onChange}
-      error={error[0] ? true : false}
-      helperText={error[0]}
+      error={error ? true : false}
+      helperText={error}
       fullWidth={fullWidth}
       multiline={multiline}
       rows={rows}
+      required={required}
+      autoFocus={autoFocus}
+      type={type}
       className={styles.text}
     />
   );

@@ -11,6 +11,8 @@ import IconButton from '@material-ui/core/IconButton';
 import { destroy } from '../../reducks/posts/operations';
 import { EditPost } from '.';
 
+import styles from '../../../../sass/templates/nav.module.scss';
+
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
@@ -71,8 +73,14 @@ const NavPost = React.forwardRef((props, ref) => {
         <MoreVertIcon />
       </IconButton>
       <StyledMenu id="customized-menu" anchorEl={open} keepMounted open={Boolean(open)} onClose={handleClose}>
-        <EditPost post={props.post} menuClose={handleClose} />
-        <MenuItem onClick={() => dispatch(destroy(props.post.id))}>削除</MenuItem>
+        <MenuItem className={styles.menuItem}>
+          <EditPost post={props.post} menuClose={handleClose} />
+        </MenuItem>
+        <MenuItem className={styles.menuItem}>
+          <button type="submit" onClick={() => dispatch(destroy(props.post.id))} className={styles.button__pull}>
+            削除
+          </button>
+        </MenuItem>
       </StyledMenu>
     </React.Fragment>
   );

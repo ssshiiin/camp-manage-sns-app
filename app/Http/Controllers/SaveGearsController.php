@@ -32,4 +32,13 @@ class SaveGearsController extends Controller
 
         return $this->index(User::find($user_id));
     }
+
+    public function destroy(Request $request){
+        $user_id = $request->user_id;
+        $gear_id = $request->gear_id;
+
+        SaveGear::where('user_id', $user_id)->where('gear_id', $gear_id)->delete();
+
+        return $this->index(User::find($user_id));
+    }
 }

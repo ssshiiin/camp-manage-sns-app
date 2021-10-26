@@ -16,6 +16,7 @@ import { CampInfo } from '../components/Column';
 import { getPlacePosts } from '../reducks/posts/operations';
 import { InputText } from '../components/Form';
 import { ScrollToTopOnMount } from '../components/Utility';
+import { useString } from '../Function';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,9 +32,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flexStart',
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
+    padding: theme.spacing(1),
   },
   textForm: {
     width: '100%',
@@ -67,7 +66,7 @@ const Schedule = () => {
   const [latLng, setlatLng] = useState();
   const [marker, setMarker] = useState({});
 
-  const place = selector.schedules.schedule_place;
+  const [place, handlePlace] = useString();
   const nap_camp = selector.schedules.nap_camp;
   const nap_address = selector.schedules.nap_address;
   const nap_check_in = selector.schedules.nap_check_in;
@@ -119,27 +118,29 @@ const Schedule = () => {
                 autoComplete="off"
                 className={classes.textForm}
                 onSubmit={(e) => {
-                  dispatch(searchSchedulePlace(e));
+                  e.preventDefault();
+                  dispatch(searchSchedulePlace(place));
                 }}
               >
-                <div style={{ width: '65%' }}>
+                <div style={{ width: '60%' }}>
                   <InputText
                     value={place}
                     label={'キャンプ場'}
                     placeholder={'ふもとっぱら'}
-                    onChange={handleSchedulePlaceChange}
+                    onChange={handlePlace}
                     fullWidth={true}
                   />
                 </div>
                 <div
                   style={{
+                    margin: '0 13px 0 0',
                     width: '23%',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
                   }}
                 >
-                  <Button fullWidth size="medium" className={classes.search} type="submit">
+                  <Button size="medium" className={classes.search} type="submit">
                     検索
                   </Button>
                 </div>
@@ -150,27 +151,11 @@ const Schedule = () => {
               <CampInfo column={'チェックアウト'} info={nap_check_out} />
               <CampInfo column={'Dayout'} info={dayout_camp} />
               <CampInfo column={'電話番号'} info={dayout_tel} />
-              <Grid container item xs={12} justifyContent="center" alignItems="center" style={{ flexBasis: '13%' }}>
-                <Grid item xs={4}>
-                  <Typography component="h2" variant="body1" align="center">
-                    ホームページ
-                  </Typography>
-                </Grid>
-                <Grid item xs={1}>
-                  <Typography component="h2" variant="body1" align="center">
-                    :
-                  </Typography>
-                </Grid>
-                <Grid item xs={7} style={{ textAlign: 'center' }}>
-                  <Link href={dayout_home_page} variant="body1">
-                    {dayout_home_page}
-                  </Link>
-                </Grid>
-              </Grid>
+              <CampInfo column={'ホームページ'} info={dayout_home_page} />
             </Paper>
           </Grid>
-          <Grid item md={5} xs={12}>
-            <Paper style={{ minHeight: 392, width: '100%' }}>{googleMap()}</Paper>
+          <Grid item md={5} xs={12} styles={{ height: '100%' }}>
+            <Paper style={{ minHeight: 392, width: '100%', height: '100%' }}>{googleMap()}</Paper>
           </Grid>
         </Grid>
       </Container>

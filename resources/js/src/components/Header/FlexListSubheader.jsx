@@ -6,15 +6,15 @@ import MediaQuery from 'react-responsive';
 const FlexListSubheader = (props) => {
   return (
     <div style={{ display: 'flex' }}>
-      <ListItemText
-        primary={props.title}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-        }}
-      />
       <MediaQuery query="(min-width: 767px)">
+        <ListItemText
+          primary={props.title}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
+        />
         <ListItemText
           secondary={`${props.countTrue}/${props.countAll}  selected`}
           style={{
@@ -26,6 +26,15 @@ const FlexListSubheader = (props) => {
         />
       </MediaQuery>
       <MediaQuery query="(max-width: 767px)">
+        <ListItemText
+          primary={props.title}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            padding: 0,
+          }}
+        />
         <ListItemText
           secondary={`${props.countTrue}/${props.countAll}`}
           style={{

@@ -1,2 +1,2 @@
 export { default as SimpleModal } from './SimpleModal';
-export { default as GearEditModal } from './GearEditModal';
+export { default as ModalMediaQuery } from './ModalMediaQuery';

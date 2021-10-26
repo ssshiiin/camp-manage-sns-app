@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use App\Dayout_url;
-use App\Dayout_info;
+use App\Models\Dayout_url;
+use App\Models\Dayout_info;
 
 class ScrapeDayOut extends Command
 {
@@ -42,9 +42,9 @@ class ScrapeDayOut extends Command
      */
     public function handle()
     {
-        // $this->truncateTables();
-        // $this->saveUrls();
-        // $this->saveInfos();
+        $this->truncateTables();
+        $this->saveUrls();
+        $this->saveInfos();
         $this->exportCsv();
     }
 
@@ -58,6 +58,9 @@ class ScrapeDayOut extends Command
             $tel = $this->getTel($crawler);
             $home_page = $this->getHomePage($crawler);
 
+            if(empty($camp_name)){
+                $camp_name = [""];
+            }
             if(empty($tel)){
                 $tel = [""];
             }
@@ -103,7 +106,7 @@ class ScrapeDayOut extends Command
     }
 
     private function saveUrls(){
-        foreach (range(1, 60) as $page){
+        foreach (range(1, 170) as $page){
             dump($page);
             $url = $this::HOST . '/campsites?page=' . $page;
 

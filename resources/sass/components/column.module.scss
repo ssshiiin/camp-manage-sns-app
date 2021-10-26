@@ -1,0 +1,6 @@
+@import '../variables';
+.divide {
+  @include mobile {
+    display: none;
+  }
+}

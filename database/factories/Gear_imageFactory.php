@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Gear_image;
+use App\Models\GearImage;
 use Faker\Generator as Faker;
 
-$factory->define(Gear_image::class, function (Faker $faker) {
+$factory->define(GearImage::class, function (Faker $faker) {
     return [
         "gear_id" => $faker->unique()->numberBetween(1, 200),
         "image_path" => $faker->randomElement(

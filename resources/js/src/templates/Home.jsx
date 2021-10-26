@@ -8,6 +8,7 @@ const loader = <Loading key={0} />;
 
 const Home = (props) => {
   const [allPosts, setAllPosts] = useState([]);
+  const [ranking, setRanking] = useState([]);
   const [hasMore, setHasMore] = useState(true);
 
   const getAllPosts = async (page) => {
@@ -15,11 +16,12 @@ const Home = (props) => {
     await axios
       .get(url)
       .then((res) => {
-        if (res.data.data.length < 1) {
+        if (res.data.timeline.length < 1) {
           setHasMore(false);
           return;
         }
-        setAllPosts([...allPosts, ...res.data.data]);
+        setAllPosts([...allPosts, ...res.data.timeline]);
+        setRanking(res.data.ranking);
       })
       .catch((err) => {
         console.log('err:', err);

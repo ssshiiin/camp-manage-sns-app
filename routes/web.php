@@ -14,14 +14,13 @@ Auth::routes(['verify' => true]);
 
 
 //認証
+Route::get('/user', function(){
+    return auth()->user();
+});
 Route::get('/users', 'UserController@getUserId');
 
 Route::get('/auth/redirect', 'GoogleLoginController@getGoogleAuth');
 Route::get('/login/callback', 'GoogleLoginController@authGoogleCallback');
-
-Route::middleware('auth')->get('/user', function (Request $request) {
-    return auth()->user();
-});
 
 
 //表示
@@ -36,11 +35,12 @@ Route::get('/templates/{user}', 'TemplateController@index');
 
 Route::get('/save_gears/{user}', 'SaveGearsController@index');
 
-Route::post('/schedule/search', 'ScheduleController@search');
+Route::get('/schedule', 'ScheduleController@index');
 
 //詳細
 Route::get('/posts/show/{post}', 'PostController@show');
 Route::get('/gears/show/{gear}', 'GearController@show');
+Route::get('/schedule/search', 'ScheduleController@search');
 Route::post('/templates/show/{user}', 'TemplateController@show');
 
 //作成
@@ -67,6 +67,7 @@ Route::put('/bring_gears/not/brings/{user}', 'BringGearController@updateNotBring
 //削除
 Route::delete('/posts/delete/{post}', 'PostController@destroy');
 Route::delete('/gears/delete/{gear}', 'GearController@destroy');
+Route::post('/save_gears/delete', 'SaveGearsController@destroy');
 
 Route::delete('/bring_gears/delete/{user}', 'BringGearController@destroy');
 

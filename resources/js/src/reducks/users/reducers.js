@@ -8,7 +8,7 @@ export const UsersReducer = (state = initialState.users, action) => {
         ...state,
         ...action.payload,
       };
-    case Actions.MENU_OPEN:
+    case Actions.LOADING:
       return {
         ...state,
         ...action.payload,

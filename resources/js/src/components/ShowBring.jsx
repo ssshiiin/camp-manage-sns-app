@@ -8,7 +8,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import { CheckBoxes } from './Form';
+import { CheckBoxes, CheckBoxList } from './Form';
 import { FlexListSubheader } from './Header';
 
 const useStyles = makeStyles((theme) => ({
@@ -49,12 +49,7 @@ const ShowBring = (props) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {props.category.gear_list.map((gear, i) => (
-            <ListItem key={i} style={{ padding: '0px 8px' }}>
-              <ListItemIcon>
-                <CheckBoxes gear={gear} updateIsCheck={props.updateIsCheck} />
-              </ListItemIcon>
-              <ListItemText primary={gear.gear_name} />
-            </ListItem>
+            <CheckBoxList gear={gear} update={props.update} key={i} />
           ))}
         </List>
       </Collapse>

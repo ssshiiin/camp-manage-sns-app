@@ -15,7 +15,7 @@ class CreateDayoutInfosTable extends Migration
     {
         Schema::create('dayout_infos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('camp_name');
+            $table->string('camp_name')->nullable();
             $table->string('tel')->nullable();
             $table->string('home_page')->nullable();
             $table->timestamps();

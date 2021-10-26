@@ -1,9 +1,9 @@
-import { signInAction } from './actions';
+import { loadingAction, signInAction } from './actions';
 import axios from 'axios';
 
 //ユーザーがサインインしているか確認
 export const signInUser = () => {
-  return async (dispach, getState) => {
+  return async (dispatch, getState) => {
     const state = getState();
     const isSignedIn = state.users.isSignedIn;
 
@@ -14,14 +14,24 @@ export const signInUser = () => {
       await axios
         .get(url)
         .then((res) => {
-          dispach(
+          dispatch(
             signInAction({
               isSignedIn: true,
               user_id: res.data.id,
             })
           );
+          dispatch(
+            loadingAction({
+              loading: true,
+            })
+          );
         })
         .catch((err) => {
+          dispatch(
+            loadingAction({
+              loading: true,
+            })
+          );
           console.log('err:', err);
         });
     }

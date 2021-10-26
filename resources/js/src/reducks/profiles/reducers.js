@@ -3,27 +3,7 @@ import initialState from '../store/initialState';
 
 export const ProfilesReducer = (state = initialState.profiles, action) => {
   switch (action.type) {
-    case Actions.PROFILES:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case Actions.CHANGE_APP_NAME:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case Actions.CHANGE_PROF_CONTENT:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case Actions.CHANGE_IMAGE:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case Actions.CATCH_ERROR:
+    case Actions.PROFILE:
       return {
         ...state,
         ...action.payload,

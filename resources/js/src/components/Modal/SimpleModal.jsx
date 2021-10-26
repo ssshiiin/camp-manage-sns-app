@@ -16,16 +16,20 @@ function getModalStyle(top, left, transX, transY, width) {
 const SimpleModal = memo(
   forwardRef((props, ref) => {
     console.log('Modal');
-    const { open, modalOpen, modalClose, nav, body, top, left, transX, transY, width } = props;
+    const { open, setOpen, nav, body, top, left, transX, transY, pull = false, width } = props;
     const dispatch = useDispatch();
     const [modalStyle] = useState(getModalStyle(top, left, transX, transY, width));
 
+    const pullStyle = () => {
+      return pull ? styles.modal__button__pull : styles.modal__button;
+    };
+
     return (
       <div>
-        <button onClick={() => dispatch(modalOpen())} className={styles.modal__button}>
+        <button onClick={() => setOpen(true)} className={pullStyle()}>
           {nav}
         </button>
-        <Modal open={open} onClose={() => dispatch(modalClose())} className={styles.modal}>
+        <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
           <div style={modalStyle} className={styles.modal__paper}>
             <div id="simple-modal-description">{body}</div>
           </div>

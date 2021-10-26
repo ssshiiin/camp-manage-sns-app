@@ -5,6 +5,8 @@ import { signInUser } from '../reducks/users/operations';
 import Button from '@material-ui/core/Button';
 import { pushMyProfile } from '../reducks/posts/operations';
 
+import styles from '../../../sass/templates/side.module.scss';
+
 import MediaQuery from 'react-responsive';
 
 const SideBar = memo(() => {
@@ -16,6 +18,8 @@ const SideBar = memo(() => {
   useEffect(() => {
     dispatch(signInUser());
   }, []);
+
+  console.log(selector);
 
   const handleGearClick = () => {
     if (userId === undefined) {
@@ -35,7 +39,7 @@ const SideBar = memo(() => {
 
   return (
     <nav className="side-bar">
-      <MediaQuery query="(min-width: 767px)">
+      <MediaQuery query="(min-width: 1200px)">
         <div
           className="logo"
           style={{
@@ -77,19 +81,35 @@ const SideBar = memo(() => {
           </li>
         </ul>
       </MediaQuery>
-      <MediaQuery query="(max-width: 767px)">
+      <MediaQuery query="(min-width: 767px)">
         <ul className="side-nav">
           <li onClick={() => dispatch(push('/'))}>
-            <img src={'/images/mhome.png'} width="25px" height="25px" />
+            <img src={'/images/Home.png'} className={styles.img} />
           </li>
           <li onClick={() => dispatch(push(`/site`))}>
-            <img src={'/images/msite.png'} width="25px" height="25px" />
+            <img src={'/images/Site.png'} className={styles.img} />
           </li>
           <li onClick={handleGearClick}>
-            <img src={'/images/mlantan.png'} width="25px" height="25px" />
+            <img src={'/images/Lantan.png'} className={styles.img} />
           </li>
           <li onClick={handleMyPageClick}>
-            <img src={'/images/mhuman.png'} width="25px" height="25px" />
+            <img src={'/images/Human.png'} className={styles.img} />
+          </li>
+        </ul>
+      </MediaQuery>
+      <MediaQuery query="(min-width: 1px)">
+        <ul className="side-nav">
+          <li onClick={() => dispatch(push('/'))}>
+            <img src={'/images/mhome.png'} className={styles.img} />
+          </li>
+          <li onClick={() => dispatch(push(`/site`))}>
+            <img src={'/images/msite.png'} className={styles.img} />
+          </li>
+          <li onClick={handleGearClick}>
+            <img src={'/images/mlantan.png'} className={styles.img} />
+          </li>
+          <li onClick={handleMyPageClick}>
+            <img src={'/images/mhuman.png'} className={styles.img} />
           </li>
         </ul>
       </MediaQuery>

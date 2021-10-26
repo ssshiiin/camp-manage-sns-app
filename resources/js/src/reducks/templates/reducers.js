@@ -1,19 +1,14 @@
-import * as Actions from "./actions";
-import initialState from "../store/initialState";
+import * as Actions from './actions';
+import initialState from '../store/initialState';
 
 export const TemplatesReducers = (state = initialState.templates, action) => {
-  switch (action.type){
+  switch (action.type) {
     case Actions.TEMPLATES:
-      return  {
+      return {
         ...state,
-        ...action.payload
-      }
-    case Actions.CREATE_TEMPLATE:
-      return  {
-        ...state,
-        ...action.payload
-      }
+        ...action.payload,
+      };
     default:
-      return state
+      return state;
   }
-} 
+};
