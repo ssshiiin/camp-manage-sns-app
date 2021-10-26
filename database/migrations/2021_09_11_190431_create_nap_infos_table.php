@@ -15,7 +15,7 @@ class CreateNapInfosTable extends Migration
     {
         Schema::create('nap_infos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('camp_name');
+            $table->string('camp_name')->nullable();
             $table->string('address')->nullable();
             $table->string('check_in')->nullable();
             $table->string('check_out')->nullable();

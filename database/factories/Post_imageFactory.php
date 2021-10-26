@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Post_image;
+use App\Models\PostImage;
 use Faker\Generator as Faker;
 
-$factory->define(Post_image::class, function (Faker $faker) {
+$factory->define(PostImage::class, function (Faker $faker) {
     return [
         "post_id" => $faker->unique()->numberBetween(1, 100),
         "image_path" => $faker->randomElement(

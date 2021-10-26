@@ -1,18 +1,41 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
+import styles from '../../../../sass/components/form.module.scss';
 
-// props = {handleChange, errors, value}
 const InputText = (props) => {
+  const {
+    value,
+    onChange,
+    label,
+    placeholder = '',
+    error = false,
+    fullWidth = false,
+    multiline = false,
+    rows = 1,
+    required = false,
+    autoFocus = false,
+    type = 'text',
+  } = props;
+
   return (
     <TextField
-      error={errors.place !== undefined}
-      helperText={errors.place}
+      size="small"
       id="outlined-textarea"
-      label="キャンプ場"
-      defaultValue={place}
-      placeholder="ふもとっぱら"
+      label={label}
+      defaultValue={value}
+      placeholder={placeholder}
       variant="outlined"
-      onChange={(event) => dispatch(handlePlaceChange(event))}
+      onChange={onChange}
+      error={error ? true : false}
+      helperText={error}
+      fullWidth={fullWidth}
+      multiline={multiline}
+      rows={rows}
+      required={required}
+      autoFocus={autoFocus}
+      type={type}
+      className={styles.text}
     />
   );
 };

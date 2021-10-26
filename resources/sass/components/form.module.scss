@@ -8,3 +8,95 @@
     font-size: 14px;
   }
 }
+
+.text {
+  margin: 16px 0px !important;
+  @include mobile {
+    margin: 8px 0px !important;
+  }
+  > div {
+    font-size: 16px;
+  }
+}
+
+.date {
+  margin: 16px 0px !important;
+  @include mobile {
+    margin: 8px !important;
+  }
+  & > label {
+    padding: 0px 14px;
+  }
+}
+
+.upload {
+  margin: 10px !important;
+  @include mobile {
+    margin: 8px 0px !important;
+  }
+  background-color: #1876d1 !important;
+  color: white !important;
+  &__input {
+    display: none;
+  }
+
+  &__root {
+    & > * {
+      margin: 8px;
+    }
+    text-align: right;
+  }
+}
+
+.submit {
+  margin: 16px 0px !important;
+  @include mobile {
+    margin: 8px 0px !important;
+  }
+  background-color: #1876d1 !important;
+  color: white !important;
+}
+
+.bolb {
+  min-width: 800px;
+  width: 800px;
+  object-fit: cover;
+  @include mobile {
+    min-width: 360px;
+    width: 360px;
+    object-fit: cover;
+  }
+
+  &__circle {
+    margin: 10px;
+    min-width: 160px;
+    width: 160px;
+    height: 160px;
+    border-radius: 100%;
+    object-fit: cover;
+    border: solid 1px $border-color;
+
+    @include mobile {
+      margin: 8px;
+      min-width: 80px;
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
+
+.checkBoxList {
+  padding: 0 !important;
+
+  &__checkBox {
+    margin: 0 8px !important;
+    @include mobile {
+      margin: 0 !important;
+    }
+  }
+  &__text {
+    & > * {
+      font-size: 14px !important;
+    }
+  }
+}

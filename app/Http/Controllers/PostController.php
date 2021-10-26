@@ -12,14 +12,16 @@ use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\User;
 use App\Models\Gear;
+use App\Models\Schedule;
 
 class PostController extends Controller
 {
     // タイムライン一覧表示
     public function indexHome()
     {   
-        $posts = new Post;
-        return $posts->getTimeLinePosts();
+        return [
+            "timeline" => Post::getTimeLinePosts(),
+        ];
     }
     
     //プロフィール一覧表示
@@ -48,7 +50,7 @@ class PostController extends Controller
     public function getPlacePosts(Request $request){
         $place = $request->place;
 
-        return Post::with("Post_images")->where('place', 'like', "%$place%")->orderBy('day', 'DESC')->take(21)->get();
+        return Post::with("PostImages")->where('place', 'like', "%$place%")->orderBy('day', 'DESC')->take(21)->get();
     }
     
     //postsとpost_imagesを作成し、画像はs3に保存する

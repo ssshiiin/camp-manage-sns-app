@@ -1,7 +1,7 @@
-export const GET_SCHEDULE = "GET_SCHEDULE";
+export const GET_SCHEDULE = 'GET_SCHEDULE';
 export const getScheduleAction = (schedulesState) => {
   return {
-    type: "GET_SCHEDULE",
+    type: 'GET_SCHEDULE',
     payload: {
       nap_camp: schedulesState.nap_camp,
       nap_check_in: schedulesState.nap_check_in,
@@ -10,16 +10,6 @@ export const getScheduleAction = (schedulesState) => {
       dayout_camp: schedulesState.dayout_camp,
       dayout_tel: schedulesState.dayout_tel,
       dayout_home_page: schedulesState.dayout_home_page,
-    }
-  }
-}
-
-export const REGISTER_SCHEDULE_PLACE = "REGISTER_SCHEDULE_PLACE";
-export const RegisterSchedulePlaceAction = (schedulesState) => {
-  return {
-    type: "REGISTER_SCHEDULE_PLACE",
-    payload: {
-      schedule_place: schedulesState.schedule_place
-    }
-  }
-}
+    },
+  };
+};

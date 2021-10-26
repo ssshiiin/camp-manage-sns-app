@@ -11,6 +11,6 @@ class Save_gearsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Save_gear::class, 50)->create();
+        factory(App\Models\SaveGear::class, 50)->create();
     }
 }

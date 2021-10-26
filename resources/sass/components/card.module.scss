@@ -1,0 +1,117 @@
+@import '../variables';
+$paper: #fefefe;
+
+.custom {
+  width: 100%;
+  height: 500px;
+  background-color: $paper;
+  overflow: auto;
+  @include mobile {
+    height: 400px;
+  }
+
+  &__header {
+    display: flex;
+    padding: 8px;
+
+    @include mobile {
+      padding: 0;
+    }
+  }
+
+  &__checkBox {
+    margin-right: 8px !important;
+    @include mobile {
+      margin-right: 0px !important;
+    }
+  }
+}
+
+.rank {
+  display: flex;
+  flex-direction: column;
+  &__index {
+    &__count {
+      color: grey;
+      font-size: 14px;
+      margin-left: 13px;
+    }
+  }
+  &__3 {
+    font-size: 16px;
+    padding: 5px 10px 10px;
+    border-top: 1px solid $border-color;
+    & > div {
+      .rank__index {
+        font-family: Arial, Helvetica, sans-serif;
+        color: grey;
+        font-size: 16px;
+      }
+    }
+    & > span {
+      display: block;
+    }
+  }
+
+  &__2 {
+    font-size: 16px;
+    padding: 5px 10px;
+    border-top: 1px solid $border-color;
+    & > div {
+      .rank__index {
+        font-family: Arial, Helvetica, sans-serif;
+        color: grey;
+        font-size: 16px;
+      }
+    }
+    & > span {
+      display: block;
+    }
+  }
+
+  &__top {
+    font-size: 18px;
+    padding: 5px 10px;
+    & > div {
+      .rank__index {
+        font-family: Arial, Helvetica, sans-serif;
+        color: grey;
+        font-size: 18px;
+      }
+    }
+    & > span {
+      display: block;
+    }
+  }
+}
+
+.gear {
+  display: flex;
+  width: 44%;
+  margin: 24px;
+
+  @include large {
+    width: 100%;
+    margin: 16;
+  }
+
+  @include mobile {
+    width: 100%;
+    margin: 8;
+  }
+
+  &__img {
+    width: 190px;
+  }
+
+  &__detail {
+    min-width: 40%;
+    display: flex;
+    flex-direction: column;
+
+    &__content {
+      flex: 1 0 auto;
+      padding: 16px 0px 16px 16px;
+    }
+  }
+}

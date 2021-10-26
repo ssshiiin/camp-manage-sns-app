@@ -1,6 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Sacramento);
 @import url(https://fonts.googleapis.com/css?family=Raleway:200,100,400);
 @charset "UTF-8";
+.MuiInputBase-input {
+  color: red;
+}
+@media screen and (max-width: 767px) {
+  .MuiInputBase-input {
+    font-size: 16px;
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -9,7 +18,7 @@
 }
 @media screen and (max-width: 767px) {
   * {
-    font-size: 11px;
+    font-size: 14px;
   }
 }
 
@@ -78,6 +87,18 @@ p {
   position: relative;
   border: 1px solid #dbdbdb;
 }
+@media screen and (max-width: 1370px) {
+  .profile-main-posts-image {
+    width: 33%;
+    padding-top: 33%;
+  }
+}
+@media screen and (max-width: 860px) {
+  .profile-main-posts-image {
+    width: 32.9%;
+    padding-top: 32.9%;
+  }
+}
 @media screen and (max-width: 767px) {
   .profile-main-posts-image {
     width: 32.7%;
@@ -111,21 +132,38 @@ body #root {
   min-height: 100vh;
   width: 100%;
 }
+@media screen and (max-width: 767px) {
+  body #root {
+    min-height: auto;
+  }
+}
 body #root main {
   width: 100%;
   min-height: 100vh;
+  background-color: #f5f5f5;
+}
+@media screen and (max-width: 767px) {
+  body #root main {
+    min-height: auto;
+  }
 }
 body #root main header {
   top: 0;
   background-color: white;
   position: fixed;
-  width: calc(100% - 516px);
+  width: calc(100% - 258px);
   height: 80px;
   padding-left: 258px;
   padding-right: 258px;
   z-index: 10;
   box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.2), 0px 2px 3px 0px rgba(0, 0, 0, 0.14), 0px 1px 4px 0px rgba(0, 0, 0, 0.12);
   display: flex;
+}
+@media screen and (max-width: 1200px) {
+  body #root main header {
+    width: 100%;
+    padding: 0;
+  }
 }
 @media screen and (max-width: 767px) {
   body #root main header {
@@ -139,14 +177,16 @@ body #root main header {
 body #root main header h2 {
   height: 80px;
   font-family: "Roboto", "Helvetica", "Arial", "游明朝体", "游ゴシック体", "ヒラギノ角ゴシック", sans-serif;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 80px;
-  font-size: 1.5em;
+  font-size: 26px;
   padding-left: 20px;
 }
 @media screen and (max-width: 767px) {
   body #root main header h2 {
+    font-weight: 400;
     height: 60px;
+    font-size: 20px;
     line-height: 60px;
     color: white;
   }
@@ -161,14 +201,19 @@ body #root main .side-bar {
   left: 0;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1200px) {
   body #root main .side-bar {
     width: 100%;
-    height: 60px;
+    height: 80px;
     top: auto;
     bottom: 0;
-    background-color: white;
     box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.2), 0px -2px 2px 0px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.12);
+  }
+}
+@media screen and (max-width: 767px) {
+  body #root main .side-bar {
+    height: 60px;
+    background-color: white;
   }
 }
 body #root main .side-bar .side-header {
@@ -187,7 +232,7 @@ body #root main .side-bar .side-nav {
   margin: 0;
   padding: 0;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1200px) {
   body #root main .side-bar .side-nav {
     min-height: 60px;
     display: flex;
@@ -200,7 +245,7 @@ body #root main .side-bar .side-nav li {
   margin: 20px 0px;
   border-bottom: 1px solid #dbdbdb;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1200px) {
   body #root main .side-bar .side-nav li {
     border-bottom: 0;
     margin: 15px 0px;
@@ -225,9 +270,16 @@ body #root main .main-category {
   padding-right: 258px;
   border-left: 1px solid #dbdbdb;
 }
+@media screen and (max-width: 1200px) {
+  body #root main .main-category {
+    width: calc(100% - 258px);
+    padding: 80px 0;
+  }
+}
 @media screen and (max-width: 767px) {
   body #root main .main-category {
     width: 100%;
+    min-height: auto;
     padding: 60px 0 60px 0;
   }
 }
@@ -365,14 +417,33 @@ body #root main .main-category .gear {
   width: 100%;
 }
 body #root main .sub-category {
-  background-color: #f5f5f5;
   position: fixed;
-  z-index: 20;
   top: 0;
   right: 0;
   width: 258px;
   height: 100vh;
   border-left: 1px solid #dbdbdb;
+  background-color: white;
+  margin-top: 80px;
+}
+body #root main .sub-category .paper {
+  margin: 20px;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+}
+body #root main .sub-category .search {
+  width: calc(100% - 60px);
+  margin: 20px;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  font-size: 20px;
+}
+body #root main .sub-category .search:focus {
+  outline: none;
+  border: 1px solid #1876d0;
+  background-color: white;
 }
 @media screen and (max-width: 767px) {
   body #root main .sub-category {

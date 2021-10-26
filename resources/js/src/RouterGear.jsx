@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 
 import { BringSlideNav } from './components';
-import ScrollToTopOnMount from './templates/ScrollToTopOnMount';
+import { ScrollToTopOnMount } from './components/Utility';
 import { IndexBring, IndexSave } from './templates';
 
 const RouterGear = (props) => {
@@ -22,11 +22,7 @@ const RouterGear = (props) => {
       <div className="gear">
         <BringSlideNav />
         <Switch>
-          <Route
-            path={`/${userId}/bring/save`}
-            exact
-            render={() => <IndexSave userId={userId} />}
-          />
+          <Route path={`/${userId}/bring/save`} exact render={() => <IndexSave userId={userId} />} />
           <Route path={`/${userId}/bring`} exact render={() => <IndexBring />} />
         </Switch>
       </div>

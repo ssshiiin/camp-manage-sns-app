@@ -11,6 +11,6 @@ class TemplatesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Template::class, 200)->create();
+        factory(App\Models\Template::class, 200)->create();
     }
 }

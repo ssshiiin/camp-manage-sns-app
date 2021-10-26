@@ -6,12 +6,11 @@ import { withStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Typography from '@material-ui/core/Typography';
 import MediaQuery from 'react-responsive';
 
 import { CreatePost, EditProfile, CreateGear } from './Profile';
 import { useDispatch, useSelector } from 'react-redux';
-import { MenuAction } from '../reducks/users/actions';
+import styles from '../../../sass/templates/nav.module.scss';
 
 const StyledMenu = withStyles({
   paper: {
@@ -34,6 +33,11 @@ const StyledMenu = withStyles({
 ));
 
 const useStyles = makeStyles((theme) => ({
+  pcRoot: {
+    height: 80,
+    display: 'flex',
+    marginLeft: 'auto',
+  },
   root: {
     height: 80,
     marginLeft: 'auto',
@@ -61,9 +65,10 @@ const useStyles = makeStyles((theme) => ({
 const NavProfile = (props) => {
   console.log('nav profile');
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state.users);
+  const users = useSelector((state) => state.users);
   const userId = props.userId;
-  const loginUser = selector.user_id;
+  const loginUser = users.user_id;
+
   const [csrf_token, setCsrf_token] = useState(document.head.querySelector('meta[name="csrf-token"]').content);
   const [open, setOpen] = useState(false);
 
@@ -81,31 +86,24 @@ const NavProfile = (props) => {
     return (
       <>
         <MediaQuery query="(min-width: 767px)">
-          <div className={classes.root}>
-            <Button
-              className={classes.navButton}
-              aria-controls="customized-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-            >
-              <MoreHorizOutlined fontSize="large" />
-            </Button>
-            <StyledMenu id="customized-menu" anchorEl={open} keepMounted open={Boolean(open)} onClose={handleClose}>
+          <div className={classes.pcRoot}>
+            <MenuItem style={{ padding: 0, marginRight: 20 }}>
               <CreatePost menuClose={handleClose} />
+            </MenuItem>
+            <MenuItem style={{ padding: 0, marginRight: 20 }}>
               <CreateGear menuClose={handleClose} />
-              <EditProfile menuClose={handleClose} />
-              <MenuItem>
-                <form className={classes.form} noValidate method="POST" action="/logout">
-                  <input type="hidden" name="_token" value={csrf_token} />
-                  <button
-                    type="submit"
-                    style={{ border: 'none', backgroundColor: 'white', minWidth: '180px', textAlign: 'left' }}
-                  >
-                    ログアウト
-                  </button>
-                </form>
-              </MenuItem>
-            </StyledMenu>
+            </MenuItem>
+            <MenuItem style={{ padding: 0, marginRight: 20 }}>
+              <EditProfile />
+            </MenuItem>
+            <MenuItem style={{ padding: 0, marginRight: 20 }}>
+              <form className={classes.form} noValidate method="POST" action="/logout">
+                <input type="hidden" name="_token" value={csrf_token} />
+                <button type="submit" className={styles.button}>
+                  ログアウト
+                </button>
+              </form>
+            </MenuItem>
           </div>
         </MediaQuery>
         <MediaQuery query="(max-width: 767px)">
@@ -119,16 +117,19 @@ const NavProfile = (props) => {
               <MoreHorizOutlined fontSize="large" />
             </Button>
             <StyledMenu id="customized-menu" anchorEl={open} keepMounted open={Boolean(open)} onClose={handleClose}>
-              <CreatePost menuClose={handleClose} />
-              <CreateGear menuClose={handleClose} />
-              <EditProfile menuClose={handleClose} />
-              <MenuItem>
-                <form className={classes.form} noValidate method="POST" action="logout">
+              <MenuItem style={{ padding: 0 }}>
+                <CreatePost menuClose={handleClose} />
+              </MenuItem>
+              <MenuItem style={{ padding: 0 }}>
+                <CreateGear menuClose={handleClose} />
+              </MenuItem>
+              <MenuItem style={{ padding: 0 }}>
+                <EditProfile />
+              </MenuItem>
+              <MenuItem style={{ padding: 0 }}>
+                <form className={classes.form} noValidate method="POST" action="/logout">
                   <input type="hidden" name="_token" value={csrf_token} />
-                  <button
-                    type="submit"
-                    style={{ border: 'none', backgroundColor: 'white', minWidth: '120px', textAlign: 'left' }}
-                  >
+                  <button type="submit" className={styles.button}>
                     ログアウト
                   </button>
                 </form>

@@ -25,6 +25,7 @@ class GetUserGearsResource extends JsonResource
             'price' => $this->price, 
             'amount' => $this->amount, 
             'gear_images' => $this->gearImages, 
+            'save_gears'=> $this->saveGear,
         ];
     }
 }

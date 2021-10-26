@@ -9,12 +9,12 @@ export const signInAction = (userState) => {
   };
 };
 
-export const MENU_OPEN = 'MENU_OPEN';
-export const MenuAction = (userState) => {
+export const LOADING = 'LOADING';
+export const loadingAction = (userState) => {
   return {
-    type: 'MENU_OPEN',
+    type: 'LOADING',
     payload: {
-      menu_open: userState.menu_open,
+      loading: true,
     },
   };
 };

@@ -1,11 +1,4 @@
-import {
-  getProfileAction,
-  changeAppNameAction,
-  changeImageAction,
-  changeProfContentAction,
-  catchErrorsAction,
-} from './actions';
-import { openModalProfEditAction } from '../modals/actions';
+import { getProfileAction } from './actions';
 
 //プロフィール取得
 export const getProfile = (user_id) => {
@@ -16,44 +9,18 @@ export const getProfile = (user_id) => {
     await axios
       .get(url)
       .then((res) => {
+        const profile = () => {
+          if (res.data.profile !== null) {
+            return res.data.profile;
+          } else {
+            return {};
+          }
+        };
         dispatch(
           getProfileAction({
-            profile: res.data.profile,
+            profile: profile(),
           })
         );
-        if (res.data.profile !== null) {
-          dispatch(
-            changeAppNameAction({
-              appName: res.data.profile.app_name,
-            })
-          );
-          dispatch(
-            changeProfContentAction({
-              profContent: res.data.profile.profile,
-            })
-          );
-          dispatch(
-            changeImageAction({
-              profUrl: res.data.profile.image_path,
-            })
-          );
-        } else {
-          dispatch(
-            changeAppNameAction({
-              appName: '',
-            })
-          );
-          dispatch(
-            changeProfContentAction({
-              profContent: '',
-            })
-          );
-          dispatch(
-            changeImageAction({
-              profUrl: '',
-            })
-          );
-        }
       })
       .catch((err) => {
         console.log('err:', err);
@@ -62,18 +29,15 @@ export const getProfile = (user_id) => {
 };
 
 //プロフィールの更新
-export const update = () => {
+export const update = (name, content, image, setErrors, setOpen) => {
   return async (dispatch, getState) => {
     console.log('updateProfile');
     const state = getState();
     const userId = state.users.user_id;
     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-    const appName = state.profiles.appName;
-    const content = state.profiles.profContent;
-    const image = state.profiles.image;
     const data = new FormData();
 
-    data.append('app_name', appName === null ? '' : appName);
+    data.append('app_name', name === null ? '' : name);
     data.append('profile', content === null ? '' : content);
     data.append(`img`, image === null || typeof image === 'undefined' ? '' : image);
     data.append('_token', csrfToken);
@@ -91,52 +55,11 @@ export const update = () => {
             profile: res.data.profile,
           })
         );
-        dispatch(
-          openModalProfEditAction({
-            modalProfEdit: false,
-          })
-        );
+        setOpen(false);
+        setErrors([]);
       })
       .catch((err) => {
-        dispatch(
-          catchErrorsAction({
-            errors: err.response.data.errors,
-          })
-        );
+        setErrors(err.response.data.errors);
       });
-  };
-};
-
-export const handleAppNameChange = (event) => {
-  return (dispatch, getState) => {
-    dispatch(
-      changeAppNameAction({
-        appName: event.target.value,
-      })
-    );
-  };
-};
-
-export const handleImageChange = (event) => {
-  return (dispatch, getState) => {
-    const image = event.target.files[0];
-    const bolbUrl = URL.createObjectURL(image);
-
-    dispatch(
-      changeImageAction({
-        profUrl: bolbUrl,
-        image: image,
-      })
-    );
-  };
-};
-
-export const handleProfileChange = (event) => {
-  return (dispatch, getState) => {
-    dispatch(
-      changeProfContentAction({
-        profContent: event.target.value,
-      })
-    );
   };
 };

@@ -7,9 +7,10 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-import { MenuAction } from '../reducks/users/actions';
 import { UseTemplates, CreateTemplates, EditBring } from './Bring';
+import styles from '../../../sass/templates/nav.module.scss';
 
 const StyledMenu = withStyles({
   paper: {
@@ -32,6 +33,11 @@ const StyledMenu = withStyles({
 ));
 
 const useStyles = makeStyles((theme) => ({
+  pcRoot: {
+    height: 80,
+    marginLeft: 'auto',
+    display: 'flex',
+  },
   root: {
     height: 80,
     marginLeft: 'auto',
@@ -73,25 +79,22 @@ const NavBring = () => {
   return (
     <>
       <MediaQuery query="(min-width: 767px)">
-        <div className={classes.root}>
-          <Button
-            className={classes.navButton}
-            aria-controls="customized-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            <MoreHorizOutlined fontSize="large" />
-          </Button>
-          <StyledMenu
-            id="customized-menu"
-            anchorEl={open}
-            keepMounted
-            open={Boolean(open)}
-            onClose={handleClose}
-          >
+        <div className={classes.pcRoot}>
+          <MenuItem style={{ padding: 0, marginRight: 20 }}>
             <EditBring />
-            <UseTemplates />
-            <CreateTemplates />
+          </MenuItem>
+          <MenuItem style={{ padding: 0, marginRight: 20 }}>
+            <button type="submit" className={styles.button} onClick={handleClick}>
+              テンプレート
+            </button>
+          </MenuItem>
+          <StyledMenu id="customized-menu" anchorEl={open} keepMounted open={Boolean(open)} onClose={handleClose}>
+            <MenuItem style={{ padding: 0 }}>
+              <UseTemplates />
+            </MenuItem>
+            <MenuItem style={{ padding: 0 }}>
+              <CreateTemplates />
+            </MenuItem>
           </StyledMenu>
         </div>
       </MediaQuery>
@@ -105,13 +108,7 @@ const NavBring = () => {
           >
             <MoreHorizOutlined fontSize="large" />
           </Button>
-          <StyledMenu
-            id="customized-menu"
-            anchorEl={open}
-            keepMounted
-            open={Boolean(open)}
-            onClose={handleClose}
-          >
+          <StyledMenu id="customized-menu" anchorEl={open} keepMounted open={Boolean(open)} onClose={handleClose}>
             <EditBring />
             <UseTemplates />
             <CreateTemplates />

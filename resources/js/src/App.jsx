@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Router from './router';
 import RouterHeader from './RouterHeader';
-import { SideBar } from './templates';
+import { SideBar, SubCategory } from './templates';
 
 const App = () => {
   return (
@@ -13,7 +14,7 @@ const App = () => {
       <div className="main-category">
         <Router />
       </div>
-      <div className="sub-category"></div>
+      <SubCategory />
     </main>
   );
 };

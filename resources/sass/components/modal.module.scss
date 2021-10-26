@@ -1,0 +1,33 @@
+@import '../variables';
+
+.modal {
+  overflow: scroll;
+  &__button {
+    border: none;
+    background-color: white;
+    text-align: center;
+    min-width: 100px;
+    height: 80px;
+    &:hover {
+      background-color: $back-color;
+    }
+    &__pull {
+      @extend .modal__button;
+      height: 30px;
+      padding: 5px 10px;
+    }
+
+    @include mobile {
+      padding: 0 8px;
+      min-width: 150px;
+      height: 40px;
+      text-align: left;
+    }
+  }
+
+  &__paper {
+    background-color: white;
+    box-shadow: $boxShadow;
+    position: absolute;
+  }
+}

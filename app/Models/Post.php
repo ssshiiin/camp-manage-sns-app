@@ -16,8 +16,8 @@ class Post extends Model
     ];
     
     // タイムライン用の投稿を取得
-    public function getTimeLinePosts($limit = 15){
-        $posts = $this->with("nices")->orderBy("created_at", "DESC")->simplePaginate(15);
+    public static function getTimeLinePosts($limit = 15){
+        $posts = Post::with("nices")->orderBy("created_at", "DESC")->simplePaginate(15);
         
         return GetPostsResource::collection($posts);
     }

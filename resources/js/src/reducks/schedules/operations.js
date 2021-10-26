@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getScheduleAction, RegisterSchedulePlaceAction } from './actions';
+import { getScheduleAction } from './actions';
 
 export const handleSchedulePlaceChange = (event) => {
   return (dispatch, getState) => {
@@ -11,18 +11,14 @@ export const handleSchedulePlaceChange = (event) => {
   };
 };
 
-export const searchSchedulePlace = (e) => {
+export const searchSchedulePlace = (place) => {
   return async (dispatch, getState) => {
-    e.preventDefault();
     const state = getState();
-    const place = state.schedules.schedule_place;
 
-    const url = '/schedule/search';
+    const url = `/schedule/search?place=${place}`;
 
     await axios
-      .post(url, {
-        place: place,
-      })
+      .get(url)
       .then((res) => {
         if (res.data.nap !== null && res.data.dayout !== null) {
           dispatch(

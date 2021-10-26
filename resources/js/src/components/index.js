@@ -6,6 +6,4 @@ export { default as BringSlideNav } from './BringSlideNav';
 export { default as ShowPost } from './ShowPost';
 
 export { default as ShowBring } from './ShowBring';
-
-export { default as CampInfo } from './CampInfo';
 export { default as IndexPosts } from './IndexPosts';

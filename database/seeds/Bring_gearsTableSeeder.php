@@ -11,6 +11,6 @@ class Bring_gearsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Bring_gear::class, 1)->create();
+        factory(App\Models\Bring_gear::class, 1)->create();
     }
 }

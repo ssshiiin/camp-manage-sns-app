@@ -1,17 +1,38 @@
-// Body
-$body-bg: #f8fafc;
-$border: rgb(230, 230, 230);
-
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$border-color: rgb(219, 219, 219);
+$side-color: darkslategray;
+$header-color: rgb(250, 250, 250);
+$back-color: #f5f5f5;
+$main-color: white;
+$primary: rgb(24, 118, 208);
 
 // MediaQuery
 $mb: 767px;
+$rg: 860px;
+$md: 1200px;
+$lg: 1370px;
 
 @mixin mobile {
   @media screen and (max-width: $mb) {
     @content;
   }
 }
+
+@mixin regular {
+  @media screen and (max-width: $rg) {
+    @content;
+  }
+}
+
+@mixin middle {
+  @media screen and (max-width: $md) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media screen and (max-width: $lg) {
+    @content;
+  }
+}
+
+$boxShadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 5px 8px 0px rgb(0 0 0 / 14%), 0px 1px 14px 0px rgb(0 0 0 / 12%);

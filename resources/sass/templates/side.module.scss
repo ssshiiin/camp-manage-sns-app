@@ -1,0 +1,11 @@
+@import '../variables';
+.img {
+  @include middle {
+    width: 40px;
+    height: 40px;
+  }
+  @include mobile {
+    width: 25px;
+    height: 25px;
+  }
+}

@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'static',
     backgroundColor: theme.palette.background.paper,
     width: '100%',
+    padding: 0,
   },
   nested: {
     paddingLeft: theme.spacing(4),
@@ -44,18 +45,14 @@ const IndexBring = () => {
         aria-labelledby="nested-list-subheader"
         subheader={
           <div style={{ display: 'flex', padding: '16px 16px' }}>
-            <FlexListSubheader
-              title={'持ち物リスト'}
-              countTrue={bringsCountTrue}
-              countAll={bringsCountAll}
-            />
+            <FlexListSubheader title={'持ち物リスト'} countTrue={bringsCountTrue} countAll={bringsCountAll} />
           </div>
         }
         className={classes.root}
       >
         <Divider />
         {bringGears.map((category, i) => (
-          <ShowBring category={category} updateIsCheck={updateBringCheck} mode={'Bring'} key={i} />
+          <ShowBring category={category} update={updateBringCheck} mode={'Bring'} key={i} />
         ))}
       </List>
     </>

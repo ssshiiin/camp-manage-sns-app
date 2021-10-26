@@ -9,10 +9,11 @@ const CheckBoxes = (props) => {
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
-    dispatch(props.updateIsCheck(!checked, props.gear.id));
+    dispatch(props.update(!checked, props.gear.id));
   };
+  onChange = { handleChange };
 
-  return <Checkbox checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'primary checkbox' }} />;
+  return <Checkbox checked={checked} inputProps={{ 'aria-label': 'primary checkbox' }} />;
 };
 
 export default CheckBoxes;

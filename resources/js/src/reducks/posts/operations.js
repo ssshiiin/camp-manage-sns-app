@@ -1,18 +1,7 @@
 import { push } from 'connected-react-router';
 import axios from 'axios';
 import moment from 'moment';
-import {
-  countPostsAction,
-  changeContentAction,
-  changeDayAction,
-  catchErrorsAction,
-  changeImageAction,
-  changePlaceAction,
-  getPostsAction,
-  PlacePostsAction,
-  ShowPostAction,
-} from './actions';
-import { openModalPostCreateAction, openModalPostEditAction } from '../modals/actions';
+import { getPostsAction, PlacePostsAction, ShowPostAction } from './actions';
 import { getProfile } from '../profiles/operations';
 
 //プロフィールpost取得
@@ -112,21 +101,17 @@ export const pushMyProfile = (userId) => {
 };
 
 //postの作成
-export const create = () => {
+export const create = (place, date, content, image, setErrors, resetState) => {
   return async (dispatch, getState) => {
     console.log('createPost');
     const state = getState();
     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-    const place = state.posts.place;
-    const day = state.posts.day;
-    const content = state.posts.content;
-    const image = state.posts.image;
     const userId = state.users.user_id;
 
     const data = new FormData();
 
     data.append('place', place === null ? '' : place);
-    data.append('day', day === null ? '' : moment(day).format('YYYY/MM/DD'));
+    data.append('day', date === null ? '' : moment(date).format('YYYY/MM/DD'));
     data.append('content', content === null ? '' : content);
     data.append(`img`, image === null ? '' : image);
     data.append('_token', csrfToken);
@@ -145,37 +130,25 @@ export const create = () => {
             countPosts: res.data.countPosts,
           })
         );
-        dispatch(
-          openModalPostCreateAction({
-            modalPostCreate: false,
-          })
-        );
+        resetState();
       })
       .catch((err) => {
-        dispatch(
-          catchErrorsAction({
-            errors: err.response.data.errors,
-          })
-        );
+        setErrors(err.response.data.errors);
       });
   };
 };
 
 //postの更新
-export const update = (postId) => {
+export const update = (postId, place, date, content, image, setErrors, setOpen) => {
   return async (dispatch, getState) => {
     console.log('updatePost');
     const state = getState();
     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-    const place = state.posts.place;
-    const day = state.posts.day;
-    const content = state.posts.content;
-    const image = state.posts.image;
 
     const data = new FormData();
 
     data.append('place', place === null ? '' : place);
-    data.append('day', day === null ? '' : moment(day).format('YYYY/MM/DD'));
+    data.append('day', date === null ? '' : moment(date).format('YYYY/MM/DD'));
     data.append('content', content === null ? '' : content);
     data.append(`img`, image === null || typeof image === 'undefined' ? '' : image);
     data.append('_token', csrfToken);
@@ -193,18 +166,10 @@ export const update = (postId) => {
             post: res.data.data,
           })
         );
-        dispatch(
-          openModalPostEditAction({
-            modalPostEdit: false,
-          })
-        );
+        setOpen(false);
       })
       .catch((err) => {
-        dispatch(
-          catchErrorsAction({
-            errors: err.response.data.errors,
-          })
-        );
+        setErrors(err.response.data.errors);
       });
   };
 };
@@ -229,49 +194,5 @@ export const destroy = (postId) => {
       .catch((err) => {
         console.log(err);
       });
-  };
-};
-
-//form のstate更新
-export const handleImageChange = (event) => {
-  return (dispatch, getState) => {
-    const image = event.target.files[0];
-    const bolbUrl = URL.createObjectURL(image);
-    dispatch(
-      changeImageAction({
-        bolbUrl: bolbUrl,
-        image: image,
-      })
-    );
-  };
-};
-
-export const handlePlaceChange = (event) => {
-  return (dispatch, getState) => {
-    dispatch(
-      changePlaceAction({
-        place: event.target.value,
-      })
-    );
-  };
-};
-
-export const handleDayChange = (date) => {
-  return (dispatch, getState) => {
-    dispatch(
-      changeDayAction({
-        day: date,
-      })
-    );
-  };
-};
-
-export const handleContentChange = (event) => {
-  return (dispatch, getState) => {
-    dispatch(
-      changeContentAction({
-        content: event.target.value,
-      })
-    );
   };
 };

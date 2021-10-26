@@ -1,48 +1,21 @@
 const initialState = {
   users: {
     isSignedIn: false,
+    loading: false,
+    user_id: null,
   },
   profiles: {
     profile: {},
-    appName: '',
-    profContent: '',
-    profUrl: '',
-    image: '',
-    errors: [],
   },
   posts: {
     post: undefined,
     posts: [],
     countPosts: 0,
     place_posts: [],
-    content: '',
-    place: '',
-    day: null,
-    bolbUrl: [],
-    image: null,
-    errors: [],
   },
   gears: {
     gears: [],
     countGears: 0,
-    gearName: '',
-    category: '',
-    purchasedDay: null,
-    brand: null,
-    price: null,
-    amount: null,
-    bolbUrl: [],
-    image: null,
-    errors: [],
-  },
-  modals: {
-    modalProfEdit: false,
-    modalPostCreate: false,
-    modalGearCreate: false,
-    modalPostEdit: false,
-    modalBringEdit: false,
-    modalTemplateCreate: false,
-    modalTemplateUse: false,
   },
   alerts: {
     open: false,
@@ -66,7 +39,6 @@ const initialState = {
   },
   templates: {
     templates: [],
-    template_name: '',
   },
   schedules: {
     nap_camp: 'ふもとっぱら',
@@ -76,8 +48,6 @@ const initialState = {
     dayout_camp: 'ふもとっぱら',
     dayout_tel: '0544-52-2112',
     dayout_home_page: 'http://fumotoppara.net/',
-    schedule_place: '',
-    schedule_day: '',
   },
 };
 

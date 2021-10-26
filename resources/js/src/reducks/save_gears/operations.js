@@ -26,6 +26,31 @@ export const create = (gearId) => {
   };
 };
 
+export const destroy = (gearId) => {
+  return async (dispatch, getState) => {
+    console.log('destroySaveGears');
+    const state = getState();
+    const userId = state.users.user_id;
+    const url = '/save_gears/delete';
+
+    await axios
+      .post(url, {
+        user_id: userId,
+        gear_id: gearId,
+      })
+      .then((res) => {
+        dispatch(
+          getSaveGearsAction({
+            save_gears: res.data.data,
+          })
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
 export const getSaveGears = (userId) => {
   return async (dispatch, getState) => {
     console.log('getSaveGears');

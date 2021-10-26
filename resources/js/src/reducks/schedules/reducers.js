@@ -1,19 +1,14 @@
-import * as Actions from "./actions";
-import initialState from "../store/initialState";
+import * as Actions from './actions';
+import initialState from '../store/initialState';
 
 export const SchedulesReducers = (state = initialState.schedules, action) => {
-  switch(action.type){
+  switch (action.type) {
     case Actions.GET_SCHEDULE:
       return {
         ...state,
         ...action.payload,
-      }
-    case Actions.REGISTER_SCHEDULE_PLACE:
-      return {
-        ...state,
-        ...action.payload,
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
