@@ -15,7 +15,7 @@ class ScheduleController extends Controller
         $search = $request->place;
         
         $nap = Nap_info::where("camp_name", "like", "%$search%")->first();
-        $dayout = Dayout_info::where("camp_name", "like", "%$search%")->first();        
+        $dayout = Dayout_info::where("camp_name", "like", "%$search%")->first();   
 
         Schedule::create([
             "user_id" => Auth::id(),

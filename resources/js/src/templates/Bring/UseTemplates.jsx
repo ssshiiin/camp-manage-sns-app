@@ -11,7 +11,6 @@ import styles from '../../../../sass/templates/form.module.scss';
 
 const UseTemplates = React.memo(
   React.forwardRef((props, ref) => {
-    console.log('useTem');
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users);
     const templatesSelector = useSelector((state) => state.templates);
@@ -20,8 +19,6 @@ const UseTemplates = React.memo(
     const templates = templatesSelector.templates;
 
     const [open, setOpen] = useState(false);
-
-    console.log(templatesSelector);
 
     useEffect(() => {
       if (typeof userId !== 'undefined') {

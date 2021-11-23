@@ -63,7 +63,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavBring = () => {
-  console.log('Nav');
   const [open, setOpen] = useState(null);
 
   const handleClick = (event) => {

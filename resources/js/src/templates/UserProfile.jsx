@@ -4,7 +4,6 @@ import Avatar from '@material-ui/core/Avatar';
 import { useImage, useString } from '../Function';
 
 const UserProfile = memo((props) => {
-  console.log('userProfile');
   const posts = useSelector((state) => state.posts);
   const gears = useSelector((state) => state.gears);
   const profiles = useSelector((state) => state.profiles);

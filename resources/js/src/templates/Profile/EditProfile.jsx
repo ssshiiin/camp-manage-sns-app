@@ -12,7 +12,6 @@ import { BolbImage, ImageError, InputText, SubmitButton, UploadButton } from '..
 import styles from '../../../../sass/templates/form.module.scss';
 
 const EditProfile = React.forwardRef((props, ref) => {
-  console.log('ModalProfile');
   const profiles = useSelector((state) => state.profiles);
   const profile = profiles.profile;
 

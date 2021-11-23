@@ -3,7 +3,6 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { getShowPost } from '../reducks/posts/operations';
 import { push } from 'connected-react-router';
 
 const useStyles = makeStyles((theme) => ({

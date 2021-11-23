@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavGear = React.forwardRef((props, ref) => {
-  console.log('navgear', props);
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const loginUser = selector.users.user_id;
@@ -78,8 +77,6 @@ const NavGear = React.forwardRef((props, ref) => {
   };
 
   const classes = useStyles();
-
-  console.log('check', props.gear.save_gears, checkNice(props.gear.save_gears, loginUser));
 
   return (
     <React.Fragment>

@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router';
 import { NavHeader, NormalHeader } from './components/Header';
 
 const RouteHeader = memo(() => {
-  console.log('header');
   return (
     <Switch>
       <Route path="(/)?" exact render={() => <NormalHeader title={'Home'} />} />

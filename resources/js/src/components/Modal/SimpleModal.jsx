@@ -15,7 +15,6 @@ function getModalStyle(top, left, transX, transY, width) {
 
 const SimpleModal = memo(
   forwardRef((props, ref) => {
-    console.log('Modal');
     const { open, setOpen, nav, body, top, left, transX, transY, pull = false, width } = props;
     const dispatch = useDispatch();
     const [modalStyle] = useState(getModalStyle(top, left, transX, transY, width));

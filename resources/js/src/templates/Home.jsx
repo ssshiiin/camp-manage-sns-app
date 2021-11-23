@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { Loading } from '../components/Loading';
 import { CardPost } from '../components/Card';
+import { countPV } from '../Function';
 
 const loader = <Loading key={0} />;
 
-const Home = (props) => {
+const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
-  const [ranking, setRanking] = useState([]);
   const [hasMore, setHasMore] = useState(true);
 
   const getAllPosts = async (page) => {
@@ -21,12 +21,15 @@ const Home = (props) => {
           return;
         }
         setAllPosts([...allPosts, ...res.data.timeline]);
-        setRanking(res.data.ranking);
       })
       .catch((err) => {
         console.log('err:', err);
       });
   };
+
+  useEffect(() => {
+    countPV();
+  }, []);
 
   return (
     <React.Fragment>

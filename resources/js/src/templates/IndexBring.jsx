@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IndexBring = () => {
-  console.log('indexBring');
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const classes = useStyles();

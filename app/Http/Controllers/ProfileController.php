@@ -35,6 +35,8 @@ class ProfileController extends Controller
         $app_name = $request->app_name;
         $content = $request->profile;
 
+
+
         $profile = Profile::where("user_id", $user_id)->get();
         
         // プロフィールが存在するかどうか

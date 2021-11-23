@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import MediaQuery from 'react-responsive';
 
 const NormalHeader = memo((props) => {
-  console.log('normalHeader');
   return (
     <>
       <MediaQuery query="(min-width: 767px)">

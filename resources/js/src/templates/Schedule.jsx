@@ -16,7 +16,7 @@ import { CampInfo } from '../components/Column';
 import { getPlacePosts } from '../reducks/posts/operations';
 import { InputText } from '../components/Form';
 import { ScrollToTopOnMount } from '../components/Utility';
-import { useString } from '../Function';
+import { countPV, useString } from '../Function';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -102,6 +102,7 @@ const Schedule = () => {
   };
 
   useEffect(() => {
+    countPV();
     placeCastLatLng(nap_address);
     dispatch(getPlacePosts(nap_camp));
   }, [nap_camp, nap_address]);

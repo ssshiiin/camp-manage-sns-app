@@ -10,7 +10,6 @@ import styles from '../../../sass/templates/side.module.scss';
 import MediaQuery from 'react-responsive';
 
 const SideBar = memo(() => {
-  console.log('sidebar');
   const selector = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const userId = selector.user_id;
@@ -18,8 +17,6 @@ const SideBar = memo(() => {
   useEffect(() => {
     dispatch(signInUser());
   }, []);
-
-  console.log(selector);
 
   const handleGearClick = () => {
     if (userId === undefined) {

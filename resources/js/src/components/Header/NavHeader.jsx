@@ -6,7 +6,6 @@ import { push } from 'connected-react-router';
 import { NavBring, NavProfile } from '../../templates';
 
 const NavHeader = memo((props) => {
-  console.log('NavHeader');
   const selector = useSelector((state) => state.profiles);
   const dispatch = useDispatch();
   if (props.type === 'Profile') {

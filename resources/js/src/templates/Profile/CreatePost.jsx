@@ -12,7 +12,6 @@ import styles from '../../../../sass/templates/form.module.scss';
 
 const CreatePost = memo(
   forwardRef((props, ref) => {
-    console.log('ModalPost');
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
 

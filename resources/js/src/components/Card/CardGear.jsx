@@ -11,7 +11,6 @@ import { NavGear } from '../../templates/Profile';
 import styles from '../../../../sass/components/card.module.scss';
 
 const CardGear = (props) => {
-  console.log('Card');
   const gear = props.gear;
   const userId = props.userId;
 

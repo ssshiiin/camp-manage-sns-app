@@ -63,7 +63,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavProfile = (props) => {
-  console.log('nav profile');
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
   const userId = props.userId;

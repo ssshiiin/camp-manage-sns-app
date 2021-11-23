@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import MenuItem from '@material-ui/core/MenuItem';
+import React, { useState } from 'react';
 
 import { create } from '../../reducks/templates/operations';
 import { useString } from '../../Function';
@@ -12,8 +9,6 @@ import { InputText, SubmitButton } from '../../components/Form';
 
 const CreateTemplates = React.memo(
   React.forwardRef((props, ref) => {
-    console.log('CreateTem');
-
     const [template, handleTemplate, setTemplate] = useString();
     const [open, setOpen] = useState(false);
 

@@ -1,7 +1,5 @@
-import React, { useState, useEffect, memo, forwardRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import MenuItem from '@material-ui/core/MenuItem';
+import React, { useState, memo, forwardRef } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { create } from '../../reducks/gears/operations';
 import { BolbImage, ImageError, InputText, SelectDate, SubmitButton, UploadButton } from '../../components/Form';
@@ -12,9 +10,6 @@ import { ModalMediaQuery } from '../../components/Modal';
 
 const CreateGear = memo(
   forwardRef((props, ref) => {
-    console.log('ModalGear');
-    const dispatch = useDispatch();
-
     const [gear, handleGear, setGear] = useString();
     const [category, handleCategory, setCategory] = useString();
     const [brand, handleBrand, setBrand] = useString();

@@ -9,7 +9,6 @@ import { store, destroy } from '../../reducks/nices/operations';
 import { checkNice } from '../../Function';
 
 const NiceButton = (props) => {
-  console.log('button');
   const { postId, nices } = props;
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);

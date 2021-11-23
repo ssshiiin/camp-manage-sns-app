@@ -1,19 +1,18 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Collapse from '@material-ui/core/Collapse';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
   nested: {
-    paddingLeft: theme.spacing(4)
-  }
+    paddingLeft: theme.spacing(4),
+  },
 }));
 
 export default function TimeLineGearNested(props) {
@@ -35,13 +34,12 @@ export default function TimeLineGearNested(props) {
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {props.category.gearList.map((gear) =>
+          {props.category.gearList.map((gear) => (
             <ListItem button className={classes.nested} key={gear.gear_id}>
-              <ListItemIcon>
-              </ListItemIcon>
+              <ListItemIcon></ListItemIcon>
               <ListItemText primary={gear.gear_name} />
             </ListItem>
-          )}
+          ))}
         </List>
       </Collapse>
     </div>

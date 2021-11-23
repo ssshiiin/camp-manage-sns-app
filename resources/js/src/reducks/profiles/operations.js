@@ -38,7 +38,7 @@ export const update = (name, content, image, setErrors, setOpen) => {
     const data = new FormData();
 
     data.append('app_name', name === null ? '' : name);
-    data.append('profile', content === null ? '' : content);
+    data.append('profile', content === null || typeof content === 'undefined' ? '' : content);
     data.append(`img`, image === null || typeof image === 'undefined' ? '' : image);
     data.append('_token', csrfToken);
 

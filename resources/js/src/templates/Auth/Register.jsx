@@ -13,7 +13,6 @@ import { push } from 'connected-react-router';
 import { useDispatch } from 'react-redux';
 import { useString } from '../../Function';
 import { InputText } from '../../components/Form';
-import { signInUser } from '../../reducks/users/operations';
 import { signInAction } from '../../reducks/users/actions';
 
 function Copyright() {

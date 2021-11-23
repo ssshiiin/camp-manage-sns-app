@@ -15,7 +15,6 @@ const useStyles = makeStyles({
 });
 
 const ProfileSlideNav = memo((props) => {
-  console.log('profileSlideNav');
   const dispatch = useDispatch();
   const classes = useStyles();
   const [value, setValue] = React.useState(0);

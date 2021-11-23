@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router';
 
 import { BringSlideNav } from './components';
 import { ScrollToTopOnMount } from './components/Utility';
+import { countPV } from './Function';
 import { IndexBring, IndexSave } from './templates';
 
 const RouterGear = (props) => {
@@ -15,6 +16,10 @@ const RouterGear = (props) => {
   //   getGear();
   //   getCountBring();
   // }
+
+  useEffect(() => {
+    countPV();
+  }, []);
 
   return (
     <>

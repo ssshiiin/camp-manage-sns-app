@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 
 const EditBring = React.memo(
   React.forwardRef((props, ref) => {
-    console.log('Edit');
     const classes = useStyles();
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users);

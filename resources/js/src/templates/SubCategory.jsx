@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import { useString } from '../Function';
 
 const SubCategory = () => {
-  console.log('sub');
   const [ranking, setRanking] = useState([]);
   const [myRanking, setMyRanking] = useState([]);
   const getRanking = () => {
@@ -21,7 +20,6 @@ const SubCategory = () => {
     getRanking();
   }, []);
 
-  console.log('ranking', ranking);
   return (
     <div className="sub-category">
       <form>

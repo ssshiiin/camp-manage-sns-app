@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IndexSave = (props) => {
-  console.log('IndexSave');
   const dispatch = useDispatch();
   const saveGearsSelector = useSelector((state) => state.save_gears);
   const classes = useStyles();
