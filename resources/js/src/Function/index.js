@@ -4,4 +4,4 @@ export { default as useString } from './useString';
 export { default as useDate } from './useDate';
 export { default as useImage } from './useImage';
 
-export { default as countPV } from './countPV';
+export { default as useGaTrackPage } from './useGaTrackPage';

@@ -7,7 +7,6 @@ import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { handleSchedulePlaceChange, searchSchedulePlace } from '../reducks/schedules/operations';
 
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
@@ -16,7 +15,9 @@ import { CampInfo } from '../components/Column';
 import { getPlacePosts } from '../reducks/posts/operations';
 import { InputText } from '../components/Form';
 import { ScrollToTopOnMount } from '../components/Utility';
-import { countPV, useString } from '../Function';
+import { useString } from '../Function';
+import { useLocation } from 'react-router';
+import useGaTrackPage from '../Function/useGaTrackPage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,6 +77,9 @@ const Schedule = () => {
   const dayout_home_page = selector.schedules.dayout_home_page;
   const place_posts = selector.posts.place_posts;
 
+  const location = useLocation();
+  useGaTrackPage(location.pathname);
+
   const placeCastLatLng = (place) => {
     Geocode.setApiKey(process.env.MIX_GOOGLE_MAP_API);
     Geocode.fromAddress(place)
@@ -102,7 +106,6 @@ const Schedule = () => {
   };
 
   useEffect(() => {
-    countPV();
     placeCastLatLng(nap_address);
     dispatch(getPlacePosts(nap_camp));
   }, [nap_camp, nap_address]);

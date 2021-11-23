@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { Route, Switch } from 'react-router';
+import React from 'react';
+import { Route, Switch, useLocation } from 'react-router';
 
 import { BringSlideNav } from './components';
 import { ScrollToTopOnMount } from './components/Utility';
-import { countPV } from './Function';
+import { useGaTrackPage } from './Function';
 import { IndexBring, IndexSave } from './templates';
 
 const RouterGear = (props) => {
@@ -17,9 +17,8 @@ const RouterGear = (props) => {
   //   getCountBring();
   // }
 
-  useEffect(() => {
-    countPV();
-  }, []);
+  const location = useLocation();
+  useGaTrackPage(location.pathname);
 
   return (
     <>

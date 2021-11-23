@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { Loading } from '../components/Loading';
 import { CardPost } from '../components/Card';
-import { countPV } from '../Function';
+import { useLocation } from 'react-router';
+import { useGaTrackPage } from '../Function';
 
 const loader = <Loading key={0} />;
 
@@ -27,9 +28,8 @@ const Home = () => {
       });
   };
 
-  useEffect(() => {
-    countPV();
-  }, []);
+  const location = useLocation();
+  useGaTrackPage(location.pathname);
 
   return (
     <React.Fragment>

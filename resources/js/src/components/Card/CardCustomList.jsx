@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import Card from '@material-ui/core/Card';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Checkbox from '@material-ui/core/Checkbox';

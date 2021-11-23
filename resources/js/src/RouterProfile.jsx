@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { UserProfile, IndexGearsNav, IndexPostsNav } from './templates';
 import { ProfileSlideNav, ShowPost } from './components';
@@ -7,10 +7,13 @@ import { getPosts } from './reducks/posts/operations';
 import { getGears } from './reducks/gears/operations';
 import { ScrollToTopOnMount } from './components/Utility';
 import { getProfile } from './reducks/profiles/operations';
-import { countPV } from './Function';
+import { useGaTrackPage } from './Function';
 
 function RouterProfile(props) {
   const dispatch = useDispatch();
+
+  const location = useLocation();
+  useGaTrackPage(location.pathname);
 
   const userId = props.match.params.id;
 
@@ -18,7 +21,6 @@ function RouterProfile(props) {
     dispatch(getProfile(userId));
     dispatch(getPosts(userId));
     dispatch(getGears(userId));
-    countPV();
   }, [userId]);
 
   return (
